@@ -33,4 +33,34 @@ const client = new ApolloClient({
   }), // 缓存实现
 })
 
-export { client }
+class YeapClient {
+  constructor() {
+
+  }
+
+  static setup(options: {
+    uri: string,
+    apiKey: string
+  }) {
+    // HTTP 链接
+    const httpLink = new HttpLink({
+      uri: options.uri, // GraphQL 服务器地址
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${options.apiKey}` // 从环境变量中获取 API Key
+      }
+    })
+
+    // 创建 Apollo 客户端
+    const client = new ApolloClient({
+      link: from([errorLink, httpLink]), // 组合链接
+      cache: new InMemoryCache({
+        fragments: fragmentRegistry
+      })
+    })
+
+    return client
+  }
+}
+
+export { client,YeapClient }

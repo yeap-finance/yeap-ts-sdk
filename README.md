@@ -11,7 +11,7 @@ npm install yeap-finance-client
 ## Usage
 
 ```typescript
-import { YeapFinanceClient } from 'yeap-finance-client';
+import { YeapClient } from 'yeap-finance-client';
 
 // Create client instance
 const client = new YeapFinanceClient({
@@ -20,8 +20,19 @@ const client = new YeapFinanceClient({
   timeout: 5000
 });
 
-// Use the client
-const result = await client.getFinanceData('transaction-id');
+// Use the client with 
+const { gql } = require('@apollo/client');
+const result = await client.query(gql`
+      query GetVaultList {
+        yeap_vaults {
+            vault_address
+            underlying_asset_address
+            debt_asset_address
+            interest_fee_store_address
+            underlying_asset_store_address
+        }
+    }
+`);
 console.log(result);
 ```
 
@@ -71,7 +82,7 @@ Main client class for interacting with finance APIs.
 #### Constructor
 
 ```typescript
-new YeapFinanceClient(config?: ClientConfig)
+new YeapClient(config?: ClientConfig)
 ```
 
 #### Methods
