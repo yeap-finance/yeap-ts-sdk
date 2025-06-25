@@ -1,0 +1,21 @@
+#import "./fragments/VaultInfoFields.graphql"
+
+query GetVaultsWithHighYield(
+  $minInterestRate: numeric!
+  $limit: Int = 10
+  $offset: Int = 0
+) {
+  vault_info(
+    where: {
+      settings: {
+        interest_fee_rate: { _gte: $minInterestRate }
+        is_paused: { _eq: false }
+      }
+    }
+    order_by: [{ settings: { interest_fee_rate: desc } }]
+    limit: $limit
+    offset: $offset
+  ) {
+    ...VaultInfoFields
+  }
+}

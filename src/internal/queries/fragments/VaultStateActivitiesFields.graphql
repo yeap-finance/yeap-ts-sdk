@@ -1,0 +1,13 @@
+fragment VaultStateActivitiesFields on vault_states_activities {
+  bad_debt
+  cash
+  current_interest_rate
+  event_index
+  last_interest_update_time
+  timestamp
+  total_borrows
+  total_debt_shares
+  total_shares
+  transaction_version
+  vault_address
+}

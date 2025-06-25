@@ -1,0 +1,12 @@
+#import "./fragments/VaultStateActivitiesFields.graphql"
+
+query GetVaultStateActivities(
+  $where: vault_states_activities_bool_exp
+  $orderBy: [vault_states_activities_order_by!]
+  $limit: Int
+  $offset: Int
+) {
+  vault_states_activities(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+    ...VaultStateActivitiesFields
+  }
+}

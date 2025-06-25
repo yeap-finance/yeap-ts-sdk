@@ -1,0 +1,13 @@
+#import "./fragments/VaultStateActivitiesFields.graphql"
+
+query GetVaultLatestState(
+  $vault_address: String!
+) {
+  vault_states_activities(
+    where: { vault_address: { _eq: $vault_address } }
+    order_by: [{ transaction_version: desc }, { event_index: desc }]
+    limit: 1
+  ) {
+    ...VaultStateActivitiesFields
+  }
+}

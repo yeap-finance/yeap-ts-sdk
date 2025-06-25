@@ -1,0 +1,7 @@
+fragment KinkedIrmConfigFields on kinked_irm_current_config {
+  config_address
+  max_borrow_rate
+  min_borrow_rate
+  optimal_borrow_rate
+  optimal_utilization
+}

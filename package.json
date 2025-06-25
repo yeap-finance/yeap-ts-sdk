@@ -1,49 +1,85 @@
 {
-  "name": "yeap-finance-client",
+  "name": "@aptos-labs/yeap-sdk",
+  "description": "Yeap DeFi Protocol SDK for Aptos",
+  "packageManager": "pnpm@8.15.1",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/aptos-labs/aptos-ts-sdk/issues/new/choose"
+  },
+  "homepage": "https://aptos-labs.github.io/aptos-ts-sdk/",
   "version": "1.0.0",
-  "description": "A TypeScript npm package",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "main": "dist/common/index.js",
+  "module": "dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "require": {
+        "types": "./dist/common/index.d.ts",
+        "default": "./dist/common/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "prepare": "npm run build"
-  },
-  "keywords": [
-    "typescript",
-    "finance",
-    "client"
-  ],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^29.0.0",
-    "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.0.0",
-    "jest": "^29.0.0",
-    "ts-jest": "^29.0.0",
-    "tsx": "^4.0.0",
-    "typescript": "^5.0.0"
+    "build:clean": "rm -rf dist",
+    "build": "pnpm build:clean && tsup",
+    "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
+    "prepublishOnly": "pnpm run build",
+    "_fmt": "prettier 'src/**/*.ts' 'tests/**/*.ts'",
+    "fmt": "pnpm _fmt --write",
+    "lint": "eslint '**/*.{cts,mts,ts}'",
+    "test": "pnpm jest",
+    "unit-test": "pnpm jest tests/unit",
+    "e2e-test": "pnpm jest tests/e2e",
+    "indexer-codegen": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
+    "indexer-codegen:dev": "npx dotenv-cli -e .env.development -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
+    "indexer-codegen:prod": "npx dotenv-cli -e .env.production -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
+    "indexer-codegen:watch": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml --watch"
   },
   "dependencies": {
-    "@apollo/client": "^3.13.8"
+    "@aptos-labs/ts-sdk": "^2.0.1",
+    "@noble/curves": "^1.6.0",
+    "@noble/hashes": "^1.5.0",
+    "decimal.js": "^10.5.0",
+    "graphql-request": "^7.1.2"
   },
-  "peerDependencies": {
-    "react": "^19.1.0"
-  },
-  "engines": {
-    "node": ">=16"
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/client-preset": "^4.8.2",
+    "@graphql-codegen/import-types-preset": "^3.0.0",
+    "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/typescript": "^4.1.5",
+    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
+    "@graphql-codegen/typescript-operations": "^4.5.1",
+    "@parcel/watcher": "^2.5.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.25",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "dotenv-cli": "^7.4.4",
+    "eslint": "^9.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-import": "^2.31.0",
+    "graphql": "^16.10.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.2.5",
+    "tsup": "^8.4.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.2"
   }
 }

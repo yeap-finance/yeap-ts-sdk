@@ -1,0 +1,7 @@
+#import "./fragments/VaultInfoFields.graphql"
+
+query GetVaultInfoByAddress($vaultAddress: String!) {
+  vault_info_by_pk(vault_address: $vaultAddress) {
+    ...VaultInfoFields
+  }
+}

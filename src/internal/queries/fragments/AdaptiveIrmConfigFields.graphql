@@ -1,0 +1,9 @@
+fragment AdaptiveIrmConfigFields on adaptive_irm_current_config {
+  config_address
+  adjustment_speed
+  curve_steepness
+  initial_rate_at_target
+  max_rate_at_target
+  min_rate_at_target
+  target_utilization
+}

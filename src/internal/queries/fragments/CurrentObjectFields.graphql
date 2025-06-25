@@ -1,0 +1,7 @@
+fragment CurrentObjectFields on current_objects {
+  object_address
+  owner_address
+  state_key_hash
+  allow_ungated_transfer
+  is_deleted
+}

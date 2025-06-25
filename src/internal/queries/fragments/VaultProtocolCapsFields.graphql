@@ -1,0 +1,10 @@
+fragment VaultProtocolCapsFields on vault_protocol_caps {
+  vault_address
+  protocol_module_address
+  protocol_module_name
+  protocol_struct_name
+  borrow_cap
+  borrow_enabled
+  supply_cap
+  supply_enabled
+}

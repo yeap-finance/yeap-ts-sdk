@@ -1,0 +1,8 @@
+fragment VaultFlashloanActivitiesFields on vault_flashloan_activities {
+  event_index
+  transaction_version
+  vault_address
+  timestamp
+  amount
+  fee
+}

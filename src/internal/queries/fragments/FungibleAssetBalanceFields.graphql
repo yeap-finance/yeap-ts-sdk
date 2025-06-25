@@ -1,0 +1,15 @@
+fragment FungibleAssetBalanceFields on current_fungible_asset_balances {
+  amount
+  amount_v1
+  amount_v2
+  asset_type
+  asset_type_v1
+  asset_type_v2
+  owner_address
+  metadata {
+    ...FungibleAssetMetadataFields
+  }
+  is_frozen
+  is_primary
+  storage_id
+}

@@ -1,0 +1,12 @@
+fragment VaultSettingsFields on vault_settings {
+  vault_address
+  auto_socialize_debt_enabled
+  emergency_withdraw_enabled
+  fee_store_address
+  flashloan_enabled
+  flashloan_fee_rate
+  flashloan_fee_store_address
+  interest_fee_rate
+  irm_kind
+  is_paused
+}

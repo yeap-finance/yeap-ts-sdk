@@ -1,0 +1,19 @@
+#import "./fragments/VaultInfoFields.graphql"
+
+query GetActiveVaults(
+  $limit: Int = 20
+  $offset: Int = 0
+) {
+  vault_info(
+    where: {
+      settings: {
+        is_paused: { _eq: false }
+      }
+    }
+    order_by: [{ vault_address: asc }]
+    limit: $limit
+    offset: $offset
+  ) {
+    ...VaultInfoFields
+  }
+}
