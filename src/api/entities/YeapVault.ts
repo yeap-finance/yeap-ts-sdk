@@ -2,11 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import {
-  getLatestVaultState,
-  getVaultInfoByAddress,
-  getVaultUnderlyingAssetBalance,
-} from "../../internal";
+import { getLatestVaultState, getVaultInfoByAddress, getVaultUnderlyingAssetBalance } from "../../internal";
 import {
   YeapVaultSettings,
   YeapFungibleAssetMetadata,
@@ -30,10 +26,7 @@ import {
   transformKinkedIrmConfig,
   transformVaultProtocolCaps,
 } from "../transforms";
-import {
-  GetVaultInfoByAddressQuery,
-  VaultInfoFieldsFragment,
-} from "../../types/generated/operations";
+import { GetVaultInfoByAddressQuery, VaultInfoFieldsFragment } from "../../types/generated/operations";
 
 // Field transformers type
 type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
@@ -145,10 +138,7 @@ export class YeapVault {
    * @param vaultAddress The address of the vault.
    * @returns A new YeapVault instance.
    */
-  static async fromAddress(
-    config: YeapConfig,
-    vaultAddress: string,
-  ): Promise<YeapVault> {
+  static async fromAddress(config: YeapConfig, vaultAddress: string): Promise<YeapVault> {
     const vaultInfo = await getVaultInfoByAddress({
       yeapConfig: config,
       vaultAddress,
@@ -167,9 +157,7 @@ export class YeapVault {
 
     const state = transformVaultState(rawResult);
     if (!state) {
-      throw new Error(
-        `Could not transform latest state for vault ${this.vaultAddress}`,
-      );
+      throw new Error(`Could not transform latest state for vault ${this.vaultAddress}`);
     }
     return state;
   }
@@ -181,9 +169,7 @@ export class YeapVault {
     });
 
     if (!rawBalance) {
-      throw new Error(
-        `Could not find vault info for address ${this.vaultAddress}`,
-      );
+      throw new Error(`Could not find vault info for address ${this.vaultAddress}`);
     }
 
     return {

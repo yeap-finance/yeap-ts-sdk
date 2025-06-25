@@ -31,10 +31,7 @@ export interface GraphqlQuery {
  * Make a GraphQL request to the Yeap indexer
  * This is the core function that handles all GraphQL communication
  */
-export async function yeapRequest<
-  Req extends GraphqlQuery,
-  Res extends {},
->(args: {
+export async function yeapRequest<Req extends GraphqlQuery, Res extends {}>(args: {
   yeapConfig: YeapConfig;
   query: Req;
   originMethod?: string;
@@ -74,9 +71,7 @@ export async function yeapRequest<
       headers,
     };
   } catch (error: any) {
-    throw new Error(
-      `Yeap GraphQL request failed (${originMethod || "unknown"}): ${error.message}`,
-    );
+    throw new Error(`Yeap GraphQL request failed (${originMethod || "unknown"}): ${error.message}`);
   }
 }
 
@@ -84,10 +79,7 @@ export async function yeapRequest<
  * Post a GraphQL query to the Yeap indexer
  * This follows the same pattern as postAptosIndexer from the main SDK
  */
-export async function postYeapIndexer<
-  Req extends GraphqlQuery,
-  Res extends {},
->(args: {
+export async function postYeapIndexer<Req extends GraphqlQuery, Res extends {}>(args: {
   yeapConfig: YeapConfig;
   query: Req;
   originMethod?: string;
