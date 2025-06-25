@@ -1,0 +1,54 @@
+overwrite: true
+documents: src/internal/queries/**/*.graphql
+schema:
+  - ${GRAPHQL_SCHEMA_URL}:
+      headers:
+        Authorization: Bearer ${CUSTOM_API_KEY}
+generates:
+  src/types/generated/schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true
+  src/types/generated/schema.json:
+    plugins:
+      - introspection
+  src/types/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      skipTypename: true
+      namingConvention:
+        transformUnderscore: true
+  src/types/generated/operations.ts:
+    preset: import-types-preset
+    presetConfig:
+      typesPath: ./types
+    plugins:
+      - typescript-operations
+    config:
+      preResolveTypes: false
+      exportFragmentSpreadSubTypes: true
+      dedupeFragments: true
+      inlineFragmentTypes: "combine"
+      skipTypename: true
+      namingConvention:
+        transformUnderscore: true
+      strictScalars: true
+      scalars:
+        bigint: string
+        numeric: string
+        timestamp: Date
+        jsonb: any
+  src/types/generated/queries.ts:
+    preset: import-types-preset
+    presetConfig:
+      typesPath: ./operations
+    plugins:
+      - typescript-graphql-request
+    config:
+      documentMode: string
+      documentVariableSuffix: ""
+      skipTypename: true
+      namingConvention:
+        transformUnderscore: true

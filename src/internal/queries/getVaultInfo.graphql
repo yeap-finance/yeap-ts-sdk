@@ -1,0 +1,12 @@
+#import "./fragments/VaultInfoFields.graphql"
+
+query GetVaultInfo(
+  $where: vault_info_bool_exp
+  $orderBy: [vault_info_order_by!]
+  $limit: Int
+  $offset: Int
+) {
+  vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+    ...VaultInfoFields
+  }
+}

@@ -1,0 +1,12 @@
+#import "./fragments/VaultSettingsFields.graphql"
+
+query GetVaultSettings(
+  $where: vault_settings_bool_exp
+  $orderBy: [vault_settings_order_by!]
+  $limit: Int
+  $offset: Int
+) {
+  vault_settings(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+    ...VaultSettingsFields
+  }
+}

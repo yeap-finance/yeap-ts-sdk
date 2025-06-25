@@ -1,0 +1,7 @@
+#import "./fragments/VaultSettingsFields.graphql"
+
+query GetVaultSettingsByAddress($vaultAddress: String!) {
+  vault_settings_by_pk(vault_address: $vaultAddress) {
+    ...VaultSettingsFields
+  }
+}

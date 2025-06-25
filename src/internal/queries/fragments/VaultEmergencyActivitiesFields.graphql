@@ -1,0 +1,8 @@
+fragment VaultEmergencyActivitiesFields on vault_emergency_activities {
+  event_index
+  transaction_version
+  vault_address
+  timestamp
+  amount
+  withdrawn_by
+}

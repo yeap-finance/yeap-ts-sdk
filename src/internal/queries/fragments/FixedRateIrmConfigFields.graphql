@@ -1,0 +1,4 @@
+fragment FixedRateIrmConfigFields on fixed_rate_irm_current_config {
+  config_address
+  rate_per_second
+}

@@ -1,0 +1,10 @@
+#import "./fragments/FungibleAssetBalanceFields.graphql"
+
+query GetVaultUnderlyingAssetBalance($vaultAddress: String!) {
+  vault_info_by_pk(vault_address: $vaultAddress) {
+    vault_address
+    underlying_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
+  }
+}

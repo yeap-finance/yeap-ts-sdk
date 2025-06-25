@@ -1,0 +1,5 @@
+fragment AdaptiveIrmStateFields on adaptive_irm_current_state {
+  state_address
+  current_rate_at_target
+  last_update_timestamp_secs
+}

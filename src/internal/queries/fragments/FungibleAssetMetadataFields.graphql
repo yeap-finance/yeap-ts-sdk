@@ -1,0 +1,8 @@
+fragment FungibleAssetMetadataFields on fungible_asset_metadata {
+  token_standard
+  name
+  symbol
+  decimals
+  icon_uri
+  project_uri
+}

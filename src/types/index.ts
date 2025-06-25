@@ -1,23 +1,7 @@
-/**
- * Type definitions for Yeap Finance Client
- */
+// Copyright © Aptos Foundation
+// SPDX-License-Identifier: Apache-2.0
 
-export interface ClientConfig {
-  apiKey?: string;
-  baseUrl?: string;
-  timeout?: number;
-}
-
-export interface ApiResponse<T = any> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  message?: string;
-}
-
-export interface FinanceData {
-  id: string;
-  amount: number;
-  currency: string;
-  timestamp: Date;
-} 
+export * from "./generated/types";
+export * from "./generated/queries";
+export * from "./generated/operations";
+export * from "./types";
