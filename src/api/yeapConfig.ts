@@ -67,7 +67,8 @@ export class YeapConfig {
    * @param settings - Configuration settings for the Yeap client
    */
   constructor(settings?: YeapSettings) {
-    this.endpoint = settings?.endpoint || "https://api.testnet.aptoslabs.com/v1/graphql";
+    this.endpoint =
+      settings?.endpoint || "https://api.testnet.aptoslabs.com/v1/graphql";
     this.apiKey = settings?.apiKey;
     this.timeout = settings?.timeout || 30000;
     this.headers = settings?.headers || {};

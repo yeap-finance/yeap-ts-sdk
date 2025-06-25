@@ -1,11 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  getVaultInfoByAddress,
-
-  getVaultsByUnderlyingAsset,
-} from "../internal";
+import { getVaultInfoByAddress, getVaultsByUnderlyingAsset } from "../internal";
 import { YeapVault } from "./entities";
 import { YeapConfig } from "./yeapConfig";
 
@@ -94,6 +90,6 @@ export class Vault {
       return null;
     }
 
-    return new YeapVault(this.config,  vaultInfo);
+    return new YeapVault(this.config, vaultInfo);
   }
 }

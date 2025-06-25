@@ -17,7 +17,11 @@ import {
   YeapVaultProtocolCaps,
   YeapVaultStateActivity,
 } from "./interfaces";
-import { GetVaultInfoQuery, GetVaultLatestStateQuery, VaultInfoFieldsFragment } from "../types/generated/operations";
+import {
+  GetVaultInfoQuery,
+  GetVaultLatestStateQuery,
+  VaultInfoFieldsFragment,
+} from "../types/generated/operations";
 
 type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
 type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
@@ -34,7 +38,9 @@ type RawVaultProtocolCaps = VaultInfoFieldsFragment["protocol_configs"][0];
  * Transform raw GraphQL fungible asset metadata to clean interface
  * @internal
  */
-export function transformFungibleAssetMetadata(raw: RawFungibleAssetMetadata): YeapFungibleAssetMetadata | null {
+export function transformFungibleAssetMetadata(
+  raw: RawFungibleAssetMetadata,
+): YeapFungibleAssetMetadata | null {
   if (!raw) return null;
   return {
     tokenStandard: raw.token_standard,
@@ -50,7 +56,9 @@ export function transformFungibleAssetMetadata(raw: RawFungibleAssetMetadata): Y
  * Transform raw GraphQL current object to clean interface
  * @internal
  */
-export function transformCurrentObject(raw: RawCurrentObject): YeapCurrentObject | null {
+export function transformCurrentObject(
+  raw: RawCurrentObject,
+): YeapCurrentObject | null {
   if (!raw) return null;
   return {
     objectAddress: raw.object_address,
@@ -65,7 +73,9 @@ export function transformCurrentObject(raw: RawCurrentObject): YeapCurrentObject
  * Transform raw GraphQL vault settings to clean interface
  * @internal
  */
-export function transformVaultSettings(raw: RawVaultSettings): YeapVaultSettings | null {
+export function transformVaultSettings(
+  raw: RawVaultSettings,
+): YeapVaultSettings | null {
   if (!raw) return null;
   return {
     vaultAddress: raw.vault_address,
@@ -94,15 +104,21 @@ export function transformVaultInfo(raw: RawVaultInfo): YeapVaultInfo | null {
     debtAsset: raw.debt_asset || null,
     underlyingAssetStore: raw.underlying_asset_store || null,
     governanceObjectAddress: raw.governance_object_address || null,
-    underlyingAssetMetadata: transformFungibleAssetMetadata(raw.underlying_asset_metadata),
+    underlyingAssetMetadata: transformFungibleAssetMetadata(
+      raw.underlying_asset_metadata,
+    ),
     debtAssetMetadata: transformFungibleAssetMetadata(raw.debt_asset_metadata),
-    vaultAssetMetadata: transformFungibleAssetMetadata(raw.vault_asset_metadata),
+    vaultAssetMetadata: transformFungibleAssetMetadata(
+      raw.vault_asset_metadata,
+    ),
     underlyingAssetBalance: raw.underlying_asset_balance
       ? {
           amount: raw.underlying_asset_balance.amount,
           isFrozen: raw.underlying_asset_balance.is_frozen,
           storageId: raw.underlying_asset_balance.storage_id,
-          metadata: transformFungibleAssetMetadata(raw.underlying_asset_balance.metadata),
+          metadata: transformFungibleAssetMetadata(
+            raw.underlying_asset_balance.metadata,
+          ),
         }
       : null,
     governanceObject: transformCurrentObject(raw.governance_object),
@@ -135,7 +151,9 @@ export function transformVaultState(raw: RawVaultState): YeapVaultState | null {
  * Transform raw GraphQL adaptive IRM config to clean interface
  * @internal
  */
-export function transformAdaptiveIrmConfig(raw: RawAdaptiveIrmConfig): YeapAdaptiveIrmConfig | null {
+export function transformAdaptiveIrmConfig(
+  raw: RawAdaptiveIrmConfig,
+): YeapAdaptiveIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -152,7 +170,9 @@ export function transformAdaptiveIrmConfig(raw: RawAdaptiveIrmConfig): YeapAdapt
  * Transform raw GraphQL adaptive IRM state to clean interface
  * @internal
  */
-export function transformAdaptiveIrmState(raw: RawAdaptiveIrmState): YeapAdaptiveIrmState | null {
+export function transformAdaptiveIrmState(
+  raw: RawAdaptiveIrmState,
+): YeapAdaptiveIrmState | null {
   if (!raw) return null;
   return {
     stateAddress: raw.state_address,
@@ -165,7 +185,9 @@ export function transformAdaptiveIrmState(raw: RawAdaptiveIrmState): YeapAdaptiv
  * Transform raw GraphQL fixed rate IRM config to clean interface
  * @internal
  */
-export function transformFixedRateIrmConfig(raw: RawFixedRateIrmConfig): YeapFixedRateIrmConfig | null {
+export function transformFixedRateIrmConfig(
+  raw: RawFixedRateIrmConfig,
+): YeapFixedRateIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -177,7 +199,9 @@ export function transformFixedRateIrmConfig(raw: RawFixedRateIrmConfig): YeapFix
  * Transform raw GraphQL kinked IRM config to clean interface
  * @internal
  */
-export function transformKinkedIrmConfig(raw: RawKinkedIrmConfig): YeapKinkedIrmConfig | null {
+export function transformKinkedIrmConfig(
+  raw: RawKinkedIrmConfig,
+): YeapKinkedIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -192,7 +216,9 @@ export function transformKinkedIrmConfig(raw: RawKinkedIrmConfig): YeapKinkedIrm
  * Transform raw GraphQL vault protocol caps to clean interface
  * @internal
  */
-export function transformVaultProtocolCaps(raw: RawVaultProtocolCaps): YeapVaultProtocolCaps | null {
+export function transformVaultProtocolCaps(
+  raw: RawVaultProtocolCaps,
+): YeapVaultProtocolCaps | null {
   if (!raw) return null;
   return {
     vaultAddress: raw.vault_address || "",
