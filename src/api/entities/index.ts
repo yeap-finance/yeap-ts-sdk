@@ -1,4 +1,5 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-export { YeapVault } from "./YeapVault";
+export { VaultState } from "./vaultState";
+export { Vault } from "./vault";

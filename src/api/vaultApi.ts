@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { getVaultInfoByAddress, getVaultsByUnderlyingAsset } from "../internal";
-import { YeapVault } from "./entities";
+import { Vault } from "./entities";
 import { YeapConfig } from "./yeapConfig";
 
 /**
@@ -11,7 +11,7 @@ import { YeapConfig } from "./yeapConfig";
  * This follows the same pattern as other API classes in the main Aptos SDK.
  * @group Vault
  */
-export class Vault {
+export class VaultApi {
   readonly config: YeapConfig;
 
   /**
@@ -44,7 +44,7 @@ export class Vault {
     underlyingAsset: string,
     limit: number = 10,
     offset: number = 0,
-  ): Promise<YeapVault[]> {
+  ): Promise<Vault[]> {
     const vaultInfos = await getVaultsByUnderlyingAsset({
       yeapConfig: this.config,
       underlyingAsset,
@@ -54,7 +54,7 @@ export class Vault {
 
     return vaultInfos
       .filter((vaultInfo) => vaultInfo !== null)
-      .map((vaultInfo) => new YeapVault(this.config, vaultInfo));
+      .map((vaultInfo) => new Vault(this.config, vaultInfo));
   }
 
   /**
@@ -80,7 +80,7 @@ export class Vault {
    * ```
    * @group Vault
    */
-  async vault(vaultAddress: string): Promise<YeapVault | null> {
+  async vault(vaultAddress: string): Promise<Vault | null> {
     const vaultInfo = await getVaultInfoByAddress({
       yeapConfig: this.config,
       vaultAddress,
@@ -90,6 +90,6 @@ export class Vault {
       return null;
     }
 
-    return new YeapVault(this.config, vaultInfo);
+    return new Vault(this.config, vaultInfo);
   }
 }

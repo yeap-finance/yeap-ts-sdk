@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "./yeapConfig";
-import { Vault } from "./vault";
+import { VaultApi } from "./vaultApi";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -39,7 +39,7 @@ import { Vault } from "./vault";
 export class Yeap {
   readonly config: YeapConfig;
 
-  readonly vaultApi: Vault;
+  readonly vaultApi: VaultApi;
 
   /**
    * Initializes a new instance of the Yeap client with the provided configuration settings.
@@ -66,13 +66,13 @@ export class Yeap {
    */
   constructor(settings?: YeapConfig) {
     this.config = new YeapConfig(settings);
-    this.vaultApi = new Vault(this.config);
+    this.vaultApi = new VaultApi(this.config);
   }
 }
 
 // extends Yeap interface so all the methods and properties
 // from the other classes will be recognized by typescript.
-export interface Yeap extends Vault {}
+export interface Yeap extends VaultApi {}
 
 /**
 In TypeScript, we can't inherit or extend from more than one class,
@@ -96,4 +96,4 @@ function applyMixin(targetClass: any, baseClass: any, baseClassProp: string) {
   });
 }
 
-applyMixin(Yeap, Vault, "vaultApi");
+applyMixin(Yeap, VaultApi, "vaultApi");

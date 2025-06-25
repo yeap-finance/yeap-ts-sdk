@@ -20,6 +20,12 @@ generates:
       skipTypename: true
       namingConvention:
         transformUnderscore: true
+      strictScalars: true
+      scalars:
+        bigint: string
+        numeric: string
+        timestamp: Date
+        jsonb: any
   src/types/generated/operations.ts:
     preset: import-types-preset
     presetConfig:

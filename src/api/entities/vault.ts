@@ -26,7 +26,8 @@ import {
   transformKinkedIrmConfig,
   transformVaultProtocolCaps,
 } from "../transforms";
-import { GetVaultInfoByAddressQuery, VaultInfoFieldsFragment } from "../../types/generated/operations";
+import { GetVaultInfoByAddressQuery, VaultInfoFieldsFragment } from "../../types";
+import { VaultState } from "./vaultState";
 
 // Field transformers type
 type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
@@ -34,7 +35,7 @@ type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
 /**
  * Represents a vault entity with convenient methods to access vault data.
  */
-export class YeapVault {
+export class Vault {
   private readonly config: YeapConfig;
   private readonly _rawVaultData: RawVaultData;
 
@@ -138,7 +139,7 @@ export class YeapVault {
    * @param vaultAddress The address of the vault.
    * @returns A new YeapVault instance.
    */
-  static async fromAddress(config: YeapConfig, vaultAddress: string): Promise<YeapVault> {
+  static async fromAddress(config: YeapConfig, vaultAddress: string): Promise<Vault> {
     const vaultInfo = await getVaultInfoByAddress({
       yeapConfig: config,
       vaultAddress,
@@ -146,20 +147,25 @@ export class YeapVault {
     if (!vaultInfo) {
       throw new Error(`Vault with address ${vaultAddress} not found`);
     }
-    return new YeapVault(config, vaultInfo);
+    return new Vault(config, vaultInfo);
   }
 
-  async getLatestState(): Promise<YeapVaultState> {
+
+  /**
+   * Get the latest vault state with derived financial metrics.
+   * @returns A VaultState instance with computed financial metrics
+   */
+  async getLatestState(): Promise<VaultState> {
     const rawResult = await getLatestVaultState({
       yeapConfig: this.config,
       vaultAddress: this.vaultAddress,
     });
 
-    const state = transformVaultState(rawResult);
-    if (!state) {
-      throw new Error(`Could not transform latest state for vault ${this.vaultAddress}`);
+    if (!rawResult) {
+      throw new Error(`Could not get latest state for vault ${this.vaultAddress}`);
     }
-    return state;
+
+    return VaultState.fromRawData(rawResult);
   }
 
   async getUnderlyingAssetBalance(): Promise<YeapFungibleAssetBalance | null> {

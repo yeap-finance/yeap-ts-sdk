@@ -12,10 +12,10 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  bigint: { input: any; output: any; }
+  bigint: { input: string; output: string; }
   jsonb: { input: any; output: any; }
-  numeric: { input: any; output: any; }
-  timestamp: { input: any; output: any; }
+  numeric: { input: string; output: string; }
+  timestamp: { input: Date; output: Date; }
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */

@@ -3,4 +3,4 @@
 
 export * from "./yeap";
 export * from "./yeapConfig";
-export * from "./vault";
+export * from "./vaultApi";
