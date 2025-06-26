@@ -312,6 +312,99 @@ export interface YeapVaultStateActivity {
 }
 
 /**
+ * SCMD Position debt store information (clean interface)
+ */
+export interface YeapPositionDebtStore {
+  /** Position address */
+  positionAddress: string;
+  /** Debt store address */
+  debtStoreAddress?: string | null;
+  /** Vault address */
+  vaultAddress: string;
+  /** Debt asset balance */
+  debtAssetBalance?: YeapFungibleAssetBalance | null;
+  /** Vault information */
+  vaultInfo?: YeapVaultInfo | null;
+}
+
+/**
+ * SCMD Position information (clean interface)
+ */
+export interface YeapPosition {
+  /** Position address (unique identifier) */
+  positionAddress: string;
+  /** Owner address */
+  ownerAddress?: string | null;
+  /** Collateral asset address */
+  collateral?: string | null;
+  /** Collateral type */
+  collateralType?: string | null;
+  /** Position status (1 = active, 0 = inactive) */
+  status?: number | null;
+  /** Collateral asset balance */
+  collateralAssetBalance?: YeapFungibleAssetBalance | null;
+  /** Debt stores (borrowing positions) */
+  debtStores?: YeapPositionDebtStore[];
+}
+
+/**
+ * Filter options for SCMD position queries
+ */
+export interface PositionFilterOptions {
+  /** Filter by owner address */
+  ownerAddress?: string;
+  /** Filter by position status (1 = active, 0 = inactive) */
+  status?: number;
+  /** Filter by collateral type */
+  collateralType?: string;
+  /** Minimum collateral value */
+  minCollateralValue?: string;
+}
+
+/**
+ * Sort options for SCMD position queries
+ */
+export interface PositionSortOptions {
+  /** Sort by field */
+  field: "positionAddress" | "ownerAddress" | "collateralType";
+  /** Sort direction */
+  direction: "asc" | "desc";
+}
+
+/**
+ * Comprehensive query options for SCMD position queries
+ */
+export interface PositionQueryOptions extends QueryOptions {
+  /** Filter options */
+  filter?: PositionFilterOptions;
+  /** Sort options */
+  sort?: PositionSortOptions;
+}
+
+/**
+ * Interface for SCMD Position-related operations.
+ * Provides methods to query and interact with SCMD (Spot Collateralized Margin Debt) positions.
+ */
+export interface ScmdPositionApiInterface {
+  /**
+   * Retrieves all positions owned by a specific address.
+   *
+   * @param ownerAddress - The address of the position owner
+   * @param options - Optional query parameters (limit, offset, etc.)
+   * @returns Promise resolving to an array of positions
+   *
+   * @example
+   * ```typescript
+   * const positions = await yeap.scmdPositionApi.getPositionsByOwner(
+   *   "0x123...",
+   *   { limit: 10, offset: 0 }
+   * );
+   * ```
+   */
+  getPositionsByOwner(ownerAddress: string, options?: QueryOptions): Promise<YeapPosition[]>;
+}
+
+/**
  * Query variable interfaces for type safety
  */
 
@@ -479,4 +572,22 @@ export interface VaultQueryOptions extends QueryOptions {
   filter?: VaultFilterOptions;
   /** Sort options */
   sort?: VaultSortOptions;
+}
+
+/**
+ * Oracle router configuration information (clean interface)
+ */
+export interface YeapOracleRouterConfig {
+  /** Base asset address */
+  baseAsset: string;
+  /** Quote asset address */
+  quoteAsset: string;
+  /** Oracle router address */
+  oracleRouter: string;
+  /** Oracle address (if set) */
+  oracle?: string | null;
+  /** Oracle kind/type identifier */
+  oracleKind?: number | null;
+  /** Whether the configuration is deleted */
+  isDeleted?: boolean;
 }

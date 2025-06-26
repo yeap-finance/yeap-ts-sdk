@@ -15,6 +15,7 @@ export type Scalars = {
   bigint: { input: string; output: string; }
   jsonb: { input: any; output: any; }
   numeric: { input: string; output: string; }
+  smallint: { input: number; output: number; }
   timestamp: { input: Date; output: Date; }
 };
 
@@ -806,6 +807,73 @@ export type AdaptiveIrmCurrentStateStreamCursorValueInput = {
   current_rate_at_target?: InputMaybe<Scalars['numeric']['input']>;
   last_update_timestamp_secs?: InputMaybe<Scalars['numeric']['input']>;
   state_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "adaptive_irm_state_activities" */
+export type AdaptiveIrmStateActivities = {
+  current_rate_at_target?: Maybe<Scalars['numeric']['output']>;
+  event_index: Scalars['numeric']['output'];
+  last_update_timestamp_secs?: Maybe<Scalars['numeric']['output']>;
+  state_address?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "adaptive_irm_state_activities". All fields are combined with a logical 'AND'. */
+export type AdaptiveIrmStateActivitiesBoolExp = {
+  _and?: InputMaybe<Array<AdaptiveIrmStateActivitiesBoolExp>>;
+  _not?: InputMaybe<AdaptiveIrmStateActivitiesBoolExp>;
+  _or?: InputMaybe<Array<AdaptiveIrmStateActivitiesBoolExp>>;
+  current_rate_at_target?: InputMaybe<NumericComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  last_update_timestamp_secs?: InputMaybe<NumericComparisonExp>;
+  state_address?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "adaptive_irm_state_activities". */
+export type AdaptiveIrmStateActivitiesOrderBy = {
+  current_rate_at_target?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  last_update_timestamp_secs?: InputMaybe<OrderBy>;
+  state_address?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "adaptive_irm_state_activities" */
+export enum AdaptiveIrmStateActivitiesSelectColumn {
+  /** column name */
+  CurrentRateAtTarget = 'current_rate_at_target',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  LastUpdateTimestampSecs = 'last_update_timestamp_secs',
+  /** column name */
+  StateAddress = 'state_address',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "adaptive_irm_state_activities" */
+export type AdaptiveIrmStateActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: AdaptiveIrmStateActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type AdaptiveIrmStateActivitiesStreamCursorValueInput = {
+  current_rate_at_target?: InputMaybe<Scalars['numeric']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  last_update_timestamp_secs?: InputMaybe<Scalars['numeric']['input']>;
+  state_address?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "address_events_summary" */
@@ -5998,6 +6066,207 @@ export type EventsStreamCursorValueInput = {
   type?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** columns and relationships of "fixed_price_oracle_activities" */
+export type FixedPriceOracleActivities = {
+  base_asset?: Maybe<Scalars['String']['output']>;
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  event_index: Scalars['numeric']['output'];
+  oracle_address?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['numeric']['output']>;
+  quote_asset?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "fixed_price_oracle_activities". All fields are combined with a logical 'AND'. */
+export type FixedPriceOracleActivitiesBoolExp = {
+  _and?: InputMaybe<Array<FixedPriceOracleActivitiesBoolExp>>;
+  _not?: InputMaybe<FixedPriceOracleActivitiesBoolExp>;
+  _or?: InputMaybe<Array<FixedPriceOracleActivitiesBoolExp>>;
+  base_asset?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  price?: InputMaybe<NumericComparisonExp>;
+  quote_asset?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "fixed_price_oracle_activities". */
+export type FixedPriceOracleActivitiesOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  price?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "fixed_price_oracle_activities" */
+export enum FixedPriceOracleActivitiesSelectColumn {
+  /** column name */
+  BaseAsset = 'base_asset',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  Price = 'price',
+  /** column name */
+  QuoteAsset = 'quote_asset',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "fixed_price_oracle_activities" */
+export type FixedPriceOracleActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: FixedPriceOracleActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type FixedPriceOracleActivitiesStreamCursorValueInput = {
+  base_asset?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['numeric']['input']>;
+  quote_asset?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "fixed_price_oracle_current_config" */
+export type FixedPriceOracleCurrentConfig = {
+  base_asset: Scalars['String']['output'];
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  oracle_address: Scalars['String']['output'];
+  price?: Maybe<Scalars['numeric']['output']>;
+  quote_asset: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "fixed_price_oracle_current_config". All fields are combined with a logical 'AND'. */
+export type FixedPriceOracleCurrentConfigBoolExp = {
+  _and?: InputMaybe<Array<FixedPriceOracleCurrentConfigBoolExp>>;
+  _not?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
+  _or?: InputMaybe<Array<FixedPriceOracleCurrentConfigBoolExp>>;
+  base_asset?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  price?: InputMaybe<NumericComparisonExp>;
+  quote_asset?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "fixed_price_oracle_current_config". */
+export type FixedPriceOracleCurrentConfigOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  price?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "fixed_price_oracle_current_config" */
+export enum FixedPriceOracleCurrentConfigSelectColumn {
+  /** column name */
+  BaseAsset = 'base_asset',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  Price = 'price',
+  /** column name */
+  QuoteAsset = 'quote_asset'
+}
+
+/** Streaming cursor of the table "fixed_price_oracle_current_config" */
+export type FixedPriceOracleCurrentConfigStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: FixedPriceOracleCurrentConfigStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type FixedPriceOracleCurrentConfigStreamCursorValueInput = {
+  base_asset?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['numeric']['input']>;
+  quote_asset?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "fixed_rate_irm_activities" */
+export type FixedRateIrmActivities = {
+  config_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  rate_per_second?: Maybe<Scalars['numeric']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "fixed_rate_irm_activities". All fields are combined with a logical 'AND'. */
+export type FixedRateIrmActivitiesBoolExp = {
+  _and?: InputMaybe<Array<FixedRateIrmActivitiesBoolExp>>;
+  _not?: InputMaybe<FixedRateIrmActivitiesBoolExp>;
+  _or?: InputMaybe<Array<FixedRateIrmActivitiesBoolExp>>;
+  config_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  rate_per_second?: InputMaybe<NumericComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "fixed_rate_irm_activities". */
+export type FixedRateIrmActivitiesOrderBy = {
+  config_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  rate_per_second?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "fixed_rate_irm_activities" */
+export enum FixedRateIrmActivitiesSelectColumn {
+  /** column name */
+  ConfigAddress = 'config_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  RatePerSecond = 'rate_per_second',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "fixed_rate_irm_activities" */
+export type FixedRateIrmActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: FixedRateIrmActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type FixedRateIrmActivitiesStreamCursorValueInput = {
+  config_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  rate_per_second?: InputMaybe<Scalars['numeric']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+};
+
 /** columns and relationships of "fixed_rate_irm_current_config" */
 export type FixedRateIrmCurrentConfig = {
   config_address: Scalars['String']['output'];
@@ -6435,6 +6704,353 @@ export type FungibleAssetMetadataStreamCursorValueInput = {
   token_standard?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** columns and relationships of "hyperion_llp_bad_debt_activities" */
+export type HyperionLlpBadDebtActivities = {
+  bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
+  bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  position_address?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "hyperion_llp_bad_debt_activities". All fields are combined with a logical 'AND'. */
+export type HyperionLlpBadDebtActivitiesBoolExp = {
+  _and?: InputMaybe<Array<HyperionLlpBadDebtActivitiesBoolExp>>;
+  _not?: InputMaybe<HyperionLlpBadDebtActivitiesBoolExp>;
+  _or?: InputMaybe<Array<HyperionLlpBadDebtActivitiesBoolExp>>;
+  bad_debt_amount?: InputMaybe<NumericComparisonExp>;
+  bad_debt_shares?: InputMaybe<NumericComparisonExp>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "hyperion_llp_bad_debt_activities". */
+export type HyperionLlpBadDebtActivitiesOrderBy = {
+  bad_debt_amount?: InputMaybe<OrderBy>;
+  bad_debt_shares?: InputMaybe<OrderBy>;
+  debt_store_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "hyperion_llp_bad_debt_activities" */
+export enum HyperionLlpBadDebtActivitiesSelectColumn {
+  /** column name */
+  BadDebtAmount = 'bad_debt_amount',
+  /** column name */
+  BadDebtShares = 'bad_debt_shares',
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "hyperion_llp_bad_debt_activities" */
+export type HyperionLlpBadDebtActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: HyperionLlpBadDebtActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type HyperionLlpBadDebtActivitiesStreamCursorValueInput = {
+  bad_debt_amount?: InputMaybe<Scalars['numeric']['input']>;
+  bad_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "hyperion_llp_debt_status_activities" */
+export type HyperionLlpDebtStatusActivities = {
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  position_address?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['smallint']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "hyperion_llp_debt_status_activities". All fields are combined with a logical 'AND'. */
+export type HyperionLlpDebtStatusActivitiesBoolExp = {
+  _and?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesBoolExp>>;
+  _not?: InputMaybe<HyperionLlpDebtStatusActivitiesBoolExp>;
+  _or?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesBoolExp>>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<SmallintComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "hyperion_llp_debt_status_activities". */
+export type HyperionLlpDebtStatusActivitiesOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "hyperion_llp_debt_status_activities" */
+export enum HyperionLlpDebtStatusActivitiesSelectColumn {
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "hyperion_llp_debt_status_activities" */
+export type HyperionLlpDebtStatusActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: HyperionLlpDebtStatusActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type HyperionLlpDebtStatusActivitiesStreamCursorValueInput = {
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['smallint']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "hyperion_llp_liquidation_activities" */
+export type HyperionLlpLiquidationActivities = {
+  collateral_liquidation_amount?: Maybe<Scalars['numeric']['output']>;
+  collateral_value_before?: Maybe<Scalars['numeric']['output']>;
+  event_index: Scalars['numeric']['output'];
+  loan_value_before?: Maybe<Scalars['numeric']['output']>;
+  position_address?: Maybe<Scalars['String']['output']>;
+  repay_amount?: Maybe<Scalars['numeric']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "hyperion_llp_liquidation_activities". All fields are combined with a logical 'AND'. */
+export type HyperionLlpLiquidationActivitiesBoolExp = {
+  _and?: InputMaybe<Array<HyperionLlpLiquidationActivitiesBoolExp>>;
+  _not?: InputMaybe<HyperionLlpLiquidationActivitiesBoolExp>;
+  _or?: InputMaybe<Array<HyperionLlpLiquidationActivitiesBoolExp>>;
+  collateral_liquidation_amount?: InputMaybe<NumericComparisonExp>;
+  collateral_value_before?: InputMaybe<NumericComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  loan_value_before?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  repay_amount?: InputMaybe<NumericComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "hyperion_llp_liquidation_activities". */
+export type HyperionLlpLiquidationActivitiesOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "hyperion_llp_liquidation_activities" */
+export enum HyperionLlpLiquidationActivitiesSelectColumn {
+  /** column name */
+  CollateralLiquidationAmount = 'collateral_liquidation_amount',
+  /** column name */
+  CollateralValueBefore = 'collateral_value_before',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  LoanValueBefore = 'loan_value_before',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  RepayAmount = 'repay_amount',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "hyperion_llp_liquidation_activities" */
+export type HyperionLlpLiquidationActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: HyperionLlpLiquidationActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type HyperionLlpLiquidationActivitiesStreamCursorValueInput = {
+  collateral_liquidation_amount?: InputMaybe<Scalars['numeric']['input']>;
+  collateral_value_before?: InputMaybe<Scalars['numeric']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  loan_value_before?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  repay_amount?: InputMaybe<Scalars['numeric']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "hyperion_llp_position_current" */
+export type HyperionLlpPositionCurrent = {
+  collateral?: Maybe<Scalars['String']['output']>;
+  collateral_type?: Maybe<Scalars['String']['output']>;
+  owner_address?: Maybe<Scalars['String']['output']>;
+  position_address: Scalars['String']['output'];
+  status?: Maybe<Scalars['smallint']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "hyperion_llp_position_current". All fields are combined with a logical 'AND'. */
+export type HyperionLlpPositionCurrentBoolExp = {
+  _and?: InputMaybe<Array<HyperionLlpPositionCurrentBoolExp>>;
+  _not?: InputMaybe<HyperionLlpPositionCurrentBoolExp>;
+  _or?: InputMaybe<Array<HyperionLlpPositionCurrentBoolExp>>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  collateral_type?: InputMaybe<StringComparisonExp>;
+  owner_address?: InputMaybe<StringComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<SmallintComparisonExp>;
+};
+
+/** Ordering options when selecting data from "hyperion_llp_position_current". */
+export type HyperionLlpPositionCurrentOrderBy = {
+  collateral?: InputMaybe<OrderBy>;
+  collateral_type?: InputMaybe<OrderBy>;
+  owner_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "hyperion_llp_position_current" */
+export enum HyperionLlpPositionCurrentSelectColumn {
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  CollateralType = 'collateral_type',
+  /** column name */
+  OwnerAddress = 'owner_address',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Status = 'status'
+}
+
+/** Streaming cursor of the table "hyperion_llp_position_current" */
+export type HyperionLlpPositionCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: HyperionLlpPositionCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type HyperionLlpPositionCurrentStreamCursorValueInput = {
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  collateral_type?: InputMaybe<Scalars['String']['input']>;
+  owner_address?: InputMaybe<Scalars['String']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['smallint']['input']>;
+};
+
+/** columns and relationships of "hyperion_llp_position_debt_stores" */
+export type HyperionLlpPositionDebtStores = {
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  position_address: Scalars['String']['output'];
+  vault_address: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "hyperion_llp_position_debt_stores". All fields are combined with a logical 'AND'. */
+export type HyperionLlpPositionDebtStoresBoolExp = {
+  _and?: InputMaybe<Array<HyperionLlpPositionDebtStoresBoolExp>>;
+  _not?: InputMaybe<HyperionLlpPositionDebtStoresBoolExp>;
+  _or?: InputMaybe<Array<HyperionLlpPositionDebtStoresBoolExp>>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "hyperion_llp_position_debt_stores". */
+export type HyperionLlpPositionDebtStoresOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "hyperion_llp_position_debt_stores" */
+export enum HyperionLlpPositionDebtStoresSelectColumn {
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "hyperion_llp_position_debt_stores" */
+export type HyperionLlpPositionDebtStoresStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: HyperionLlpPositionDebtStoresStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type HyperionLlpPositionDebtStoresStreamCursorValueInput = {
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** columns and relationships of "indexer_status" */
 export type IndexerStatus = {
   db: Scalars['String']['output'];
@@ -6504,6 +7120,85 @@ export type JsonbComparisonExp = {
   _lte?: InputMaybe<Scalars['jsonb']['input']>;
   _neq?: InputMaybe<Scalars['jsonb']['input']>;
   _nin?: InputMaybe<Array<Scalars['jsonb']['input']>>;
+};
+
+/** columns and relationships of "kinked_irm_activities" */
+export type KinkedIrmActivities = {
+  config_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  max_borrow_rate?: Maybe<Scalars['numeric']['output']>;
+  min_borrow_rate?: Maybe<Scalars['numeric']['output']>;
+  optimal_borrow_rate?: Maybe<Scalars['numeric']['output']>;
+  optimal_utilization?: Maybe<Scalars['numeric']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "kinked_irm_activities". All fields are combined with a logical 'AND'. */
+export type KinkedIrmActivitiesBoolExp = {
+  _and?: InputMaybe<Array<KinkedIrmActivitiesBoolExp>>;
+  _not?: InputMaybe<KinkedIrmActivitiesBoolExp>;
+  _or?: InputMaybe<Array<KinkedIrmActivitiesBoolExp>>;
+  config_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  max_borrow_rate?: InputMaybe<NumericComparisonExp>;
+  min_borrow_rate?: InputMaybe<NumericComparisonExp>;
+  optimal_borrow_rate?: InputMaybe<NumericComparisonExp>;
+  optimal_utilization?: InputMaybe<NumericComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "kinked_irm_activities". */
+export type KinkedIrmActivitiesOrderBy = {
+  config_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  max_borrow_rate?: InputMaybe<OrderBy>;
+  min_borrow_rate?: InputMaybe<OrderBy>;
+  optimal_borrow_rate?: InputMaybe<OrderBy>;
+  optimal_utilization?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "kinked_irm_activities" */
+export enum KinkedIrmActivitiesSelectColumn {
+  /** column name */
+  ConfigAddress = 'config_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  MaxBorrowRate = 'max_borrow_rate',
+  /** column name */
+  MinBorrowRate = 'min_borrow_rate',
+  /** column name */
+  OptimalBorrowRate = 'optimal_borrow_rate',
+  /** column name */
+  OptimalUtilization = 'optimal_utilization',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "kinked_irm_activities" */
+export type KinkedIrmActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: KinkedIrmActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type KinkedIrmActivitiesStreamCursorValueInput = {
+  config_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  max_borrow_rate?: InputMaybe<Scalars['numeric']['input']>;
+  min_borrow_rate?: InputMaybe<Scalars['numeric']['input']>;
+  optimal_borrow_rate?: InputMaybe<Scalars['numeric']['input']>;
+  optimal_utilization?: InputMaybe<Scalars['numeric']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "kinked_irm_current_config" */
@@ -6866,6 +7561,158 @@ export type NumericComparisonExp = {
   _lte?: InputMaybe<Scalars['numeric']['input']>;
   _neq?: InputMaybe<Scalars['numeric']['input']>;
   _nin?: InputMaybe<Array<Scalars['numeric']['input']>>;
+};
+
+/** columns and relationships of "oracle_router_activities" */
+export type OracleRouterActivities = {
+  base_asset?: Maybe<Scalars['String']['output']>;
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  event_index: Scalars['numeric']['output'];
+  oracle?: Maybe<Scalars['String']['output']>;
+  oracle_kind?: Maybe<Scalars['smallint']['output']>;
+  oracle_router?: Maybe<Scalars['String']['output']>;
+  quote_asset?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "oracle_router_activities". All fields are combined with a logical 'AND'. */
+export type OracleRouterActivitiesBoolExp = {
+  _and?: InputMaybe<Array<OracleRouterActivitiesBoolExp>>;
+  _not?: InputMaybe<OracleRouterActivitiesBoolExp>;
+  _or?: InputMaybe<Array<OracleRouterActivitiesBoolExp>>;
+  base_asset?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  oracle?: InputMaybe<StringComparisonExp>;
+  oracle_kind?: InputMaybe<SmallintComparisonExp>;
+  oracle_router?: InputMaybe<StringComparisonExp>;
+  quote_asset?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "oracle_router_activities". */
+export type OracleRouterActivitiesOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  oracle_kind?: InputMaybe<OrderBy>;
+  oracle_router?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "oracle_router_activities" */
+export enum OracleRouterActivitiesSelectColumn {
+  /** column name */
+  BaseAsset = 'base_asset',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  Oracle = 'oracle',
+  /** column name */
+  OracleKind = 'oracle_kind',
+  /** column name */
+  OracleRouter = 'oracle_router',
+  /** column name */
+  QuoteAsset = 'quote_asset',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "oracle_router_activities" */
+export type OracleRouterActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: OracleRouterActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type OracleRouterActivitiesStreamCursorValueInput = {
+  base_asset?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  oracle?: InputMaybe<Scalars['String']['input']>;
+  oracle_kind?: InputMaybe<Scalars['smallint']['input']>;
+  oracle_router?: InputMaybe<Scalars['String']['input']>;
+  quote_asset?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "oracle_router_current_config" */
+export type OracleRouterCurrentConfig = {
+  base_asset: Scalars['String']['output'];
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  oracle?: Maybe<Scalars['String']['output']>;
+  oracle_kind?: Maybe<Scalars['smallint']['output']>;
+  oracle_router: Scalars['String']['output'];
+  quote_asset: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'. */
+export type OracleRouterCurrentConfigBoolExp = {
+  _and?: InputMaybe<Array<OracleRouterCurrentConfigBoolExp>>;
+  _not?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
+  _or?: InputMaybe<Array<OracleRouterCurrentConfigBoolExp>>;
+  base_asset?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  oracle?: InputMaybe<StringComparisonExp>;
+  oracle_kind?: InputMaybe<SmallintComparisonExp>;
+  oracle_router?: InputMaybe<StringComparisonExp>;
+  quote_asset?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "oracle_router_current_config". */
+export type OracleRouterCurrentConfigOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  oracle_kind?: InputMaybe<OrderBy>;
+  oracle_router?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "oracle_router_current_config" */
+export enum OracleRouterCurrentConfigSelectColumn {
+  /** column name */
+  BaseAsset = 'base_asset',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  Oracle = 'oracle',
+  /** column name */
+  OracleKind = 'oracle_kind',
+  /** column name */
+  OracleRouter = 'oracle_router',
+  /** column name */
+  QuoteAsset = 'quote_asset'
+}
+
+/** Streaming cursor of the table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: OracleRouterCurrentConfigStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type OracleRouterCurrentConfigStreamCursorValueInput = {
+  base_asset?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  oracle?: InputMaybe<Scalars['String']['input']>;
+  oracle_kind?: InputMaybe<Scalars['smallint']['input']>;
+  oracle_router?: InputMaybe<Scalars['String']['input']>;
+  quote_asset?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** column ordering options */
@@ -7277,6 +8124,158 @@ export type PublicKeyAuthKeysVarianceFields = {
   last_transaction_version?: Maybe<Scalars['Float']['output']>;
 };
 
+/** columns and relationships of "pyth_oracle_activities" */
+export type PythOracleActivities = {
+  asset_identifier?: Maybe<Scalars['String']['output']>;
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  event_index: Scalars['numeric']['output'];
+  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
+  max_confidence?: Maybe<Scalars['numeric']['output']>;
+  oracle_address?: Maybe<Scalars['String']['output']>;
+  pyth_id?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "pyth_oracle_activities". All fields are combined with a logical 'AND'. */
+export type PythOracleActivitiesBoolExp = {
+  _and?: InputMaybe<Array<PythOracleActivitiesBoolExp>>;
+  _not?: InputMaybe<PythOracleActivitiesBoolExp>;
+  _or?: InputMaybe<Array<PythOracleActivitiesBoolExp>>;
+  asset_identifier?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
+  max_confidence?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  pyth_id?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "pyth_oracle_activities". */
+export type PythOracleActivitiesOrderBy = {
+  asset_identifier?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  max_age_in_seconds?: InputMaybe<OrderBy>;
+  max_confidence?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  pyth_id?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "pyth_oracle_activities" */
+export enum PythOracleActivitiesSelectColumn {
+  /** column name */
+  AssetIdentifier = 'asset_identifier',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  MaxAgeInSeconds = 'max_age_in_seconds',
+  /** column name */
+  MaxConfidence = 'max_confidence',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  PythId = 'pyth_id',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "pyth_oracle_activities" */
+export type PythOracleActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: PythOracleActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type PythOracleActivitiesStreamCursorValueInput = {
+  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
+  max_confidence?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  pyth_id?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "pyth_oracle_current_config" */
+export type PythOracleCurrentConfig = {
+  asset_identifier: Scalars['String']['output'];
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
+  max_confidence?: Maybe<Scalars['numeric']['output']>;
+  oracle_address: Scalars['String']['output'];
+  pyth_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "pyth_oracle_current_config". All fields are combined with a logical 'AND'. */
+export type PythOracleCurrentConfigBoolExp = {
+  _and?: InputMaybe<Array<PythOracleCurrentConfigBoolExp>>;
+  _not?: InputMaybe<PythOracleCurrentConfigBoolExp>;
+  _or?: InputMaybe<Array<PythOracleCurrentConfigBoolExp>>;
+  asset_identifier?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
+  max_confidence?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  pyth_id?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "pyth_oracle_current_config". */
+export type PythOracleCurrentConfigOrderBy = {
+  asset_identifier?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  max_age_in_seconds?: InputMaybe<OrderBy>;
+  max_confidence?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  pyth_id?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "pyth_oracle_current_config" */
+export enum PythOracleCurrentConfigSelectColumn {
+  /** column name */
+  AssetIdentifier = 'asset_identifier',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  MaxAgeInSeconds = 'max_age_in_seconds',
+  /** column name */
+  MaxConfidence = 'max_confidence',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  PythId = 'pyth_id'
+}
+
+/** Streaming cursor of the table "pyth_oracle_current_config" */
+export type PythOracleCurrentConfigStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: PythOracleCurrentConfigStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type PythOracleCurrentConfigStreamCursorValueInput = {
+  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
+  max_confidence?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  pyth_id?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryRoot = {
   /** fetch data from the table: "account_transactions" */
   account_transactions: Array<AccountTransactions>;
@@ -7300,6 +8299,10 @@ export type QueryRoot = {
   adaptive_irm_current_state: Array<AdaptiveIrmCurrentState>;
   /** fetch data from the table: "adaptive_irm_current_state" using primary key columns */
   adaptive_irm_current_state_by_pk?: Maybe<AdaptiveIrmCurrentState>;
+  /** fetch data from the table: "adaptive_irm_state_activities" */
+  adaptive_irm_state_activities: Array<AdaptiveIrmStateActivities>;
+  /** fetch data from the table: "adaptive_irm_state_activities" using primary key columns */
+  adaptive_irm_state_activities_by_pk?: Maybe<AdaptiveIrmStateActivities>;
   /** fetch data from the table: "address_events_summary" */
   address_events_summary: Array<AddressEventsSummary>;
   /** fetch data from the table: "address_version_from_events" */
@@ -7432,6 +8435,18 @@ export type QueryRoot = {
   events: Array<Events>;
   /** fetch data from the table: "events" using primary key columns */
   events_by_pk?: Maybe<Events>;
+  /** fetch data from the table: "fixed_price_oracle_activities" */
+  fixed_price_oracle_activities: Array<FixedPriceOracleActivities>;
+  /** fetch data from the table: "fixed_price_oracle_activities" using primary key columns */
+  fixed_price_oracle_activities_by_pk?: Maybe<FixedPriceOracleActivities>;
+  /** fetch data from the table: "fixed_price_oracle_current_config" */
+  fixed_price_oracle_current_config: Array<FixedPriceOracleCurrentConfig>;
+  /** fetch data from the table: "fixed_price_oracle_current_config" using primary key columns */
+  fixed_price_oracle_current_config_by_pk?: Maybe<FixedPriceOracleCurrentConfig>;
+  /** fetch data from the table: "fixed_rate_irm_activities" */
+  fixed_rate_irm_activities: Array<FixedRateIrmActivities>;
+  /** fetch data from the table: "fixed_rate_irm_activities" using primary key columns */
+  fixed_rate_irm_activities_by_pk?: Maybe<FixedRateIrmActivities>;
   /** fetch data from the table: "fixed_rate_irm_current_config" */
   fixed_rate_irm_current_config: Array<FixedRateIrmCurrentConfig>;
   /** fetch data from the table: "fixed_rate_irm_current_config" using primary key columns */
@@ -7444,10 +8459,34 @@ export type QueryRoot = {
   fungible_asset_metadata: Array<FungibleAssetMetadata>;
   /** fetch data from the table: "fungible_asset_metadata" using primary key columns */
   fungible_asset_metadata_by_pk?: Maybe<FungibleAssetMetadata>;
+  /** fetch data from the table: "hyperion_llp_bad_debt_activities" */
+  hyperion_llp_bad_debt_activities: Array<HyperionLlpBadDebtActivities>;
+  /** fetch data from the table: "hyperion_llp_bad_debt_activities" using primary key columns */
+  hyperion_llp_bad_debt_activities_by_pk?: Maybe<HyperionLlpBadDebtActivities>;
+  /** fetch data from the table: "hyperion_llp_debt_status_activities" */
+  hyperion_llp_debt_status_activities: Array<HyperionLlpDebtStatusActivities>;
+  /** fetch data from the table: "hyperion_llp_debt_status_activities" using primary key columns */
+  hyperion_llp_debt_status_activities_by_pk?: Maybe<HyperionLlpDebtStatusActivities>;
+  /** fetch data from the table: "hyperion_llp_liquidation_activities" */
+  hyperion_llp_liquidation_activities: Array<HyperionLlpLiquidationActivities>;
+  /** fetch data from the table: "hyperion_llp_liquidation_activities" using primary key columns */
+  hyperion_llp_liquidation_activities_by_pk?: Maybe<HyperionLlpLiquidationActivities>;
+  /** fetch data from the table: "hyperion_llp_position_current" */
+  hyperion_llp_position_current: Array<HyperionLlpPositionCurrent>;
+  /** fetch data from the table: "hyperion_llp_position_current" using primary key columns */
+  hyperion_llp_position_current_by_pk?: Maybe<HyperionLlpPositionCurrent>;
+  /** fetch data from the table: "hyperion_llp_position_debt_stores" */
+  hyperion_llp_position_debt_stores: Array<HyperionLlpPositionDebtStores>;
+  /** fetch data from the table: "hyperion_llp_position_debt_stores" using primary key columns */
+  hyperion_llp_position_debt_stores_by_pk?: Maybe<HyperionLlpPositionDebtStores>;
   /** fetch data from the table: "indexer_status" */
   indexer_status: Array<IndexerStatus>;
   /** fetch data from the table: "indexer_status" using primary key columns */
   indexer_status_by_pk?: Maybe<IndexerStatus>;
+  /** fetch data from the table: "kinked_irm_activities" */
+  kinked_irm_activities: Array<KinkedIrmActivities>;
+  /** fetch data from the table: "kinked_irm_activities" using primary key columns */
+  kinked_irm_activities_by_pk?: Maybe<KinkedIrmActivities>;
   /** fetch data from the table: "kinked_irm_current_config" */
   kinked_irm_current_config: Array<KinkedIrmCurrentConfig>;
   /** fetch data from the table: "kinked_irm_current_config" using primary key columns */
@@ -7466,6 +8505,14 @@ export type QueryRoot = {
   nft_metadata_crawler_parsed_asset_uris_by_pk?: Maybe<NftMetadataCrawlerParsedAssetUris>;
   /** fetch data from the table: "num_active_delegator_per_pool" */
   num_active_delegator_per_pool: Array<NumActiveDelegatorPerPool>;
+  /** fetch data from the table: "oracle_router_activities" */
+  oracle_router_activities: Array<OracleRouterActivities>;
+  /** fetch data from the table: "oracle_router_activities" using primary key columns */
+  oracle_router_activities_by_pk?: Maybe<OracleRouterActivities>;
+  /** fetch data from the table: "oracle_router_current_config" */
+  oracle_router_current_config: Array<OracleRouterCurrentConfig>;
+  /** fetch data from the table: "oracle_router_current_config" using primary key columns */
+  oracle_router_current_config_by_pk?: Maybe<OracleRouterCurrentConfig>;
   /** fetch data from the table: "processor_metadata.processor_status" */
   processor_status: Array<ProcessorStatus>;
   /** fetch data from the table: "processor_metadata.processor_status" using primary key columns */
@@ -7482,10 +8529,46 @@ export type QueryRoot = {
   public_key_auth_keys_aggregate: PublicKeyAuthKeysAggregate;
   /** fetch data from the table: "public_key_auth_keys" using primary key columns */
   public_key_auth_keys_by_pk?: Maybe<PublicKeyAuthKeys>;
+  /** fetch data from the table: "pyth_oracle_activities" */
+  pyth_oracle_activities: Array<PythOracleActivities>;
+  /** fetch data from the table: "pyth_oracle_activities" using primary key columns */
+  pyth_oracle_activities_by_pk?: Maybe<PythOracleActivities>;
+  /** fetch data from the table: "pyth_oracle_current_config" */
+  pyth_oracle_current_config: Array<PythOracleCurrentConfig>;
+  /** fetch data from the table: "pyth_oracle_current_config" using primary key columns */
+  pyth_oracle_current_config_by_pk?: Maybe<PythOracleCurrentConfig>;
+  /** fetch data from the table: "scmd_bad_debt_activities" */
+  scmd_bad_debt_activities: Array<ScmdBadDebtActivities>;
+  /** fetch data from the table: "scmd_bad_debt_activities" using primary key columns */
+  scmd_bad_debt_activities_by_pk?: Maybe<ScmdBadDebtActivities>;
+  /** fetch data from the table: "scmd_debt_status_activities" */
+  scmd_debt_status_activities: Array<ScmdDebtStatusActivities>;
+  /** fetch data from the table: "scmd_debt_status_activities" using primary key columns */
+  scmd_debt_status_activities_by_pk?: Maybe<ScmdDebtStatusActivities>;
+  /** fetch data from the table: "scmd_liquidation_activities" */
+  scmd_liquidation_activities: Array<ScmdLiquidationActivities>;
+  /** fetch data from the table: "scmd_liquidation_activities" using primary key columns */
+  scmd_liquidation_activities_by_pk?: Maybe<ScmdLiquidationActivities>;
+  /** fetch data from the table: "scmd_position_current" */
+  scmd_position_current: Array<ScmdPositionCurrent>;
+  /** fetch data from the table: "scmd_position_current" using primary key columns */
+  scmd_position_current_by_pk?: Maybe<ScmdPositionCurrent>;
+  /** fetch data from the table: "scmd_position_debt_stores" */
+  scmd_position_debt_stores: Array<ScmdPositionDebtStores>;
+  /** fetch data from the table: "scmd_position_debt_stores" using primary key columns */
+  scmd_position_debt_stores_by_pk?: Maybe<ScmdPositionDebtStores>;
   /** fetch data from the table: "signatures" */
   signatures: Array<Signatures>;
   /** fetch data from the table: "signatures" using primary key columns */
   signatures_by_pk?: Maybe<Signatures>;
+  /** fetch data from the table: "switchboard_oracle_activities" */
+  switchboard_oracle_activities: Array<SwitchboardOracleActivities>;
+  /** fetch data from the table: "switchboard_oracle_activities" using primary key columns */
+  switchboard_oracle_activities_by_pk?: Maybe<SwitchboardOracleActivities>;
+  /** fetch data from the table: "switchboard_oracle_current_config" */
+  switchboard_oracle_current_config: Array<SwitchboardOracleCurrentConfig>;
+  /** fetch data from the table: "switchboard_oracle_current_config" using primary key columns */
+  switchboard_oracle_current_config_by_pk?: Maybe<SwitchboardOracleCurrentConfig>;
   /** fetch data from the table: "table_items" */
   table_items: Array<TableItems>;
   /** fetch data from the table: "table_items" using primary key columns */
@@ -7637,6 +8720,21 @@ export type QueryRootAdaptiveIrmCurrentStateArgs = {
 
 export type QueryRootAdaptiveIrmCurrentStateByPkArgs = {
   state_address: Scalars['String']['input'];
+};
+
+
+export type QueryRootAdaptiveIrmStateActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<AdaptiveIrmStateActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AdaptiveIrmStateActivitiesOrderBy>>;
+  where?: InputMaybe<AdaptiveIrmStateActivitiesBoolExp>;
+};
+
+
+export type QueryRootAdaptiveIrmStateActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
 };
 
 
@@ -8171,6 +9269,52 @@ export type QueryRootEventsByPkArgs = {
 };
 
 
+export type QueryRootFixedPriceOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FixedPriceOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedPriceOracleActivitiesOrderBy>>;
+  where?: InputMaybe<FixedPriceOracleActivitiesBoolExp>;
+};
+
+
+export type QueryRootFixedPriceOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootFixedPriceOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<FixedPriceOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedPriceOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
+};
+
+
+export type QueryRootFixedPriceOracleCurrentConfigByPkArgs = {
+  base_asset: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+  quote_asset: Scalars['String']['input'];
+};
+
+
+export type QueryRootFixedRateIrmActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FixedRateIrmActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedRateIrmActivitiesOrderBy>>;
+  where?: InputMaybe<FixedRateIrmActivitiesBoolExp>;
+};
+
+
+export type QueryRootFixedRateIrmActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
 export type QueryRootFixedRateIrmCurrentConfigArgs = {
   distinct_on?: InputMaybe<Array<FixedRateIrmCurrentConfigSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8214,6 +9358,80 @@ export type QueryRootFungibleAssetMetadataByPkArgs = {
 };
 
 
+export type QueryRootHyperionLlpBadDebtActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpBadDebtActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpBadDebtActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpBadDebtActivitiesBoolExp>;
+};
+
+
+export type QueryRootHyperionLlpBadDebtActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootHyperionLlpDebtStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpDebtStatusActivitiesBoolExp>;
+};
+
+
+export type QueryRootHyperionLlpDebtStatusActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootHyperionLlpLiquidationActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpLiquidationActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpLiquidationActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpLiquidationActivitiesBoolExp>;
+};
+
+
+export type QueryRootHyperionLlpLiquidationActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootHyperionLlpPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpPositionCurrentOrderBy>>;
+  where?: InputMaybe<HyperionLlpPositionCurrentBoolExp>;
+};
+
+
+export type QueryRootHyperionLlpPositionCurrentByPkArgs = {
+  position_address: Scalars['String']['input'];
+};
+
+
+export type QueryRootHyperionLlpPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<HyperionLlpPositionDebtStoresBoolExp>;
+};
+
+
+export type QueryRootHyperionLlpPositionDebtStoresByPkArgs = {
+  position_address: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
+};
+
+
 export type QueryRootIndexerStatusArgs = {
   distinct_on?: InputMaybe<Array<IndexerStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8225,6 +9443,21 @@ export type QueryRootIndexerStatusArgs = {
 
 export type QueryRootIndexerStatusByPkArgs = {
   db: Scalars['String']['input'];
+};
+
+
+export type QueryRootKinkedIrmActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<KinkedIrmActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<KinkedIrmActivitiesOrderBy>>;
+  where?: InputMaybe<KinkedIrmActivitiesBoolExp>;
+};
+
+
+export type QueryRootKinkedIrmActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
 };
 
 
@@ -8297,6 +9530,37 @@ export type QueryRootNumActiveDelegatorPerPoolArgs = {
 };
 
 
+export type QueryRootOracleRouterActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<OracleRouterActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<OracleRouterActivitiesOrderBy>>;
+  where?: InputMaybe<OracleRouterActivitiesBoolExp>;
+};
+
+
+export type QueryRootOracleRouterActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootOracleRouterCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<OracleRouterCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<OracleRouterCurrentConfigOrderBy>>;
+  where?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
+};
+
+
+export type QueryRootOracleRouterCurrentConfigByPkArgs = {
+  base_asset: Scalars['String']['input'];
+  oracle_router: Scalars['String']['input'];
+  quote_asset: Scalars['String']['input'];
+};
+
+
 export type QueryRootProcessorStatusArgs = {
   distinct_on?: InputMaybe<Array<ProcessorStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8361,6 +9625,110 @@ export type QueryRootPublicKeyAuthKeysByPkArgs = {
 };
 
 
+export type QueryRootPythOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<PythOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PythOracleActivitiesOrderBy>>;
+  where?: InputMaybe<PythOracleActivitiesBoolExp>;
+};
+
+
+export type QueryRootPythOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootPythOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<PythOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PythOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<PythOracleCurrentConfigBoolExp>;
+};
+
+
+export type QueryRootPythOracleCurrentConfigByPkArgs = {
+  asset_identifier: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+};
+
+
+export type QueryRootScmdBadDebtActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdBadDebtActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdBadDebtActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdBadDebtActivitiesBoolExp>;
+};
+
+
+export type QueryRootScmdBadDebtActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootScmdDebtStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdDebtStatusActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdDebtStatusActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdDebtStatusActivitiesBoolExp>;
+};
+
+
+export type QueryRootScmdDebtStatusActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootScmdLiquidationActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdLiquidationActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdLiquidationActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+};
+
+
+export type QueryRootScmdLiquidationActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootScmdPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<ScmdPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdPositionCurrentOrderBy>>;
+  where?: InputMaybe<ScmdPositionCurrentBoolExp>;
+};
+
+
+export type QueryRootScmdPositionCurrentByPkArgs = {
+  position_address: Scalars['String']['input'];
+};
+
+
+export type QueryRootScmdPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<ScmdPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+};
+
+
+export type QueryRootScmdPositionDebtStoresByPkArgs = {
+  position_address: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
+};
+
+
 export type QueryRootSignaturesArgs = {
   distinct_on?: InputMaybe<Array<SignaturesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8375,6 +9743,36 @@ export type QueryRootSignaturesByPkArgs = {
   multi_agent_index: Scalars['bigint']['input'];
   multi_sig_index: Scalars['bigint']['input'];
   transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type QueryRootSwitchboardOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<SwitchboardOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SwitchboardOracleActivitiesOrderBy>>;
+  where?: InputMaybe<SwitchboardOracleActivitiesBoolExp>;
+};
+
+
+export type QueryRootSwitchboardOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type QueryRootSwitchboardOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<SwitchboardOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SwitchboardOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
+};
+
+
+export type QueryRootSwitchboardOracleCurrentConfigByPkArgs = {
+  asset_identifier: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
 };
 
 
@@ -8640,6 +10038,529 @@ export type QueryRootVaultStatesActivitiesByPkArgs = {
   transaction_version: Scalars['numeric']['input'];
 };
 
+/** columns and relationships of "scmd_bad_debt_activities" */
+export type ScmdBadDebtActivities = {
+  bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
+  bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  position_address?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "scmd_bad_debt_activities". All fields are combined with a logical 'AND'. */
+export type ScmdBadDebtActivitiesBoolExp = {
+  _and?: InputMaybe<Array<ScmdBadDebtActivitiesBoolExp>>;
+  _not?: InputMaybe<ScmdBadDebtActivitiesBoolExp>;
+  _or?: InputMaybe<Array<ScmdBadDebtActivitiesBoolExp>>;
+  bad_debt_amount?: InputMaybe<NumericComparisonExp>;
+  bad_debt_shares?: InputMaybe<NumericComparisonExp>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "scmd_bad_debt_activities". */
+export type ScmdBadDebtActivitiesOrderBy = {
+  bad_debt_amount?: InputMaybe<OrderBy>;
+  bad_debt_shares?: InputMaybe<OrderBy>;
+  debt_store_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "scmd_bad_debt_activities" */
+export enum ScmdBadDebtActivitiesSelectColumn {
+  /** column name */
+  BadDebtAmount = 'bad_debt_amount',
+  /** column name */
+  BadDebtShares = 'bad_debt_shares',
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "scmd_bad_debt_activities" */
+export type ScmdBadDebtActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ScmdBadDebtActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ScmdBadDebtActivitiesStreamCursorValueInput = {
+  bad_debt_amount?: InputMaybe<Scalars['numeric']['input']>;
+  bad_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "scmd_debt_status_activities" */
+export type ScmdDebtStatusActivities = {
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  event_index: Scalars['numeric']['output'];
+  position_address?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['smallint']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "scmd_debt_status_activities". All fields are combined with a logical 'AND'. */
+export type ScmdDebtStatusActivitiesBoolExp = {
+  _and?: InputMaybe<Array<ScmdDebtStatusActivitiesBoolExp>>;
+  _not?: InputMaybe<ScmdDebtStatusActivitiesBoolExp>;
+  _or?: InputMaybe<Array<ScmdDebtStatusActivitiesBoolExp>>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<SmallintComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "scmd_debt_status_activities". */
+export type ScmdDebtStatusActivitiesOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "scmd_debt_status_activities" */
+export enum ScmdDebtStatusActivitiesSelectColumn {
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "scmd_debt_status_activities" */
+export type ScmdDebtStatusActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ScmdDebtStatusActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ScmdDebtStatusActivitiesStreamCursorValueInput = {
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['smallint']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "scmd_liquidation_activities" */
+export type ScmdLiquidationActivities = {
+  collateral_liquidation_amount?: Maybe<Scalars['numeric']['output']>;
+  collateral_value_before?: Maybe<Scalars['numeric']['output']>;
+  event_index: Scalars['numeric']['output'];
+  loan_value_before?: Maybe<Scalars['numeric']['output']>;
+  position_address?: Maybe<Scalars['String']['output']>;
+  repay_amount?: Maybe<Scalars['numeric']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+  vault_address?: Maybe<Scalars['String']['output']>;
+};
+
+/** order by aggregate values of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesAggregateOrderBy = {
+  avg?: InputMaybe<ScmdLiquidationActivitiesAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<ScmdLiquidationActivitiesMaxOrderBy>;
+  min?: InputMaybe<ScmdLiquidationActivitiesMinOrderBy>;
+  stddev?: InputMaybe<ScmdLiquidationActivitiesStddevOrderBy>;
+  stddev_pop?: InputMaybe<ScmdLiquidationActivitiesStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<ScmdLiquidationActivitiesStddevSampOrderBy>;
+  sum?: InputMaybe<ScmdLiquidationActivitiesSumOrderBy>;
+  var_pop?: InputMaybe<ScmdLiquidationActivitiesVarPopOrderBy>;
+  var_samp?: InputMaybe<ScmdLiquidationActivitiesVarSampOrderBy>;
+  variance?: InputMaybe<ScmdLiquidationActivitiesVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesAvgOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "scmd_liquidation_activities". All fields are combined with a logical 'AND'. */
+export type ScmdLiquidationActivitiesBoolExp = {
+  _and?: InputMaybe<Array<ScmdLiquidationActivitiesBoolExp>>;
+  _not?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+  _or?: InputMaybe<Array<ScmdLiquidationActivitiesBoolExp>>;
+  collateral_liquidation_amount?: InputMaybe<NumericComparisonExp>;
+  collateral_value_before?: InputMaybe<NumericComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  loan_value_before?: InputMaybe<NumericComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  repay_amount?: InputMaybe<NumericComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** order by max() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesMaxOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesMinOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** Ordering options when selecting data from "scmd_liquidation_activities". */
+export type ScmdLiquidationActivitiesOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "scmd_liquidation_activities" */
+export enum ScmdLiquidationActivitiesSelectColumn {
+  /** column name */
+  CollateralLiquidationAmount = 'collateral_liquidation_amount',
+  /** column name */
+  CollateralValueBefore = 'collateral_value_before',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  LoanValueBefore = 'loan_value_before',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  RepayAmount = 'repay_amount',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** order by stddev() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesStddevOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesStddevPopOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesStddevSampOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ScmdLiquidationActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ScmdLiquidationActivitiesStreamCursorValueInput = {
+  collateral_liquidation_amount?: InputMaybe<Scalars['numeric']['input']>;
+  collateral_value_before?: InputMaybe<Scalars['numeric']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  loan_value_before?: InputMaybe<Scalars['numeric']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  repay_amount?: InputMaybe<Scalars['numeric']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesSumOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesVarPopOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesVarSampOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "scmd_liquidation_activities" */
+export type ScmdLiquidationActivitiesVarianceOrderBy = {
+  collateral_liquidation_amount?: InputMaybe<OrderBy>;
+  collateral_value_before?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  loan_value_before?: InputMaybe<OrderBy>;
+  repay_amount?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** columns and relationships of "scmd_position_current" */
+export type ScmdPositionCurrent = {
+  collateral?: Maybe<Scalars['String']['output']>;
+  collateral_asset_balance?: Maybe<CurrentFungibleAssetBalances>;
+  collateral_type?: Maybe<Scalars['String']['output']>;
+  /** An array relationship */
+  debt_stores: Array<ScmdPositionDebtStores>;
+  /** An array relationship */
+  liquidation_activities: Array<ScmdLiquidationActivities>;
+  owner_address?: Maybe<Scalars['String']['output']>;
+  position_address: Scalars['String']['output'];
+  status?: Maybe<Scalars['smallint']['output']>;
+};
+
+
+/** columns and relationships of "scmd_position_current" */
+export type ScmdPositionCurrentDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<ScmdPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+};
+
+
+/** columns and relationships of "scmd_position_current" */
+export type ScmdPositionCurrentLiquidationActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdLiquidationActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdLiquidationActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+};
+
+/** Boolean expression to filter rows from the table "scmd_position_current". All fields are combined with a logical 'AND'. */
+export type ScmdPositionCurrentBoolExp = {
+  _and?: InputMaybe<Array<ScmdPositionCurrentBoolExp>>;
+  _not?: InputMaybe<ScmdPositionCurrentBoolExp>;
+  _or?: InputMaybe<Array<ScmdPositionCurrentBoolExp>>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  collateral_type?: InputMaybe<StringComparisonExp>;
+  debt_stores?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+  liquidation_activities?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+  owner_address?: InputMaybe<StringComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<SmallintComparisonExp>;
+};
+
+/** Ordering options when selecting data from "scmd_position_current". */
+export type ScmdPositionCurrentOrderBy = {
+  collateral?: InputMaybe<OrderBy>;
+  collateral_type?: InputMaybe<OrderBy>;
+  debt_stores_aggregate?: InputMaybe<ScmdPositionDebtStoresAggregateOrderBy>;
+  liquidation_activities_aggregate?: InputMaybe<ScmdLiquidationActivitiesAggregateOrderBy>;
+  owner_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "scmd_position_current" */
+export enum ScmdPositionCurrentSelectColumn {
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  CollateralType = 'collateral_type',
+  /** column name */
+  OwnerAddress = 'owner_address',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  Status = 'status'
+}
+
+/** Streaming cursor of the table "scmd_position_current" */
+export type ScmdPositionCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ScmdPositionCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ScmdPositionCurrentStreamCursorValueInput = {
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  collateral_type?: InputMaybe<Scalars['String']['input']>;
+  owner_address?: InputMaybe<Scalars['String']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['smallint']['input']>;
+};
+
+/** columns and relationships of "scmd_position_debt_stores" */
+export type ScmdPositionDebtStores = {
+  debt_asset_balance?: Maybe<CurrentFungibleAssetBalances>;
+  debt_store_address?: Maybe<Scalars['String']['output']>;
+  position_address: Scalars['String']['output'];
+  vault_address: Scalars['String']['output'];
+  /** An object relationship */
+  vault_info?: Maybe<VaultInfo>;
+};
+
+/** order by aggregate values of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresAggregateOrderBy = {
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<ScmdPositionDebtStoresMaxOrderBy>;
+  min?: InputMaybe<ScmdPositionDebtStoresMinOrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "scmd_position_debt_stores". All fields are combined with a logical 'AND'. */
+export type ScmdPositionDebtStoresBoolExp = {
+  _and?: InputMaybe<Array<ScmdPositionDebtStoresBoolExp>>;
+  _not?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+  _or?: InputMaybe<Array<ScmdPositionDebtStoresBoolExp>>;
+  debt_store_address?: InputMaybe<StringComparisonExp>;
+  position_address?: InputMaybe<StringComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+  vault_info?: InputMaybe<VaultInfoBoolExp>;
+};
+
+/** order by max() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresMaxOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresMinOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** Ordering options when selecting data from "scmd_position_debt_stores". */
+export type ScmdPositionDebtStoresOrderBy = {
+  debt_store_address?: InputMaybe<OrderBy>;
+  position_address?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+  vault_info?: InputMaybe<VaultInfoOrderBy>;
+};
+
+/** select columns of table "scmd_position_debt_stores" */
+export enum ScmdPositionDebtStoresSelectColumn {
+  /** column name */
+  DebtStoreAddress = 'debt_store_address',
+  /** column name */
+  PositionAddress = 'position_address',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ScmdPositionDebtStoresStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ScmdPositionDebtStoresStreamCursorValueInput = {
+  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  position_address?: InputMaybe<Scalars['String']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** columns and relationships of "signatures" */
 export type Signatures = {
   is_sender_primary: Scalars['Boolean']['output'];
@@ -8743,6 +10664,19 @@ export type SignaturesStreamCursorValueInput = {
   type?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
+export type SmallintComparisonExp = {
+  _eq?: InputMaybe<Scalars['smallint']['input']>;
+  _gt?: InputMaybe<Scalars['smallint']['input']>;
+  _gte?: InputMaybe<Scalars['smallint']['input']>;
+  _in?: InputMaybe<Array<Scalars['smallint']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['smallint']['input']>;
+  _lte?: InputMaybe<Scalars['smallint']['input']>;
+  _neq?: InputMaybe<Scalars['smallint']['input']>;
+  _nin?: InputMaybe<Array<Scalars['smallint']['input']>>;
+};
+
 export type SubscriptionRoot = {
   /** fetch data from the table: "account_transactions" */
   account_transactions: Array<AccountTransactions>;
@@ -8774,6 +10708,12 @@ export type SubscriptionRoot = {
   adaptive_irm_current_state_by_pk?: Maybe<AdaptiveIrmCurrentState>;
   /** fetch data from the table in a streaming manner: "adaptive_irm_current_state" */
   adaptive_irm_current_state_stream: Array<AdaptiveIrmCurrentState>;
+  /** fetch data from the table: "adaptive_irm_state_activities" */
+  adaptive_irm_state_activities: Array<AdaptiveIrmStateActivities>;
+  /** fetch data from the table: "adaptive_irm_state_activities" using primary key columns */
+  adaptive_irm_state_activities_by_pk?: Maybe<AdaptiveIrmStateActivities>;
+  /** fetch data from the table in a streaming manner: "adaptive_irm_state_activities" */
+  adaptive_irm_state_activities_stream: Array<AdaptiveIrmStateActivities>;
   /** fetch data from the table: "address_events_summary" */
   address_events_summary: Array<AddressEventsSummary>;
   /** fetch data from the table in a streaming manner: "address_events_summary" */
@@ -8976,6 +10916,24 @@ export type SubscriptionRoot = {
   events_by_pk?: Maybe<Events>;
   /** fetch data from the table in a streaming manner: "events" */
   events_stream: Array<Events>;
+  /** fetch data from the table: "fixed_price_oracle_activities" */
+  fixed_price_oracle_activities: Array<FixedPriceOracleActivities>;
+  /** fetch data from the table: "fixed_price_oracle_activities" using primary key columns */
+  fixed_price_oracle_activities_by_pk?: Maybe<FixedPriceOracleActivities>;
+  /** fetch data from the table in a streaming manner: "fixed_price_oracle_activities" */
+  fixed_price_oracle_activities_stream: Array<FixedPriceOracleActivities>;
+  /** fetch data from the table: "fixed_price_oracle_current_config" */
+  fixed_price_oracle_current_config: Array<FixedPriceOracleCurrentConfig>;
+  /** fetch data from the table: "fixed_price_oracle_current_config" using primary key columns */
+  fixed_price_oracle_current_config_by_pk?: Maybe<FixedPriceOracleCurrentConfig>;
+  /** fetch data from the table in a streaming manner: "fixed_price_oracle_current_config" */
+  fixed_price_oracle_current_config_stream: Array<FixedPriceOracleCurrentConfig>;
+  /** fetch data from the table: "fixed_rate_irm_activities" */
+  fixed_rate_irm_activities: Array<FixedRateIrmActivities>;
+  /** fetch data from the table: "fixed_rate_irm_activities" using primary key columns */
+  fixed_rate_irm_activities_by_pk?: Maybe<FixedRateIrmActivities>;
+  /** fetch data from the table in a streaming manner: "fixed_rate_irm_activities" */
+  fixed_rate_irm_activities_stream: Array<FixedRateIrmActivities>;
   /** fetch data from the table: "fixed_rate_irm_current_config" */
   fixed_rate_irm_current_config: Array<FixedRateIrmCurrentConfig>;
   /** fetch data from the table: "fixed_rate_irm_current_config" using primary key columns */
@@ -8994,12 +10952,48 @@ export type SubscriptionRoot = {
   fungible_asset_metadata_by_pk?: Maybe<FungibleAssetMetadata>;
   /** fetch data from the table in a streaming manner: "fungible_asset_metadata" */
   fungible_asset_metadata_stream: Array<FungibleAssetMetadata>;
+  /** fetch data from the table: "hyperion_llp_bad_debt_activities" */
+  hyperion_llp_bad_debt_activities: Array<HyperionLlpBadDebtActivities>;
+  /** fetch data from the table: "hyperion_llp_bad_debt_activities" using primary key columns */
+  hyperion_llp_bad_debt_activities_by_pk?: Maybe<HyperionLlpBadDebtActivities>;
+  /** fetch data from the table in a streaming manner: "hyperion_llp_bad_debt_activities" */
+  hyperion_llp_bad_debt_activities_stream: Array<HyperionLlpBadDebtActivities>;
+  /** fetch data from the table: "hyperion_llp_debt_status_activities" */
+  hyperion_llp_debt_status_activities: Array<HyperionLlpDebtStatusActivities>;
+  /** fetch data from the table: "hyperion_llp_debt_status_activities" using primary key columns */
+  hyperion_llp_debt_status_activities_by_pk?: Maybe<HyperionLlpDebtStatusActivities>;
+  /** fetch data from the table in a streaming manner: "hyperion_llp_debt_status_activities" */
+  hyperion_llp_debt_status_activities_stream: Array<HyperionLlpDebtStatusActivities>;
+  /** fetch data from the table: "hyperion_llp_liquidation_activities" */
+  hyperion_llp_liquidation_activities: Array<HyperionLlpLiquidationActivities>;
+  /** fetch data from the table: "hyperion_llp_liquidation_activities" using primary key columns */
+  hyperion_llp_liquidation_activities_by_pk?: Maybe<HyperionLlpLiquidationActivities>;
+  /** fetch data from the table in a streaming manner: "hyperion_llp_liquidation_activities" */
+  hyperion_llp_liquidation_activities_stream: Array<HyperionLlpLiquidationActivities>;
+  /** fetch data from the table: "hyperion_llp_position_current" */
+  hyperion_llp_position_current: Array<HyperionLlpPositionCurrent>;
+  /** fetch data from the table: "hyperion_llp_position_current" using primary key columns */
+  hyperion_llp_position_current_by_pk?: Maybe<HyperionLlpPositionCurrent>;
+  /** fetch data from the table in a streaming manner: "hyperion_llp_position_current" */
+  hyperion_llp_position_current_stream: Array<HyperionLlpPositionCurrent>;
+  /** fetch data from the table: "hyperion_llp_position_debt_stores" */
+  hyperion_llp_position_debt_stores: Array<HyperionLlpPositionDebtStores>;
+  /** fetch data from the table: "hyperion_llp_position_debt_stores" using primary key columns */
+  hyperion_llp_position_debt_stores_by_pk?: Maybe<HyperionLlpPositionDebtStores>;
+  /** fetch data from the table in a streaming manner: "hyperion_llp_position_debt_stores" */
+  hyperion_llp_position_debt_stores_stream: Array<HyperionLlpPositionDebtStores>;
   /** fetch data from the table: "indexer_status" */
   indexer_status: Array<IndexerStatus>;
   /** fetch data from the table: "indexer_status" using primary key columns */
   indexer_status_by_pk?: Maybe<IndexerStatus>;
   /** fetch data from the table in a streaming manner: "indexer_status" */
   indexer_status_stream: Array<IndexerStatus>;
+  /** fetch data from the table: "kinked_irm_activities" */
+  kinked_irm_activities: Array<KinkedIrmActivities>;
+  /** fetch data from the table: "kinked_irm_activities" using primary key columns */
+  kinked_irm_activities_by_pk?: Maybe<KinkedIrmActivities>;
+  /** fetch data from the table in a streaming manner: "kinked_irm_activities" */
+  kinked_irm_activities_stream: Array<KinkedIrmActivities>;
   /** fetch data from the table: "kinked_irm_current_config" */
   kinked_irm_current_config: Array<KinkedIrmCurrentConfig>;
   /** fetch data from the table: "kinked_irm_current_config" using primary key columns */
@@ -9028,6 +11022,18 @@ export type SubscriptionRoot = {
   num_active_delegator_per_pool: Array<NumActiveDelegatorPerPool>;
   /** fetch data from the table in a streaming manner: "num_active_delegator_per_pool" */
   num_active_delegator_per_pool_stream: Array<NumActiveDelegatorPerPool>;
+  /** fetch data from the table: "oracle_router_activities" */
+  oracle_router_activities: Array<OracleRouterActivities>;
+  /** fetch data from the table: "oracle_router_activities" using primary key columns */
+  oracle_router_activities_by_pk?: Maybe<OracleRouterActivities>;
+  /** fetch data from the table in a streaming manner: "oracle_router_activities" */
+  oracle_router_activities_stream: Array<OracleRouterActivities>;
+  /** fetch data from the table: "oracle_router_current_config" */
+  oracle_router_current_config: Array<OracleRouterCurrentConfig>;
+  /** fetch data from the table: "oracle_router_current_config" using primary key columns */
+  oracle_router_current_config_by_pk?: Maybe<OracleRouterCurrentConfig>;
+  /** fetch data from the table in a streaming manner: "oracle_router_current_config" */
+  oracle_router_current_config_stream: Array<OracleRouterCurrentConfig>;
   /** fetch data from the table: "processor_metadata.processor_status" */
   processor_status: Array<ProcessorStatus>;
   /** fetch data from the table: "processor_metadata.processor_status" using primary key columns */
@@ -9050,12 +11056,66 @@ export type SubscriptionRoot = {
   public_key_auth_keys_by_pk?: Maybe<PublicKeyAuthKeys>;
   /** fetch data from the table in a streaming manner: "public_key_auth_keys" */
   public_key_auth_keys_stream: Array<PublicKeyAuthKeys>;
+  /** fetch data from the table: "pyth_oracle_activities" */
+  pyth_oracle_activities: Array<PythOracleActivities>;
+  /** fetch data from the table: "pyth_oracle_activities" using primary key columns */
+  pyth_oracle_activities_by_pk?: Maybe<PythOracleActivities>;
+  /** fetch data from the table in a streaming manner: "pyth_oracle_activities" */
+  pyth_oracle_activities_stream: Array<PythOracleActivities>;
+  /** fetch data from the table: "pyth_oracle_current_config" */
+  pyth_oracle_current_config: Array<PythOracleCurrentConfig>;
+  /** fetch data from the table: "pyth_oracle_current_config" using primary key columns */
+  pyth_oracle_current_config_by_pk?: Maybe<PythOracleCurrentConfig>;
+  /** fetch data from the table in a streaming manner: "pyth_oracle_current_config" */
+  pyth_oracle_current_config_stream: Array<PythOracleCurrentConfig>;
+  /** fetch data from the table: "scmd_bad_debt_activities" */
+  scmd_bad_debt_activities: Array<ScmdBadDebtActivities>;
+  /** fetch data from the table: "scmd_bad_debt_activities" using primary key columns */
+  scmd_bad_debt_activities_by_pk?: Maybe<ScmdBadDebtActivities>;
+  /** fetch data from the table in a streaming manner: "scmd_bad_debt_activities" */
+  scmd_bad_debt_activities_stream: Array<ScmdBadDebtActivities>;
+  /** fetch data from the table: "scmd_debt_status_activities" */
+  scmd_debt_status_activities: Array<ScmdDebtStatusActivities>;
+  /** fetch data from the table: "scmd_debt_status_activities" using primary key columns */
+  scmd_debt_status_activities_by_pk?: Maybe<ScmdDebtStatusActivities>;
+  /** fetch data from the table in a streaming manner: "scmd_debt_status_activities" */
+  scmd_debt_status_activities_stream: Array<ScmdDebtStatusActivities>;
+  /** fetch data from the table: "scmd_liquidation_activities" */
+  scmd_liquidation_activities: Array<ScmdLiquidationActivities>;
+  /** fetch data from the table: "scmd_liquidation_activities" using primary key columns */
+  scmd_liquidation_activities_by_pk?: Maybe<ScmdLiquidationActivities>;
+  /** fetch data from the table in a streaming manner: "scmd_liquidation_activities" */
+  scmd_liquidation_activities_stream: Array<ScmdLiquidationActivities>;
+  /** fetch data from the table: "scmd_position_current" */
+  scmd_position_current: Array<ScmdPositionCurrent>;
+  /** fetch data from the table: "scmd_position_current" using primary key columns */
+  scmd_position_current_by_pk?: Maybe<ScmdPositionCurrent>;
+  /** fetch data from the table in a streaming manner: "scmd_position_current" */
+  scmd_position_current_stream: Array<ScmdPositionCurrent>;
+  /** fetch data from the table: "scmd_position_debt_stores" */
+  scmd_position_debt_stores: Array<ScmdPositionDebtStores>;
+  /** fetch data from the table: "scmd_position_debt_stores" using primary key columns */
+  scmd_position_debt_stores_by_pk?: Maybe<ScmdPositionDebtStores>;
+  /** fetch data from the table in a streaming manner: "scmd_position_debt_stores" */
+  scmd_position_debt_stores_stream: Array<ScmdPositionDebtStores>;
   /** fetch data from the table: "signatures" */
   signatures: Array<Signatures>;
   /** fetch data from the table: "signatures" using primary key columns */
   signatures_by_pk?: Maybe<Signatures>;
   /** fetch data from the table in a streaming manner: "signatures" */
   signatures_stream: Array<Signatures>;
+  /** fetch data from the table: "switchboard_oracle_activities" */
+  switchboard_oracle_activities: Array<SwitchboardOracleActivities>;
+  /** fetch data from the table: "switchboard_oracle_activities" using primary key columns */
+  switchboard_oracle_activities_by_pk?: Maybe<SwitchboardOracleActivities>;
+  /** fetch data from the table in a streaming manner: "switchboard_oracle_activities" */
+  switchboard_oracle_activities_stream: Array<SwitchboardOracleActivities>;
+  /** fetch data from the table: "switchboard_oracle_current_config" */
+  switchboard_oracle_current_config: Array<SwitchboardOracleCurrentConfig>;
+  /** fetch data from the table: "switchboard_oracle_current_config" using primary key columns */
+  switchboard_oracle_current_config_by_pk?: Maybe<SwitchboardOracleCurrentConfig>;
+  /** fetch data from the table in a streaming manner: "switchboard_oracle_current_config" */
+  switchboard_oracle_current_config_stream: Array<SwitchboardOracleCurrentConfig>;
   /** fetch data from the table: "table_items" */
   table_items: Array<TableItems>;
   /** fetch data from the table: "table_items" using primary key columns */
@@ -9265,6 +11325,28 @@ export type SubscriptionRootAdaptiveIrmCurrentStateStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<AdaptiveIrmCurrentStateStreamCursorInput>>;
   where?: InputMaybe<AdaptiveIrmCurrentStateBoolExp>;
+};
+
+
+export type SubscriptionRootAdaptiveIrmStateActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<AdaptiveIrmStateActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AdaptiveIrmStateActivitiesOrderBy>>;
+  where?: InputMaybe<AdaptiveIrmStateActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootAdaptiveIrmStateActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootAdaptiveIrmStateActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AdaptiveIrmStateActivitiesStreamCursorInput>>;
+  where?: InputMaybe<AdaptiveIrmStateActivitiesBoolExp>;
 };
 
 
@@ -10044,6 +12126,73 @@ export type SubscriptionRootEventsStreamArgs = {
 };
 
 
+export type SubscriptionRootFixedPriceOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FixedPriceOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedPriceOracleActivitiesOrderBy>>;
+  where?: InputMaybe<FixedPriceOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootFixedPriceOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootFixedPriceOracleActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<FixedPriceOracleActivitiesStreamCursorInput>>;
+  where?: InputMaybe<FixedPriceOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootFixedPriceOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<FixedPriceOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedPriceOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootFixedPriceOracleCurrentConfigByPkArgs = {
+  base_asset: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+  quote_asset: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootFixedPriceOracleCurrentConfigStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<FixedPriceOracleCurrentConfigStreamCursorInput>>;
+  where?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootFixedRateIrmActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FixedRateIrmActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FixedRateIrmActivitiesOrderBy>>;
+  where?: InputMaybe<FixedRateIrmActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootFixedRateIrmActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootFixedRateIrmActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<FixedRateIrmActivitiesStreamCursorInput>>;
+  where?: InputMaybe<FixedRateIrmActivitiesBoolExp>;
+};
+
+
 export type SubscriptionRootFixedRateIrmCurrentConfigArgs = {
   distinct_on?: InputMaybe<Array<FixedRateIrmCurrentConfigSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -10108,6 +12257,115 @@ export type SubscriptionRootFungibleAssetMetadataStreamArgs = {
 };
 
 
+export type SubscriptionRootHyperionLlpBadDebtActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpBadDebtActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpBadDebtActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpBadDebtActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpBadDebtActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootHyperionLlpBadDebtActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<HyperionLlpBadDebtActivitiesStreamCursorInput>>;
+  where?: InputMaybe<HyperionLlpBadDebtActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpDebtStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpDebtStatusActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpDebtStatusActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootHyperionLlpDebtStatusActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<HyperionLlpDebtStatusActivitiesStreamCursorInput>>;
+  where?: InputMaybe<HyperionLlpDebtStatusActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpLiquidationActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpLiquidationActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpLiquidationActivitiesOrderBy>>;
+  where?: InputMaybe<HyperionLlpLiquidationActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpLiquidationActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootHyperionLlpLiquidationActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<HyperionLlpLiquidationActivitiesStreamCursorInput>>;
+  where?: InputMaybe<HyperionLlpLiquidationActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpPositionCurrentOrderBy>>;
+  where?: InputMaybe<HyperionLlpPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpPositionCurrentByPkArgs = {
+  position_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootHyperionLlpPositionCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<HyperionLlpPositionCurrentStreamCursorInput>>;
+  where?: InputMaybe<HyperionLlpPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<HyperionLlpPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<HyperionLlpPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<HyperionLlpPositionDebtStoresBoolExp>;
+};
+
+
+export type SubscriptionRootHyperionLlpPositionDebtStoresByPkArgs = {
+  position_address: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootHyperionLlpPositionDebtStoresStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<HyperionLlpPositionDebtStoresStreamCursorInput>>;
+  where?: InputMaybe<HyperionLlpPositionDebtStoresBoolExp>;
+};
+
+
 export type SubscriptionRootIndexerStatusArgs = {
   distinct_on?: InputMaybe<Array<IndexerStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -10126,6 +12384,28 @@ export type SubscriptionRootIndexerStatusStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<IndexerStatusStreamCursorInput>>;
   where?: InputMaybe<IndexerStatusBoolExp>;
+};
+
+
+export type SubscriptionRootKinkedIrmActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<KinkedIrmActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<KinkedIrmActivitiesOrderBy>>;
+  where?: InputMaybe<KinkedIrmActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootKinkedIrmActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootKinkedIrmActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<KinkedIrmActivitiesStreamCursorInput>>;
+  where?: InputMaybe<KinkedIrmActivitiesBoolExp>;
 };
 
 
@@ -10233,6 +12513,51 @@ export type SubscriptionRootNumActiveDelegatorPerPoolStreamArgs = {
 };
 
 
+export type SubscriptionRootOracleRouterActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<OracleRouterActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<OracleRouterActivitiesOrderBy>>;
+  where?: InputMaybe<OracleRouterActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootOracleRouterActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootOracleRouterActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<OracleRouterActivitiesStreamCursorInput>>;
+  where?: InputMaybe<OracleRouterActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootOracleRouterCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<OracleRouterCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<OracleRouterCurrentConfigOrderBy>>;
+  where?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootOracleRouterCurrentConfigByPkArgs = {
+  base_asset: Scalars['String']['input'];
+  oracle_router: Scalars['String']['input'];
+  quote_asset: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootOracleRouterCurrentConfigStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<OracleRouterCurrentConfigStreamCursorInput>>;
+  where?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
+};
+
+
 export type SubscriptionRootProcessorStatusArgs = {
   distinct_on?: InputMaybe<Array<ProcessorStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -10318,6 +12643,159 @@ export type SubscriptionRootPublicKeyAuthKeysStreamArgs = {
 };
 
 
+export type SubscriptionRootPythOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<PythOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PythOracleActivitiesOrderBy>>;
+  where?: InputMaybe<PythOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootPythOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootPythOracleActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<PythOracleActivitiesStreamCursorInput>>;
+  where?: InputMaybe<PythOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootPythOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<PythOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PythOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<PythOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootPythOracleCurrentConfigByPkArgs = {
+  asset_identifier: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootPythOracleCurrentConfigStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<PythOracleCurrentConfigStreamCursorInput>>;
+  where?: InputMaybe<PythOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootScmdBadDebtActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdBadDebtActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdBadDebtActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdBadDebtActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdBadDebtActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootScmdBadDebtActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ScmdBadDebtActivitiesStreamCursorInput>>;
+  where?: InputMaybe<ScmdBadDebtActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdDebtStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdDebtStatusActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdDebtStatusActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdDebtStatusActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdDebtStatusActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootScmdDebtStatusActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ScmdDebtStatusActivitiesStreamCursorInput>>;
+  where?: InputMaybe<ScmdDebtStatusActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdLiquidationActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<ScmdLiquidationActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdLiquidationActivitiesOrderBy>>;
+  where?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdLiquidationActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootScmdLiquidationActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ScmdLiquidationActivitiesStreamCursorInput>>;
+  where?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootScmdPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<ScmdPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdPositionCurrentOrderBy>>;
+  where?: InputMaybe<ScmdPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootScmdPositionCurrentByPkArgs = {
+  position_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootScmdPositionCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ScmdPositionCurrentStreamCursorInput>>;
+  where?: InputMaybe<ScmdPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootScmdPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<ScmdPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ScmdPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+};
+
+
+export type SubscriptionRootScmdPositionDebtStoresByPkArgs = {
+  position_address: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootScmdPositionDebtStoresStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ScmdPositionDebtStoresStreamCursorInput>>;
+  where?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
+};
+
+
 export type SubscriptionRootSignaturesArgs = {
   distinct_on?: InputMaybe<Array<SignaturesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -10339,6 +12817,50 @@ export type SubscriptionRootSignaturesStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<SignaturesStreamCursorInput>>;
   where?: InputMaybe<SignaturesBoolExp>;
+};
+
+
+export type SubscriptionRootSwitchboardOracleActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<SwitchboardOracleActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SwitchboardOracleActivitiesOrderBy>>;
+  where?: InputMaybe<SwitchboardOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootSwitchboardOracleActivitiesByPkArgs = {
+  event_index: Scalars['numeric']['input'];
+  transaction_version: Scalars['numeric']['input'];
+};
+
+
+export type SubscriptionRootSwitchboardOracleActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<SwitchboardOracleActivitiesStreamCursorInput>>;
+  where?: InputMaybe<SwitchboardOracleActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootSwitchboardOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<SwitchboardOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SwitchboardOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootSwitchboardOracleCurrentConfigByPkArgs = {
+  asset_identifier: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootSwitchboardOracleCurrentConfigStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<SwitchboardOracleCurrentConfigStreamCursorInput>>;
+  where?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
 };
 
 
@@ -10707,6 +13229,158 @@ export type SubscriptionRootVaultStatesActivitiesStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<VaultStatesActivitiesStreamCursorInput>>;
   where?: InputMaybe<VaultStatesActivitiesBoolExp>;
+};
+
+/** columns and relationships of "switchboard_oracle_activities" */
+export type SwitchboardOracleActivities = {
+  aggregator_address?: Maybe<Scalars['String']['output']>;
+  asset_identifier?: Maybe<Scalars['String']['output']>;
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  event_index: Scalars['numeric']['output'];
+  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
+  max_stdev?: Maybe<Scalars['numeric']['output']>;
+  oracle_address?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['timestamp']['output']>;
+  transaction_version: Scalars['numeric']['output'];
+};
+
+/** Boolean expression to filter rows from the table "switchboard_oracle_activities". All fields are combined with a logical 'AND'. */
+export type SwitchboardOracleActivitiesBoolExp = {
+  _and?: InputMaybe<Array<SwitchboardOracleActivitiesBoolExp>>;
+  _not?: InputMaybe<SwitchboardOracleActivitiesBoolExp>;
+  _or?: InputMaybe<Array<SwitchboardOracleActivitiesBoolExp>>;
+  aggregator_address?: InputMaybe<StringComparisonExp>;
+  asset_identifier?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  event_index?: InputMaybe<NumericComparisonExp>;
+  max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
+  max_stdev?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  timestamp?: InputMaybe<TimestampComparisonExp>;
+  transaction_version?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "switchboard_oracle_activities". */
+export type SwitchboardOracleActivitiesOrderBy = {
+  aggregator_address?: InputMaybe<OrderBy>;
+  asset_identifier?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  event_index?: InputMaybe<OrderBy>;
+  max_age_in_seconds?: InputMaybe<OrderBy>;
+  max_stdev?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  timestamp?: InputMaybe<OrderBy>;
+  transaction_version?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "switchboard_oracle_activities" */
+export enum SwitchboardOracleActivitiesSelectColumn {
+  /** column name */
+  AggregatorAddress = 'aggregator_address',
+  /** column name */
+  AssetIdentifier = 'asset_identifier',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  EventIndex = 'event_index',
+  /** column name */
+  MaxAgeInSeconds = 'max_age_in_seconds',
+  /** column name */
+  MaxStdev = 'max_stdev',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  Timestamp = 'timestamp',
+  /** column name */
+  TransactionVersion = 'transaction_version'
+}
+
+/** Streaming cursor of the table "switchboard_oracle_activities" */
+export type SwitchboardOracleActivitiesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: SwitchboardOracleActivitiesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type SwitchboardOracleActivitiesStreamCursorValueInput = {
+  aggregator_address?: InputMaybe<Scalars['String']['input']>;
+  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  event_index?: InputMaybe<Scalars['numeric']['input']>;
+  max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
+  max_stdev?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['timestamp']['input']>;
+  transaction_version?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "switchboard_oracle_current_config" */
+export type SwitchboardOracleCurrentConfig = {
+  aggregator_address?: Maybe<Scalars['String']['output']>;
+  asset_identifier: Scalars['String']['output'];
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
+  max_stdev?: Maybe<Scalars['numeric']['output']>;
+  oracle_address: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "switchboard_oracle_current_config". All fields are combined with a logical 'AND'. */
+export type SwitchboardOracleCurrentConfigBoolExp = {
+  _and?: InputMaybe<Array<SwitchboardOracleCurrentConfigBoolExp>>;
+  _not?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
+  _or?: InputMaybe<Array<SwitchboardOracleCurrentConfigBoolExp>>;
+  aggregator_address?: InputMaybe<StringComparisonExp>;
+  asset_identifier?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
+  max_stdev?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "switchboard_oracle_current_config". */
+export type SwitchboardOracleCurrentConfigOrderBy = {
+  aggregator_address?: InputMaybe<OrderBy>;
+  asset_identifier?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  max_age_in_seconds?: InputMaybe<OrderBy>;
+  max_stdev?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "switchboard_oracle_current_config" */
+export enum SwitchboardOracleCurrentConfigSelectColumn {
+  /** column name */
+  AggregatorAddress = 'aggregator_address',
+  /** column name */
+  AssetIdentifier = 'asset_identifier',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  MaxAgeInSeconds = 'max_age_in_seconds',
+  /** column name */
+  MaxStdev = 'max_stdev',
+  /** column name */
+  OracleAddress = 'oracle_address'
+}
+
+/** Streaming cursor of the table "switchboard_oracle_current_config" */
+export type SwitchboardOracleCurrentConfigStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: SwitchboardOracleCurrentConfigStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type SwitchboardOracleCurrentConfigStreamCursorValueInput = {
+  aggregator_address?: InputMaybe<Scalars['String']['input']>;
+  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
+  max_stdev?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "table_items" */
@@ -12871,8 +15545,6 @@ export type VaultFlashloanActivitiesVarianceFields = {
 export type VaultInfo = {
   /** An object relationship */
   adaptive_irm_config?: Maybe<AdaptiveIrmCurrentConfig>;
-  /** An object relationship */
-  adaptive_irm_state?: Maybe<AdaptiveIrmCurrentState>;
   creator?: Maybe<Scalars['String']['output']>;
   debt_asset?: Maybe<Scalars['String']['output']>;
   debt_asset_metadata?: Maybe<FungibleAssetMetadata>;
@@ -12942,7 +15614,6 @@ export type VaultInfoBoolExp = {
   _not?: InputMaybe<VaultInfoBoolExp>;
   _or?: InputMaybe<Array<VaultInfoBoolExp>>;
   adaptive_irm_config?: InputMaybe<AdaptiveIrmCurrentConfigBoolExp>;
-  adaptive_irm_state?: InputMaybe<AdaptiveIrmCurrentStateBoolExp>;
   creator?: InputMaybe<StringComparisonExp>;
   debt_asset?: InputMaybe<StringComparisonExp>;
   fixed_rate_irm_config?: InputMaybe<FixedRateIrmCurrentConfigBoolExp>;
@@ -12979,7 +15650,6 @@ export type VaultInfoMinFields = {
 /** Ordering options when selecting data from "vault_info". */
 export type VaultInfoOrderBy = {
   adaptive_irm_config?: InputMaybe<AdaptiveIrmCurrentConfigOrderBy>;
-  adaptive_irm_state?: InputMaybe<AdaptiveIrmCurrentStateOrderBy>;
   creator?: InputMaybe<OrderBy>;
   debt_asset?: InputMaybe<OrderBy>;
   fixed_rate_irm_config?: InputMaybe<FixedRateIrmCurrentConfigOrderBy>;

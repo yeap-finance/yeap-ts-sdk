@@ -1,0 +1,11 @@
+fragment LiquidationActivityFields on scmd_liquidation_activities {
+  event_index
+  transaction_version
+  timestamp
+  position_address
+  vault_address
+  collateral_liquidation_amount
+  collateral_value_before
+  loan_value_before
+  repay_amount
+}

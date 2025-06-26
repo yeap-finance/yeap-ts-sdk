@@ -100,14 +100,6 @@ export class Vault {
   }
 
   /**
-   * Get the adaptive interest rate model state.
-   */
-  get adaptiveIrmState(): YeapAdaptiveIrmState | null {
-    const rawState = this._rawVaultData.adaptive_irm_state;
-    return rawState ? transformAdaptiveIrmState(rawState) : null;
-  }
-
-  /**
    * Get the fixed rate interest rate model configuration.
    */
   get fixedRateIrmConfig(): YeapFixedRateIrmConfig | null {
@@ -149,7 +141,6 @@ export class Vault {
     }
     return new Vault(config, vaultInfo);
   }
-
 
   /**
    * Get the latest vault state with derived financial metrics.

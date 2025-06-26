@@ -6,10 +6,10 @@ import { Decimal } from "decimal.js";
 
 // Configure decimal.js for financial calculations
 Decimal.set({
-  precision: 38,                    // Handle large blockchain numbers with precision
-  rounding: Decimal.ROUND_DOWN,  // Standard financial rounding
-  toExpNeg: -18,                     // Handle small percentages
-  toExpPos: 38                      // Handle large token amounts
+  precision: 38, // Handle large blockchain numbers with precision
+  rounding: Decimal.ROUND_DOWN, // Standard financial rounding
+  toExpNeg: -18, // Handle small percentages
+  toExpPos: 38, // Handle large token amounts
 });
 
 // Raw type for vault state data
@@ -80,7 +80,6 @@ export class VaultState {
   get totalShares(): bigint {
     return this._rawStateData.total_shares ? BigInt(this._rawStateData.total_shares) : 0n;
   }
-
 
   get totalSupply(): bigint {
     return this.totalBorrows + this.cash + this.badDebt;

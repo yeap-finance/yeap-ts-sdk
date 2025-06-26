@@ -2,6 +2,79 @@ import * as Types from './operations';
 
 import { GraphQLClient, RequestOptions } from 'graphql-request';
 type GraphQLClientRequestHeaders = RequestOptions['requestHeaders'];
+export const AdaptiveIrmStateFieldsFragmentDoc = `
+    fragment AdaptiveIrmStateFields on adaptive_irm_current_state {
+  state_address
+  current_rate_at_target
+  last_update_timestamp_secs
+}
+    `;
+export const LiquidationActivityFieldsFragmentDoc = `
+    fragment LiquidationActivityFields on scmd_liquidation_activities {
+  event_index
+  transaction_version
+  timestamp
+  position_address
+  vault_address
+  collateral_liquidation_amount
+  collateral_value_before
+  loan_value_before
+  repay_amount
+}
+    `;
+export const OracleRouterConfigFieldsFragmentDoc = `
+    fragment OracleRouterConfigFields on oracle_router_current_config {
+  base_asset
+  deleted
+  oracle
+  oracle_kind
+  oracle_router
+  quote_asset
+}
+    `;
+export const FungibleAssetMetadataFieldsFragmentDoc = `
+    fragment FungibleAssetMetadataFields on fungible_asset_metadata {
+  token_standard
+  name
+  symbol
+  decimals
+  icon_uri
+  project_uri
+}
+    `;
+export const FungibleAssetBalanceFieldsFragmentDoc = `
+    fragment FungibleAssetBalanceFields on current_fungible_asset_balances {
+  amount
+  amount_v1
+  amount_v2
+  asset_type
+  asset_type_v1
+  asset_type_v2
+  owner_address
+  metadata {
+    ...FungibleAssetMetadataFields
+  }
+  is_frozen
+  is_primary
+  storage_id
+}
+    ${FungibleAssetMetadataFieldsFragmentDoc}`;
+export const PositionFieldsFragmentDoc = `
+    fragment PositionFields on scmd_position_current {
+  position_address
+  owner_address
+  collateral
+  collateral_type
+  status
+  collateral_asset_balance {
+    ...FungibleAssetBalanceFields
+  }
+  debt_stores {
+    debt_store_address
+    vault_address
+  }
+}
+    ${FungibleAssetBalanceFieldsFragmentDoc}`;
 export const VaultBadDebtActivitiesFieldsFragmentDoc = `
     fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
   event_index
@@ -37,33 +110,6 @@ export const VaultFlashloanActivitiesFieldsFragmentDoc = `
   fee
 }
     `;
-export const FungibleAssetMetadataFieldsFragmentDoc = `
-    fragment FungibleAssetMetadataFields on fungible_asset_metadata {
-  token_standard
-  name
-  symbol
-  decimals
-  icon_uri
-  project_uri
-}
-    `;
-export const FungibleAssetBalanceFieldsFragmentDoc = `
-    fragment FungibleAssetBalanceFields on current_fungible_asset_balances {
-  amount
-  amount_v1
-  amount_v2
-  asset_type
-  asset_type_v1
-  asset_type_v2
-  owner_address
-  metadata {
-    ...FungibleAssetMetadataFields
-  }
-  is_frozen
-  is_primary
-  storage_id
-}
-    ${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const CurrentObjectFieldsFragmentDoc = `
     fragment CurrentObjectFields on current_objects {
   object_address
@@ -96,13 +142,6 @@ export const AdaptiveIrmConfigFieldsFragmentDoc = `
   max_rate_at_target
   min_rate_at_target
   target_utilization
-}
-    `;
-export const AdaptiveIrmStateFieldsFragmentDoc = `
-    fragment AdaptiveIrmStateFields on adaptive_irm_current_state {
-  state_address
-  current_rate_at_target
-  last_update_timestamp_secs
 }
     `;
 export const FixedRateIrmConfigFieldsFragmentDoc = `
@@ -161,9 +200,6 @@ export const VaultInfoFieldsFragmentDoc = `
   adaptive_irm_config {
     ...AdaptiveIrmConfigFields
   }
-  adaptive_irm_state {
-    ...AdaptiveIrmStateFields
-  }
   fixed_rate_irm_config {
     ...FixedRateIrmConfigFields
   }
@@ -179,7 +215,6 @@ ${FungibleAssetBalanceFieldsFragmentDoc}
 ${CurrentObjectFieldsFragmentDoc}
 ${VaultSettingsFieldsFragmentDoc}
 ${AdaptiveIrmConfigFieldsFragmentDoc}
-${AdaptiveIrmStateFieldsFragmentDoc}
 ${FixedRateIrmConfigFieldsFragmentDoc}
 ${KinkedIrmConfigFieldsFragmentDoc}
 ${VaultProtocolCapsFieldsFragmentDoc}`;
@@ -210,6 +245,39 @@ export const GetActiveVaults = `
   }
 }
     ${VaultInfoFieldsFragmentDoc}`;
+export const GetOracleRouterConfigByPrimaryKey = `
+    query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
+  oracle_router_current_config(
+    where: {base_asset: {_eq: $baseAsset}, oracle_router: {_eq: $oracleRouter}, quote_asset: {_eq: $quoteAsset}, deleted: {_neq: true}}
+  ) {
+    ...OracleRouterConfigFields
+  }
+}
+    ${OracleRouterConfigFieldsFragmentDoc}`;
+export const GetOracleRouterConfigsByOracle = `
+    query getOracleRouterConfigsByOracle($oracleRouter: String!, $limit: Int, $offset: Int) {
+  oracle_router_current_config(
+    where: {oracle_router: {_eq: $oracleRouter}, deleted: {_neq: true}}
+    limit: $limit
+    offset: $offset
+    order_by: [{base_asset: asc}, {quote_asset: asc}]
+  ) {
+    ...OracleRouterConfigFields
+  }
+}
+    ${OracleRouterConfigFieldsFragmentDoc}`;
+export const GetPositionsByOwner = `
+    query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+  scmd_position_current(
+    where: {owner_address: {_eq: $ownerAddress}}
+    limit: $limit
+    offset: $offset
+    order_by: {position_address: asc}
+  ) {
+    ...PositionFields
+  }
+}
+    ${PositionFieldsFragmentDoc}`;
 export const GetVaultInfo = `
     query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
   vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
@@ -298,6 +366,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetActiveVaults(variables?: Types.GetActiveVaultsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetActiveVaultsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetActiveVaultsQuery>({ document: GetActiveVaults, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetActiveVaults', 'query', variables);
+    },
+    getOracleRouterConfigByPrimaryKey(variables: Types.GetOracleRouterConfigByPrimaryKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigByPrimaryKeyQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigByPrimaryKeyQuery>({ document: GetOracleRouterConfigByPrimaryKey, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigByPrimaryKey', 'query', variables);
+    },
+    getOracleRouterConfigsByOracle(variables: Types.GetOracleRouterConfigsByOracleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigsByOracleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigsByOracleQuery>({ document: GetOracleRouterConfigsByOracle, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigsByOracle', 'query', variables);
+    },
+    GetPositionsByOwner(variables: Types.GetPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetPositionsByOwnerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetPositionsByOwnerQuery>({ document: GetPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPositionsByOwner', 'query', variables);
     },
     GetVaultInfo(variables?: Types.GetVaultInfoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultInfoQuery>({ document: GetVaultInfo, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultInfo', 'query', variables);

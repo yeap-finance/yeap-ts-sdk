@@ -40,9 +40,9 @@ fragment VaultInfoFields on vault_info {
   adaptive_irm_config {
     ...AdaptiveIrmConfigFields
   }
-  adaptive_irm_state {
-    ...AdaptiveIrmStateFields
-  }
+  # adaptive_irm_state {
+  #   ...AdaptiveIrmStateFields
+  # }
   fixed_rate_irm_config {
     ...FixedRateIrmConfigFields
   }

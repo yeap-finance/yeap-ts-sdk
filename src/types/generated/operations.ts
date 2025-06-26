@@ -17,6 +17,15 @@ export type FungibleAssetMetadataFieldsFragment = Pick<Types.FungibleAssetMetada
 
 export type KinkedIrmConfigFieldsFragment = Pick<Types.KinkedIrmCurrentConfig, 'config_address' | 'max_borrow_rate' | 'min_borrow_rate' | 'optimal_borrow_rate' | 'optimal_utilization'>;
 
+export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivities, 'event_index' | 'transaction_version' | 'timestamp' | 'position_address' | 'vault_address' | 'collateral_liquidation_amount' | 'collateral_value_before' | 'loan_value_before' | 'repay_amount'>;
+
+export type OracleRouterConfigFieldsFragment = Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>;
+
+export type PositionFieldsFragment = (
+  Pick<Types.ScmdPositionCurrent, 'position_address' | 'owner_address' | 'collateral' | 'collateral_type' | 'status'>
+  & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, debt_stores: Array<Pick<Types.ScmdPositionDebtStores, 'debt_store_address' | 'vault_address'>> }
+);
+
 export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'borrow_protocol' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
 
 export type VaultEmergencyActivitiesFieldsFragment = Pick<Types.VaultEmergencyActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'timestamp' | 'amount' | 'withdrawn_by'>;
@@ -25,7 +34,7 @@ export type VaultFlashloanActivitiesFieldsFragment = Pick<Types.VaultFlashloanAc
 
 export type VaultInfoFieldsFragment = (
   Pick<Types.VaultInfo, 'vault_address' | 'creator' | 'underlying_asset' | 'debt_asset' | 'underlying_asset_store' | 'governance_object_address'>
-  & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, adaptive_irm_state?: Types.Maybe<AdaptiveIrmStateFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment>, protocol_configs: Array<VaultProtocolCapsFieldsFragment> }
+  & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment>, protocol_configs: Array<VaultProtocolCapsFieldsFragment> }
 );
 
 export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_cap' | 'supply_enabled'>;
@@ -41,6 +50,33 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
+  baseAsset: Types.Scalars['String']['input'];
+  oracleRouter: Types.Scalars['String']['input'];
+  quoteAsset: Types.Scalars['String']['input'];
+}>;
+
+
+export type GetOracleRouterConfigByPrimaryKeyQuery = { oracle_router_current_config: Array<OracleRouterConfigFieldsFragment> };
+
+export type GetOracleRouterConfigsByOracleQueryVariables = Types.Exact<{
+  oracleRouter: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetOracleRouterConfigsByOracleQuery = { oracle_router_current_config: Array<OracleRouterConfigFieldsFragment> };
+
+export type GetPositionsByOwnerQueryVariables = Types.Exact<{
+  ownerAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetPositionsByOwnerQuery = { scmd_position_current: Array<PositionFieldsFragment> };
 
 export type GetVaultInfoQueryVariables = Types.Exact<{
   where?: Types.InputMaybe<Types.VaultInfoBoolExp>;

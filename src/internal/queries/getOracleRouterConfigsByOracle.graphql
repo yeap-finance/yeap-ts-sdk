@@ -1,0 +1,22 @@
+#import "./fragments/OracleRouterConfigFields.graphql"
+
+query getOracleRouterConfigsByOracle(
+  $oracleRouter: String!
+  $limit: Int
+  $offset: Int
+) {
+  oracle_router_current_config(
+    where: {
+      oracle_router: { _eq: $oracleRouter }
+      deleted: { _neq: true }
+    }
+    limit: $limit
+    offset: $offset
+    order_by: [
+      { base_asset: asc }
+      { quote_asset: asc }
+    ]
+  ) {
+    ...OracleRouterConfigFields
+  }
+}

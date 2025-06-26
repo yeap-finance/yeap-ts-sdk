@@ -3,6 +3,7 @@
 
 import {
   YeapFungibleAssetMetadata,
+  YeapFungibleAssetBalance,
   YeapCurrentObject,
   YeapVaultSettings,
   YeapVaultInfo,
@@ -16,8 +17,16 @@ import {
   YeapVaultFlashloanActivity,
   YeapVaultProtocolCaps,
   YeapVaultStateActivity,
+  YeapPosition,
+  YeapOracleRouterConfig,
 } from "./interfaces";
-import { GetVaultInfoQuery, GetVaultLatestStateQuery, VaultInfoFieldsFragment } from "../types/generated/operations";
+import {
+  FungibleAssetBalanceFieldsFragment,
+  GetVaultInfoQuery,
+  GetVaultLatestStateQuery,
+  VaultInfoFieldsFragment,
+  OracleRouterConfigFieldsFragment,
+} from "../types/generated/operations";
 
 type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
 type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
@@ -25,10 +34,10 @@ type RawFungibleAssetMetadata = RawVaultInfo["underlying_asset_metadata"];
 type RawCurrentObject = RawVaultInfo["governance_object"];
 type RawVaultSettings = RawVaultInfo["settings"];
 type RawAdaptiveIrmConfig = VaultInfoFieldsFragment["adaptive_irm_config"];
-type RawAdaptiveIrmState = VaultInfoFieldsFragment["adaptive_irm_state"];
 type RawFixedRateIrmConfig = VaultInfoFieldsFragment["fixed_rate_irm_config"];
 type RawKinkedIrmConfig = VaultInfoFieldsFragment["kinked_irm_config"];
 type RawVaultProtocolCaps = VaultInfoFieldsFragment["protocol_configs"][0];
+type RawOracleRouterConfig = OracleRouterConfigFieldsFragment;
 
 /**
  * Transform raw GraphQL fungible asset metadata to clean interface
@@ -152,7 +161,7 @@ export function transformAdaptiveIrmConfig(raw: RawAdaptiveIrmConfig): YeapAdapt
  * Transform raw GraphQL adaptive IRM state to clean interface
  * @internal
  */
-export function transformAdaptiveIrmState(raw: RawAdaptiveIrmState): YeapAdaptiveIrmState | null {
+export function transformAdaptiveIrmState(raw: any): YeapAdaptiveIrmState | null {
   if (!raw) return null;
   return {
     stateAddress: raw.state_address,
@@ -203,5 +212,37 @@ export function transformVaultProtocolCaps(raw: RawVaultProtocolCaps): YeapVault
     borrowEnabled: raw.borrow_enabled ?? null,
     supplyCap: raw.supply_cap || null,
     supplyEnabled: raw.supply_enabled ?? null,
+  };
+}
+
+/**
+ * Transform raw GraphQL fungible asset balance to clean interface
+ * @internal
+ */
+export function transformFungibleAssetBalance(
+  raw: FungibleAssetBalanceFieldsFragment,
+): YeapFungibleAssetBalance | null {
+  if (!raw) return null;
+  return {
+    amount: raw.amount || "0",
+    isFrozen: raw.is_frozen || false,
+    storageId: raw.storage_id || "",
+    metadata: raw.metadata ? transformFungibleAssetMetadata(raw.metadata) : null,
+  };
+}
+
+/**
+ * Transform raw GraphQL oracle router config to clean interface
+ * @internal
+ */
+export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOracleRouterConfig | null {
+  if (!raw) return null;
+  return {
+    baseAsset: raw.base_asset,
+    quoteAsset: raw.quote_asset,
+    oracleRouter: raw.oracle_router,
+    oracle: raw.oracle ?? null,
+    oracleKind: raw.oracle_kind ?? null,
+    isDeleted: raw.deleted ?? false,
   };
 }
