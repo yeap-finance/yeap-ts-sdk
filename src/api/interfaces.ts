@@ -573,3 +573,21 @@ export interface VaultQueryOptions extends QueryOptions {
   /** Sort options */
   sort?: VaultSortOptions;
 }
+
+/**
+ * Oracle router configuration information (clean interface)
+ */
+export interface YeapOracleRouterConfig {
+  /** Base asset address */
+  baseAsset: string;
+  /** Quote asset address */
+  quoteAsset: string;
+  /** Oracle router address */
+  oracleRouter: string;
+  /** Oracle address (if set) */
+  oracle?: string | null;
+  /** Oracle kind/type identifier */
+  oracleKind?: number | null;
+  /** Whether the configuration is deleted */
+  isDeleted?: boolean;
+}

@@ -40,11 +40,7 @@ export class VaultApi {
    * ```
    * @group Vault
    */
-  async getVaultsByUnderlyingAsset(
-    underlyingAsset: string,
-    limit: number = 10,
-    offset: number = 0,
-  ): Promise<Vault[]> {
+  async getVaultsByUnderlyingAsset(underlyingAsset: string, limit: number = 10, offset: number = 0): Promise<Vault[]> {
     const vaultInfos = await getVaultsByUnderlyingAsset({
       yeapConfig: this.config,
       underlyingAsset,
@@ -52,9 +48,7 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos
-      .filter((vaultInfo) => vaultInfo !== null)
-      .map((vaultInfo) => new Vault(this.config, vaultInfo));
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
   }
 
   /**

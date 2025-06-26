@@ -2,16 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import {
-  YeapFungibleAssetBalance,
-  YeapFungibleAssetMetadata,
-  YeapVaultInfo,
-} from "../interfaces";
-import {
-  transformFungibleAssetBalance,
-  transformFungibleAssetMetadata,
-  transformVaultInfo,
-} from "../transforms";
+import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata, YeapVaultInfo } from "../interfaces";
+import { transformFungibleAssetBalance, transformFungibleAssetMetadata, transformVaultInfo } from "../transforms";
 import { PositionFieldsFragment } from "../../types/generated/operations";
 
 // Raw data type from GraphQL
@@ -126,11 +118,11 @@ export class SCMDPosition {
   get debtStores(): PositionDebtStore[] {
     const rawDebtStores = this._rawPositionData.debt_stores || [];
 
-    return rawDebtStores.map(store => ({
+    return rawDebtStores.map((store) => ({
       debtStoreAddress: store.debt_store_address!,
       vaultAddress: store.vault_address!,
-    //   debtAssetBalance: store.debt_asset_balance ? transformFungibleAssetBalance(store.debt_asset_balance) : null,
-    //   vaultInfo: store.vault_info ? transformVaultInfo(store.vault_info) : null,
+      //   debtAssetBalance: store.debt_asset_balance ? transformFungibleAssetBalance(store.debt_asset_balance) : null,
+      //   vaultInfo: store.vault_info ? transformVaultInfo(store.vault_info) : null,
     }));
   }
 
@@ -139,7 +131,7 @@ export class SCMDPosition {
    * @param vaultAddress - The vault address to filter by
    */
   getDebtStoresByVault(vaultAddress: string): PositionDebtStore[] {
-    return this.debtStores.filter(store => store.vaultAddress === vaultAddress);
+    return this.debtStores.filter((store) => store.vaultAddress === vaultAddress);
   }
 
   /**
@@ -154,14 +146,13 @@ export class SCMDPosition {
    * @param vaultAddress - The vault address to check
    */
   hasDebtInVault(vaultAddress: string): boolean {
-    return this.debtStores.some(store => store.vaultAddress === vaultAddress);
+    return this.debtStores.some((store) => store.vaultAddress === vaultAddress);
   }
 
   /**
    * Get all vault addresses this position has borrowed from.
    */
   get vaultAddresses(): string[] {
-    return this.debtStores.map(store => store.vaultAddress);
+    return this.debtStores.map((store) => store.vaultAddress);
   }
-
 }

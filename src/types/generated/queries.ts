@@ -22,6 +22,16 @@ export const LiquidationActivityFieldsFragmentDoc = `
   repay_amount
 }
     `;
+export const OracleRouterConfigFieldsFragmentDoc = `
+    fragment OracleRouterConfigFields on oracle_router_current_config {
+  base_asset
+  deleted
+  oracle
+  oracle_kind
+  oracle_router
+  quote_asset
+}
+    `;
 export const FungibleAssetMetadataFieldsFragmentDoc = `
     fragment FungibleAssetMetadataFields on fungible_asset_metadata {
   token_standard
@@ -235,6 +245,27 @@ export const GetActiveVaults = `
   }
 }
     ${VaultInfoFieldsFragmentDoc}`;
+export const GetOracleRouterConfigByPrimaryKey = `
+    query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
+  oracle_router_current_config(
+    where: {base_asset: {_eq: $baseAsset}, oracle_router: {_eq: $oracleRouter}, quote_asset: {_eq: $quoteAsset}, deleted: {_neq: true}}
+  ) {
+    ...OracleRouterConfigFields
+  }
+}
+    ${OracleRouterConfigFieldsFragmentDoc}`;
+export const GetOracleRouterConfigsByOracle = `
+    query getOracleRouterConfigsByOracle($oracleRouter: String!, $limit: Int, $offset: Int) {
+  oracle_router_current_config(
+    where: {oracle_router: {_eq: $oracleRouter}, deleted: {_neq: true}}
+    limit: $limit
+    offset: $offset
+    order_by: [{base_asset: asc}, {quote_asset: asc}]
+  ) {
+    ...OracleRouterConfigFields
+  }
+}
+    ${OracleRouterConfigFieldsFragmentDoc}`;
 export const GetPositionsByOwner = `
     query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(
@@ -335,6 +366,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetActiveVaults(variables?: Types.GetActiveVaultsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetActiveVaultsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetActiveVaultsQuery>({ document: GetActiveVaults, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetActiveVaults', 'query', variables);
+    },
+    getOracleRouterConfigByPrimaryKey(variables: Types.GetOracleRouterConfigByPrimaryKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigByPrimaryKeyQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigByPrimaryKeyQuery>({ document: GetOracleRouterConfigByPrimaryKey, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigByPrimaryKey', 'query', variables);
+    },
+    getOracleRouterConfigsByOracle(variables: Types.GetOracleRouterConfigsByOracleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigsByOracleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigsByOracleQuery>({ document: GetOracleRouterConfigsByOracle, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigsByOracle', 'query', variables);
     },
     GetPositionsByOwner(variables: Types.GetPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetPositionsByOwnerQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetPositionsByOwnerQuery>({ document: GetPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPositionsByOwner', 'query', variables);

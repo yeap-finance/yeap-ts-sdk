@@ -19,6 +19,8 @@ export type KinkedIrmConfigFieldsFragment = Pick<Types.KinkedIrmCurrentConfig, '
 
 export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivities, 'event_index' | 'transaction_version' | 'timestamp' | 'position_address' | 'vault_address' | 'collateral_liquidation_amount' | 'collateral_value_before' | 'loan_value_before' | 'repay_amount'>;
 
+export type OracleRouterConfigFieldsFragment = Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>;
+
 export type PositionFieldsFragment = (
   Pick<Types.ScmdPositionCurrent, 'position_address' | 'owner_address' | 'collateral' | 'collateral_type' | 'status'>
   & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, debt_stores: Array<Pick<Types.ScmdPositionDebtStores, 'debt_store_address' | 'vault_address'>> }
@@ -48,6 +50,24 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
+  baseAsset: Types.Scalars['String']['input'];
+  oracleRouter: Types.Scalars['String']['input'];
+  quoteAsset: Types.Scalars['String']['input'];
+}>;
+
+
+export type GetOracleRouterConfigByPrimaryKeyQuery = { oracle_router_current_config: Array<OracleRouterConfigFieldsFragment> };
+
+export type GetOracleRouterConfigsByOracleQueryVariables = Types.Exact<{
+  oracleRouter: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetOracleRouterConfigsByOracleQuery = { oracle_router_current_config: Array<OracleRouterConfigFieldsFragment> };
 
 export type GetPositionsByOwnerQueryVariables = Types.Exact<{
   ownerAddress: Types.Scalars['String']['input'];

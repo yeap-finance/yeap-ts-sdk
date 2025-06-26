@@ -1,0 +1,8 @@
+fragment OracleRouterConfigFields on oracle_router_current_config {
+  base_asset
+  deleted
+  oracle
+  oracle_kind
+  oracle_router
+  quote_asset
+}

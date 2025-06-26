@@ -5,3 +5,4 @@ export * from "./yeap";
 export * from "./yeapConfig";
 export * from "./vaultApi";
 export * from "./scmdPositionApi";
+export * from "./oracleApi";

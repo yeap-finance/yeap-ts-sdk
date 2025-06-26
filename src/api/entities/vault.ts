@@ -99,7 +99,6 @@ export class Vault {
     return rawConfig ? transformAdaptiveIrmConfig(rawConfig) : null;
   }
 
-
   /**
    * Get the fixed rate interest rate model configuration.
    */
@@ -142,7 +141,6 @@ export class Vault {
     }
     return new Vault(config, vaultInfo);
   }
-
 
   /**
    * Get the latest vault state with derived financial metrics.
