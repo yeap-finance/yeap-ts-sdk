@@ -851,6 +851,83 @@ input adaptive_irm_current_state_stream_cursor_value_input {
 }
 
 """
+columns and relationships of "adaptive_irm_state_activities"
+"""
+type adaptive_irm_state_activities {
+  current_rate_at_target: numeric
+  event_index: numeric!
+  last_update_timestamp_secs: numeric
+  state_address: String
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "adaptive_irm_state_activities". All fields are combined with a logical 'AND'.
+"""
+input adaptive_irm_state_activities_bool_exp {
+  _and: [adaptive_irm_state_activities_bool_exp!]
+  _not: adaptive_irm_state_activities_bool_exp
+  _or: [adaptive_irm_state_activities_bool_exp!]
+  current_rate_at_target: numeric_comparison_exp
+  event_index: numeric_comparison_exp
+  last_update_timestamp_secs: numeric_comparison_exp
+  state_address: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "adaptive_irm_state_activities".
+"""
+input adaptive_irm_state_activities_order_by {
+  current_rate_at_target: order_by
+  event_index: order_by
+  last_update_timestamp_secs: order_by
+  state_address: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "adaptive_irm_state_activities"
+"""
+enum adaptive_irm_state_activities_select_column {
+  """column name"""
+  current_rate_at_target
+  """column name"""
+  event_index
+  """column name"""
+  last_update_timestamp_secs
+  """column name"""
+  state_address
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "adaptive_irm_state_activities"
+"""
+input adaptive_irm_state_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: adaptive_irm_state_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input adaptive_irm_state_activities_stream_cursor_value_input {
+  current_rate_at_target: numeric
+  event_index: numeric
+  last_update_timestamp_secs: numeric
+  state_address: String
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
 columns and relationships of "address_events_summary"
 """
 type address_events_summary {
@@ -6452,6 +6529,235 @@ input events_stream_cursor_value_input {
 }
 
 """
+columns and relationships of "fixed_price_oracle_activities"
+"""
+type fixed_price_oracle_activities {
+  base_asset: String
+  deleted: Boolean
+  event_index: numeric!
+  oracle_address: String
+  price: numeric
+  quote_asset: String
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "fixed_price_oracle_activities". All fields are combined with a logical 'AND'.
+"""
+input fixed_price_oracle_activities_bool_exp {
+  _and: [fixed_price_oracle_activities_bool_exp!]
+  _not: fixed_price_oracle_activities_bool_exp
+  _or: [fixed_price_oracle_activities_bool_exp!]
+  base_asset: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  event_index: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+  price: numeric_comparison_exp
+  quote_asset: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "fixed_price_oracle_activities".
+"""
+input fixed_price_oracle_activities_order_by {
+  base_asset: order_by
+  deleted: order_by
+  event_index: order_by
+  oracle_address: order_by
+  price: order_by
+  quote_asset: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "fixed_price_oracle_activities"
+"""
+enum fixed_price_oracle_activities_select_column {
+  """column name"""
+  base_asset
+  """column name"""
+  deleted
+  """column name"""
+  event_index
+  """column name"""
+  oracle_address
+  """column name"""
+  price
+  """column name"""
+  quote_asset
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "fixed_price_oracle_activities"
+"""
+input fixed_price_oracle_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: fixed_price_oracle_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input fixed_price_oracle_activities_stream_cursor_value_input {
+  base_asset: String
+  deleted: Boolean
+  event_index: numeric
+  oracle_address: String
+  price: numeric
+  quote_asset: String
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
+columns and relationships of "fixed_price_oracle_current_config"
+"""
+type fixed_price_oracle_current_config {
+  base_asset: String!
+  deleted: Boolean
+  oracle_address: String!
+  price: numeric
+  quote_asset: String!
+}
+
+"""
+Boolean expression to filter rows from the table "fixed_price_oracle_current_config". All fields are combined with a logical 'AND'.
+"""
+input fixed_price_oracle_current_config_bool_exp {
+  _and: [fixed_price_oracle_current_config_bool_exp!]
+  _not: fixed_price_oracle_current_config_bool_exp
+  _or: [fixed_price_oracle_current_config_bool_exp!]
+  base_asset: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  oracle_address: String_comparison_exp
+  price: numeric_comparison_exp
+  quote_asset: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "fixed_price_oracle_current_config".
+"""
+input fixed_price_oracle_current_config_order_by {
+  base_asset: order_by
+  deleted: order_by
+  oracle_address: order_by
+  price: order_by
+  quote_asset: order_by
+}
+
+"""
+select columns of table "fixed_price_oracle_current_config"
+"""
+enum fixed_price_oracle_current_config_select_column {
+  """column name"""
+  base_asset
+  """column name"""
+  deleted
+  """column name"""
+  oracle_address
+  """column name"""
+  price
+  """column name"""
+  quote_asset
+}
+
+"""
+Streaming cursor of the table "fixed_price_oracle_current_config"
+"""
+input fixed_price_oracle_current_config_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: fixed_price_oracle_current_config_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input fixed_price_oracle_current_config_stream_cursor_value_input {
+  base_asset: String
+  deleted: Boolean
+  oracle_address: String
+  price: numeric
+  quote_asset: String
+}
+
+"""
+columns and relationships of "fixed_rate_irm_activities"
+"""
+type fixed_rate_irm_activities {
+  config_address: String
+  event_index: numeric!
+  rate_per_second: numeric
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "fixed_rate_irm_activities". All fields are combined with a logical 'AND'.
+"""
+input fixed_rate_irm_activities_bool_exp {
+  _and: [fixed_rate_irm_activities_bool_exp!]
+  _not: fixed_rate_irm_activities_bool_exp
+  _or: [fixed_rate_irm_activities_bool_exp!]
+  config_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  rate_per_second: numeric_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""Ordering options when selecting data from "fixed_rate_irm_activities"."""
+input fixed_rate_irm_activities_order_by {
+  config_address: order_by
+  event_index: order_by
+  rate_per_second: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "fixed_rate_irm_activities"
+"""
+enum fixed_rate_irm_activities_select_column {
+  """column name"""
+  config_address
+  """column name"""
+  event_index
+  """column name"""
+  rate_per_second
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "fixed_rate_irm_activities"
+"""
+input fixed_rate_irm_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: fixed_rate_irm_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input fixed_rate_irm_activities_stream_cursor_value_input {
+  config_address: String
+  event_index: numeric
+  rate_per_second: numeric
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
 columns and relationships of "fixed_rate_irm_current_config"
 """
 type fixed_rate_irm_current_config {
@@ -6939,6 +7245,403 @@ input fungible_asset_metadata_stream_cursor_value_input {
 }
 
 """
+columns and relationships of "hyperion_llp_bad_debt_activities"
+"""
+type hyperion_llp_bad_debt_activities {
+  bad_debt_amount: numeric
+  bad_debt_shares: numeric
+  debt_store_address: String
+  event_index: numeric!
+  position_address: String
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+Boolean expression to filter rows from the table "hyperion_llp_bad_debt_activities". All fields are combined with a logical 'AND'.
+"""
+input hyperion_llp_bad_debt_activities_bool_exp {
+  _and: [hyperion_llp_bad_debt_activities_bool_exp!]
+  _not: hyperion_llp_bad_debt_activities_bool_exp
+  _or: [hyperion_llp_bad_debt_activities_bool_exp!]
+  bad_debt_amount: numeric_comparison_exp
+  bad_debt_shares: numeric_comparison_exp
+  debt_store_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  position_address: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "hyperion_llp_bad_debt_activities".
+"""
+input hyperion_llp_bad_debt_activities_order_by {
+  bad_debt_amount: order_by
+  bad_debt_shares: order_by
+  debt_store_address: order_by
+  event_index: order_by
+  position_address: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "hyperion_llp_bad_debt_activities"
+"""
+enum hyperion_llp_bad_debt_activities_select_column {
+  """column name"""
+  bad_debt_amount
+  """column name"""
+  bad_debt_shares
+  """column name"""
+  debt_store_address
+  """column name"""
+  event_index
+  """column name"""
+  position_address
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "hyperion_llp_bad_debt_activities"
+"""
+input hyperion_llp_bad_debt_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: hyperion_llp_bad_debt_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input hyperion_llp_bad_debt_activities_stream_cursor_value_input {
+  bad_debt_amount: numeric
+  bad_debt_shares: numeric
+  debt_store_address: String
+  event_index: numeric
+  position_address: String
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+columns and relationships of "hyperion_llp_debt_status_activities"
+"""
+type hyperion_llp_debt_status_activities {
+  debt_store_address: String
+  event_index: numeric!
+  position_address: String
+  status: smallint
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+Boolean expression to filter rows from the table "hyperion_llp_debt_status_activities". All fields are combined with a logical 'AND'.
+"""
+input hyperion_llp_debt_status_activities_bool_exp {
+  _and: [hyperion_llp_debt_status_activities_bool_exp!]
+  _not: hyperion_llp_debt_status_activities_bool_exp
+  _or: [hyperion_llp_debt_status_activities_bool_exp!]
+  debt_store_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  position_address: String_comparison_exp
+  status: smallint_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "hyperion_llp_debt_status_activities".
+"""
+input hyperion_llp_debt_status_activities_order_by {
+  debt_store_address: order_by
+  event_index: order_by
+  position_address: order_by
+  status: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "hyperion_llp_debt_status_activities"
+"""
+enum hyperion_llp_debt_status_activities_select_column {
+  """column name"""
+  debt_store_address
+  """column name"""
+  event_index
+  """column name"""
+  position_address
+  """column name"""
+  status
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "hyperion_llp_debt_status_activities"
+"""
+input hyperion_llp_debt_status_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: hyperion_llp_debt_status_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input hyperion_llp_debt_status_activities_stream_cursor_value_input {
+  debt_store_address: String
+  event_index: numeric
+  position_address: String
+  status: smallint
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+columns and relationships of "hyperion_llp_liquidation_activities"
+"""
+type hyperion_llp_liquidation_activities {
+  collateral_liquidation_amount: numeric
+  collateral_value_before: numeric
+  event_index: numeric!
+  loan_value_before: numeric
+  position_address: String
+  repay_amount: numeric
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+Boolean expression to filter rows from the table "hyperion_llp_liquidation_activities". All fields are combined with a logical 'AND'.
+"""
+input hyperion_llp_liquidation_activities_bool_exp {
+  _and: [hyperion_llp_liquidation_activities_bool_exp!]
+  _not: hyperion_llp_liquidation_activities_bool_exp
+  _or: [hyperion_llp_liquidation_activities_bool_exp!]
+  collateral_liquidation_amount: numeric_comparison_exp
+  collateral_value_before: numeric_comparison_exp
+  event_index: numeric_comparison_exp
+  loan_value_before: numeric_comparison_exp
+  position_address: String_comparison_exp
+  repay_amount: numeric_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "hyperion_llp_liquidation_activities".
+"""
+input hyperion_llp_liquidation_activities_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  position_address: order_by
+  repay_amount: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "hyperion_llp_liquidation_activities"
+"""
+enum hyperion_llp_liquidation_activities_select_column {
+  """column name"""
+  collateral_liquidation_amount
+  """column name"""
+  collateral_value_before
+  """column name"""
+  event_index
+  """column name"""
+  loan_value_before
+  """column name"""
+  position_address
+  """column name"""
+  repay_amount
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "hyperion_llp_liquidation_activities"
+"""
+input hyperion_llp_liquidation_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: hyperion_llp_liquidation_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input hyperion_llp_liquidation_activities_stream_cursor_value_input {
+  collateral_liquidation_amount: numeric
+  collateral_value_before: numeric
+  event_index: numeric
+  loan_value_before: numeric
+  position_address: String
+  repay_amount: numeric
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+columns and relationships of "hyperion_llp_position_current"
+"""
+type hyperion_llp_position_current {
+  collateral: String
+  collateral_type: String
+  owner_address: String
+  position_address: String!
+  status: smallint
+}
+
+"""
+Boolean expression to filter rows from the table "hyperion_llp_position_current". All fields are combined with a logical 'AND'.
+"""
+input hyperion_llp_position_current_bool_exp {
+  _and: [hyperion_llp_position_current_bool_exp!]
+  _not: hyperion_llp_position_current_bool_exp
+  _or: [hyperion_llp_position_current_bool_exp!]
+  collateral: String_comparison_exp
+  collateral_type: String_comparison_exp
+  owner_address: String_comparison_exp
+  position_address: String_comparison_exp
+  status: smallint_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "hyperion_llp_position_current".
+"""
+input hyperion_llp_position_current_order_by {
+  collateral: order_by
+  collateral_type: order_by
+  owner_address: order_by
+  position_address: order_by
+  status: order_by
+}
+
+"""
+select columns of table "hyperion_llp_position_current"
+"""
+enum hyperion_llp_position_current_select_column {
+  """column name"""
+  collateral
+  """column name"""
+  collateral_type
+  """column name"""
+  owner_address
+  """column name"""
+  position_address
+  """column name"""
+  status
+}
+
+"""
+Streaming cursor of the table "hyperion_llp_position_current"
+"""
+input hyperion_llp_position_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: hyperion_llp_position_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input hyperion_llp_position_current_stream_cursor_value_input {
+  collateral: String
+  collateral_type: String
+  owner_address: String
+  position_address: String
+  status: smallint
+}
+
+"""
+columns and relationships of "hyperion_llp_position_debt_stores"
+"""
+type hyperion_llp_position_debt_stores {
+  debt_store_address: String
+  position_address: String!
+  vault_address: String!
+}
+
+"""
+Boolean expression to filter rows from the table "hyperion_llp_position_debt_stores". All fields are combined with a logical 'AND'.
+"""
+input hyperion_llp_position_debt_stores_bool_exp {
+  _and: [hyperion_llp_position_debt_stores_bool_exp!]
+  _not: hyperion_llp_position_debt_stores_bool_exp
+  _or: [hyperion_llp_position_debt_stores_bool_exp!]
+  debt_store_address: String_comparison_exp
+  position_address: String_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "hyperion_llp_position_debt_stores".
+"""
+input hyperion_llp_position_debt_stores_order_by {
+  debt_store_address: order_by
+  position_address: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "hyperion_llp_position_debt_stores"
+"""
+enum hyperion_llp_position_debt_stores_select_column {
+  """column name"""
+  debt_store_address
+  """column name"""
+  position_address
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "hyperion_llp_position_debt_stores"
+"""
+input hyperion_llp_position_debt_stores_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: hyperion_llp_position_debt_stores_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input hyperion_llp_position_debt_stores_stream_cursor_value_input {
+  debt_store_address: String
+  position_address: String
+  vault_address: String
+}
+
+"""
 columns and relationships of "indexer_status"
 """
 type indexer_status {
@@ -7019,6 +7722,93 @@ input jsonb_comparison_exp {
   _lte: jsonb
   _neq: jsonb
   _nin: [jsonb!]
+}
+
+"""
+columns and relationships of "kinked_irm_activities"
+"""
+type kinked_irm_activities {
+  config_address: String
+  event_index: numeric!
+  max_borrow_rate: numeric
+  min_borrow_rate: numeric
+  optimal_borrow_rate: numeric
+  optimal_utilization: numeric
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "kinked_irm_activities". All fields are combined with a logical 'AND'.
+"""
+input kinked_irm_activities_bool_exp {
+  _and: [kinked_irm_activities_bool_exp!]
+  _not: kinked_irm_activities_bool_exp
+  _or: [kinked_irm_activities_bool_exp!]
+  config_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  max_borrow_rate: numeric_comparison_exp
+  min_borrow_rate: numeric_comparison_exp
+  optimal_borrow_rate: numeric_comparison_exp
+  optimal_utilization: numeric_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""Ordering options when selecting data from "kinked_irm_activities"."""
+input kinked_irm_activities_order_by {
+  config_address: order_by
+  event_index: order_by
+  max_borrow_rate: order_by
+  min_borrow_rate: order_by
+  optimal_borrow_rate: order_by
+  optimal_utilization: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "kinked_irm_activities"
+"""
+enum kinked_irm_activities_select_column {
+  """column name"""
+  config_address
+  """column name"""
+  event_index
+  """column name"""
+  max_borrow_rate
+  """column name"""
+  min_borrow_rate
+  """column name"""
+  optimal_borrow_rate
+  """column name"""
+  optimal_utilization
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "kinked_irm_activities"
+"""
+input kinked_irm_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: kinked_irm_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input kinked_irm_activities_stream_cursor_value_input {
+  config_address: String
+  event_index: numeric
+  max_borrow_rate: numeric
+  min_borrow_rate: numeric
+  optimal_borrow_rate: numeric
+  optimal_utilization: numeric
+  timestamp: timestamp
+  transaction_version: numeric
 }
 
 """
@@ -7430,6 +8220,176 @@ input numeric_comparison_exp {
   _lte: numeric
   _neq: numeric
   _nin: [numeric!]
+}
+
+"""
+columns and relationships of "oracle_router_activities"
+"""
+type oracle_router_activities {
+  base_asset: String
+  deleted: Boolean
+  event_index: numeric!
+  oracle: String
+  oracle_kind: smallint
+  oracle_router: String
+  quote_asset: String
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "oracle_router_activities". All fields are combined with a logical 'AND'.
+"""
+input oracle_router_activities_bool_exp {
+  _and: [oracle_router_activities_bool_exp!]
+  _not: oracle_router_activities_bool_exp
+  _or: [oracle_router_activities_bool_exp!]
+  base_asset: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  event_index: numeric_comparison_exp
+  oracle: String_comparison_exp
+  oracle_kind: smallint_comparison_exp
+  oracle_router: String_comparison_exp
+  quote_asset: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""Ordering options when selecting data from "oracle_router_activities"."""
+input oracle_router_activities_order_by {
+  base_asset: order_by
+  deleted: order_by
+  event_index: order_by
+  oracle: order_by
+  oracle_kind: order_by
+  oracle_router: order_by
+  quote_asset: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "oracle_router_activities"
+"""
+enum oracle_router_activities_select_column {
+  """column name"""
+  base_asset
+  """column name"""
+  deleted
+  """column name"""
+  event_index
+  """column name"""
+  oracle
+  """column name"""
+  oracle_kind
+  """column name"""
+  oracle_router
+  """column name"""
+  quote_asset
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "oracle_router_activities"
+"""
+input oracle_router_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: oracle_router_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input oracle_router_activities_stream_cursor_value_input {
+  base_asset: String
+  deleted: Boolean
+  event_index: numeric
+  oracle: String
+  oracle_kind: smallint
+  oracle_router: String
+  quote_asset: String
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
+columns and relationships of "oracle_router_current_config"
+"""
+type oracle_router_current_config {
+  base_asset: String!
+  deleted: Boolean
+  oracle: String
+  oracle_kind: smallint
+  oracle_router: String!
+  quote_asset: String!
+}
+
+"""
+Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'.
+"""
+input oracle_router_current_config_bool_exp {
+  _and: [oracle_router_current_config_bool_exp!]
+  _not: oracle_router_current_config_bool_exp
+  _or: [oracle_router_current_config_bool_exp!]
+  base_asset: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  oracle: String_comparison_exp
+  oracle_kind: smallint_comparison_exp
+  oracle_router: String_comparison_exp
+  quote_asset: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "oracle_router_current_config".
+"""
+input oracle_router_current_config_order_by {
+  base_asset: order_by
+  deleted: order_by
+  oracle: order_by
+  oracle_kind: order_by
+  oracle_router: order_by
+  quote_asset: order_by
+}
+
+"""
+select columns of table "oracle_router_current_config"
+"""
+enum oracle_router_current_config_select_column {
+  """column name"""
+  base_asset
+  """column name"""
+  deleted
+  """column name"""
+  oracle
+  """column name"""
+  oracle_kind
+  """column name"""
+  oracle_router
+  """column name"""
+  quote_asset
+}
+
+"""
+Streaming cursor of the table "oracle_router_current_config"
+"""
+input oracle_router_current_config_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: oracle_router_current_config_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input oracle_router_current_config_stream_cursor_value_input {
+  base_asset: String
+  deleted: Boolean
+  oracle: String
+  oracle_kind: smallint
+  oracle_router: String
+  quote_asset: String
 }
 
 """column ordering options"""
@@ -7861,6 +8821,176 @@ type public_key_auth_keys_variance_fields {
   last_transaction_version: Float
 }
 
+"""
+columns and relationships of "pyth_oracle_activities"
+"""
+type pyth_oracle_activities {
+  asset_identifier: String
+  deleted: Boolean
+  event_index: numeric!
+  max_age_in_seconds: numeric
+  max_confidence: numeric
+  oracle_address: String
+  pyth_id: String
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "pyth_oracle_activities". All fields are combined with a logical 'AND'.
+"""
+input pyth_oracle_activities_bool_exp {
+  _and: [pyth_oracle_activities_bool_exp!]
+  _not: pyth_oracle_activities_bool_exp
+  _or: [pyth_oracle_activities_bool_exp!]
+  asset_identifier: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  event_index: numeric_comparison_exp
+  max_age_in_seconds: numeric_comparison_exp
+  max_confidence: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+  pyth_id: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""Ordering options when selecting data from "pyth_oracle_activities"."""
+input pyth_oracle_activities_order_by {
+  asset_identifier: order_by
+  deleted: order_by
+  event_index: order_by
+  max_age_in_seconds: order_by
+  max_confidence: order_by
+  oracle_address: order_by
+  pyth_id: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "pyth_oracle_activities"
+"""
+enum pyth_oracle_activities_select_column {
+  """column name"""
+  asset_identifier
+  """column name"""
+  deleted
+  """column name"""
+  event_index
+  """column name"""
+  max_age_in_seconds
+  """column name"""
+  max_confidence
+  """column name"""
+  oracle_address
+  """column name"""
+  pyth_id
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "pyth_oracle_activities"
+"""
+input pyth_oracle_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: pyth_oracle_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input pyth_oracle_activities_stream_cursor_value_input {
+  asset_identifier: String
+  deleted: Boolean
+  event_index: numeric
+  max_age_in_seconds: numeric
+  max_confidence: numeric
+  oracle_address: String
+  pyth_id: String
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
+columns and relationships of "pyth_oracle_current_config"
+"""
+type pyth_oracle_current_config {
+  asset_identifier: String!
+  deleted: Boolean
+  max_age_in_seconds: numeric
+  max_confidence: numeric
+  oracle_address: String!
+  pyth_id: String
+}
+
+"""
+Boolean expression to filter rows from the table "pyth_oracle_current_config". All fields are combined with a logical 'AND'.
+"""
+input pyth_oracle_current_config_bool_exp {
+  _and: [pyth_oracle_current_config_bool_exp!]
+  _not: pyth_oracle_current_config_bool_exp
+  _or: [pyth_oracle_current_config_bool_exp!]
+  asset_identifier: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  max_age_in_seconds: numeric_comparison_exp
+  max_confidence: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+  pyth_id: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "pyth_oracle_current_config".
+"""
+input pyth_oracle_current_config_order_by {
+  asset_identifier: order_by
+  deleted: order_by
+  max_age_in_seconds: order_by
+  max_confidence: order_by
+  oracle_address: order_by
+  pyth_id: order_by
+}
+
+"""
+select columns of table "pyth_oracle_current_config"
+"""
+enum pyth_oracle_current_config_select_column {
+  """column name"""
+  asset_identifier
+  """column name"""
+  deleted
+  """column name"""
+  max_age_in_seconds
+  """column name"""
+  max_confidence
+  """column name"""
+  oracle_address
+  """column name"""
+  pyth_id
+}
+
+"""
+Streaming cursor of the table "pyth_oracle_current_config"
+"""
+input pyth_oracle_current_config_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: pyth_oracle_current_config_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input pyth_oracle_current_config_stream_cursor_value_input {
+  asset_identifier: String
+  deleted: Boolean
+  max_age_in_seconds: numeric
+  max_confidence: numeric
+  oracle_address: String
+  pyth_id: String
+}
+
 type query_root {
   """
   fetch data from the table: "account_transactions"
@@ -7983,6 +9113,25 @@ type query_root {
   fetch data from the table: "adaptive_irm_current_state" using primary key columns
   """
   adaptive_irm_current_state_by_pk(state_address: String!): adaptive_irm_current_state
+  """
+  fetch data from the table: "adaptive_irm_state_activities"
+  """
+  adaptive_irm_state_activities(
+    """distinct select on columns"""
+    distinct_on: [adaptive_irm_state_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [adaptive_irm_state_activities_order_by!]
+    """filter the rows returned"""
+    where: adaptive_irm_state_activities_bool_exp
+  ): [adaptive_irm_state_activities!]!
+  """
+  fetch data from the table: "adaptive_irm_state_activities" using primary key columns
+  """
+  adaptive_irm_state_activities_by_pk(event_index: numeric!, transaction_version: numeric!): adaptive_irm_state_activities
   """
   fetch data from the table: "address_events_summary"
   """
@@ -8742,6 +9891,63 @@ type query_root {
   """fetch data from the table: "events" using primary key columns"""
   events_by_pk(event_index: bigint!, transaction_version: bigint!): events
   """
+  fetch data from the table: "fixed_price_oracle_activities"
+  """
+  fixed_price_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [fixed_price_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_price_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: fixed_price_oracle_activities_bool_exp
+  ): [fixed_price_oracle_activities!]!
+  """
+  fetch data from the table: "fixed_price_oracle_activities" using primary key columns
+  """
+  fixed_price_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): fixed_price_oracle_activities
+  """
+  fetch data from the table: "fixed_price_oracle_current_config"
+  """
+  fixed_price_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [fixed_price_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_price_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: fixed_price_oracle_current_config_bool_exp
+  ): [fixed_price_oracle_current_config!]!
+  """
+  fetch data from the table: "fixed_price_oracle_current_config" using primary key columns
+  """
+  fixed_price_oracle_current_config_by_pk(base_asset: String!, oracle_address: String!, quote_asset: String!): fixed_price_oracle_current_config
+  """
+  fetch data from the table: "fixed_rate_irm_activities"
+  """
+  fixed_rate_irm_activities(
+    """distinct select on columns"""
+    distinct_on: [fixed_rate_irm_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_rate_irm_activities_order_by!]
+    """filter the rows returned"""
+    where: fixed_rate_irm_activities_bool_exp
+  ): [fixed_rate_irm_activities!]!
+  """
+  fetch data from the table: "fixed_rate_irm_activities" using primary key columns
+  """
+  fixed_rate_irm_activities_by_pk(event_index: numeric!, transaction_version: numeric!): fixed_rate_irm_activities
+  """
   fetch data from the table: "fixed_rate_irm_current_config"
   """
   fixed_rate_irm_current_config(
@@ -8797,6 +10003,101 @@ type query_root {
   """
   fungible_asset_metadata_by_pk(asset_type: String!): fungible_asset_metadata
   """
+  fetch data from the table: "hyperion_llp_bad_debt_activities"
+  """
+  hyperion_llp_bad_debt_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_bad_debt_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_bad_debt_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_bad_debt_activities_bool_exp
+  ): [hyperion_llp_bad_debt_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_bad_debt_activities" using primary key columns
+  """
+  hyperion_llp_bad_debt_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_bad_debt_activities
+  """
+  fetch data from the table: "hyperion_llp_debt_status_activities"
+  """
+  hyperion_llp_debt_status_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_debt_status_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_debt_status_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_debt_status_activities_bool_exp
+  ): [hyperion_llp_debt_status_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_debt_status_activities" using primary key columns
+  """
+  hyperion_llp_debt_status_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_debt_status_activities
+  """
+  fetch data from the table: "hyperion_llp_liquidation_activities"
+  """
+  hyperion_llp_liquidation_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_liquidation_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_liquidation_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_liquidation_activities_bool_exp
+  ): [hyperion_llp_liquidation_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_liquidation_activities" using primary key columns
+  """
+  hyperion_llp_liquidation_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_liquidation_activities
+  """
+  fetch data from the table: "hyperion_llp_position_current"
+  """
+  hyperion_llp_position_current(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_position_current_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_position_current_bool_exp
+  ): [hyperion_llp_position_current!]!
+  """
+  fetch data from the table: "hyperion_llp_position_current" using primary key columns
+  """
+  hyperion_llp_position_current_by_pk(position_address: String!): hyperion_llp_position_current
+  """
+  fetch data from the table: "hyperion_llp_position_debt_stores"
+  """
+  hyperion_llp_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_position_debt_stores_bool_exp
+  ): [hyperion_llp_position_debt_stores!]!
+  """
+  fetch data from the table: "hyperion_llp_position_debt_stores" using primary key columns
+  """
+  hyperion_llp_position_debt_stores_by_pk(position_address: String!, vault_address: String!): hyperion_llp_position_debt_stores
+  """
   fetch data from the table: "indexer_status"
   """
   indexer_status(
@@ -8813,6 +10114,25 @@ type query_root {
   ): [indexer_status!]!
   """fetch data from the table: "indexer_status" using primary key columns"""
   indexer_status_by_pk(db: String!): indexer_status
+  """
+  fetch data from the table: "kinked_irm_activities"
+  """
+  kinked_irm_activities(
+    """distinct select on columns"""
+    distinct_on: [kinked_irm_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [kinked_irm_activities_order_by!]
+    """filter the rows returned"""
+    where: kinked_irm_activities_bool_exp
+  ): [kinked_irm_activities!]!
+  """
+  fetch data from the table: "kinked_irm_activities" using primary key columns
+  """
+  kinked_irm_activities_by_pk(event_index: numeric!, transaction_version: numeric!): kinked_irm_activities
   """
   fetch data from the table: "kinked_irm_current_config"
   """
@@ -8916,6 +10236,44 @@ type query_root {
     where: num_active_delegator_per_pool_bool_exp
   ): [num_active_delegator_per_pool!]!
   """
+  fetch data from the table: "oracle_router_activities"
+  """
+  oracle_router_activities(
+    """distinct select on columns"""
+    distinct_on: [oracle_router_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [oracle_router_activities_order_by!]
+    """filter the rows returned"""
+    where: oracle_router_activities_bool_exp
+  ): [oracle_router_activities!]!
+  """
+  fetch data from the table: "oracle_router_activities" using primary key columns
+  """
+  oracle_router_activities_by_pk(event_index: numeric!, transaction_version: numeric!): oracle_router_activities
+  """
+  fetch data from the table: "oracle_router_current_config"
+  """
+  oracle_router_current_config(
+    """distinct select on columns"""
+    distinct_on: [oracle_router_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [oracle_router_current_config_order_by!]
+    """filter the rows returned"""
+    where: oracle_router_current_config_bool_exp
+  ): [oracle_router_current_config!]!
+  """
+  fetch data from the table: "oracle_router_current_config" using primary key columns
+  """
+  oracle_router_current_config_by_pk(base_asset: String!, oracle_router: String!, quote_asset: String!): oracle_router_current_config
+  """
   fetch data from the table: "processor_metadata.processor_status"
   """
   processor_status(
@@ -9001,6 +10359,139 @@ type query_root {
   """
   public_key_auth_keys_by_pk(auth_key: String!, public_key: String!, public_key_type: String!): public_key_auth_keys
   """
+  fetch data from the table: "pyth_oracle_activities"
+  """
+  pyth_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [pyth_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [pyth_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: pyth_oracle_activities_bool_exp
+  ): [pyth_oracle_activities!]!
+  """
+  fetch data from the table: "pyth_oracle_activities" using primary key columns
+  """
+  pyth_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): pyth_oracle_activities
+  """
+  fetch data from the table: "pyth_oracle_current_config"
+  """
+  pyth_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [pyth_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [pyth_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: pyth_oracle_current_config_bool_exp
+  ): [pyth_oracle_current_config!]!
+  """
+  fetch data from the table: "pyth_oracle_current_config" using primary key columns
+  """
+  pyth_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): pyth_oracle_current_config
+  """
+  fetch data from the table: "scmd_bad_debt_activities"
+  """
+  scmd_bad_debt_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_bad_debt_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_bad_debt_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_bad_debt_activities_bool_exp
+  ): [scmd_bad_debt_activities!]!
+  """
+  fetch data from the table: "scmd_bad_debt_activities" using primary key columns
+  """
+  scmd_bad_debt_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_bad_debt_activities
+  """
+  fetch data from the table: "scmd_debt_status_activities"
+  """
+  scmd_debt_status_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_debt_status_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_debt_status_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_debt_status_activities_bool_exp
+  ): [scmd_debt_status_activities!]!
+  """
+  fetch data from the table: "scmd_debt_status_activities" using primary key columns
+  """
+  scmd_debt_status_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_debt_status_activities
+  """
+  fetch data from the table: "scmd_liquidation_activities"
+  """
+  scmd_liquidation_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_liquidation_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_liquidation_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_liquidation_activities_bool_exp
+  ): [scmd_liquidation_activities!]!
+  """
+  fetch data from the table: "scmd_liquidation_activities" using primary key columns
+  """
+  scmd_liquidation_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_liquidation_activities
+  """
+  fetch data from the table: "scmd_position_current"
+  """
+  scmd_position_current(
+    """distinct select on columns"""
+    distinct_on: [scmd_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_position_current_order_by!]
+    """filter the rows returned"""
+    where: scmd_position_current_bool_exp
+  ): [scmd_position_current!]!
+  """
+  fetch data from the table: "scmd_position_current" using primary key columns
+  """
+  scmd_position_current_by_pk(position_address: String!): scmd_position_current
+  """
+  fetch data from the table: "scmd_position_debt_stores"
+  """
+  scmd_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [scmd_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: scmd_position_debt_stores_bool_exp
+  ): [scmd_position_debt_stores!]!
+  """
+  fetch data from the table: "scmd_position_debt_stores" using primary key columns
+  """
+  scmd_position_debt_stores_by_pk(position_address: String!, vault_address: String!): scmd_position_debt_stores
+  """
   fetch data from the table: "signatures"
   """
   signatures(
@@ -9017,6 +10508,44 @@ type query_root {
   ): [signatures!]!
   """fetch data from the table: "signatures" using primary key columns"""
   signatures_by_pk(is_sender_primary: Boolean!, multi_agent_index: bigint!, multi_sig_index: bigint!, transaction_version: bigint!): signatures
+  """
+  fetch data from the table: "switchboard_oracle_activities"
+  """
+  switchboard_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [switchboard_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [switchboard_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: switchboard_oracle_activities_bool_exp
+  ): [switchboard_oracle_activities!]!
+  """
+  fetch data from the table: "switchboard_oracle_activities" using primary key columns
+  """
+  switchboard_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): switchboard_oracle_activities
+  """
+  fetch data from the table: "switchboard_oracle_current_config"
+  """
+  switchboard_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [switchboard_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [switchboard_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: switchboard_oracle_current_config_bool_exp
+  ): [switchboard_oracle_current_config!]!
+  """
+  fetch data from the table: "switchboard_oracle_current_config" using primary key columns
+  """
+  switchboard_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): switchboard_oracle_current_config
   """
   fetch data from the table: "table_items"
   """
@@ -9389,6 +10918,603 @@ type query_root {
 }
 
 """
+columns and relationships of "scmd_bad_debt_activities"
+"""
+type scmd_bad_debt_activities {
+  bad_debt_amount: numeric
+  bad_debt_shares: numeric
+  debt_store_address: String
+  event_index: numeric!
+  position_address: String
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+Boolean expression to filter rows from the table "scmd_bad_debt_activities". All fields are combined with a logical 'AND'.
+"""
+input scmd_bad_debt_activities_bool_exp {
+  _and: [scmd_bad_debt_activities_bool_exp!]
+  _not: scmd_bad_debt_activities_bool_exp
+  _or: [scmd_bad_debt_activities_bool_exp!]
+  bad_debt_amount: numeric_comparison_exp
+  bad_debt_shares: numeric_comparison_exp
+  debt_store_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  position_address: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""Ordering options when selecting data from "scmd_bad_debt_activities"."""
+input scmd_bad_debt_activities_order_by {
+  bad_debt_amount: order_by
+  bad_debt_shares: order_by
+  debt_store_address: order_by
+  event_index: order_by
+  position_address: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "scmd_bad_debt_activities"
+"""
+enum scmd_bad_debt_activities_select_column {
+  """column name"""
+  bad_debt_amount
+  """column name"""
+  bad_debt_shares
+  """column name"""
+  debt_store_address
+  """column name"""
+  event_index
+  """column name"""
+  position_address
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "scmd_bad_debt_activities"
+"""
+input scmd_bad_debt_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: scmd_bad_debt_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input scmd_bad_debt_activities_stream_cursor_value_input {
+  bad_debt_amount: numeric
+  bad_debt_shares: numeric
+  debt_store_address: String
+  event_index: numeric
+  position_address: String
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+columns and relationships of "scmd_debt_status_activities"
+"""
+type scmd_debt_status_activities {
+  debt_store_address: String
+  event_index: numeric!
+  position_address: String
+  status: smallint
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+Boolean expression to filter rows from the table "scmd_debt_status_activities". All fields are combined with a logical 'AND'.
+"""
+input scmd_debt_status_activities_bool_exp {
+  _and: [scmd_debt_status_activities_bool_exp!]
+  _not: scmd_debt_status_activities_bool_exp
+  _or: [scmd_debt_status_activities_bool_exp!]
+  debt_store_address: String_comparison_exp
+  event_index: numeric_comparison_exp
+  position_address: String_comparison_exp
+  status: smallint_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "scmd_debt_status_activities".
+"""
+input scmd_debt_status_activities_order_by {
+  debt_store_address: order_by
+  event_index: order_by
+  position_address: order_by
+  status: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "scmd_debt_status_activities"
+"""
+enum scmd_debt_status_activities_select_column {
+  """column name"""
+  debt_store_address
+  """column name"""
+  event_index
+  """column name"""
+  position_address
+  """column name"""
+  status
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "scmd_debt_status_activities"
+"""
+input scmd_debt_status_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: scmd_debt_status_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input scmd_debt_status_activities_stream_cursor_value_input {
+  debt_store_address: String
+  event_index: numeric
+  position_address: String
+  status: smallint
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+columns and relationships of "scmd_liquidation_activities"
+"""
+type scmd_liquidation_activities {
+  collateral_liquidation_amount: numeric
+  collateral_value_before: numeric
+  event_index: numeric!
+  loan_value_before: numeric
+  position_address: String
+  repay_amount: numeric
+  timestamp: timestamp
+  transaction_version: numeric!
+  vault_address: String
+}
+
+"""
+order by aggregate values of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_aggregate_order_by {
+  avg: scmd_liquidation_activities_avg_order_by
+  count: order_by
+  max: scmd_liquidation_activities_max_order_by
+  min: scmd_liquidation_activities_min_order_by
+  stddev: scmd_liquidation_activities_stddev_order_by
+  stddev_pop: scmd_liquidation_activities_stddev_pop_order_by
+  stddev_samp: scmd_liquidation_activities_stddev_samp_order_by
+  sum: scmd_liquidation_activities_sum_order_by
+  var_pop: scmd_liquidation_activities_var_pop_order_by
+  var_samp: scmd_liquidation_activities_var_samp_order_by
+  variance: scmd_liquidation_activities_variance_order_by
+}
+
+"""
+order by avg() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_avg_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "scmd_liquidation_activities". All fields are combined with a logical 'AND'.
+"""
+input scmd_liquidation_activities_bool_exp {
+  _and: [scmd_liquidation_activities_bool_exp!]
+  _not: scmd_liquidation_activities_bool_exp
+  _or: [scmd_liquidation_activities_bool_exp!]
+  collateral_liquidation_amount: numeric_comparison_exp
+  collateral_value_before: numeric_comparison_exp
+  event_index: numeric_comparison_exp
+  loan_value_before: numeric_comparison_exp
+  position_address: String_comparison_exp
+  repay_amount: numeric_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""
+order by max() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_max_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  position_address: order_by
+  repay_amount: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+order by min() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_min_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  position_address: order_by
+  repay_amount: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+Ordering options when selecting data from "scmd_liquidation_activities".
+"""
+input scmd_liquidation_activities_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  position_address: order_by
+  repay_amount: order_by
+  timestamp: order_by
+  transaction_version: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "scmd_liquidation_activities"
+"""
+enum scmd_liquidation_activities_select_column {
+  """column name"""
+  collateral_liquidation_amount
+  """column name"""
+  collateral_value_before
+  """column name"""
+  event_index
+  """column name"""
+  loan_value_before
+  """column name"""
+  position_address
+  """column name"""
+  repay_amount
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+  """column name"""
+  vault_address
+}
+
+"""
+order by stddev() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_stddev_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+order by stddev_pop() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_stddev_pop_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+order by stddev_samp() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_stddev_samp_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+Streaming cursor of the table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: scmd_liquidation_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input scmd_liquidation_activities_stream_cursor_value_input {
+  collateral_liquidation_amount: numeric
+  collateral_value_before: numeric
+  event_index: numeric
+  loan_value_before: numeric
+  position_address: String
+  repay_amount: numeric
+  timestamp: timestamp
+  transaction_version: numeric
+  vault_address: String
+}
+
+"""
+order by sum() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_sum_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+order by var_pop() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_var_pop_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+order by var_samp() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_var_samp_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+order by variance() on columns of table "scmd_liquidation_activities"
+"""
+input scmd_liquidation_activities_variance_order_by {
+  collateral_liquidation_amount: order_by
+  collateral_value_before: order_by
+  event_index: order_by
+  loan_value_before: order_by
+  repay_amount: order_by
+  transaction_version: order_by
+}
+
+"""
+columns and relationships of "scmd_position_current"
+"""
+type scmd_position_current {
+  collateral: String
+  collateral_asset_balance: current_fungible_asset_balances
+  collateral_type: String
+  """An array relationship"""
+  debt_stores(
+    """distinct select on columns"""
+    distinct_on: [scmd_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: scmd_position_debt_stores_bool_exp
+  ): [scmd_position_debt_stores!]!
+  """An array relationship"""
+  liquidation_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_liquidation_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_liquidation_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_liquidation_activities_bool_exp
+  ): [scmd_liquidation_activities!]!
+  owner_address: String
+  position_address: String!
+  status: smallint
+}
+
+"""
+Boolean expression to filter rows from the table "scmd_position_current". All fields are combined with a logical 'AND'.
+"""
+input scmd_position_current_bool_exp {
+  _and: [scmd_position_current_bool_exp!]
+  _not: scmd_position_current_bool_exp
+  _or: [scmd_position_current_bool_exp!]
+  collateral: String_comparison_exp
+  collateral_type: String_comparison_exp
+  debt_stores: scmd_position_debt_stores_bool_exp
+  liquidation_activities: scmd_liquidation_activities_bool_exp
+  owner_address: String_comparison_exp
+  position_address: String_comparison_exp
+  status: smallint_comparison_exp
+}
+
+"""Ordering options when selecting data from "scmd_position_current"."""
+input scmd_position_current_order_by {
+  collateral: order_by
+  collateral_type: order_by
+  debt_stores_aggregate: scmd_position_debt_stores_aggregate_order_by
+  liquidation_activities_aggregate: scmd_liquidation_activities_aggregate_order_by
+  owner_address: order_by
+  position_address: order_by
+  status: order_by
+}
+
+"""
+select columns of table "scmd_position_current"
+"""
+enum scmd_position_current_select_column {
+  """column name"""
+  collateral
+  """column name"""
+  collateral_type
+  """column name"""
+  owner_address
+  """column name"""
+  position_address
+  """column name"""
+  status
+}
+
+"""
+Streaming cursor of the table "scmd_position_current"
+"""
+input scmd_position_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: scmd_position_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input scmd_position_current_stream_cursor_value_input {
+  collateral: String
+  collateral_type: String
+  owner_address: String
+  position_address: String
+  status: smallint
+}
+
+"""
+columns and relationships of "scmd_position_debt_stores"
+"""
+type scmd_position_debt_stores {
+  debt_asset_balance: current_fungible_asset_balances
+  debt_store_address: String
+  position_address: String!
+  vault_address: String!
+  """An object relationship"""
+  vault_info: vault_info
+}
+
+"""
+order by aggregate values of table "scmd_position_debt_stores"
+"""
+input scmd_position_debt_stores_aggregate_order_by {
+  count: order_by
+  max: scmd_position_debt_stores_max_order_by
+  min: scmd_position_debt_stores_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "scmd_position_debt_stores". All fields are combined with a logical 'AND'.
+"""
+input scmd_position_debt_stores_bool_exp {
+  _and: [scmd_position_debt_stores_bool_exp!]
+  _not: scmd_position_debt_stores_bool_exp
+  _or: [scmd_position_debt_stores_bool_exp!]
+  debt_store_address: String_comparison_exp
+  position_address: String_comparison_exp
+  vault_address: String_comparison_exp
+  vault_info: vault_info_bool_exp
+}
+
+"""
+order by max() on columns of table "scmd_position_debt_stores"
+"""
+input scmd_position_debt_stores_max_order_by {
+  debt_store_address: order_by
+  position_address: order_by
+  vault_address: order_by
+}
+
+"""
+order by min() on columns of table "scmd_position_debt_stores"
+"""
+input scmd_position_debt_stores_min_order_by {
+  debt_store_address: order_by
+  position_address: order_by
+  vault_address: order_by
+}
+
+"""Ordering options when selecting data from "scmd_position_debt_stores"."""
+input scmd_position_debt_stores_order_by {
+  debt_store_address: order_by
+  position_address: order_by
+  vault_address: order_by
+  vault_info: vault_info_order_by
+}
+
+"""
+select columns of table "scmd_position_debt_stores"
+"""
+enum scmd_position_debt_stores_select_column {
+  """column name"""
+  debt_store_address
+  """column name"""
+  position_address
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "scmd_position_debt_stores"
+"""
+input scmd_position_debt_stores_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: scmd_position_debt_stores_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input scmd_position_debt_stores_stream_cursor_value_input {
+  debt_store_address: String
+  position_address: String
+  vault_address: String
+}
+
+"""
 columns and relationships of "signatures"
 """
 type signatures {
@@ -9494,6 +11620,23 @@ input signatures_stream_cursor_value_input {
   transaction_block_height: bigint
   transaction_version: bigint
   type: String
+}
+
+scalar smallint
+
+"""
+Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'.
+"""
+input smallint_comparison_exp {
+  _eq: smallint
+  _gt: smallint
+  _gte: smallint
+  _in: [smallint!]
+  _is_null: Boolean
+  _lt: smallint
+  _lte: smallint
+  _neq: smallint
+  _nin: [smallint!]
 }
 
 type subscription_root {
@@ -9662,6 +11805,36 @@ type subscription_root {
     """filter the rows returned"""
     where: adaptive_irm_current_state_bool_exp
   ): [adaptive_irm_current_state!]!
+  """
+  fetch data from the table: "adaptive_irm_state_activities"
+  """
+  adaptive_irm_state_activities(
+    """distinct select on columns"""
+    distinct_on: [adaptive_irm_state_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [adaptive_irm_state_activities_order_by!]
+    """filter the rows returned"""
+    where: adaptive_irm_state_activities_bool_exp
+  ): [adaptive_irm_state_activities!]!
+  """
+  fetch data from the table: "adaptive_irm_state_activities" using primary key columns
+  """
+  adaptive_irm_state_activities_by_pk(event_index: numeric!, transaction_version: numeric!): adaptive_irm_state_activities
+  """
+  fetch data from the table in a streaming manner: "adaptive_irm_state_activities"
+  """
+  adaptive_irm_state_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [adaptive_irm_state_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: adaptive_irm_state_activities_bool_exp
+  ): [adaptive_irm_state_activities!]!
   """
   fetch data from the table: "address_events_summary"
   """
@@ -10806,6 +12979,96 @@ type subscription_root {
     where: events_bool_exp
   ): [events!]!
   """
+  fetch data from the table: "fixed_price_oracle_activities"
+  """
+  fixed_price_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [fixed_price_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_price_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: fixed_price_oracle_activities_bool_exp
+  ): [fixed_price_oracle_activities!]!
+  """
+  fetch data from the table: "fixed_price_oracle_activities" using primary key columns
+  """
+  fixed_price_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): fixed_price_oracle_activities
+  """
+  fetch data from the table in a streaming manner: "fixed_price_oracle_activities"
+  """
+  fixed_price_oracle_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [fixed_price_oracle_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: fixed_price_oracle_activities_bool_exp
+  ): [fixed_price_oracle_activities!]!
+  """
+  fetch data from the table: "fixed_price_oracle_current_config"
+  """
+  fixed_price_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [fixed_price_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_price_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: fixed_price_oracle_current_config_bool_exp
+  ): [fixed_price_oracle_current_config!]!
+  """
+  fetch data from the table: "fixed_price_oracle_current_config" using primary key columns
+  """
+  fixed_price_oracle_current_config_by_pk(base_asset: String!, oracle_address: String!, quote_asset: String!): fixed_price_oracle_current_config
+  """
+  fetch data from the table in a streaming manner: "fixed_price_oracle_current_config"
+  """
+  fixed_price_oracle_current_config_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [fixed_price_oracle_current_config_stream_cursor_input]!
+    """filter the rows returned"""
+    where: fixed_price_oracle_current_config_bool_exp
+  ): [fixed_price_oracle_current_config!]!
+  """
+  fetch data from the table: "fixed_rate_irm_activities"
+  """
+  fixed_rate_irm_activities(
+    """distinct select on columns"""
+    distinct_on: [fixed_rate_irm_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fixed_rate_irm_activities_order_by!]
+    """filter the rows returned"""
+    where: fixed_rate_irm_activities_bool_exp
+  ): [fixed_rate_irm_activities!]!
+  """
+  fetch data from the table: "fixed_rate_irm_activities" using primary key columns
+  """
+  fixed_rate_irm_activities_by_pk(event_index: numeric!, transaction_version: numeric!): fixed_rate_irm_activities
+  """
+  fetch data from the table in a streaming manner: "fixed_rate_irm_activities"
+  """
+  fixed_rate_irm_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [fixed_rate_irm_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: fixed_rate_irm_activities_bool_exp
+  ): [fixed_rate_irm_activities!]!
+  """
   fetch data from the table: "fixed_rate_irm_current_config"
   """
   fixed_rate_irm_current_config(
@@ -10894,6 +13157,156 @@ type subscription_root {
     where: fungible_asset_metadata_bool_exp
   ): [fungible_asset_metadata!]!
   """
+  fetch data from the table: "hyperion_llp_bad_debt_activities"
+  """
+  hyperion_llp_bad_debt_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_bad_debt_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_bad_debt_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_bad_debt_activities_bool_exp
+  ): [hyperion_llp_bad_debt_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_bad_debt_activities" using primary key columns
+  """
+  hyperion_llp_bad_debt_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_bad_debt_activities
+  """
+  fetch data from the table in a streaming manner: "hyperion_llp_bad_debt_activities"
+  """
+  hyperion_llp_bad_debt_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [hyperion_llp_bad_debt_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: hyperion_llp_bad_debt_activities_bool_exp
+  ): [hyperion_llp_bad_debt_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_debt_status_activities"
+  """
+  hyperion_llp_debt_status_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_debt_status_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_debt_status_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_debt_status_activities_bool_exp
+  ): [hyperion_llp_debt_status_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_debt_status_activities" using primary key columns
+  """
+  hyperion_llp_debt_status_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_debt_status_activities
+  """
+  fetch data from the table in a streaming manner: "hyperion_llp_debt_status_activities"
+  """
+  hyperion_llp_debt_status_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [hyperion_llp_debt_status_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: hyperion_llp_debt_status_activities_bool_exp
+  ): [hyperion_llp_debt_status_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_liquidation_activities"
+  """
+  hyperion_llp_liquidation_activities(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_liquidation_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_liquidation_activities_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_liquidation_activities_bool_exp
+  ): [hyperion_llp_liquidation_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_liquidation_activities" using primary key columns
+  """
+  hyperion_llp_liquidation_activities_by_pk(event_index: numeric!, transaction_version: numeric!): hyperion_llp_liquidation_activities
+  """
+  fetch data from the table in a streaming manner: "hyperion_llp_liquidation_activities"
+  """
+  hyperion_llp_liquidation_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [hyperion_llp_liquidation_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: hyperion_llp_liquidation_activities_bool_exp
+  ): [hyperion_llp_liquidation_activities!]!
+  """
+  fetch data from the table: "hyperion_llp_position_current"
+  """
+  hyperion_llp_position_current(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_position_current_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_position_current_bool_exp
+  ): [hyperion_llp_position_current!]!
+  """
+  fetch data from the table: "hyperion_llp_position_current" using primary key columns
+  """
+  hyperion_llp_position_current_by_pk(position_address: String!): hyperion_llp_position_current
+  """
+  fetch data from the table in a streaming manner: "hyperion_llp_position_current"
+  """
+  hyperion_llp_position_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [hyperion_llp_position_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: hyperion_llp_position_current_bool_exp
+  ): [hyperion_llp_position_current!]!
+  """
+  fetch data from the table: "hyperion_llp_position_debt_stores"
+  """
+  hyperion_llp_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [hyperion_llp_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [hyperion_llp_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: hyperion_llp_position_debt_stores_bool_exp
+  ): [hyperion_llp_position_debt_stores!]!
+  """
+  fetch data from the table: "hyperion_llp_position_debt_stores" using primary key columns
+  """
+  hyperion_llp_position_debt_stores_by_pk(position_address: String!, vault_address: String!): hyperion_llp_position_debt_stores
+  """
+  fetch data from the table in a streaming manner: "hyperion_llp_position_debt_stores"
+  """
+  hyperion_llp_position_debt_stores_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [hyperion_llp_position_debt_stores_stream_cursor_input]!
+    """filter the rows returned"""
+    where: hyperion_llp_position_debt_stores_bool_exp
+  ): [hyperion_llp_position_debt_stores!]!
+  """
   fetch data from the table: "indexer_status"
   """
   indexer_status(
@@ -10921,6 +13334,36 @@ type subscription_root {
     """filter the rows returned"""
     where: indexer_status_bool_exp
   ): [indexer_status!]!
+  """
+  fetch data from the table: "kinked_irm_activities"
+  """
+  kinked_irm_activities(
+    """distinct select on columns"""
+    distinct_on: [kinked_irm_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [kinked_irm_activities_order_by!]
+    """filter the rows returned"""
+    where: kinked_irm_activities_bool_exp
+  ): [kinked_irm_activities!]!
+  """
+  fetch data from the table: "kinked_irm_activities" using primary key columns
+  """
+  kinked_irm_activities_by_pk(event_index: numeric!, transaction_version: numeric!): kinked_irm_activities
+  """
+  fetch data from the table in a streaming manner: "kinked_irm_activities"
+  """
+  kinked_irm_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [kinked_irm_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: kinked_irm_activities_bool_exp
+  ): [kinked_irm_activities!]!
   """
   fetch data from the table: "kinked_irm_current_config"
   """
@@ -11079,6 +13522,66 @@ type subscription_root {
     where: num_active_delegator_per_pool_bool_exp
   ): [num_active_delegator_per_pool!]!
   """
+  fetch data from the table: "oracle_router_activities"
+  """
+  oracle_router_activities(
+    """distinct select on columns"""
+    distinct_on: [oracle_router_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [oracle_router_activities_order_by!]
+    """filter the rows returned"""
+    where: oracle_router_activities_bool_exp
+  ): [oracle_router_activities!]!
+  """
+  fetch data from the table: "oracle_router_activities" using primary key columns
+  """
+  oracle_router_activities_by_pk(event_index: numeric!, transaction_version: numeric!): oracle_router_activities
+  """
+  fetch data from the table in a streaming manner: "oracle_router_activities"
+  """
+  oracle_router_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [oracle_router_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: oracle_router_activities_bool_exp
+  ): [oracle_router_activities!]!
+  """
+  fetch data from the table: "oracle_router_current_config"
+  """
+  oracle_router_current_config(
+    """distinct select on columns"""
+    distinct_on: [oracle_router_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [oracle_router_current_config_order_by!]
+    """filter the rows returned"""
+    where: oracle_router_current_config_bool_exp
+  ): [oracle_router_current_config!]!
+  """
+  fetch data from the table: "oracle_router_current_config" using primary key columns
+  """
+  oracle_router_current_config_by_pk(base_asset: String!, oracle_router: String!, quote_asset: String!): oracle_router_current_config
+  """
+  fetch data from the table in a streaming manner: "oracle_router_current_config"
+  """
+  oracle_router_current_config_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [oracle_router_current_config_stream_cursor_input]!
+    """filter the rows returned"""
+    where: oracle_router_current_config_bool_exp
+  ): [oracle_router_current_config!]!
+  """
   fetch data from the table: "processor_metadata.processor_status"
   """
   processor_status(
@@ -11197,6 +13700,216 @@ type subscription_root {
     where: public_key_auth_keys_bool_exp
   ): [public_key_auth_keys!]!
   """
+  fetch data from the table: "pyth_oracle_activities"
+  """
+  pyth_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [pyth_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [pyth_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: pyth_oracle_activities_bool_exp
+  ): [pyth_oracle_activities!]!
+  """
+  fetch data from the table: "pyth_oracle_activities" using primary key columns
+  """
+  pyth_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): pyth_oracle_activities
+  """
+  fetch data from the table in a streaming manner: "pyth_oracle_activities"
+  """
+  pyth_oracle_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [pyth_oracle_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: pyth_oracle_activities_bool_exp
+  ): [pyth_oracle_activities!]!
+  """
+  fetch data from the table: "pyth_oracle_current_config"
+  """
+  pyth_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [pyth_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [pyth_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: pyth_oracle_current_config_bool_exp
+  ): [pyth_oracle_current_config!]!
+  """
+  fetch data from the table: "pyth_oracle_current_config" using primary key columns
+  """
+  pyth_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): pyth_oracle_current_config
+  """
+  fetch data from the table in a streaming manner: "pyth_oracle_current_config"
+  """
+  pyth_oracle_current_config_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [pyth_oracle_current_config_stream_cursor_input]!
+    """filter the rows returned"""
+    where: pyth_oracle_current_config_bool_exp
+  ): [pyth_oracle_current_config!]!
+  """
+  fetch data from the table: "scmd_bad_debt_activities"
+  """
+  scmd_bad_debt_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_bad_debt_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_bad_debt_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_bad_debt_activities_bool_exp
+  ): [scmd_bad_debt_activities!]!
+  """
+  fetch data from the table: "scmd_bad_debt_activities" using primary key columns
+  """
+  scmd_bad_debt_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_bad_debt_activities
+  """
+  fetch data from the table in a streaming manner: "scmd_bad_debt_activities"
+  """
+  scmd_bad_debt_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [scmd_bad_debt_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: scmd_bad_debt_activities_bool_exp
+  ): [scmd_bad_debt_activities!]!
+  """
+  fetch data from the table: "scmd_debt_status_activities"
+  """
+  scmd_debt_status_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_debt_status_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_debt_status_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_debt_status_activities_bool_exp
+  ): [scmd_debt_status_activities!]!
+  """
+  fetch data from the table: "scmd_debt_status_activities" using primary key columns
+  """
+  scmd_debt_status_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_debt_status_activities
+  """
+  fetch data from the table in a streaming manner: "scmd_debt_status_activities"
+  """
+  scmd_debt_status_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [scmd_debt_status_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: scmd_debt_status_activities_bool_exp
+  ): [scmd_debt_status_activities!]!
+  """
+  fetch data from the table: "scmd_liquidation_activities"
+  """
+  scmd_liquidation_activities(
+    """distinct select on columns"""
+    distinct_on: [scmd_liquidation_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_liquidation_activities_order_by!]
+    """filter the rows returned"""
+    where: scmd_liquidation_activities_bool_exp
+  ): [scmd_liquidation_activities!]!
+  """
+  fetch data from the table: "scmd_liquidation_activities" using primary key columns
+  """
+  scmd_liquidation_activities_by_pk(event_index: numeric!, transaction_version: numeric!): scmd_liquidation_activities
+  """
+  fetch data from the table in a streaming manner: "scmd_liquidation_activities"
+  """
+  scmd_liquidation_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [scmd_liquidation_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: scmd_liquidation_activities_bool_exp
+  ): [scmd_liquidation_activities!]!
+  """
+  fetch data from the table: "scmd_position_current"
+  """
+  scmd_position_current(
+    """distinct select on columns"""
+    distinct_on: [scmd_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_position_current_order_by!]
+    """filter the rows returned"""
+    where: scmd_position_current_bool_exp
+  ): [scmd_position_current!]!
+  """
+  fetch data from the table: "scmd_position_current" using primary key columns
+  """
+  scmd_position_current_by_pk(position_address: String!): scmd_position_current
+  """
+  fetch data from the table in a streaming manner: "scmd_position_current"
+  """
+  scmd_position_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [scmd_position_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: scmd_position_current_bool_exp
+  ): [scmd_position_current!]!
+  """
+  fetch data from the table: "scmd_position_debt_stores"
+  """
+  scmd_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [scmd_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [scmd_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: scmd_position_debt_stores_bool_exp
+  ): [scmd_position_debt_stores!]!
+  """
+  fetch data from the table: "scmd_position_debt_stores" using primary key columns
+  """
+  scmd_position_debt_stores_by_pk(position_address: String!, vault_address: String!): scmd_position_debt_stores
+  """
+  fetch data from the table in a streaming manner: "scmd_position_debt_stores"
+  """
+  scmd_position_debt_stores_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [scmd_position_debt_stores_stream_cursor_input]!
+    """filter the rows returned"""
+    where: scmd_position_debt_stores_bool_exp
+  ): [scmd_position_debt_stores!]!
+  """
   fetch data from the table: "signatures"
   """
   signatures(
@@ -11224,6 +13937,66 @@ type subscription_root {
     """filter the rows returned"""
     where: signatures_bool_exp
   ): [signatures!]!
+  """
+  fetch data from the table: "switchboard_oracle_activities"
+  """
+  switchboard_oracle_activities(
+    """distinct select on columns"""
+    distinct_on: [switchboard_oracle_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [switchboard_oracle_activities_order_by!]
+    """filter the rows returned"""
+    where: switchboard_oracle_activities_bool_exp
+  ): [switchboard_oracle_activities!]!
+  """
+  fetch data from the table: "switchboard_oracle_activities" using primary key columns
+  """
+  switchboard_oracle_activities_by_pk(event_index: numeric!, transaction_version: numeric!): switchboard_oracle_activities
+  """
+  fetch data from the table in a streaming manner: "switchboard_oracle_activities"
+  """
+  switchboard_oracle_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [switchboard_oracle_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: switchboard_oracle_activities_bool_exp
+  ): [switchboard_oracle_activities!]!
+  """
+  fetch data from the table: "switchboard_oracle_current_config"
+  """
+  switchboard_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [switchboard_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [switchboard_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: switchboard_oracle_current_config_bool_exp
+  ): [switchboard_oracle_current_config!]!
+  """
+  fetch data from the table: "switchboard_oracle_current_config" using primary key columns
+  """
+  switchboard_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): switchboard_oracle_current_config
+  """
+  fetch data from the table in a streaming manner: "switchboard_oracle_current_config"
+  """
+  switchboard_oracle_current_config_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [switchboard_oracle_current_config_stream_cursor_input]!
+    """filter the rows returned"""
+    where: switchboard_oracle_current_config_bool_exp
+  ): [switchboard_oracle_current_config!]!
   """
   fetch data from the table: "table_items"
   """
@@ -11758,6 +14531,178 @@ type subscription_root {
     """filter the rows returned"""
     where: vault_states_activities_bool_exp
   ): [vault_states_activities!]!
+}
+
+"""
+columns and relationships of "switchboard_oracle_activities"
+"""
+type switchboard_oracle_activities {
+  aggregator_address: String
+  asset_identifier: String
+  deleted: Boolean
+  event_index: numeric!
+  max_age_in_seconds: numeric
+  max_stdev: numeric
+  oracle_address: String
+  timestamp: timestamp
+  transaction_version: numeric!
+}
+
+"""
+Boolean expression to filter rows from the table "switchboard_oracle_activities". All fields are combined with a logical 'AND'.
+"""
+input switchboard_oracle_activities_bool_exp {
+  _and: [switchboard_oracle_activities_bool_exp!]
+  _not: switchboard_oracle_activities_bool_exp
+  _or: [switchboard_oracle_activities_bool_exp!]
+  aggregator_address: String_comparison_exp
+  asset_identifier: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  event_index: numeric_comparison_exp
+  max_age_in_seconds: numeric_comparison_exp
+  max_stdev: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+  timestamp: timestamp_comparison_exp
+  transaction_version: numeric_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "switchboard_oracle_activities".
+"""
+input switchboard_oracle_activities_order_by {
+  aggregator_address: order_by
+  asset_identifier: order_by
+  deleted: order_by
+  event_index: order_by
+  max_age_in_seconds: order_by
+  max_stdev: order_by
+  oracle_address: order_by
+  timestamp: order_by
+  transaction_version: order_by
+}
+
+"""
+select columns of table "switchboard_oracle_activities"
+"""
+enum switchboard_oracle_activities_select_column {
+  """column name"""
+  aggregator_address
+  """column name"""
+  asset_identifier
+  """column name"""
+  deleted
+  """column name"""
+  event_index
+  """column name"""
+  max_age_in_seconds
+  """column name"""
+  max_stdev
+  """column name"""
+  oracle_address
+  """column name"""
+  timestamp
+  """column name"""
+  transaction_version
+}
+
+"""
+Streaming cursor of the table "switchboard_oracle_activities"
+"""
+input switchboard_oracle_activities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: switchboard_oracle_activities_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input switchboard_oracle_activities_stream_cursor_value_input {
+  aggregator_address: String
+  asset_identifier: String
+  deleted: Boolean
+  event_index: numeric
+  max_age_in_seconds: numeric
+  max_stdev: numeric
+  oracle_address: String
+  timestamp: timestamp
+  transaction_version: numeric
+}
+
+"""
+columns and relationships of "switchboard_oracle_current_config"
+"""
+type switchboard_oracle_current_config {
+  aggregator_address: String
+  asset_identifier: String!
+  deleted: Boolean
+  max_age_in_seconds: numeric
+  max_stdev: numeric
+  oracle_address: String!
+}
+
+"""
+Boolean expression to filter rows from the table "switchboard_oracle_current_config". All fields are combined with a logical 'AND'.
+"""
+input switchboard_oracle_current_config_bool_exp {
+  _and: [switchboard_oracle_current_config_bool_exp!]
+  _not: switchboard_oracle_current_config_bool_exp
+  _or: [switchboard_oracle_current_config_bool_exp!]
+  aggregator_address: String_comparison_exp
+  asset_identifier: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  max_age_in_seconds: numeric_comparison_exp
+  max_stdev: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "switchboard_oracle_current_config".
+"""
+input switchboard_oracle_current_config_order_by {
+  aggregator_address: order_by
+  asset_identifier: order_by
+  deleted: order_by
+  max_age_in_seconds: order_by
+  max_stdev: order_by
+  oracle_address: order_by
+}
+
+"""
+select columns of table "switchboard_oracle_current_config"
+"""
+enum switchboard_oracle_current_config_select_column {
+  """column name"""
+  aggregator_address
+  """column name"""
+  asset_identifier
+  """column name"""
+  deleted
+  """column name"""
+  max_age_in_seconds
+  """column name"""
+  max_stdev
+  """column name"""
+  oracle_address
+}
+
+"""
+Streaming cursor of the table "switchboard_oracle_current_config"
+"""
+input switchboard_oracle_current_config_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: switchboard_oracle_current_config_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input switchboard_oracle_current_config_stream_cursor_value_input {
+  aggregator_address: String
+  asset_identifier: String
+  deleted: Boolean
+  max_age_in_seconds: numeric
+  max_stdev: numeric
+  oracle_address: String
 }
 
 """
@@ -14057,8 +17002,6 @@ columns and relationships of "vault_info"
 type vault_info {
   """An object relationship"""
   adaptive_irm_config: adaptive_irm_current_config
-  """An object relationship"""
-  adaptive_irm_state: adaptive_irm_current_state
   creator: String
   debt_asset: String
   debt_asset_metadata: fungible_asset_metadata
@@ -14129,7 +17072,6 @@ input vault_info_bool_exp {
   _not: vault_info_bool_exp
   _or: [vault_info_bool_exp!]
   adaptive_irm_config: adaptive_irm_current_config_bool_exp
-  adaptive_irm_state: adaptive_irm_current_state_bool_exp
   creator: String_comparison_exp
   debt_asset: String_comparison_exp
   fixed_rate_irm_config: fixed_rate_irm_current_config_bool_exp
@@ -14166,7 +17108,6 @@ type vault_info_min_fields {
 """Ordering options when selecting data from "vault_info"."""
 input vault_info_order_by {
   adaptive_irm_config: adaptive_irm_current_config_order_by
-  adaptive_irm_state: adaptive_irm_current_state_order_by
   creator: order_by
   debt_asset: order_by
   fixed_rate_irm_config: fixed_rate_irm_current_config_order_by

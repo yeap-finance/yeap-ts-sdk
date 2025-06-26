@@ -3,6 +3,7 @@
 
 import { YeapConfig } from "./yeapConfig";
 import { VaultApi } from "./vaultApi";
+import { ScmdPositionApi } from "./scmdPositionApi";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -30,6 +31,9 @@ import { VaultApi } from "./vaultApi";
  *     const activeVaults = await yeap.vaultApi.getActiveVaults();
  *     const vaultInfo = await yeap.vaultApi.getVaultInfoByAddress("0x123...");
  *
+ *     // Access position-related functionality
+ *     const positions = await yeap.scmdPositionApi.getPositionsByOwner("0xabc...");
+ *
  *     console.log("Yeap client initialized:", yeap);
  * }
  * runExample().catch(console.error);
@@ -40,6 +44,8 @@ export class Yeap {
   readonly config: YeapConfig;
 
   readonly vaultApi: VaultApi;
+
+  readonly scmdPositionApi: ScmdPositionApi;
 
   /**
    * Initializes a new instance of the Yeap client with the provided configuration settings.
@@ -67,12 +73,13 @@ export class Yeap {
   constructor(settings?: YeapConfig) {
     this.config = new YeapConfig(settings);
     this.vaultApi = new VaultApi(this.config);
+    this.scmdPositionApi = new ScmdPositionApi(this.config);
   }
 }
 
 // extends Yeap interface so all the methods and properties
 // from the other classes will be recognized by typescript.
-export interface Yeap extends VaultApi {}
+export interface Yeap extends VaultApi, ScmdPositionApi {}
 
 /**
 In TypeScript, we can't inherit or extend from more than one class,
@@ -97,3 +104,4 @@ function applyMixin(targetClass: any, baseClass: any, baseClassProp: string) {
 }
 
 applyMixin(Yeap, VaultApi, "vaultApi");
+applyMixin(Yeap, ScmdPositionApi, "scmdPositionApi");

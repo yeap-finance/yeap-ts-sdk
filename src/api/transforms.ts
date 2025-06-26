@@ -3,6 +3,7 @@
 
 import {
   YeapFungibleAssetMetadata,
+  YeapFungibleAssetBalance,
   YeapCurrentObject,
   YeapVaultSettings,
   YeapVaultInfo,
@@ -16,8 +17,9 @@ import {
   YeapVaultFlashloanActivity,
   YeapVaultProtocolCaps,
   YeapVaultStateActivity,
+  YeapPosition,
 } from "./interfaces";
-import { GetVaultInfoQuery, GetVaultLatestStateQuery, VaultInfoFieldsFragment } from "../types/generated/operations";
+import { FungibleAssetBalanceFieldsFragment, GetVaultInfoQuery, GetVaultLatestStateQuery, VaultInfoFieldsFragment } from "../types/generated/operations";
 
 type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
 type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
@@ -25,7 +27,6 @@ type RawFungibleAssetMetadata = RawVaultInfo["underlying_asset_metadata"];
 type RawCurrentObject = RawVaultInfo["governance_object"];
 type RawVaultSettings = RawVaultInfo["settings"];
 type RawAdaptiveIrmConfig = VaultInfoFieldsFragment["adaptive_irm_config"];
-type RawAdaptiveIrmState = VaultInfoFieldsFragment["adaptive_irm_state"];
 type RawFixedRateIrmConfig = VaultInfoFieldsFragment["fixed_rate_irm_config"];
 type RawKinkedIrmConfig = VaultInfoFieldsFragment["kinked_irm_config"];
 type RawVaultProtocolCaps = VaultInfoFieldsFragment["protocol_configs"][0];
@@ -203,5 +204,20 @@ export function transformVaultProtocolCaps(raw: RawVaultProtocolCaps): YeapVault
     borrowEnabled: raw.borrow_enabled ?? null,
     supplyCap: raw.supply_cap || null,
     supplyEnabled: raw.supply_enabled ?? null,
+  };
+}
+
+
+/**
+ * Transform raw GraphQL fungible asset balance to clean interface
+ * @internal
+ */
+export function transformFungibleAssetBalance(raw: FungibleAssetBalanceFieldsFragment): YeapFungibleAssetBalance | null {
+  if (!raw) return null;
+  return {
+    amount: raw.amount || "0",
+    isFrozen: raw.is_frozen || false,
+    storageId: raw.storage_id || "",
+    metadata: raw.metadata ? transformFungibleAssetMetadata(raw.metadata) : null,
   };
 }

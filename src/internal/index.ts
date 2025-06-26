@@ -3,3 +3,4 @@
 
 export * from "./yeapIndexer";
 export * from "./vault";
+export * from "./position";
