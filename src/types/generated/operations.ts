@@ -37,7 +37,7 @@ export type VaultInfoFieldsFragment = (
   & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment>, protocol_configs: Array<VaultProtocolCapsFieldsFragment> }
 );
 
-export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_cap' | 'supply_enabled'>;
+export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_enabled'>;
 
 export type VaultSettingsFieldsFragment = Pick<Types.VaultSettings, 'vault_address' | 'auto_socialize_debt_enabled' | 'emergency_withdraw_enabled' | 'fee_store_address' | 'flashloan_enabled' | 'flashloan_fee_rate' | 'flashloan_fee_store_address' | 'interest_fee_rate' | 'irm_kind' | 'is_paused'>;
 

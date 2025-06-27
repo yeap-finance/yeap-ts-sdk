@@ -85,7 +85,7 @@ export function transformVaultSettings(raw: RawVaultSettings): YeapVaultSettings
     flashloanFeeRate: raw.flashloan_fee_rate || null,
     flashloanFeeStoreAddress: raw.flashloan_fee_store_address || null,
     interestFeeRate: raw.interest_fee_rate || null,
-    irmKind: raw.irm_kind || null,
+    irmKind: raw.irm_kind ? Number(raw.irm_kind) : null,
     isPaused: raw.is_paused ?? false,
   };
 }
@@ -210,7 +210,6 @@ export function transformVaultProtocolCaps(raw: RawVaultProtocolCaps): YeapVault
     protocolStructName: raw.protocol_struct_name || null,
     borrowCap: raw.borrow_cap || null,
     borrowEnabled: raw.borrow_enabled ?? null,
-    supplyCap: raw.supply_cap || null,
     supplyEnabled: raw.supply_enabled ?? null,
   };
 }
@@ -242,7 +241,7 @@ export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOra
     quoteAsset: raw.quote_asset,
     oracleRouter: raw.oracle_router,
     oracle: raw.oracle ?? null,
-    oracleKind: raw.oracle_kind ?? null,
+    oracleKind: raw.oracle_kind ? Number(raw.oracle_kind) : null,
     isDeleted: raw.deleted ?? false,
   };
 }

@@ -1,3 +1,5 @@
+#import "./FungibleAssetMetadataFields.graphql"
+
 fragment FungibleAssetBalanceFields on current_fungible_asset_balances {
   amount
   amount_v1

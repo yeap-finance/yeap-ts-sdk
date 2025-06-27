@@ -6,11 +6,7 @@ import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
 /**
  * Known contract address names in the Yeap protocol
  */
-export type YeapAddressName =
-  | "yeap_oracle"
-  | "yeap_vault"
-  | "yeap_scmd_protocol"
-  | "yeap_irm";
+export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_lens";
 
 /**
  * Contract addresses mapping for the Yeap protocol
@@ -137,7 +133,9 @@ export class YeapConfig {
   getAddress(addressName: YeapAddressName): string {
     const address = this.addresses[addressName];
     if (!address) {
-      throw new Error(`Contract address '${addressName}' not found in configuration. Available addresses: ${Object.keys(this.addresses).join(', ')}`);
+      throw new Error(
+        `Contract address '${addressName}' not found in configuration. Available addresses: ${Object.keys(this.addresses).join(", ")}`,
+      );
     }
     return address;
   }
@@ -158,5 +156,9 @@ export class YeapConfig {
    */
   getYeapOracleAddress(): string {
     return this.getAddress("yeap_oracle");
+  }
+
+  get yeapLensAddress(): string {
+    return this.getAddress("yeap_lens");
   }
 }

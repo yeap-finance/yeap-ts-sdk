@@ -5,6 +5,5 @@ fragment VaultProtocolCapsFields on vault_protocol_caps {
   protocol_struct_name
   borrow_cap
   borrow_enabled
-  supply_cap
   supply_enabled
 }

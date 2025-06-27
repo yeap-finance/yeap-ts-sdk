@@ -1715,6 +1715,77 @@ input block_metadata_transactions_stream_cursor_value_input {
 }
 
 """
+columns and relationships of "borrow_risk_parameters_current"
+"""
+type borrow_risk_parameters_current {
+  brw: numeric
+  collateral: String!
+  config_address: String!
+  enabled: Boolean
+  vault: String!
+}
+
+"""
+Boolean expression to filter rows from the table "borrow_risk_parameters_current". All fields are combined with a logical 'AND'.
+"""
+input borrow_risk_parameters_current_bool_exp {
+  _and: [borrow_risk_parameters_current_bool_exp!]
+  _not: borrow_risk_parameters_current_bool_exp
+  _or: [borrow_risk_parameters_current_bool_exp!]
+  brw: numeric_comparison_exp
+  collateral: String_comparison_exp
+  config_address: String_comparison_exp
+  enabled: Boolean_comparison_exp
+  vault: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "borrow_risk_parameters_current".
+"""
+input borrow_risk_parameters_current_order_by {
+  brw: order_by
+  collateral: order_by
+  config_address: order_by
+  enabled: order_by
+  vault: order_by
+}
+
+"""
+select columns of table "borrow_risk_parameters_current"
+"""
+enum borrow_risk_parameters_current_select_column {
+  """column name"""
+  brw
+  """column name"""
+  collateral
+  """column name"""
+  config_address
+  """column name"""
+  enabled
+  """column name"""
+  vault
+}
+
+"""
+Streaming cursor of the table "borrow_risk_parameters_current"
+"""
+input borrow_risk_parameters_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: borrow_risk_parameters_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input borrow_risk_parameters_current_stream_cursor_value_input {
+  brw: numeric
+  collateral: String
+  config_address: String
+  enabled: Boolean
+  vault: String
+}
+
+"""
 columns and relationships of "legacy_migration_v1.coin_activities"
 """
 type coin_activities {
@@ -2482,6 +2553,95 @@ input coin_supply_stream_cursor_value_input {
   transaction_epoch: bigint
   transaction_timestamp: timestamp
   transaction_version: bigint
+}
+
+"""
+columns and relationships of "collateral_risk_parameters_current"
+"""
+type collateral_risk_parameters_current {
+  borrow_vault_max_num: numeric
+  collateral: String!
+  config_address: String!
+  liquidation_bonus_bps: numeric
+  lltv: numeric
+  ltv: numeric
+  oracle: String
+  risk_factor: numeric
+}
+
+"""
+Boolean expression to filter rows from the table "collateral_risk_parameters_current". All fields are combined with a logical 'AND'.
+"""
+input collateral_risk_parameters_current_bool_exp {
+  _and: [collateral_risk_parameters_current_bool_exp!]
+  _not: collateral_risk_parameters_current_bool_exp
+  _or: [collateral_risk_parameters_current_bool_exp!]
+  borrow_vault_max_num: numeric_comparison_exp
+  collateral: String_comparison_exp
+  config_address: String_comparison_exp
+  liquidation_bonus_bps: numeric_comparison_exp
+  lltv: numeric_comparison_exp
+  ltv: numeric_comparison_exp
+  oracle: String_comparison_exp
+  risk_factor: numeric_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "collateral_risk_parameters_current".
+"""
+input collateral_risk_parameters_current_order_by {
+  borrow_vault_max_num: order_by
+  collateral: order_by
+  config_address: order_by
+  liquidation_bonus_bps: order_by
+  lltv: order_by
+  ltv: order_by
+  oracle: order_by
+  risk_factor: order_by
+}
+
+"""
+select columns of table "collateral_risk_parameters_current"
+"""
+enum collateral_risk_parameters_current_select_column {
+  """column name"""
+  borrow_vault_max_num
+  """column name"""
+  collateral
+  """column name"""
+  config_address
+  """column name"""
+  liquidation_bonus_bps
+  """column name"""
+  lltv
+  """column name"""
+  ltv
+  """column name"""
+  oracle
+  """column name"""
+  risk_factor
+}
+
+"""
+Streaming cursor of the table "collateral_risk_parameters_current"
+"""
+input collateral_risk_parameters_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: collateral_risk_parameters_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input collateral_risk_parameters_current_stream_cursor_value_input {
+  borrow_vault_max_num: numeric
+  collateral: String
+  config_address: String
+  liquidation_bonus_bps: numeric
+  lltv: numeric
+  ltv: numeric
+  oracle: String
+  risk_factor: numeric
 }
 
 """
@@ -7340,7 +7500,7 @@ type hyperion_llp_debt_status_activities {
   debt_store_address: String
   event_index: numeric!
   position_address: String
-  status: smallint
+  status: numeric
   timestamp: timestamp
   transaction_version: numeric!
   vault_address: String
@@ -7356,7 +7516,7 @@ input hyperion_llp_debt_status_activities_bool_exp {
   debt_store_address: String_comparison_exp
   event_index: numeric_comparison_exp
   position_address: String_comparison_exp
-  status: smallint_comparison_exp
+  status: numeric_comparison_exp
   timestamp: timestamp_comparison_exp
   transaction_version: numeric_comparison_exp
   vault_address: String_comparison_exp
@@ -7410,7 +7570,7 @@ input hyperion_llp_debt_status_activities_stream_cursor_value_input {
   debt_store_address: String
   event_index: numeric
   position_address: String
-  status: smallint
+  status: numeric
   timestamp: timestamp
   transaction_version: numeric
   vault_address: String
@@ -7519,7 +7679,7 @@ type hyperion_llp_position_current {
   collateral_type: String
   owner_address: String
   position_address: String!
-  status: smallint
+  status: numeric
 }
 
 """
@@ -7533,7 +7693,7 @@ input hyperion_llp_position_current_bool_exp {
   collateral_type: String_comparison_exp
   owner_address: String_comparison_exp
   position_address: String_comparison_exp
-  status: smallint_comparison_exp
+  status: numeric_comparison_exp
 }
 
 """
@@ -7579,7 +7739,7 @@ input hyperion_llp_position_current_stream_cursor_value_input {
   collateral_type: String
   owner_address: String
   position_address: String
-  status: smallint
+  status: numeric
 }
 
 """
@@ -8230,7 +8390,7 @@ type oracle_router_activities {
   deleted: Boolean
   event_index: numeric!
   oracle: String
-  oracle_kind: smallint
+  oracle_kind: numeric
   oracle_router: String
   quote_asset: String
   timestamp: timestamp
@@ -8248,7 +8408,7 @@ input oracle_router_activities_bool_exp {
   deleted: Boolean_comparison_exp
   event_index: numeric_comparison_exp
   oracle: String_comparison_exp
-  oracle_kind: smallint_comparison_exp
+  oracle_kind: numeric_comparison_exp
   oracle_router: String_comparison_exp
   quote_asset: String_comparison_exp
   timestamp: timestamp_comparison_exp
@@ -8308,7 +8468,7 @@ input oracle_router_activities_stream_cursor_value_input {
   deleted: Boolean
   event_index: numeric
   oracle: String
-  oracle_kind: smallint
+  oracle_kind: numeric
   oracle_router: String
   quote_asset: String
   timestamp: timestamp
@@ -8322,7 +8482,7 @@ type oracle_router_current_config {
   base_asset: String!
   deleted: Boolean
   oracle: String
-  oracle_kind: smallint
+  oracle_kind: numeric
   oracle_router: String!
   quote_asset: String!
 }
@@ -8337,7 +8497,7 @@ input oracle_router_current_config_bool_exp {
   base_asset: String_comparison_exp
   deleted: Boolean_comparison_exp
   oracle: String_comparison_exp
-  oracle_kind: smallint_comparison_exp
+  oracle_kind: numeric_comparison_exp
   oracle_router: String_comparison_exp
   quote_asset: String_comparison_exp
 }
@@ -8387,7 +8547,7 @@ input oracle_router_current_config_stream_cursor_value_input {
   base_asset: String
   deleted: Boolean
   oracle: String
-  oracle_kind: smallint
+  oracle_kind: numeric
   oracle_router: String
   quote_asset: String
 }
@@ -9260,6 +9420,25 @@ type query_root {
   fetch data from the table: "block_metadata_transactions" using primary key columns
   """
   block_metadata_transactions_by_pk(version: bigint!): block_metadata_transactions
+  """
+  fetch data from the table: "borrow_risk_parameters_current"
+  """
+  borrow_risk_parameters_current(
+    """distinct select on columns"""
+    distinct_on: [borrow_risk_parameters_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_risk_parameters_current_order_by!]
+    """filter the rows returned"""
+    where: borrow_risk_parameters_current_bool_exp
+  ): [borrow_risk_parameters_current!]!
+  """
+  fetch data from the table: "borrow_risk_parameters_current" using primary key columns
+  """
+  borrow_risk_parameters_current_by_pk(collateral: String!, config_address: String!, vault: String!): borrow_risk_parameters_current
   """An array relationship"""
   coin_activities(
     """distinct select on columns"""
@@ -9333,6 +9512,25 @@ type query_root {
   ): [coin_supply!]!
   """fetch data from the table: "coin_supply" using primary key columns"""
   coin_supply_by_pk(coin_type_hash: String!, transaction_version: bigint!): coin_supply
+  """
+  fetch data from the table: "collateral_risk_parameters_current"
+  """
+  collateral_risk_parameters_current(
+    """distinct select on columns"""
+    distinct_on: [collateral_risk_parameters_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [collateral_risk_parameters_current_order_by!]
+    """filter the rows returned"""
+    where: collateral_risk_parameters_current_bool_exp
+  ): [collateral_risk_parameters_current!]!
+  """
+  fetch data from the table: "collateral_risk_parameters_current" using primary key columns
+  """
+  collateral_risk_parameters_current_by_pk(collateral: String!, config_address: String!): collateral_risk_parameters_current
   """
   fetch data from the table: "legacy_migration_v1.collection_datas"
   """
@@ -11011,7 +11209,7 @@ type scmd_debt_status_activities {
   debt_store_address: String
   event_index: numeric!
   position_address: String
-  status: smallint
+  status: numeric
   timestamp: timestamp
   transaction_version: numeric!
   vault_address: String
@@ -11027,7 +11225,7 @@ input scmd_debt_status_activities_bool_exp {
   debt_store_address: String_comparison_exp
   event_index: numeric_comparison_exp
   position_address: String_comparison_exp
-  status: smallint_comparison_exp
+  status: numeric_comparison_exp
   timestamp: timestamp_comparison_exp
   transaction_version: numeric_comparison_exp
   vault_address: String_comparison_exp
@@ -11081,7 +11279,7 @@ input scmd_debt_status_activities_stream_cursor_value_input {
   debt_store_address: String
   event_index: numeric
   position_address: String
-  status: smallint
+  status: numeric
   timestamp: timestamp
   transaction_version: numeric
   vault_address: String
@@ -11360,7 +11558,7 @@ type scmd_position_current {
   ): [scmd_liquidation_activities!]!
   owner_address: String
   position_address: String!
-  status: smallint
+  status: numeric
 }
 
 """
@@ -11376,7 +11574,7 @@ input scmd_position_current_bool_exp {
   liquidation_activities: scmd_liquidation_activities_bool_exp
   owner_address: String_comparison_exp
   position_address: String_comparison_exp
-  status: smallint_comparison_exp
+  status: numeric_comparison_exp
 }
 
 """Ordering options when selecting data from "scmd_position_current"."""
@@ -11422,7 +11620,7 @@ input scmd_position_current_stream_cursor_value_input {
   collateral_type: String
   owner_address: String
   position_address: String
-  status: smallint
+  status: numeric
 }
 
 """
@@ -11620,23 +11818,6 @@ input signatures_stream_cursor_value_input {
   transaction_block_height: bigint
   transaction_version: bigint
   type: String
-}
-
-scalar smallint
-
-"""
-Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'.
-"""
-input smallint_comparison_exp {
-  _eq: smallint
-  _gt: smallint
-  _gte: smallint
-  _in: [smallint!]
-  _is_null: Boolean
-  _lt: smallint
-  _lte: smallint
-  _neq: smallint
-  _nin: [smallint!]
 }
 
 type subscription_root {
@@ -12018,6 +12199,36 @@ type subscription_root {
     """filter the rows returned"""
     where: block_metadata_transactions_bool_exp
   ): [block_metadata_transactions!]!
+  """
+  fetch data from the table: "borrow_risk_parameters_current"
+  """
+  borrow_risk_parameters_current(
+    """distinct select on columns"""
+    distinct_on: [borrow_risk_parameters_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_risk_parameters_current_order_by!]
+    """filter the rows returned"""
+    where: borrow_risk_parameters_current_bool_exp
+  ): [borrow_risk_parameters_current!]!
+  """
+  fetch data from the table: "borrow_risk_parameters_current" using primary key columns
+  """
+  borrow_risk_parameters_current_by_pk(collateral: String!, config_address: String!, vault: String!): borrow_risk_parameters_current
+  """
+  fetch data from the table in a streaming manner: "borrow_risk_parameters_current"
+  """
+  borrow_risk_parameters_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [borrow_risk_parameters_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: borrow_risk_parameters_current_bool_exp
+  ): [borrow_risk_parameters_current!]!
   """An array relationship"""
   coin_activities(
     """distinct select on columns"""
@@ -12135,6 +12346,36 @@ type subscription_root {
     """filter the rows returned"""
     where: coin_supply_bool_exp
   ): [coin_supply!]!
+  """
+  fetch data from the table: "collateral_risk_parameters_current"
+  """
+  collateral_risk_parameters_current(
+    """distinct select on columns"""
+    distinct_on: [collateral_risk_parameters_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [collateral_risk_parameters_current_order_by!]
+    """filter the rows returned"""
+    where: collateral_risk_parameters_current_bool_exp
+  ): [collateral_risk_parameters_current!]!
+  """
+  fetch data from the table: "collateral_risk_parameters_current" using primary key columns
+  """
+  collateral_risk_parameters_current_by_pk(collateral: String!, config_address: String!): collateral_risk_parameters_current
+  """
+  fetch data from the table in a streaming manner: "collateral_risk_parameters_current"
+  """
+  collateral_risk_parameters_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [collateral_risk_parameters_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: collateral_risk_parameters_current_bool_exp
+  ): [collateral_risk_parameters_current!]!
   """
   fetch data from the table: "legacy_migration_v1.collection_datas"
   """
@@ -17167,7 +17408,6 @@ type vault_protocol_caps {
   protocol_module_address: String
   protocol_module_name: String
   protocol_struct_name: String
-  supply_cap: numeric
   supply_enabled: Boolean
   vault_address: String
 }
@@ -17244,7 +17484,6 @@ input vault_protocol_caps_aggregate_order_by {
 """aggregate avg on columns"""
 type vault_protocol_caps_avg_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17252,7 +17491,6 @@ order by avg() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_avg_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """
@@ -17267,7 +17505,6 @@ input vault_protocol_caps_bool_exp {
   protocol_module_address: String_comparison_exp
   protocol_module_name: String_comparison_exp
   protocol_struct_name: String_comparison_exp
-  supply_cap: numeric_comparison_exp
   supply_enabled: Boolean_comparison_exp
   vault_address: String_comparison_exp
 }
@@ -17278,7 +17515,6 @@ type vault_protocol_caps_max_fields {
   protocol_module_address: String
   protocol_module_name: String
   protocol_struct_name: String
-  supply_cap: numeric
   vault_address: String
 }
 
@@ -17290,7 +17526,6 @@ input vault_protocol_caps_max_order_by {
   protocol_module_address: order_by
   protocol_module_name: order_by
   protocol_struct_name: order_by
-  supply_cap: order_by
   vault_address: order_by
 }
 
@@ -17300,7 +17535,6 @@ type vault_protocol_caps_min_fields {
   protocol_module_address: String
   protocol_module_name: String
   protocol_struct_name: String
-  supply_cap: numeric
   vault_address: String
 }
 
@@ -17312,7 +17546,6 @@ input vault_protocol_caps_min_order_by {
   protocol_module_address: order_by
   protocol_module_name: order_by
   protocol_struct_name: order_by
-  supply_cap: order_by
   vault_address: order_by
 }
 
@@ -17323,7 +17556,6 @@ input vault_protocol_caps_order_by {
   protocol_module_address: order_by
   protocol_module_name: order_by
   protocol_struct_name: order_by
-  supply_cap: order_by
   supply_enabled: order_by
   vault_address: order_by
 }
@@ -17342,8 +17574,6 @@ enum vault_protocol_caps_select_column {
   protocol_module_name
   """column name"""
   protocol_struct_name
-  """column name"""
-  supply_cap
   """column name"""
   supply_enabled
   """column name"""
@@ -17373,7 +17603,6 @@ enum vault_protocol_caps_select_column_vault_protocol_caps_aggregate_bool_exp_bo
 """aggregate stddev on columns"""
 type vault_protocol_caps_stddev_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17381,13 +17610,11 @@ order by stddev() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_stddev_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """aggregate stddev_pop on columns"""
 type vault_protocol_caps_stddev_pop_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17395,13 +17622,11 @@ order by stddev_pop() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_stddev_pop_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """aggregate stddev_samp on columns"""
 type vault_protocol_caps_stddev_samp_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17409,7 +17634,6 @@ order by stddev_samp() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_stddev_samp_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """
@@ -17429,7 +17653,6 @@ input vault_protocol_caps_stream_cursor_value_input {
   protocol_module_address: String
   protocol_module_name: String
   protocol_struct_name: String
-  supply_cap: numeric
   supply_enabled: Boolean
   vault_address: String
 }
@@ -17437,7 +17660,6 @@ input vault_protocol_caps_stream_cursor_value_input {
 """aggregate sum on columns"""
 type vault_protocol_caps_sum_fields {
   borrow_cap: numeric
-  supply_cap: numeric
 }
 
 """
@@ -17445,13 +17667,11 @@ order by sum() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_sum_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """aggregate var_pop on columns"""
 type vault_protocol_caps_var_pop_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17459,13 +17679,11 @@ order by var_pop() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_var_pop_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """aggregate var_samp on columns"""
 type vault_protocol_caps_var_samp_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17473,13 +17691,11 @@ order by var_samp() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_var_samp_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """aggregate variance on columns"""
 type vault_protocol_caps_variance_fields {
   borrow_cap: Float
-  supply_cap: Float
 }
 
 """
@@ -17487,7 +17703,6 @@ order by variance() on columns of table "vault_protocol_caps"
 """
 input vault_protocol_caps_variance_order_by {
   borrow_cap: order_by
-  supply_cap: order_by
 }
 
 """
@@ -17501,7 +17716,7 @@ type vault_settings {
   flashloan_fee_rate: numeric
   flashloan_fee_store_address: String
   interest_fee_rate: numeric
-  irm_kind: Int
+  irm_kind: numeric
   is_paused: Boolean
   vault_address: String!
 }
@@ -17520,7 +17735,7 @@ input vault_settings_bool_exp {
   flashloan_fee_rate: numeric_comparison_exp
   flashloan_fee_store_address: String_comparison_exp
   interest_fee_rate: numeric_comparison_exp
-  irm_kind: Int_comparison_exp
+  irm_kind: numeric_comparison_exp
   is_paused: Boolean_comparison_exp
   vault_address: String_comparison_exp
 }
@@ -17584,7 +17799,7 @@ input vault_settings_stream_cursor_value_input {
   flashloan_fee_rate: numeric
   flashloan_fee_store_address: String
   interest_fee_rate: numeric
-  irm_kind: Int
+  irm_kind: numeric
   is_paused: Boolean
   vault_address: String
 }

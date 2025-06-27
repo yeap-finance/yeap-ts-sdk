@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { getVaultInfoByAddress, getVaultsByUnderlyingAsset } from "../internal";
+import { getVaultInfoByAddress, getVaultsByUnderlyingAsset, getActiveVaults, getAllVaults } from "../internal";
 import { Vault } from "./entities";
 import { YeapConfig } from "./yeapConfig";
 
@@ -85,5 +85,61 @@ export class VaultApi {
     }
 
     return new Vault(this.config, vaultInfo);
+  }
+
+  /**
+   * Get all vaults with optional pagination.
+   *
+   * @param limit - Number of results to return (default: 20)
+   * @param offset - Offset for pagination (default: 0)
+   * @returns Promise containing an array of all Vault instances
+   *
+   * @example
+   * ```typescript
+   * const allVaults = await yeap.vault.getAllVaults(50, 0);
+   * console.log(`Found ${allVaults.length} total vaults`);
+   * allVaults.forEach(vault => {
+   *   console.log("Vault address:", vault.vaultAddress());
+   *   console.log("Creator:", vault.creator());
+   * });
+   * ```
+   * @group Vault
+   */
+  async getAllVaults(limit: number = 20, offset: number = 0): Promise<Vault[]> {
+    const vaultInfos = await getAllVaults({
+      yeapConfig: this.config,
+      limit,
+      offset,
+    });
+
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
+  }
+
+  /**
+   * Get all active vaults (vaults that are not paused).
+   *
+   * @param limit - Number of results to return (default: 20)
+   * @param offset - Offset for pagination (default: 0)
+   * @returns Promise containing an array of active Vault instances
+   *
+   * @example
+   * ```typescript
+   * const activeVaults = await yeap.vault.getActiveVaults(30, 0);
+   * console.log(`Found ${activeVaults.length} active vaults`);
+   * activeVaults.forEach(vault => {
+   *   console.log("Active vault address:", vault.vaultAddress());
+   *   console.log("Underlying asset:", vault.underlyingAsset());
+   * });
+   * ```
+   * @group Vault
+   */
+  async getActiveVaults(limit: number = 20, offset: number = 0): Promise<Vault[]> {
+    const vaultInfos = await getActiveVaults({
+      yeapConfig: this.config,
+      limit,
+      offset,
+    });
+
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
   }
 }

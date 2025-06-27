@@ -83,7 +83,8 @@ export class SCMDPosition {
    * @returns The numeric status value (typically 0 for active, 1 for inactive)
    */
   get status(): number | null {
-    return this._rawPositionData.status ?? null;
+    const statusValue = this._rawPositionData.status;
+    return statusValue !== null && statusValue !== undefined ? parseInt(statusValue, 10) : null;
   }
 
   /**

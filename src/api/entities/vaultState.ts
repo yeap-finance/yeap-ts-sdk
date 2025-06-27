@@ -36,49 +36,51 @@ export class VaultState {
    * Get the bad debt amount.
    */
   get badDebt(): bigint {
-    return this._rawStateData.bad_debt ? BigInt(this._rawStateData.bad_debt) : 0n;
+    return this._rawStateData.bad_debt ? BigInt(this._rawStateData.bad_debt) : BigInt(0);
   }
 
   /**
    * Get the cash amount.
    */
   get cash(): bigint {
-    return this._rawStateData.cash ? BigInt(this._rawStateData.cash) : 0n;
+    return this._rawStateData.cash ? BigInt(this._rawStateData.cash) : BigInt(0);
   }
 
   /**
    * Get the current interest rate.
    */
   get currentInterestRate(): bigint {
-    return this._rawStateData.current_interest_rate ? BigInt(this._rawStateData.current_interest_rate) : 0n;
+    return this._rawStateData.current_interest_rate ? BigInt(this._rawStateData.current_interest_rate) : BigInt(0);
   }
 
   /**
    * Get the last interest update time.
    */
   get lastInterestUpdateTime(): bigint {
-    return this._rawStateData.last_interest_update_time ? BigInt(this._rawStateData.last_interest_update_time) : 0n;
+    return this._rawStateData.last_interest_update_time
+      ? BigInt(this._rawStateData.last_interest_update_time)
+      : BigInt(0);
   }
 
   /**
    * Get the total borrows.
    */
   get totalBorrows(): bigint {
-    return this._rawStateData.total_borrows ? BigInt(this._rawStateData.total_borrows) : 0n;
+    return this._rawStateData.total_borrows ? BigInt(this._rawStateData.total_borrows) : BigInt(0);
   }
 
   /**
    * Get the total debt shares.
    */
   get totalDebtShares(): bigint {
-    return this._rawStateData.total_debt_shares ? BigInt(this._rawStateData.total_debt_shares) : 0n;
+    return this._rawStateData.total_debt_shares ? BigInt(this._rawStateData.total_debt_shares) : BigInt(0);
   }
 
   /**
    * Get the total shares.
    */
   get totalShares(): bigint {
-    return this._rawStateData.total_shares ? BigInt(this._rawStateData.total_shares) : 0n;
+    return this._rawStateData.total_shares ? BigInt(this._rawStateData.total_shares) : BigInt(0);
   }
 
   get totalSupply(): bigint {

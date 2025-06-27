@@ -277,8 +277,6 @@ export interface YeapVaultProtocolCaps {
   borrowCap?: string | null;
   /** Whether borrowing is enabled */
   borrowEnabled?: boolean | null;
-  /** Supply cap */
-  supplyCap?: string | null;
   /** Whether supply is enabled */
   supplyEnabled?: boolean | null;
 }

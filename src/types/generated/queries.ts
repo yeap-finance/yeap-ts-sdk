@@ -58,7 +58,7 @@ export const FungibleAssetBalanceFieldsFragmentDoc = `
   is_primary
   storage_id
 }
-    ${FungibleAssetMetadataFieldsFragmentDoc}`;
+    `;
 export const PositionFieldsFragmentDoc = `
     fragment PositionFields on scmd_position_current {
   position_address
@@ -74,7 +74,7 @@ export const PositionFieldsFragmentDoc = `
     vault_address
   }
 }
-    ${FungibleAssetBalanceFieldsFragmentDoc}`;
+    `;
 export const VaultBadDebtActivitiesFieldsFragmentDoc = `
     fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
   event_index
@@ -167,7 +167,6 @@ export const VaultProtocolCapsFieldsFragmentDoc = `
   protocol_struct_name
   borrow_cap
   borrow_enabled
-  supply_cap
   supply_enabled
 }
     `;
@@ -210,14 +209,7 @@ export const VaultInfoFieldsFragmentDoc = `
     ...VaultProtocolCapsFields
   }
 }
-    ${FungibleAssetMetadataFieldsFragmentDoc}
-${FungibleAssetBalanceFieldsFragmentDoc}
-${CurrentObjectFieldsFragmentDoc}
-${VaultSettingsFieldsFragmentDoc}
-${AdaptiveIrmConfigFieldsFragmentDoc}
-${FixedRateIrmConfigFieldsFragmentDoc}
-${KinkedIrmConfigFieldsFragmentDoc}
-${VaultProtocolCapsFieldsFragmentDoc}`;
+    `;
 export const VaultStateActivitiesFieldsFragmentDoc = `
     fragment VaultStateActivitiesFields on vault_states_activities {
   bad_debt
@@ -244,7 +236,15 @@ export const GetActiveVaults = `
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 export const GetOracleRouterConfigByPrimaryKey = `
     query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
   oracle_router_current_config(
@@ -277,21 +277,39 @@ export const GetPositionsByOwner = `
     ...PositionFields
   }
 }
-    ${PositionFieldsFragmentDoc}`;
+    ${PositionFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetVaultInfo = `
     query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
   vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 export const GetVaultInfoByAddress = `
     query GetVaultInfoByAddress($vaultAddress: String!) {
   vault_info_by_pk(vault_address: $vaultAddress) {
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 export const GetVaultLatestState = `
     query GetVaultLatestState($vault_address: String!) {
   vault_states_activities(
@@ -343,7 +361,8 @@ export const GetVaultUnderlyingAssetBalance = `
     }
   }
 }
-    ${FungibleAssetBalanceFieldsFragmentDoc}`;
+    ${FungibleAssetBalanceFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetVaultsWithHighYield = `
     query GetVaultsWithHighYield($minInterestRate: numeric!, $limit: Int = 10, $offset: Int = 0) {
   vault_info(
@@ -355,7 +374,15 @@ export const GetVaultsWithHighYield = `
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
