@@ -5,3 +5,5 @@ export { VaultState } from "./vaultState";
 export { Vault } from "./vault";
 export { SCMDPosition } from "./scmdPosition";
 export { OracleConfig } from "./oracleConfig";
+export { OracleRouter } from "./oracleRouter";
+export { ScmdConfig } from "./scmdConfig";

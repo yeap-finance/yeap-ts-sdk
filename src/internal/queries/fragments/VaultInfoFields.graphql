@@ -1,4 +1,3 @@
-#import "./FungibleAssetMetadataFields.graphql"
 #import "./VaultSettingsFields.graphql"
 #import "./CurrentObjectFields.graphql"
 #import "./FungibleAssetBalanceFields.graphql"

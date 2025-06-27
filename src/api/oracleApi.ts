@@ -3,7 +3,7 @@
 
 import { getOracleRouterConfigByPrimaryKey, getOracleRouterConfigsByOracle } from "../internal";
 import { YeapConfig } from "./yeapConfig";
-import { OracleConfig } from "./entities";
+import { OracleConfig, OracleRouter } from "./entities";
 
 /**
  * A class to query oracle router configuration data from the Yeap indexer.
@@ -22,93 +22,46 @@ export class OracleApi {
   }
 
   /**
-   * Get oracle router configuration by primary key (base_asset, oracle_router, quote_asset).
+   * Get an oracle router entity with all its configurations.
    *
-   * @param baseAsset - The base asset address
    * @param oracleRouter - The oracle router address
-   * @param quoteAsset - The quote asset address
-   * @returns Promise containing the oracle router configuration or null if not found
+   * @returns Promise containing an OracleRouter entity with all configurations
    *
    * @example
    * ```typescript
-   * const config = await yeap.oracleRouter.getConfigByPrimaryKey(
-   *   "0xbase...",
-   *   "0xoracle...",
-   *   "0xquote..."
-   * );
-   * if (config) {
-   *   console.log("Oracle:", config.oracle());
-   *   console.log("Oracle type:", config.oracleTypeDescription());
-   *   console.log("Oracle details:", config.oracleTypeDetails());
-   *   console.log("Asset pair:", config.assetPair());
-   *   console.log("Is vault oracle:", config.isVaultOracle());
+   * const router = await yeap.oracleApi.getRouter("0xrouter...");
+   * console.log(`Router has ${router.getAllConfigs().length} configurations`);
    *
-   *   // Fetch current price from on-chain oracle
-   *   try {
-   *     const price = await config.get_price();
-   *     if (price !== null) {
-   *       console.log(`Current price: ${price.toString()}`);
-   *     } else {
-   *       console.log("Price not available");
-   *     }
-   *   } catch (error) {
-   *     console.error("Failed to fetch price:", error);
-   *   }
-   * }
-   * ```
-   * @group Oracle Router
-   */
-  async getConfigByPrimaryKey(
-    baseAsset: string,
-    oracleRouter: string,
-    quoteAsset: string,
-  ): Promise<OracleConfig | null> {
-    const raw = await getOracleRouterConfigByPrimaryKey({
-      yeapConfig: this.config,
-      baseAsset,
-      oracleRouter,
-      quoteAsset,
-    });
-
-    if (!raw) return null;
-    return new OracleConfig(raw, this.config);
-  }
-
-  /**
-   * Get all oracle router configurations for a specific oracle router address.
-   *
-   * @param oracleRouter - The oracle router address to filter by
-   * @param limit - Number of results to return (default: 50)
-   * @param offset - Offset for pagination (default: 0)
-   * @returns Promise containing an array of oracle router configurations
-   *
-   * @example
-   * ```typescript
-   * const configs = await yeap.oracleRouter.getConfigsByOracle("0xoracle...", 10);
-   * console.log(`Found ${configs.length} configurations for this oracle router`);
-   * configs.forEach(config => {
-   *   console.log("Asset pair:", config.assetPair());
-   *   console.log("Oracle type:", config.oracleTypeDescription());
-   *   console.log("Is active:", config.isActive());
-   *   if (config.isPrimaryBackupOracle()) {
-   *     console.log("Uses Pyth with Switchboard backup");
-   *   }
+   * // Check available asset pairs
+   * const pairs = router.getAvailableAssetPairs();
+   * pairs.forEach((quoteAsset, baseAsset) => {
+   *   console.log(`Can price ${baseAsset} in terms of ${quoteAsset}`);
    * });
+   *
+   * // Check if pricing is available for a specific pair
+   * if (router.hasPricing("0x1::btc::BTC", "0x1::usd::USD")) {
+   *   const price = await router.getPrice("0x1::btc::BTC", "0x1::usd::USD");
+   *   console.log(`BTC/USD price: ${price?.toString()}`);
+   * }
+   *
+   * // Get statistics
+   * const stats = router.getStats();
+   * console.log(`Total configs: ${stats.totalConfigs}`);
+   * console.log(`Unique oracles: ${stats.uniqueOracles}`);
    * ```
    * @group Oracle Router
    */
-  async getConfigsByOracle(
-    oracleRouter: string,
-    limit: number = 50,
-    offset: number = 0,
-  ): Promise<OracleConfig[]> {
+  async getRouter(oracleRouter: string): Promise<OracleRouter | null> {
     const rawConfigs = await getOracleRouterConfigsByOracle({
       yeapConfig: this.config,
       oracleRouter,
-      limit,
-      offset,
+      limit: 1000, // Get all configs for the router
+      offset: 0,
     });
+    if (rawConfigs.length === 0) {
+      return null; // No configurations found for this router
+    }
 
-    return rawConfigs.map((raw) => new OracleConfig(raw, this.config));
+    return new OracleRouter(oracleRouter, rawConfigs, this.config);
   }
 }

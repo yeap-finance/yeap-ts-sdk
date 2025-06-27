@@ -4,6 +4,10 @@ export type AdaptiveIrmConfigFieldsFragment = Pick<Types.AdaptiveIrmCurrentConfi
 
 export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState, 'state_address' | 'current_rate_at_target' | 'last_update_timestamp_secs'>;
 
+export type BorrowRiskParametersFieldsFragment = Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'config_address' | 'enabled' | 'vault'>;
+
+export type CollateralRiskParametersFieldsFragment = Pick<Types.CollateralRiskParametersCurrent, 'borrow_vault_max_num' | 'collateral' | 'config_address' | 'liquidation_bonus_bps' | 'lltv' | 'ltv' | 'oracle' | 'risk_factor'>;
+
 export type CurrentObjectFieldsFragment = Pick<Types.CurrentObjects, 'object_address' | 'owner_address' | 'state_key_hash' | 'allow_ungated_transfer' | 'is_deleted'>;
 
 export type FixedRateIrmConfigFieldsFragment = Pick<Types.FixedRateIrmCurrentConfig, 'config_address' | 'rate_per_second'>;
@@ -37,7 +41,7 @@ export type VaultInfoFieldsFragment = (
   & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment>, protocol_configs: Array<VaultProtocolCapsFieldsFragment> }
 );
 
-export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_cap' | 'supply_enabled'>;
+export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_enabled'>;
 
 export type VaultSettingsFieldsFragment = Pick<Types.VaultSettings, 'vault_address' | 'auto_socialize_debt_enabled' | 'emergency_withdraw_enabled' | 'fee_store_address' | 'flashloan_enabled' | 'flashloan_fee_rate' | 'flashloan_fee_store_address' | 'interest_fee_rate' | 'irm_kind' | 'is_paused'>;
 
@@ -50,6 +54,24 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetBorrowRiskParametersByConfigAddressQueryVariables = Types.Exact<{
+  configAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetBorrowRiskParametersByConfigAddressQuery = { borrow_risk_parameters_current: Array<BorrowRiskParametersFieldsFragment> };
+
+export type GetCollateralRiskParametersByConfigAddressQueryVariables = Types.Exact<{
+  configAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetCollateralRiskParametersByConfigAddressQuery = { collateral_risk_parameters_current: Array<CollateralRiskParametersFieldsFragment> };
 
 export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
   baseAsset: Types.Scalars['String']['input'];

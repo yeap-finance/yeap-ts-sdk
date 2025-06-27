@@ -145,6 +145,36 @@ export async function getVaultsByUnderlyingAsset(args: {
 }
 
 /**
+ * Get all active vaults.
+ * @param args - The arguments for the function.
+ * @param args.yeapConfig - The Yeap configuration object.
+ * @param args.limit - Number of results to return (default: 20)
+ * @param args.offset - Offset for pagination (default: 0)
+ * @returns Promise containing active vault information
+ * @group Implementation
+ */
+export async function getActiveVaults(args: {
+  yeapConfig: YeapConfig;
+  limit?: number;
+  offset?: number;
+}): Promise<GetActiveVaultsQueryResponse> {
+  const { yeapConfig, limit = 20, offset = 0 } = args;
+
+  const graphqlQuery: GraphqlQuery = {
+    query: GetActiveVaults,
+    variables: { limit, offset },
+  };
+
+  const data = await queryYeapIndexer<GetActiveVaultsQuery>({
+    yeapConfig,
+    query: graphqlQuery,
+    originMethod: "getActiveVaults",
+  });
+
+  return data.vault_info;
+}
+
+/**
  * Get the latest state activity for a specific vault.
  * @param args - The arguments for the function.
  * @param args.yeapConfig - The Yeap configuration object.
@@ -201,4 +231,30 @@ export async function getVaultUnderlyingAssetBalance(args: {
   });
 
   return data.vault_info_by_pk?.underlying_asset_balance || null;
+}
+
+/**
+ * Get all vaults with optional pagination.
+ * @param args - The arguments for the function.
+ * @param args.yeapConfig - The Yeap configuration object.
+ * @param args.limit - Number of results to return (default: 20)
+ * @param args.offset - Offset for pagination (default: 0)
+ * @returns Promise containing all vault information
+ * @group Implementation
+ */
+export async function getAllVaults(args: {
+  yeapConfig: YeapConfig;
+  limit?: number;
+  offset?: number;
+}): Promise<GetVaultInfoQueryResponse> {
+  const { yeapConfig, limit = 20, offset = 0 } = args;
+
+  return getVaultInfo({
+    yeapConfig,
+    queryArgs: {
+      orderBy: [{ vault_address: OrderBy.Asc }],
+      limit,
+      offset,
+    },
+  });
 }

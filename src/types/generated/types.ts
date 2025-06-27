@@ -15,7 +15,6 @@ export type Scalars = {
   bigint: { input: string; output: string; }
   jsonb: { input: any; output: any; }
   numeric: { input: string; output: string; }
-  smallint: { input: number; output: number; }
   timestamp: { input: Date; output: Date; }
 };
 
@@ -1612,6 +1611,67 @@ export type BlockMetadataTransactionsStreamCursorValueInput = {
   version?: InputMaybe<Scalars['bigint']['input']>;
 };
 
+/** columns and relationships of "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrent = {
+  brw?: Maybe<Scalars['numeric']['output']>;
+  collateral: Scalars['String']['output'];
+  config_address: Scalars['String']['output'];
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  vault: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "borrow_risk_parameters_current". All fields are combined with a logical 'AND'. */
+export type BorrowRiskParametersCurrentBoolExp = {
+  _and?: InputMaybe<Array<BorrowRiskParametersCurrentBoolExp>>;
+  _not?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+  _or?: InputMaybe<Array<BorrowRiskParametersCurrentBoolExp>>;
+  brw?: InputMaybe<NumericComparisonExp>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  config_address?: InputMaybe<StringComparisonExp>;
+  enabled?: InputMaybe<BooleanComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "borrow_risk_parameters_current". */
+export type BorrowRiskParametersCurrentOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+  collateral?: InputMaybe<OrderBy>;
+  config_address?: InputMaybe<OrderBy>;
+  enabled?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "borrow_risk_parameters_current" */
+export enum BorrowRiskParametersCurrentSelectColumn {
+  /** column name */
+  Brw = 'brw',
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  ConfigAddress = 'config_address',
+  /** column name */
+  Enabled = 'enabled',
+  /** column name */
+  Vault = 'vault'
+}
+
+/** Streaming cursor of the table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: BorrowRiskParametersCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BorrowRiskParametersCurrentStreamCursorValueInput = {
+  brw?: InputMaybe<Scalars['numeric']['input']>;
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  config_address?: InputMaybe<Scalars['String']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** columns and relationships of "legacy_migration_v1.coin_activities" */
 export type CoinActivities = {
   activity_type?: Maybe<Scalars['String']['output']>;
@@ -2317,6 +2377,85 @@ export type CoinSupplyStreamCursorValueInput = {
   transaction_epoch?: InputMaybe<Scalars['bigint']['input']>;
   transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** columns and relationships of "collateral_risk_parameters_current" */
+export type CollateralRiskParametersCurrent = {
+  borrow_vault_max_num?: Maybe<Scalars['numeric']['output']>;
+  collateral: Scalars['String']['output'];
+  config_address: Scalars['String']['output'];
+  liquidation_bonus_bps?: Maybe<Scalars['numeric']['output']>;
+  lltv?: Maybe<Scalars['numeric']['output']>;
+  ltv?: Maybe<Scalars['numeric']['output']>;
+  oracle?: Maybe<Scalars['String']['output']>;
+  risk_factor?: Maybe<Scalars['numeric']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "collateral_risk_parameters_current". All fields are combined with a logical 'AND'. */
+export type CollateralRiskParametersCurrentBoolExp = {
+  _and?: InputMaybe<Array<CollateralRiskParametersCurrentBoolExp>>;
+  _not?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
+  _or?: InputMaybe<Array<CollateralRiskParametersCurrentBoolExp>>;
+  borrow_vault_max_num?: InputMaybe<NumericComparisonExp>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  config_address?: InputMaybe<StringComparisonExp>;
+  liquidation_bonus_bps?: InputMaybe<NumericComparisonExp>;
+  lltv?: InputMaybe<NumericComparisonExp>;
+  ltv?: InputMaybe<NumericComparisonExp>;
+  oracle?: InputMaybe<StringComparisonExp>;
+  risk_factor?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "collateral_risk_parameters_current". */
+export type CollateralRiskParametersCurrentOrderBy = {
+  borrow_vault_max_num?: InputMaybe<OrderBy>;
+  collateral?: InputMaybe<OrderBy>;
+  config_address?: InputMaybe<OrderBy>;
+  liquidation_bonus_bps?: InputMaybe<OrderBy>;
+  lltv?: InputMaybe<OrderBy>;
+  ltv?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  risk_factor?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "collateral_risk_parameters_current" */
+export enum CollateralRiskParametersCurrentSelectColumn {
+  /** column name */
+  BorrowVaultMaxNum = 'borrow_vault_max_num',
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  ConfigAddress = 'config_address',
+  /** column name */
+  LiquidationBonusBps = 'liquidation_bonus_bps',
+  /** column name */
+  Lltv = 'lltv',
+  /** column name */
+  Ltv = 'ltv',
+  /** column name */
+  Oracle = 'oracle',
+  /** column name */
+  RiskFactor = 'risk_factor'
+}
+
+/** Streaming cursor of the table "collateral_risk_parameters_current" */
+export type CollateralRiskParametersCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: CollateralRiskParametersCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type CollateralRiskParametersCurrentStreamCursorValueInput = {
+  borrow_vault_max_num?: InputMaybe<Scalars['numeric']['input']>;
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  config_address?: InputMaybe<Scalars['String']['input']>;
+  liquidation_bonus_bps?: InputMaybe<Scalars['numeric']['input']>;
+  lltv?: InputMaybe<Scalars['numeric']['input']>;
+  ltv?: InputMaybe<Scalars['numeric']['input']>;
+  oracle?: InputMaybe<Scalars['String']['input']>;
+  risk_factor?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "legacy_migration_v1.collection_datas" */
@@ -6788,7 +6927,7 @@ export type HyperionLlpDebtStatusActivities = {
   debt_store_address?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
   position_address?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['smallint']['output']>;
+  status?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
   vault_address?: Maybe<Scalars['String']['output']>;
@@ -6802,7 +6941,7 @@ export type HyperionLlpDebtStatusActivitiesBoolExp = {
   debt_store_address?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   position_address?: InputMaybe<StringComparisonExp>;
-  status?: InputMaybe<SmallintComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
   vault_address?: InputMaybe<StringComparisonExp>;
@@ -6850,7 +6989,7 @@ export type HyperionLlpDebtStatusActivitiesStreamCursorValueInput = {
   debt_store_address?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   position_address?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['smallint']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
   vault_address?: InputMaybe<Scalars['String']['input']>;
@@ -6947,7 +7086,7 @@ export type HyperionLlpPositionCurrent = {
   collateral_type?: Maybe<Scalars['String']['output']>;
   owner_address?: Maybe<Scalars['String']['output']>;
   position_address: Scalars['String']['output'];
-  status?: Maybe<Scalars['smallint']['output']>;
+  status?: Maybe<Scalars['numeric']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "hyperion_llp_position_current". All fields are combined with a logical 'AND'. */
@@ -6959,7 +7098,7 @@ export type HyperionLlpPositionCurrentBoolExp = {
   collateral_type?: InputMaybe<StringComparisonExp>;
   owner_address?: InputMaybe<StringComparisonExp>;
   position_address?: InputMaybe<StringComparisonExp>;
-  status?: InputMaybe<SmallintComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_position_current". */
@@ -6999,7 +7138,7 @@ export type HyperionLlpPositionCurrentStreamCursorValueInput = {
   collateral_type?: InputMaybe<Scalars['String']['input']>;
   owner_address?: InputMaybe<Scalars['String']['input']>;
   position_address?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['smallint']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "hyperion_llp_position_debt_stores" */
@@ -7569,7 +7708,7 @@ export type OracleRouterActivities = {
   deleted?: Maybe<Scalars['Boolean']['output']>;
   event_index: Scalars['numeric']['output'];
   oracle?: Maybe<Scalars['String']['output']>;
-  oracle_kind?: Maybe<Scalars['smallint']['output']>;
+  oracle_kind?: Maybe<Scalars['numeric']['output']>;
   oracle_router?: Maybe<Scalars['String']['output']>;
   quote_asset?: Maybe<Scalars['String']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
@@ -7585,7 +7724,7 @@ export type OracleRouterActivitiesBoolExp = {
   deleted?: InputMaybe<BooleanComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   oracle?: InputMaybe<StringComparisonExp>;
-  oracle_kind?: InputMaybe<SmallintComparisonExp>;
+  oracle_kind?: InputMaybe<NumericComparisonExp>;
   oracle_router?: InputMaybe<StringComparisonExp>;
   quote_asset?: InputMaybe<StringComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
@@ -7641,7 +7780,7 @@ export type OracleRouterActivitiesStreamCursorValueInput = {
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   oracle?: InputMaybe<Scalars['String']['input']>;
-  oracle_kind?: InputMaybe<Scalars['smallint']['input']>;
+  oracle_kind?: InputMaybe<Scalars['numeric']['input']>;
   oracle_router?: InputMaybe<Scalars['String']['input']>;
   quote_asset?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
@@ -7653,7 +7792,7 @@ export type OracleRouterCurrentConfig = {
   base_asset: Scalars['String']['output'];
   deleted?: Maybe<Scalars['Boolean']['output']>;
   oracle?: Maybe<Scalars['String']['output']>;
-  oracle_kind?: Maybe<Scalars['smallint']['output']>;
+  oracle_kind?: Maybe<Scalars['numeric']['output']>;
   oracle_router: Scalars['String']['output'];
   quote_asset: Scalars['String']['output'];
 };
@@ -7666,7 +7805,7 @@ export type OracleRouterCurrentConfigBoolExp = {
   base_asset?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   oracle?: InputMaybe<StringComparisonExp>;
-  oracle_kind?: InputMaybe<SmallintComparisonExp>;
+  oracle_kind?: InputMaybe<NumericComparisonExp>;
   oracle_router?: InputMaybe<StringComparisonExp>;
   quote_asset?: InputMaybe<StringComparisonExp>;
 };
@@ -7710,7 +7849,7 @@ export type OracleRouterCurrentConfigStreamCursorValueInput = {
   base_asset?: InputMaybe<Scalars['String']['input']>;
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   oracle?: InputMaybe<Scalars['String']['input']>;
-  oracle_kind?: InputMaybe<Scalars['smallint']['input']>;
+  oracle_kind?: InputMaybe<Scalars['numeric']['input']>;
   oracle_router?: InputMaybe<Scalars['String']['input']>;
   quote_asset?: InputMaybe<Scalars['String']['input']>;
 };
@@ -8323,6 +8462,10 @@ export type QueryRoot = {
   block_metadata_transactions: Array<BlockMetadataTransactions>;
   /** fetch data from the table: "block_metadata_transactions" using primary key columns */
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
+  /** fetch data from the table: "borrow_risk_parameters_current" */
+  borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
+  borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
   /** An array relationship */
   coin_activities: Array<CoinActivities>;
   /** An aggregate relationship */
@@ -8335,6 +8478,10 @@ export type QueryRoot = {
   coin_supply: Array<CoinSupply>;
   /** fetch data from the table: "coin_supply" using primary key columns */
   coin_supply_by_pk?: Maybe<CoinSupply>;
+  /** fetch data from the table: "collateral_risk_parameters_current" */
+  collateral_risk_parameters_current: Array<CollateralRiskParametersCurrent>;
+  /** fetch data from the table: "collateral_risk_parameters_current" using primary key columns */
+  collateral_risk_parameters_current_by_pk?: Maybe<CollateralRiskParametersCurrent>;
   /** fetch data from the table: "legacy_migration_v1.collection_datas" */
   collection_datas: Array<CollectionDatas>;
   /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
@@ -8820,6 +8967,22 @@ export type QueryRootBlockMetadataTransactionsByPkArgs = {
 };
 
 
+export type QueryRootBorrowRiskParametersCurrentArgs = {
+  distinct_on?: InputMaybe<Array<BorrowRiskParametersCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowRiskParametersCurrentOrderBy>>;
+  where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
+export type QueryRootBorrowRiskParametersCurrentByPkArgs = {
+  collateral: Scalars['String']['input'];
+  config_address: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
 export type QueryRootCoinActivitiesArgs = {
   distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8868,6 +9031,21 @@ export type QueryRootCoinSupplyArgs = {
 export type QueryRootCoinSupplyByPkArgs = {
   coin_type_hash: Scalars['String']['input'];
   transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type QueryRootCollateralRiskParametersCurrentArgs = {
+  distinct_on?: InputMaybe<Array<CollateralRiskParametersCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CollateralRiskParametersCurrentOrderBy>>;
+  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
+};
+
+
+export type QueryRootCollateralRiskParametersCurrentByPkArgs = {
+  collateral: Scalars['String']['input'];
+  config_address: Scalars['String']['input'];
 };
 
 
@@ -10122,7 +10300,7 @@ export type ScmdDebtStatusActivities = {
   debt_store_address?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
   position_address?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['smallint']['output']>;
+  status?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
   vault_address?: Maybe<Scalars['String']['output']>;
@@ -10136,7 +10314,7 @@ export type ScmdDebtStatusActivitiesBoolExp = {
   debt_store_address?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   position_address?: InputMaybe<StringComparisonExp>;
-  status?: InputMaybe<SmallintComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
   vault_address?: InputMaybe<StringComparisonExp>;
@@ -10184,7 +10362,7 @@ export type ScmdDebtStatusActivitiesStreamCursorValueInput = {
   debt_store_address?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   position_address?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['smallint']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
   vault_address?: InputMaybe<Scalars['String']['input']>;
@@ -10407,7 +10585,7 @@ export type ScmdPositionCurrent = {
   liquidation_activities: Array<ScmdLiquidationActivities>;
   owner_address?: Maybe<Scalars['String']['output']>;
   position_address: Scalars['String']['output'];
-  status?: Maybe<Scalars['smallint']['output']>;
+  status?: Maybe<Scalars['numeric']['output']>;
 };
 
 
@@ -10441,7 +10619,7 @@ export type ScmdPositionCurrentBoolExp = {
   liquidation_activities?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
   owner_address?: InputMaybe<StringComparisonExp>;
   position_address?: InputMaybe<StringComparisonExp>;
-  status?: InputMaybe<SmallintComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
 };
 
 /** Ordering options when selecting data from "scmd_position_current". */
@@ -10483,7 +10661,7 @@ export type ScmdPositionCurrentStreamCursorValueInput = {
   collateral_type?: InputMaybe<Scalars['String']['input']>;
   owner_address?: InputMaybe<Scalars['String']['input']>;
   position_address?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['smallint']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "scmd_position_debt_stores" */
@@ -10664,19 +10842,6 @@ export type SignaturesStreamCursorValueInput = {
   type?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
-export type SmallintComparisonExp = {
-  _eq?: InputMaybe<Scalars['smallint']['input']>;
-  _gt?: InputMaybe<Scalars['smallint']['input']>;
-  _gte?: InputMaybe<Scalars['smallint']['input']>;
-  _in?: InputMaybe<Array<Scalars['smallint']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['smallint']['input']>;
-  _lte?: InputMaybe<Scalars['smallint']['input']>;
-  _neq?: InputMaybe<Scalars['smallint']['input']>;
-  _nin?: InputMaybe<Array<Scalars['smallint']['input']>>;
-};
-
 export type SubscriptionRoot = {
   /** fetch data from the table: "account_transactions" */
   account_transactions: Array<AccountTransactions>;
@@ -10744,6 +10909,12 @@ export type SubscriptionRoot = {
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
   /** fetch data from the table in a streaming manner: "block_metadata_transactions" */
   block_metadata_transactions_stream: Array<BlockMetadataTransactions>;
+  /** fetch data from the table: "borrow_risk_parameters_current" */
+  borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
+  borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
+  /** fetch data from the table in a streaming manner: "borrow_risk_parameters_current" */
+  borrow_risk_parameters_current_stream: Array<BorrowRiskParametersCurrent>;
   /** An array relationship */
   coin_activities: Array<CoinActivities>;
   /** An aggregate relationship */
@@ -10764,6 +10935,12 @@ export type SubscriptionRoot = {
   coin_supply_by_pk?: Maybe<CoinSupply>;
   /** fetch data from the table in a streaming manner: "coin_supply" */
   coin_supply_stream: Array<CoinSupply>;
+  /** fetch data from the table: "collateral_risk_parameters_current" */
+  collateral_risk_parameters_current: Array<CollateralRiskParametersCurrent>;
+  /** fetch data from the table: "collateral_risk_parameters_current" using primary key columns */
+  collateral_risk_parameters_current_by_pk?: Maybe<CollateralRiskParametersCurrent>;
+  /** fetch data from the table in a streaming manner: "collateral_risk_parameters_current" */
+  collateral_risk_parameters_current_stream: Array<CollateralRiskParametersCurrent>;
   /** fetch data from the table: "legacy_migration_v1.collection_datas" */
   collection_datas: Array<CollectionDatas>;
   /** fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas" */
@@ -11467,6 +11644,29 @@ export type SubscriptionRootBlockMetadataTransactionsStreamArgs = {
 };
 
 
+export type SubscriptionRootBorrowRiskParametersCurrentArgs = {
+  distinct_on?: InputMaybe<Array<BorrowRiskParametersCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowRiskParametersCurrentOrderBy>>;
+  where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowRiskParametersCurrentByPkArgs = {
+  collateral: Scalars['String']['input'];
+  config_address: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootBorrowRiskParametersCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BorrowRiskParametersCurrentStreamCursorInput>>;
+  where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
 export type SubscriptionRootCoinActivitiesArgs = {
   distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -11543,6 +11743,28 @@ export type SubscriptionRootCoinSupplyStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CoinSupplyStreamCursorInput>>;
   where?: InputMaybe<CoinSupplyBoolExp>;
+};
+
+
+export type SubscriptionRootCollateralRiskParametersCurrentArgs = {
+  distinct_on?: InputMaybe<Array<CollateralRiskParametersCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CollateralRiskParametersCurrentOrderBy>>;
+  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootCollateralRiskParametersCurrentByPkArgs = {
+  collateral: Scalars['String']['input'];
+  config_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootCollateralRiskParametersCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CollateralRiskParametersCurrentStreamCursorInput>>;
+  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
 };
 
 
@@ -15703,7 +15925,6 @@ export type VaultProtocolCaps = {
   protocol_module_address?: Maybe<Scalars['String']['output']>;
   protocol_module_name?: Maybe<Scalars['String']['output']>;
   protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  supply_cap?: Maybe<Scalars['numeric']['output']>;
   supply_enabled?: Maybe<Scalars['Boolean']['output']>;
   vault_address?: Maybe<Scalars['String']['output']>;
 };
@@ -15781,13 +16002,11 @@ export type VaultProtocolCapsAggregateOrderBy = {
 /** aggregate avg on columns */
 export type VaultProtocolCapsAvgFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by avg() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsAvgOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to filter rows from the table "vault_protocol_caps". All fields are combined with a logical 'AND'. */
@@ -15800,7 +16019,6 @@ export type VaultProtocolCapsBoolExp = {
   protocol_module_address?: InputMaybe<StringComparisonExp>;
   protocol_module_name?: InputMaybe<StringComparisonExp>;
   protocol_struct_name?: InputMaybe<StringComparisonExp>;
-  supply_cap?: InputMaybe<NumericComparisonExp>;
   supply_enabled?: InputMaybe<BooleanComparisonExp>;
   vault_address?: InputMaybe<StringComparisonExp>;
 };
@@ -15811,7 +16029,6 @@ export type VaultProtocolCapsMaxFields = {
   protocol_module_address?: Maybe<Scalars['String']['output']>;
   protocol_module_name?: Maybe<Scalars['String']['output']>;
   protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  supply_cap?: Maybe<Scalars['numeric']['output']>;
   vault_address?: Maybe<Scalars['String']['output']>;
 };
 
@@ -15821,7 +16038,6 @@ export type VaultProtocolCapsMaxOrderBy = {
   protocol_module_address?: InputMaybe<OrderBy>;
   protocol_module_name?: InputMaybe<OrderBy>;
   protocol_struct_name?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
   vault_address?: InputMaybe<OrderBy>;
 };
 
@@ -15831,7 +16047,6 @@ export type VaultProtocolCapsMinFields = {
   protocol_module_address?: Maybe<Scalars['String']['output']>;
   protocol_module_name?: Maybe<Scalars['String']['output']>;
   protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  supply_cap?: Maybe<Scalars['numeric']['output']>;
   vault_address?: Maybe<Scalars['String']['output']>;
 };
 
@@ -15841,7 +16056,6 @@ export type VaultProtocolCapsMinOrderBy = {
   protocol_module_address?: InputMaybe<OrderBy>;
   protocol_module_name?: InputMaybe<OrderBy>;
   protocol_struct_name?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
   vault_address?: InputMaybe<OrderBy>;
 };
 
@@ -15852,7 +16066,6 @@ export type VaultProtocolCapsOrderBy = {
   protocol_module_address?: InputMaybe<OrderBy>;
   protocol_module_name?: InputMaybe<OrderBy>;
   protocol_struct_name?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
   supply_enabled?: InputMaybe<OrderBy>;
   vault_address?: InputMaybe<OrderBy>;
 };
@@ -15869,8 +16082,6 @@ export enum VaultProtocolCapsSelectColumn {
   ProtocolModuleName = 'protocol_module_name',
   /** column name */
   ProtocolStructName = 'protocol_struct_name',
-  /** column name */
-  SupplyCap = 'supply_cap',
   /** column name */
   SupplyEnabled = 'supply_enabled',
   /** column name */
@@ -15896,37 +16107,31 @@ export enum VaultProtocolCapsSelectColumnVaultProtocolCapsAggregateBoolExpBoolOr
 /** aggregate stddev on columns */
 export type VaultProtocolCapsStddevFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsStddevOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** aggregate stddev_pop on columns */
 export type VaultProtocolCapsStddevPopFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_pop() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsStddevPopOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** aggregate stddev_samp on columns */
 export type VaultProtocolCapsStddevSampFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_samp() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsStddevSampOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** Streaming cursor of the table "vault_protocol_caps" */
@@ -15944,7 +16149,6 @@ export type VaultProtocolCapsStreamCursorValueInput = {
   protocol_module_address?: InputMaybe<Scalars['String']['input']>;
   protocol_module_name?: InputMaybe<Scalars['String']['input']>;
   protocol_struct_name?: InputMaybe<Scalars['String']['input']>;
-  supply_cap?: InputMaybe<Scalars['numeric']['input']>;
   supply_enabled?: InputMaybe<Scalars['Boolean']['input']>;
   vault_address?: InputMaybe<Scalars['String']['input']>;
 };
@@ -15952,49 +16156,41 @@ export type VaultProtocolCapsStreamCursorValueInput = {
 /** aggregate sum on columns */
 export type VaultProtocolCapsSumFields = {
   borrow_cap?: Maybe<Scalars['numeric']['output']>;
-  supply_cap?: Maybe<Scalars['numeric']['output']>;
 };
 
 /** order by sum() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsSumOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** aggregate var_pop on columns */
 export type VaultProtocolCapsVarPopFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_pop() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsVarPopOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** aggregate var_samp on columns */
 export type VaultProtocolCapsVarSampFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_samp() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsVarSampOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** aggregate variance on columns */
 export type VaultProtocolCapsVarianceFields = {
   borrow_cap?: Maybe<Scalars['Float']['output']>;
-  supply_cap?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by variance() on columns of table "vault_protocol_caps" */
 export type VaultProtocolCapsVarianceOrderBy = {
   borrow_cap?: InputMaybe<OrderBy>;
-  supply_cap?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "vault_settings" */
@@ -16006,7 +16202,7 @@ export type VaultSettings = {
   flashloan_fee_rate?: Maybe<Scalars['numeric']['output']>;
   flashloan_fee_store_address?: Maybe<Scalars['String']['output']>;
   interest_fee_rate?: Maybe<Scalars['numeric']['output']>;
-  irm_kind?: Maybe<Scalars['Int']['output']>;
+  irm_kind?: Maybe<Scalars['numeric']['output']>;
   is_paused?: Maybe<Scalars['Boolean']['output']>;
   vault_address: Scalars['String']['output'];
 };
@@ -16023,7 +16219,7 @@ export type VaultSettingsBoolExp = {
   flashloan_fee_rate?: InputMaybe<NumericComparisonExp>;
   flashloan_fee_store_address?: InputMaybe<StringComparisonExp>;
   interest_fee_rate?: InputMaybe<NumericComparisonExp>;
-  irm_kind?: InputMaybe<IntComparisonExp>;
+  irm_kind?: InputMaybe<NumericComparisonExp>;
   is_paused?: InputMaybe<BooleanComparisonExp>;
   vault_address?: InputMaybe<StringComparisonExp>;
 };
@@ -16083,7 +16279,7 @@ export type VaultSettingsStreamCursorValueInput = {
   flashloan_fee_rate?: InputMaybe<Scalars['numeric']['input']>;
   flashloan_fee_store_address?: InputMaybe<Scalars['String']['input']>;
   interest_fee_rate?: InputMaybe<Scalars['numeric']['input']>;
-  irm_kind?: InputMaybe<Scalars['Int']['input']>;
+  irm_kind?: InputMaybe<Scalars['numeric']['input']>;
   is_paused?: InputMaybe<Scalars['Boolean']['input']>;
   vault_address?: InputMaybe<Scalars['String']['input']>;
 };

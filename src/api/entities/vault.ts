@@ -176,4 +176,25 @@ export class Vault {
       metadata: transformFungibleAssetMetadata(rawBalance.metadata),
     };
   }
+
+  /**
+   * Get the creator address of the vault.
+   */
+  get creator(): string | null {
+    return this._rawVaultData.creator || null;
+  }
+
+  /**
+   * Get the underlying asset address.
+   */
+  get underlyingAsset(): string | null {
+    return this._rawVaultData.underlying_asset || null;
+  }
+
+  /**
+   * Get the debt asset address.
+   */
+  get debtAsset(): string | null {
+    return this._rawVaultData.debt_asset || null;
+  }
 }

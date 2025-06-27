@@ -1,6 +1,8 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
+import { AccountAddress } from "@aptos-labs/ts-sdk";
+
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
@@ -277,8 +279,6 @@ export interface YeapVaultProtocolCaps {
   borrowCap?: string | null;
   /** Whether borrowing is enabled */
   borrowEnabled?: boolean | null;
-  /** Supply cap */
-  supplyCap?: string | null;
   /** Whether supply is enabled */
   supplyEnabled?: boolean | null;
 }
@@ -591,3 +591,40 @@ export interface YeapOracleRouterConfig {
   /** Whether the configuration is deleted */
   isDeleted?: boolean;
 }
+
+/**
+ * Collateral risk parameters configuration (clean interface)
+ */
+export interface CollateralRiskParameters {
+  /** Maximum number of borrow vaults allowed */
+  borrowVaultMaxNum: number;
+  /** Collateral asset address */
+  collateral: AccountAddress;
+  /** Risk configuration address */
+  configAddress: AccountAddress;
+  /** Liquidation bonus in basis points */
+  liquidationBonusBps: number;
+  /** Liquidation Loan-to-Value ratio */
+  lltv: number;
+  /** Loan-to-Value ratio */
+  ltv: number;
+  /** Oracle address for price feeds */
+  oracle: AccountAddress;
+  /** Risk factor for the collateral */
+  riskFactor: number;
+}
+
+/**
+ * Borrow risk parameters configuration (clean interface)
+ */
+export interface BorrowRiskParameters {
+  /** Borrowing weight (brw) */
+  brw: number;
+  /** Collateral asset address */
+  collateral: AccountAddress;
+  /** Risk configuration address */
+  configAddress: AccountAddress;
+  /** Vault address */
+  vault: AccountAddress;
+}
+

@@ -46,13 +46,17 @@
     "indexer-codegen": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
     "indexer-codegen:dev": "npx dotenv-cli -e .env.development -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
     "indexer-codegen:prod": "npx dotenv-cli -e .env.production -- graphql-codegen --config ./src/types/codegen.yaml && pnpm fmt",
-    "indexer-codegen:watch": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml --watch"
+    "indexer-codegen:watch": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml --watch",
+    "example:vault-api": "tsx examples/test-vault-api.ts",
+    "example:oracle-api": "tsx examples/test-oracle-api.ts",
+    "example:scmd-api": "tsx examples/test-scmd-config.ts"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^2.0.1",
     "@noble/curves": "^1.6.0",
     "@noble/hashes": "^1.5.0",
     "decimal.js": "^10.5.0",
+    "dotenv": "^16.6.0",
     "graphql-request": "^7.1.2"
   },
   "devDependencies": {
@@ -66,7 +70,7 @@
     "@graphql-codegen/typescript-operations": "^4.5.1",
     "@parcel/watcher": "^2.5.1",
     "@types/jest": "^29.5.14",
-    "@types/node": "^20.17.25",
+    "@types/node": "^20.19.1",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
     "dotenv-cli": "^7.4.4",

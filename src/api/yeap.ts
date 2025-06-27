@@ -3,7 +3,7 @@
 
 import { YeapConfig } from "./yeapConfig";
 import { VaultApi } from "./vaultApi";
-import { ScmdPositionApi } from "./scmdPositionApi";
+import { ScmdApi } from "./scmdApi";
 import { OracleApi } from "./oracleApi";
 
 /**
@@ -56,7 +56,7 @@ export class Yeap {
 
   readonly vaultApi: VaultApi;
 
-  readonly scmdPositionApi: ScmdPositionApi;
+  readonly scmdApi: ScmdApi;
 
   readonly oracleRouterApi: OracleApi;
 
@@ -86,37 +86,38 @@ export class Yeap {
   constructor(settings?: YeapConfig) {
     this.config = new YeapConfig(settings);
     this.vaultApi = new VaultApi(this.config);
-    this.scmdPositionApi = new ScmdPositionApi(this.config);
+    this.scmdApi = new ScmdApi(this.config);
     this.oracleRouterApi = new OracleApi(this.config);
   }
 }
 
-// extends Yeap interface so all the methods and properties
-// from the other classes will be recognized by typescript.
-export interface Yeap extends VaultApi, ScmdPositionApi, OracleApi {}
-
-/**
-In TypeScript, we can't inherit or extend from more than one class,
-Mixins helps us to get around that by creating a partial classes
-that we can combine to form a single class that contains all the methods and properties from the partial classes.
-{@link https://www.typescriptlang.org/docs/handbook/mixins.html#alternative-pattern}
-
-Here, we combine any subclass and the Yeap class.
- * @group Client
-*/
-function applyMixin(targetClass: any, baseClass: any, baseClassProp: string) {
-  // Mixin instance methods
-  Object.getOwnPropertyNames(baseClass.prototype).forEach((propertyName) => {
-    const propertyDescriptor = Object.getOwnPropertyDescriptor(baseClass.prototype, propertyName);
-    if (!propertyDescriptor) return;
-    // eslint-disable-next-line func-names
-    propertyDescriptor.value = function (...args: any) {
-      return (this as any)[baseClassProp][propertyName](...args);
-    };
-    Object.defineProperty(targetClass.prototype, propertyName, propertyDescriptor);
-  });
-}
-
-applyMixin(Yeap, VaultApi, "vaultApi");
-applyMixin(Yeap, ScmdPositionApi, "scmdPositionApi");
-applyMixin(Yeap, OracleApi, "oracleRouterApi");
+//
+// // extends Yeap interface so all the methods and properties
+// // from the other classes will be recognized by typescript.
+// export interface Yeap extends VaultApi, ScmdApi, OracleApi {}
+//
+// /**
+// In TypeScript, we can't inherit or extend from more than one class,
+// Mixins helps us to get around that by creating a partial classes
+// that we can combine to form a single class that contains all the methods and properties from the partial classes.
+// {@link https://www.typescriptlang.org/docs/handbook/mixins.html#alternative-pattern}
+//
+// Here, we combine any subclass and the Yeap class.
+//  * @group Client
+// */
+// function applyMixin(targetClass: any, baseClass: any, baseClassProp: string) {
+//   // Mixin instance methods
+//   Object.getOwnPropertyNames(baseClass.prototype).forEach((propertyName) => {
+//     const propertyDescriptor = Object.getOwnPropertyDescriptor(baseClass.prototype, propertyName);
+//     if (!propertyDescriptor) return;
+//     // eslint-disable-next-line func-names
+//     propertyDescriptor.value = function (...args: any) {
+//       return (this as any)[baseClassProp][propertyName](...args);
+//     };
+//     Object.defineProperty(targetClass.prototype, propertyName, propertyDescriptor);
+//   });
+// }
+//
+// applyMixin(Yeap, VaultApi, "vaultApi");
+// applyMixin(Yeap, ScmdApi, "scmdApi");
+// applyMixin(Yeap, OracleApi, "oracleRouterApi");

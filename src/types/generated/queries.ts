@@ -9,6 +9,27 @@ export const AdaptiveIrmStateFieldsFragmentDoc = `
   last_update_timestamp_secs
 }
     `;
+export const BorrowRiskParametersFieldsFragmentDoc = `
+    fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
+  brw
+  collateral
+  config_address
+  enabled
+  vault
+}
+    `;
+export const CollateralRiskParametersFieldsFragmentDoc = `
+    fragment CollateralRiskParametersFields on collateral_risk_parameters_current {
+  borrow_vault_max_num
+  collateral
+  config_address
+  liquidation_bonus_bps
+  lltv
+  ltv
+  oracle
+  risk_factor
+}
+    `;
 export const LiquidationActivityFieldsFragmentDoc = `
     fragment LiquidationActivityFields on scmd_liquidation_activities {
   event_index
@@ -58,7 +79,7 @@ export const FungibleAssetBalanceFieldsFragmentDoc = `
   is_primary
   storage_id
 }
-    ${FungibleAssetMetadataFieldsFragmentDoc}`;
+    `;
 export const PositionFieldsFragmentDoc = `
     fragment PositionFields on scmd_position_current {
   position_address
@@ -74,7 +95,7 @@ export const PositionFieldsFragmentDoc = `
     vault_address
   }
 }
-    ${FungibleAssetBalanceFieldsFragmentDoc}`;
+    `;
 export const VaultBadDebtActivitiesFieldsFragmentDoc = `
     fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
   event_index
@@ -167,7 +188,6 @@ export const VaultProtocolCapsFieldsFragmentDoc = `
   protocol_struct_name
   borrow_cap
   borrow_enabled
-  supply_cap
   supply_enabled
 }
     `;
@@ -210,14 +230,7 @@ export const VaultInfoFieldsFragmentDoc = `
     ...VaultProtocolCapsFields
   }
 }
-    ${FungibleAssetMetadataFieldsFragmentDoc}
-${FungibleAssetBalanceFieldsFragmentDoc}
-${CurrentObjectFieldsFragmentDoc}
-${VaultSettingsFieldsFragmentDoc}
-${AdaptiveIrmConfigFieldsFragmentDoc}
-${FixedRateIrmConfigFieldsFragmentDoc}
-${KinkedIrmConfigFieldsFragmentDoc}
-${VaultProtocolCapsFieldsFragmentDoc}`;
+    `;
 export const VaultStateActivitiesFieldsFragmentDoc = `
     fragment VaultStateActivitiesFields on vault_states_activities {
   bad_debt
@@ -244,7 +257,39 @@ export const GetActiveVaults = `
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
+export const GetBorrowRiskParametersByConfigAddress = `
+    query getBorrowRiskParametersByConfigAddress($configAddress: String!, $limit: Int, $offset: Int) {
+  borrow_risk_parameters_current(
+    where: {config_address: {_eq: $configAddress}, enabled: {_neq: false}}
+    limit: $limit
+    offset: $offset
+    order_by: [{vault: asc}, {collateral: asc}]
+  ) {
+    ...BorrowRiskParametersFields
+  }
+}
+    ${BorrowRiskParametersFieldsFragmentDoc}`;
+export const GetCollateralRiskParametersByConfigAddress = `
+    query getCollateralRiskParametersByConfigAddress($configAddress: String!, $limit: Int, $offset: Int) {
+  collateral_risk_parameters_current(
+    where: {config_address: {_eq: $configAddress}}
+    limit: $limit
+    offset: $offset
+    order_by: [{collateral: asc}]
+  ) {
+    ...CollateralRiskParametersFields
+  }
+}
+    ${CollateralRiskParametersFieldsFragmentDoc}`;
 export const GetOracleRouterConfigByPrimaryKey = `
     query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
   oracle_router_current_config(
@@ -277,21 +322,39 @@ export const GetPositionsByOwner = `
     ...PositionFields
   }
 }
-    ${PositionFieldsFragmentDoc}`;
+    ${PositionFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetVaultInfo = `
     query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
   vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 export const GetVaultInfoByAddress = `
     query GetVaultInfoByAddress($vaultAddress: String!) {
   vault_info_by_pk(vault_address: $vaultAddress) {
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 export const GetVaultLatestState = `
     query GetVaultLatestState($vault_address: String!) {
   vault_states_activities(
@@ -343,7 +406,8 @@ export const GetVaultUnderlyingAssetBalance = `
     }
   }
 }
-    ${FungibleAssetBalanceFieldsFragmentDoc}`;
+    ${FungibleAssetBalanceFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetVaultsWithHighYield = `
     query GetVaultsWithHighYield($minInterestRate: numeric!, $limit: Int = 10, $offset: Int = 0) {
   vault_info(
@@ -355,7 +419,15 @@ export const GetVaultsWithHighYield = `
     ...VaultInfoFields
   }
 }
-    ${VaultInfoFieldsFragmentDoc}`;
+    ${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${VaultProtocolCapsFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -366,6 +438,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetActiveVaults(variables?: Types.GetActiveVaultsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetActiveVaultsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetActiveVaultsQuery>({ document: GetActiveVaults, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetActiveVaults', 'query', variables);
+    },
+    getBorrowRiskParametersByConfigAddress(variables: Types.GetBorrowRiskParametersByConfigAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetBorrowRiskParametersByConfigAddressQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetBorrowRiskParametersByConfigAddressQuery>({ document: GetBorrowRiskParametersByConfigAddress, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getBorrowRiskParametersByConfigAddress', 'query', variables);
+    },
+    getCollateralRiskParametersByConfigAddress(variables: Types.GetCollateralRiskParametersByConfigAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetCollateralRiskParametersByConfigAddressQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetCollateralRiskParametersByConfigAddressQuery>({ document: GetCollateralRiskParametersByConfigAddress, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getCollateralRiskParametersByConfigAddress', 'query', variables);
     },
     getOracleRouterConfigByPrimaryKey(variables: Types.GetOracleRouterConfigByPrimaryKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigByPrimaryKeyQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigByPrimaryKeyQuery>({ document: GetOracleRouterConfigByPrimaryKey, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigByPrimaryKey', 'query', variables);
