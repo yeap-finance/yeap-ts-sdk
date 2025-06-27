@@ -223,7 +223,8 @@ export class OracleConfig {
    *
    * @example
    * ```typescript
-   * const config = await yeap.oracleRouter.getConfigByPrimaryKey("0xbase...", "0xoracle...", "0xquote...");
+   * const oracleRouter = await yeap.oracleRouterApi.getRouter("0xrouter...");
+   * const config = oracleRouter?.getOracleConfig("0xbase...", "0xquote...");
    * if (config) {
    *   try {
    *     const price = await config.get_price();

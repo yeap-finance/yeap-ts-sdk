@@ -395,7 +395,7 @@ export interface ScmdPositionApiInterface {
    *
    * @example
    * ```typescript
-   * const positions = await yeap.scmdPositionApi.getPositionsByOwner(
+   * const positions = await yeap.scmdApi.getPositionsByOwner(
    *   "0x123...",
    *   { limit: 10, offset: 0 }
    * );

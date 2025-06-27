@@ -62,8 +62,9 @@ pnpm tsx examples/test-oracle-api.ts
 ```
 
 **Key API Methods Demonstrated:**
-- `yeap.oracleRouterApi.getConfigsByOracle(oracleRouter, limit?, offset?)` - Get oracle configs by router
-- `yeap.oracleRouterApi.getConfigByPrimaryKey(baseAsset, oracleRouter, quoteAsset)` - Get specific oracle config
+- `yeap.oracleRouterApi.getRouter(routerAddress)` - Get oracle router with all configurations
+- `oracleRouter.getOracleConfig(baseAsset, quoteAsset)` - Get specific oracle config for asset pair
+- `oracleRouter.getAllConfigs()` - Get all oracle configurations
 - `oracleConfig.get_price()` - Fetch current oracle price
 
 ## Shared Utilities

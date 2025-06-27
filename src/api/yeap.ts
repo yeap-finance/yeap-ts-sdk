@@ -36,10 +36,11 @@ import { OracleApi } from "./oracleApi";
  *     const vaultInfo = await yeap.vaultApi.getVaultInfoByAddress("0x123...");
  *
  *     // Access position-related functionality
- *     const positions = await yeap.scmdPositionApi.getPositionsByOwner("0xabc...");
+ *     const positions = await yeap.scmdApi.getPositionsByOwner("0xabc...");
  *
- *     // Access oracle router configuration functionality and fetch prices
- *     const oracleConfig = await yeap.oracleRouterApi.getConfigByPrimaryKey("0xbase...", "0xoracle...", "0xquote...");
+ *     // Access oracle router functionality
+ *     const oracleRouter = await yeap.oracleRouterApi.getRouter("0xrouter...");
+ *     const oracleConfig = oracleRouter?.getOracleConfig("0xbase...", "0xquote...");
  *     if (oracleConfig) {
  *       const price = await oracleConfig.get_price();
  *       console.log("Current price:", price?.toString());

@@ -79,7 +79,7 @@ export class ScmdApi {
    *
    * @example
    * ```typescript
-   * const positions = await yeap.scmdPositionApi.getPositionsByOwner("0xabc...", 5);
+   * const positions = await yeap.scmdApi.getPositionsByOwner("0xabc...", 5);
    * console.log(`Found ${positions.length} positions for this owner`);
    * positions.forEach(position => {
    *   console.log("Position address:", position.position_address);
