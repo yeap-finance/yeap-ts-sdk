@@ -19,6 +19,8 @@ import {
   YeapVaultStateActivity,
   YeapPosition,
   YeapOracleRouterConfig,
+  CollateralRiskParameters,
+  BorrowRiskParameters,
 } from "./interfaces";
 import {
   FungibleAssetBalanceFieldsFragment,
@@ -27,6 +29,8 @@ import {
   VaultInfoFieldsFragment,
   OracleRouterConfigFieldsFragment,
 } from "../types/generated/operations";
+import { CollateralRiskParametersFieldsFragment, BorrowRiskParametersFieldsFragment } from "../types";
+import { AccountAddress } from "@aptos-labs/ts-sdk";
 
 type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
 type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
@@ -243,5 +247,37 @@ export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOra
     oracle: raw.oracle ?? null,
     oracleKind: raw.oracle_kind ? Number(raw.oracle_kind) : null,
     isDeleted: raw.deleted ?? false,
+  };
+}
+
+/**
+ * Transform raw GraphQL collateral risk parameters to clean interface
+ * @internal
+ */
+export function transformCollateralRiskParameters(raw: CollateralRiskParametersFieldsFragment): CollateralRiskParameters | null {
+  if (!raw) return null;
+  return {
+    borrowVaultMaxNum: Number(raw.borrow_vault_max_num || 0),
+    collateral: AccountAddress.fromString(raw.collateral),
+    configAddress: AccountAddress.fromString(raw.config_address),
+    liquidationBonusBps: Number(raw.liquidation_bonus_bps || 0),
+    lltv: Number(raw.lltv || 0),
+    ltv: Number(raw.ltv || 0),
+    oracle: AccountAddress.fromString(raw.oracle || "0x0"),
+    riskFactor: Number(raw.risk_factor || 0),
+  };
+}
+
+/**
+ * Transform raw GraphQL borrow risk parameters to clean interface
+ * @internal
+ */
+export function transformBorrowRiskParameters(raw: BorrowRiskParametersFieldsFragment): BorrowRiskParameters | null {
+  if (!raw) return null;
+  return {
+    brw: Number(raw.brw || 0),
+    collateral: AccountAddress.fromString(raw.collateral),
+    configAddress: AccountAddress.fromString(raw.config_address),
+    vault: AccountAddress.fromString(raw.vault),
   };
 }

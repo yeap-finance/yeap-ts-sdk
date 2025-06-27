@@ -25,7 +25,7 @@ import { OracleConfig } from "./oracleConfig";
 export class OracleRouter {
   private readonly data: Array<OracleRouterConfigFieldsFragment>;
   private readonly config?: YeapConfig;
-    public readonly routerAddress: string;
+  public readonly routerAddress: string;
   /**
    * @param data - Array of oracle router configuration fragments
    * @param config - Optional Yeap configuration for on-chain interactions
@@ -33,7 +33,7 @@ export class OracleRouter {
   constructor(routerAddress: string, data: Array<OracleRouterConfigFieldsFragment>, config?: YeapConfig) {
     this.routerAddress = routerAddress;
     // Filter out deleted configurations during initialization
-    this.data = data.filter(config => !config.deleted);
+    this.data = data.filter((config) => !config.deleted);
     this.config = config;
   }
 
@@ -51,7 +51,7 @@ export class OracleRouter {
    * ```
    */
   getAllConfigs(): OracleConfig[] {
-    return this.data.map(configFragment => new OracleConfig(configFragment, this.config));
+    return this.data.map((configFragment) => new OracleConfig(configFragment, this.config));
   }
 
   /**
@@ -104,20 +104,17 @@ export class OracleRouter {
    * ```
    */
   private getConfigForPair(baseAsset: string, quoteAsset: string): OracleRouterConfigFieldsFragment | undefined {
-    const configs = this.data.filter(config =>
-      config.base_asset === baseAsset && config.quote_asset === quoteAsset
-    );
+    const configs = this.data.filter((config) => config.base_asset === baseAsset && config.quote_asset === quoteAsset);
 
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for asset pair ${baseAsset}/${quoteAsset}. ` +
-        `Expected at most one configuration per pair, but found ${configs.length}.`
+          `Expected at most one configuration per pair, but found ${configs.length}.`,
       );
     }
 
     return configs[0];
   }
-
 
   /**
    * Get oracle configurations by oracle address.
@@ -132,8 +129,8 @@ export class OracleRouter {
    * ```
    */
   getConfigsByOracle(oracleAddress: string): OracleConfig[] {
-    const fragments = this.data.filter(config => config.oracle === oracleAddress);
-    return fragments.map(fragment => new OracleConfig(fragment, this.config));
+    const fragments = this.data.filter((config) => config.oracle === oracleAddress);
+    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
   }
 
   /**
@@ -155,8 +152,8 @@ export class OracleRouter {
    * ```
    */
   getConfigsByKind(oracleKind: number): OracleConfig[] {
-    const fragments = this.data.filter(config => config.oracle_kind === oracleKind.toString());
-    return fragments.map(fragment => new OracleConfig(fragment, this.config));
+    const fragments = this.data.filter((config) => config.oracle_kind === oracleKind.toString());
+    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
   }
 
   /**
@@ -179,18 +176,17 @@ export class OracleRouter {
    * ```
    */
   getConfigForBaseAsset(baseAsset: string): OracleConfig | undefined {
-    const configs = this.data.filter(config => config.base_asset === baseAsset);
+    const configs = this.data.filter((config) => config.base_asset === baseAsset);
 
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for base asset ${baseAsset}. ` +
-        `Expected at most one configuration per base asset, but found ${configs.length}.`
+          `Expected at most one configuration per base asset, but found ${configs.length}.`,
       );
     }
 
     return configs[0] ? new OracleConfig(configs[0], this.config) : undefined;
   }
-
 
   /**
    * Get oracle configurations for a specific quote asset (all base assets).
@@ -205,8 +201,8 @@ export class OracleRouter {
    * ```
    */
   getConfigsForQuoteAsset(quoteAsset: string): OracleConfig[] {
-    const fragments = this.data.filter(config => config.quote_asset === quoteAsset);
-    return fragments.map(fragment => new OracleConfig(fragment, this.config));
+    const fragments = this.data.filter((config) => config.quote_asset === quoteAsset);
+    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
   }
 
   /**
@@ -230,7 +226,7 @@ export class OracleRouter {
    */
   getAvailableAssetPairs(): Map<string, string> {
     const pairs = new Map<string, string>();
-    this.getAllConfigs().forEach(config => {
+    this.getAllConfigs().forEach((config) => {
       if (config.baseAsset && config.quoteAsset) {
         pairs.set(config.baseAsset, config.quoteAsset);
       }
@@ -251,7 +247,7 @@ export class OracleRouter {
    */
   getUniqueOracles(): string[] {
     const oracles = new Set<string>();
-    this.data.forEach(config => {
+    this.data.forEach((config) => {
       if (config.oracle) {
         oracles.add(config.oracle);
       }
@@ -285,15 +281,15 @@ export class OracleRouter {
     const uniqueBaseAssets = new Set<string>();
     const uniqueQuoteAssets = new Set<string>();
 
-    this.data.forEach(config => {
+    this.data.forEach((config) => {
       if (config.oracle) uniqueOracles.add(config.oracle);
       if (config.base_asset) uniqueBaseAssets.add(config.base_asset);
       if (config.quote_asset) uniqueQuoteAssets.add(config.quote_asset);
     });
 
     const oracleKindDistribution: Record<string, number> = {};
-    this.data.forEach(config => {
-      const kind = config.oracle_kind || 'unknown';
+    this.data.forEach((config) => {
+      const kind = config.oracle_kind || "unknown";
       oracleKindDistribution[kind] = (oracleKindDistribution[kind] || 0) + 1;
     });
 
@@ -303,7 +299,7 @@ export class OracleRouter {
       uniqueBaseAssets: uniqueBaseAssets.size,
       uniqueQuoteAssets: uniqueQuoteAssets.size,
       assetPairs: this.getAvailableAssetPairs().size,
-      oracleKindDistribution
+      oracleKindDistribution,
     };
   }
 
@@ -437,7 +433,6 @@ export class OracleRouter {
     return path;
   }
 
-
   /**
    * Get the current price for a specific asset pair from the oracle router on-chain.
    * This method calls the oracle router smart contract to fetch the current price
@@ -461,7 +456,7 @@ export class OracleRouter {
   async getPrice(baseAsset: string, quoteAsset: string): Promise<bigint | null> {
     if (!this.config?.aptosClient) {
       throw new Error(
-        "Aptos client is required to fetch on-chain price. Please provide an AptosConfig or Aptos client in YeapConfig."
+        "Aptos client is required to fetch on-chain price. Please provide an AptosConfig or Aptos client in YeapConfig.",
       );
     }
 
@@ -469,7 +464,7 @@ export class OracleRouter {
       // Get the yeap_lens address from configuration
       if (!this.config.hasAddress("yeap_lens")) {
         throw new Error(
-          "yeap_lens address not found in configuration. Please add 'yeap_lens' to the addresses mapping in YeapConfig."
+          "yeap_lens address not found in configuration. Please add 'yeap_lens' to the addresses mapping in YeapConfig.",
         );
       }
 
@@ -503,7 +498,7 @@ export class OracleRouter {
     } catch (error: any) {
       // Log the error for debugging but don't throw - return null to indicate price unavailable
       console.warn(
-        `Failed to fetch price for ${baseAsset}/${quoteAsset} from oracle router ${this.routerAddress}: ${error.message}`
+        `Failed to fetch price for ${baseAsset}/${quoteAsset} from oracle router ${this.routerAddress}: ${error.message}`,
       );
       return null;
     }
@@ -535,6 +530,4 @@ export class OracleRouter {
         return `Unknown Oracle Kind (${oracleKind})`;
     }
   }
-
-
 }

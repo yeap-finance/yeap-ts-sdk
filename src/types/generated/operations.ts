@@ -4,6 +4,10 @@ export type AdaptiveIrmConfigFieldsFragment = Pick<Types.AdaptiveIrmCurrentConfi
 
 export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState, 'state_address' | 'current_rate_at_target' | 'last_update_timestamp_secs'>;
 
+export type BorrowRiskParametersFieldsFragment = Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'config_address' | 'enabled' | 'vault'>;
+
+export type CollateralRiskParametersFieldsFragment = Pick<Types.CollateralRiskParametersCurrent, 'borrow_vault_max_num' | 'collateral' | 'config_address' | 'liquidation_bonus_bps' | 'lltv' | 'ltv' | 'oracle' | 'risk_factor'>;
+
 export type CurrentObjectFieldsFragment = Pick<Types.CurrentObjects, 'object_address' | 'owner_address' | 'state_key_hash' | 'allow_ungated_transfer' | 'is_deleted'>;
 
 export type FixedRateIrmConfigFieldsFragment = Pick<Types.FixedRateIrmCurrentConfig, 'config_address' | 'rate_per_second'>;
@@ -50,6 +54,24 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetBorrowRiskParametersByConfigAddressQueryVariables = Types.Exact<{
+  configAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetBorrowRiskParametersByConfigAddressQuery = { borrow_risk_parameters_current: Array<BorrowRiskParametersFieldsFragment> };
+
+export type GetCollateralRiskParametersByConfigAddressQueryVariables = Types.Exact<{
+  configAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetCollateralRiskParametersByConfigAddressQuery = { collateral_risk_parameters_current: Array<CollateralRiskParametersFieldsFragment> };
 
 export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
   baseAsset: Types.Scalars['String']['input'];

@@ -1,0 +1,20 @@
+#import "./fragments/CollateralRiskParametersFields.graphql"
+
+query getCollateralRiskParametersByConfigAddress(
+  $configAddress: String!
+  $limit: Int
+  $offset: Int
+) {
+  collateral_risk_parameters_current(
+    where: {
+      config_address: { _eq: $configAddress }
+    }
+    limit: $limit
+    offset: $offset
+    order_by: [
+      { collateral: asc }
+    ]
+  ) {
+    ...CollateralRiskParametersFields
+  }
+}

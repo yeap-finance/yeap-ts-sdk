@@ -9,6 +9,27 @@ export const AdaptiveIrmStateFieldsFragmentDoc = `
   last_update_timestamp_secs
 }
     `;
+export const BorrowRiskParametersFieldsFragmentDoc = `
+    fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
+  brw
+  collateral
+  config_address
+  enabled
+  vault
+}
+    `;
+export const CollateralRiskParametersFieldsFragmentDoc = `
+    fragment CollateralRiskParametersFields on collateral_risk_parameters_current {
+  borrow_vault_max_num
+  collateral
+  config_address
+  liquidation_bonus_bps
+  lltv
+  ltv
+  oracle
+  risk_factor
+}
+    `;
 export const LiquidationActivityFieldsFragmentDoc = `
     fragment LiquidationActivityFields on scmd_liquidation_activities {
   event_index
@@ -245,6 +266,30 @@ ${AdaptiveIrmConfigFieldsFragmentDoc}
 ${FixedRateIrmConfigFieldsFragmentDoc}
 ${KinkedIrmConfigFieldsFragmentDoc}
 ${VaultProtocolCapsFieldsFragmentDoc}`;
+export const GetBorrowRiskParametersByConfigAddress = `
+    query getBorrowRiskParametersByConfigAddress($configAddress: String!, $limit: Int, $offset: Int) {
+  borrow_risk_parameters_current(
+    where: {config_address: {_eq: $configAddress}, enabled: {_neq: false}}
+    limit: $limit
+    offset: $offset
+    order_by: [{vault: asc}, {collateral: asc}]
+  ) {
+    ...BorrowRiskParametersFields
+  }
+}
+    ${BorrowRiskParametersFieldsFragmentDoc}`;
+export const GetCollateralRiskParametersByConfigAddress = `
+    query getCollateralRiskParametersByConfigAddress($configAddress: String!, $limit: Int, $offset: Int) {
+  collateral_risk_parameters_current(
+    where: {config_address: {_eq: $configAddress}}
+    limit: $limit
+    offset: $offset
+    order_by: [{collateral: asc}]
+  ) {
+    ...CollateralRiskParametersFields
+  }
+}
+    ${CollateralRiskParametersFieldsFragmentDoc}`;
 export const GetOracleRouterConfigByPrimaryKey = `
     query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
   oracle_router_current_config(
@@ -393,6 +438,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetActiveVaults(variables?: Types.GetActiveVaultsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetActiveVaultsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetActiveVaultsQuery>({ document: GetActiveVaults, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetActiveVaults', 'query', variables);
+    },
+    getBorrowRiskParametersByConfigAddress(variables: Types.GetBorrowRiskParametersByConfigAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetBorrowRiskParametersByConfigAddressQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetBorrowRiskParametersByConfigAddressQuery>({ document: GetBorrowRiskParametersByConfigAddress, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getBorrowRiskParametersByConfigAddress', 'query', variables);
+    },
+    getCollateralRiskParametersByConfigAddress(variables: Types.GetCollateralRiskParametersByConfigAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetCollateralRiskParametersByConfigAddressQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetCollateralRiskParametersByConfigAddressQuery>({ document: GetCollateralRiskParametersByConfigAddress, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getCollateralRiskParametersByConfigAddress', 'query', variables);
     },
     getOracleRouterConfigByPrimaryKey(variables: Types.GetOracleRouterConfigByPrimaryKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigByPrimaryKeyQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigByPrimaryKeyQuery>({ document: GetOracleRouterConfigByPrimaryKey, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigByPrimaryKey', 'query', variables);

@@ -1,0 +1,10 @@
+fragment CollateralRiskParametersFields on collateral_risk_parameters_current {
+  borrow_vault_max_num
+  collateral
+  config_address
+  liquidation_bonus_bps
+  lltv
+  ltv
+  oracle
+  risk_factor
+}

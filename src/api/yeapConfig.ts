@@ -161,4 +161,8 @@ export class YeapConfig {
   get yeapLensAddress(): string {
     return this.getAddress("yeap_lens");
   }
+
+  get yeapScmdProtocolAddress(): string {
+    return this.getAddress("yeap_scmd_protocol");
+  }
 }

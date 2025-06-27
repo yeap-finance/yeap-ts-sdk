@@ -1,0 +1,22 @@
+#import "./fragments/BorrowRiskParametersFields.graphql"
+
+query getBorrowRiskParametersByConfigAddress(
+  $configAddress: String!
+  $limit: Int
+  $offset: Int
+) {
+  borrow_risk_parameters_current(
+    where: {
+      config_address: { _eq: $configAddress }
+      enabled: { _neq: false }
+    }
+    limit: $limit
+    offset: $offset
+    order_by: [
+      { vault: asc }
+      { collateral: asc }
+    ]
+  ) {
+    ...BorrowRiskParametersFields
+  }
+}

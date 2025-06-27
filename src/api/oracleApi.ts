@@ -64,5 +64,4 @@ export class OracleApi {
 
     return new OracleRouter(oracleRouter, rawConfigs, this.config);
   }
-
 }
