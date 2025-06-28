@@ -12,18 +12,19 @@
   "homepage": "https://aptos-labs.github.io/aptos-ts-sdk/",
   "version": "1.0.0",
   "sideEffects": false,
-  "main": "dist/common/index.js",
-  "module": "dist/esm/index.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "source": "./src/index.ts",
       "require": {
-        "types": "./dist/common/index.d.ts",
-        "default": "./dist/common/index.js"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "import": {
-        "types": "./dist/esm/index.d.mts",
-        "default": "./dist/esm/index.mjs"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       }
     },
     "./package.json": "./package.json"
@@ -37,6 +38,7 @@
     "build": "pnpm build:clean && tsup",
     "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
     "prepublishOnly": "pnpm run build",
+    "postinstall": "node -e \"if (!require('fs').existsSync('./dist')) { console.log('Building SDK...'); const { execSync } = require('child_process'); try { execSync('pnpm build', {stdio: 'inherit'}); } catch(e1) { try { execSync('npm run build', {stdio: 'inherit'}); } catch(e2) { try { execSync('yarn build', {stdio: 'inherit'}); } catch(e3) { console.warn('Build failed with all package managers, but continuing...'); } } } }\"",
     "_fmt": "prettier 'src/**/*.ts' 'tests/**/*.ts'",
     "fmt": "pnpm _fmt --write",
     "lint": "eslint '**/*.{cts,mts,ts}'",
