@@ -25,5 +25,10 @@
 export * from "./api";
 export * from "./client";
 export * from "./internal";
-export * from "./types";
 export * from "./utils";
+
+// Export types specifically to avoid conflicts
+export * from "./types/types";
+export * from "./types/generated/types";
+export * from "./types/generated/queries";
+export * from "./types/generated/operations";
