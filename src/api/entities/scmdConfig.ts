@@ -9,8 +9,8 @@ import { BorrowRiskParametersCurrent, BorrowRiskParametersFieldsFragment, Collat
 import { transformCollateralRiskParameters, transformBorrowRiskParameters } from "../transforms";
 
 export class ScmdConfig {
-  private readonly rawCollateralRiskParameters: CollateralRiskParametersFieldsFragment[];
-  private readonly rawBorrowRiskParameters: BorrowRiskParametersFieldsFragment[];
+  readonly rawCollateralRiskParameters: CollateralRiskParametersFieldsFragment[];
+  readonly rawBorrowRiskParameters: BorrowRiskParametersFieldsFragment[];
 
   constructor(
     private readonly config: YeapConfig,

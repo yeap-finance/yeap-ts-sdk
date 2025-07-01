@@ -19,6 +19,7 @@ import { YeapConfig } from "./yeapConfig";
 export class ScmdApi {
   readonly config: YeapConfig;
   readonly protocolAddress: AccountAddress;
+  
   /**
    * @param config - The Yeap configuration instance
    */
