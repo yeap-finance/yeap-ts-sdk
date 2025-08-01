@@ -40,7 +40,9 @@ export async function initializeYeapFromEnv(): Promise<Yeap> {
     { env: 'YEAP_VAULT', key: 'yeap_vault' as const },
     { env: 'YEAP_SCMD_PROTOCOL', key: 'yeap_scmd_protocol' as const },
     { env: 'YEAP_IRM', key: 'yeap_irm' as const },
-    { env: 'YEAP_LENS', key: 'yeap_lens' as const }
+    { env: 'YEAP_LENS', key: 'yeap_lens' as const },
+    { env: 'YEAP_EARN_API', key: 'yeap_earn_api' as const },
+    { env: 'YEAP_BORROW_API', key: 'yeap_borrow_api' as const }
   ];
 
   const addresses: YeapAddresses = {};
