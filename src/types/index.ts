@@ -30,11 +30,11 @@ export type {
   YeapPositionDebtStore,
   YeapPosition,
   YeapOracleRouterConfig,
-  
+
   // Risk parameters
   CollateralRiskParameters,
   BorrowRiskParameters,
-  
+
   // Query options and filters
   PositionFilterOptions,
   PositionSortOptions,
@@ -44,7 +44,7 @@ export type {
   VaultQueryOptions,
   QueryOptions,
   PaginationInfo,
-  
+
   // API interfaces
   ScmdPositionApiInterface,
 } from "../api/interfaces";
@@ -56,11 +56,4 @@ export type { PositionDebtStore } from "../api/entities/scmdPosition";
 export type { YeapResponse, GraphqlQuery } from "../client/core";
 
 // Entity classes - re-export for convenience
-export { 
-  Vault, 
-  VaultState, 
-  SCMDPosition, 
-  OracleConfig, 
-  OracleRouter, 
-  ScmdConfig 
-} from "../api/entities";
+export { Vault, VaultState, SCMDPosition, OracleConfig, OracleRouter, ScmdConfig } from "../api/entities";

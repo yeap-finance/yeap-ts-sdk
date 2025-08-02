@@ -3,9 +3,14 @@ import { YeapConfig } from "../yeapConfig";
 import { BorrowRiskParameters, CollateralRiskParameters } from "../interfaces";
 import {
   getBorrowRiskParametersByConfigAddress,
-  getCollateralRiskParametersByConfigAddress
+  getCollateralRiskParametersByConfigAddress,
 } from "../../internal/riskParameters";
-import { BorrowRiskParametersCurrent, BorrowRiskParametersFieldsFragment, CollateralRiskParametersCurrent, CollateralRiskParametersFieldsFragment } from "../../types";
+import {
+  BorrowRiskParametersCurrent,
+  BorrowRiskParametersFieldsFragment,
+  CollateralRiskParametersCurrent,
+  CollateralRiskParametersFieldsFragment,
+} from "../../types";
 import { transformCollateralRiskParameters, transformBorrowRiskParameters } from "../transforms";
 
 export class ScmdConfig {
@@ -15,13 +20,11 @@ export class ScmdConfig {
   constructor(
     private readonly config: YeapConfig,
     rawCollateralRiskParameters: CollateralRiskParametersFieldsFragment[] = [],
-    rawBorrowRiskParameters: BorrowRiskParametersFieldsFragment[] = []
+    rawBorrowRiskParameters: BorrowRiskParametersFieldsFragment[] = [],
   ) {
-
     this.rawCollateralRiskParameters = rawCollateralRiskParameters;
     this.rawBorrowRiskParameters = rawBorrowRiskParameters;
   }
-
 
   // map from collateral address string to CollateralRiskParameters
   supportedCollateralConfigs(): Map<string, CollateralRiskParameters> {
@@ -60,7 +63,8 @@ export class ScmdConfig {
    * This method avoids AccountAddress reference equality issues
    */
   getCollateralConfigByAddress(address: string | AccountAddress): CollateralRiskParameters | undefined {
-    const targetAddress = typeof address === 'string' ? AccountAddress.fromString(address).toString() : address.toString();
+    const targetAddress =
+      typeof address === "string" ? AccountAddress.fromString(address).toString() : address.toString();
 
     for (const rawConfig of this.rawCollateralRiskParameters) {
       const config = transformCollateralRiskParameters(rawConfig);
@@ -77,7 +81,8 @@ export class ScmdConfig {
    * This method avoids AccountAddress reference equality issues
    */
   getVaultConfigsByCollateralAddress(address: string | AccountAddress): Array<BorrowRiskParameters> {
-    const targetAddress = typeof address === 'string' ? AccountAddress.fromString(address).toString() : address.toString();
+    const targetAddress =
+      typeof address === "string" ? AccountAddress.fromString(address).toString() : address.toString();
     const configs: Array<BorrowRiskParameters> = [];
 
     for (const rawConfig of this.rawBorrowRiskParameters) {
@@ -90,4 +95,3 @@ export class ScmdConfig {
     return configs;
   }
 }
-

@@ -93,6 +93,9 @@ export const PositionFieldsFragmentDoc = `
   debt_stores {
     debt_store_address
     vault_address
+    debt_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
   }
 }
     `;

@@ -254,7 +254,9 @@ export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOra
  * Transform raw GraphQL collateral risk parameters to clean interface
  * @internal
  */
-export function transformCollateralRiskParameters(raw: CollateralRiskParametersFieldsFragment): CollateralRiskParameters | null {
+export function transformCollateralRiskParameters(
+  raw: CollateralRiskParametersFieldsFragment,
+): CollateralRiskParameters | null {
   if (!raw) return null;
   return {
     borrowVaultMaxNum: Number(raw.borrow_vault_max_num || 0),

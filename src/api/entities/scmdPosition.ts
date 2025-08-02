@@ -18,7 +18,7 @@ export interface PositionDebtStore {
   /** Vault address */
   vaultAddress: string;
   /** Debt asset balance */
-  debtAssetBalance?: YeapFungibleAssetBalance;
+  debtAssetBalance?: YeapFungibleAssetBalance | null;
   /** Vault information */
   vaultInfo?: YeapVaultInfo;
 }
@@ -41,6 +41,10 @@ export interface PositionDebtStore {
  * if (collateralBalance) {
  *   console.log("Collateral amount:", collateralBalance.amount);
  * }
+ *
+ * // Calculate total borrow amount
+ * const totalBorrow = position.getTotalBorrowAmount();
+ * console.log("Total borrow:", totalBorrow.toString());
  * ```
  *
  * @group Entities
@@ -155,5 +159,76 @@ export class SCMDPosition {
    */
   get vaultAddresses(): string[] {
     return this.debtStores.map((store) => store.vaultAddress);
+  }
+
+  /**
+   * Calculate the total borrow amount across all debt stores.
+   * @returns Total borrow amount as a bigint
+   */
+  getTotalBorrowAmount(): bigint {
+    return this.debtStores
+      .filter((store) => store.debtAssetBalance)
+      .reduce((total, store) => {
+        const amount = BigInt(store.debtAssetBalance!.amount);
+        return total + amount;
+      }, BigInt(0));
+  }
+
+  /**
+   * Get borrow amounts grouped by asset type.
+   * @returns Map of asset symbol to borrow amount
+   */
+  getBorrowAmountsByAsset(): Map<string, bigint> {
+    const borrowByAsset = new Map<string, bigint>();
+
+    this.debtStores.forEach((store) => {
+      if (store.debtAssetBalance) {
+        const symbol = store.debtAssetBalance.metadata?.symbol || "Unknown";
+        const amount = BigInt(store.debtAssetBalance.amount);
+        const current = borrowByAsset.get(symbol) || BigInt(0);
+        borrowByAsset.set(symbol, current + amount);
+      }
+    });
+
+    return borrowByAsset;
+  }
+
+  /**
+   * Get detailed borrow information for each debt store.
+   * @returns Array of borrow details
+   */
+  getBorrowDetails(): Array<{
+    vaultAddress: string;
+    debtStoreAddress: string;
+    borrowAmount: string;
+    borrowAsset: string;
+    borrowAssetDecimals: number;
+  }> {
+    return this.debtStores
+      .filter((store) => store.debtAssetBalance)
+      .map((store) => ({
+        vaultAddress: store.vaultAddress,
+        debtStoreAddress: store.debtStoreAddress,
+        borrowAmount: store.debtAssetBalance!.amount,
+        borrowAsset: store.debtAssetBalance!.metadata?.symbol || "Unknown",
+        borrowAssetDecimals: store.debtAssetBalance!.metadata?.decimals || 0,
+      }));
+  }
+
+  /**
+   * Check if the position has any active debt.
+   * @returns True if the position has any debt, false otherwise
+   */
+  hasAnyDebt(): boolean {
+    return this.debtStores.some((store) => store.debtAssetBalance && BigInt(store.debtAssetBalance.amount) > 0);
+  }
+
+  /**
+   * Get the number of vaults with active debt.
+   * @returns Number of vaults with debt
+   */
+  getActiveDebtVaultCount(): number {
+    return this.debtStores.filter((store) => store.debtAssetBalance && BigInt(store.debtAssetBalance.amount) > 0)
+      .length;
   }
 }

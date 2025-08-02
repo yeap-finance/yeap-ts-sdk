@@ -627,4 +627,3 @@ export interface BorrowRiskParameters {
   /** Vault address */
   vault: AccountAddress;
 }
-
