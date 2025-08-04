@@ -14,9 +14,9 @@ fragment PositionFields on scmd_position_current {
   debt_stores {
     debt_store_address
     vault_address
-    # debt_asset_balance {
-    #   ...FungibleAssetBalanceFields
-    # }
+    debt_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
     # vault_info {
     #   ...VaultInfoFields
     # }

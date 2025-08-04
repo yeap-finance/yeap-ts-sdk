@@ -27,7 +27,10 @@ export type OracleRouterConfigFieldsFragment = Pick<Types.OracleRouterCurrentCon
 
 export type PositionFieldsFragment = (
   Pick<Types.ScmdPositionCurrent, 'position_address' | 'owner_address' | 'collateral' | 'collateral_type' | 'status'>
-  & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, debt_stores: Array<Pick<Types.ScmdPositionDebtStores, 'debt_store_address' | 'vault_address'>> }
+  & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, debt_stores: Array<(
+    Pick<Types.ScmdPositionDebtStores, 'debt_store_address' | 'vault_address'>
+    & { debt_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment> }
+  )> }
 );
 
 export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'borrow_protocol' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
