@@ -23,7 +23,10 @@ export type KinkedIrmConfigFieldsFragment = Pick<Types.KinkedIrmCurrentConfig, '
 
 export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivities, 'event_index' | 'transaction_version' | 'timestamp' | 'position_address' | 'vault_address' | 'collateral_liquidation_amount' | 'collateral_value_before' | 'loan_value_before' | 'repay_amount'>;
 
-export type OracleRouterConfigFieldsFragment = Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>;
+export type OracleRouterConfigFieldsFragment = (
+  Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>
+  & { base_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, quote_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment> }
+);
 
 export type PositionFieldsFragment = (
   Pick<Types.ScmdPositionCurrent, 'position_address' | 'owner_address' | 'collateral' | 'collateral_type' | 'status'>

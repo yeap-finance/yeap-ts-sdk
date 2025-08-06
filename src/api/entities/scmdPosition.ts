@@ -126,7 +126,7 @@ export class SCMDPosition {
     return rawDebtStores.map((store) => ({
       debtStoreAddress: store.debt_store_address!,
       vaultAddress: store.vault_address!,
-      debtAssetBalance: store.debt_asset_balance ?  (transformFungibleAssetBalance(store.debt_asset_balance)!) : undefined,
+      debtAssetBalance: store.debt_asset_balance ? transformFungibleAssetBalance(store.debt_asset_balance)! : undefined,
       //   vaultInfo: store.vault_info ? transformVaultInfo(store.vault_info) : null,
     }));
   }

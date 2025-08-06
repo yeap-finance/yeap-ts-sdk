@@ -1,7 +1,9 @@
 overwrite: true
 documents: src/internal/queries/**/*.graphql
 schema:
-  - src/types/generated/schema.graphql
+  - ${GRAPHQL_SCHEMA_URL}:
+      headers:
+        Authorization: Bearer ${CUSTOM_API_KEY}
 generates:
   src/types/generated/schema.graphql:
     plugins:

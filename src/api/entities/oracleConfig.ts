@@ -1,9 +1,10 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { OracleRouterConfigFieldsFragment } from "../../types";
-import { YeapConfig } from "../yeapConfig";
-import { InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import {Maybe, OracleRouterConfigFieldsFragment, YeapFungibleAssetMetadata} from "../../types";
+import {YeapConfig} from "../yeapConfig";
+import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
+import {transformFungibleAssetMetadata} from "../transforms";
 
 export const PRICE_PRECISION = BigInt(10 ** 18); // 18 decimal places for price values, adjust as needed
 export const ORACLE_UNIT_ASSET = "0x0"; // Placeholder for the unit asset address
@@ -35,6 +36,21 @@ export class OracleConfig {
    */
   get baseAsset(): string {
     return this.data.base_asset;
+  }
+
+  get baseAssetMetadata(): Maybe<YeapFungibleAssetMetadata> {
+    if (this.data.base_asset_metadata) {
+      return transformFungibleAssetMetadata(this.data.base_asset_metadata);
+    } else {
+      return null;
+    }
+  }
+  get quoteAssetMetadata(): Maybe<YeapFungibleAssetMetadata> {
+    if (this.data.quote_asset_metadata) {
+      return transformFungibleAssetMetadata(this.data.quote_asset_metadata);
+    } else {
+      return null;
+    }
   }
 
   /**

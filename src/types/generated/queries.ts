@@ -43,16 +43,6 @@ export const LiquidationActivityFieldsFragmentDoc = `
   repay_amount
 }
     `;
-export const OracleRouterConfigFieldsFragmentDoc = `
-    fragment OracleRouterConfigFields on oracle_router_current_config {
-  base_asset
-  deleted
-  oracle
-  oracle_kind
-  oracle_router
-  quote_asset
-}
-    `;
 export const FungibleAssetMetadataFieldsFragmentDoc = `
     fragment FungibleAssetMetadataFields on fungible_asset_metadata {
   token_standard
@@ -61,6 +51,22 @@ export const FungibleAssetMetadataFieldsFragmentDoc = `
   decimals
   icon_uri
   project_uri
+}
+    `;
+export const OracleRouterConfigFieldsFragmentDoc = `
+    fragment OracleRouterConfigFields on oracle_router_current_config {
+  base_asset
+  base_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
+  deleted
+  oracle
+  oracle_kind
+  oracle_router
+  quote_asset
+  quote_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
 }
     `;
 export const FungibleAssetBalanceFieldsFragmentDoc = `
@@ -301,7 +307,8 @@ export const GetOracleRouterConfigByPrimaryKey = `
     ...OracleRouterConfigFields
   }
 }
-    ${OracleRouterConfigFieldsFragmentDoc}`;
+    ${OracleRouterConfigFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetOracleRouterConfigsByOracle = `
     query getOracleRouterConfigsByOracle($oracleRouter: String!, $limit: Int, $offset: Int) {
   oracle_router_current_config(
@@ -313,7 +320,8 @@ export const GetOracleRouterConfigsByOracle = `
     ...OracleRouterConfigFields
   }
 }
-    ${OracleRouterConfigFieldsFragmentDoc}`;
+    ${OracleRouterConfigFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}`;
 export const GetPositionsByOwner = `
     query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(

@@ -7790,11 +7790,13 @@ export type OracleRouterActivitiesStreamCursorValueInput = {
 /** columns and relationships of "oracle_router_current_config" */
 export type OracleRouterCurrentConfig = {
   base_asset: Scalars['String']['output'];
+  base_asset_metadata?: Maybe<FungibleAssetMetadata>;
   deleted?: Maybe<Scalars['Boolean']['output']>;
   oracle?: Maybe<Scalars['String']['output']>;
   oracle_kind?: Maybe<Scalars['numeric']['output']>;
   oracle_router: Scalars['String']['output'];
   quote_asset: Scalars['String']['output'];
+  quote_asset_metadata?: Maybe<FungibleAssetMetadata>;
 };
 
 /** Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'. */

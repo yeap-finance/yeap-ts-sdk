@@ -6,7 +6,14 @@ import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
 /**
  * Known contract address names in the Yeap protocol
  */
-export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_lens" | "yeap_earn_api" | "yeap_borrow_api";
+export type YeapAddressName =
+  | "yeap_oracle"
+  | "yeap_vault"
+  | "yeap_scmd_protocol"
+  | "yeap_irm"
+  | "yeap_lens"
+  | "yeap_earn_api"
+  | "yeap_borrow_api";
 
 /**
  * Contract addresses mapping for the Yeap protocol

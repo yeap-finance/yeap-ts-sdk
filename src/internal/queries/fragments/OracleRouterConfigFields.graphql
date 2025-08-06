@@ -1,8 +1,14 @@
 fragment OracleRouterConfigFields on oracle_router_current_config {
   base_asset
+  base_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
   deleted
   oracle
   oracle_kind
   oracle_router
   quote_asset
+  quote_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
 }

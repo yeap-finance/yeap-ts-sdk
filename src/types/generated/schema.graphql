@@ -8480,11 +8480,13 @@ columns and relationships of "oracle_router_current_config"
 """
 type oracle_router_current_config {
   base_asset: String!
+  base_asset_metadata: fungible_asset_metadata
   deleted: Boolean
   oracle: String
   oracle_kind: numeric
   oracle_router: String!
   quote_asset: String!
+  quote_asset_metadata: fungible_asset_metadata
 }
 
 """
