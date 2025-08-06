@@ -5,6 +5,7 @@ import { YeapConfig } from "./yeapConfig";
 import { VaultApi } from "./vaultApi";
 import { ScmdApi } from "./scmdApi";
 import { OracleApi } from "./oracleApi";
+import { BuildApi } from "./buildApi";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -61,6 +62,8 @@ export class Yeap {
 
   readonly oracleRouterApi: OracleApi;
 
+  readonly buildApi: BuildApi;
+
   /**
    * Initializes a new instance of the Yeap client with the provided configuration settings.
    * This allows you to interact with various Yeap functionalities such as vaults and other DeFi features.
@@ -89,6 +92,7 @@ export class Yeap {
     this.vaultApi = new VaultApi(this.config);
     this.scmdApi = new ScmdApi(this.config);
     this.oracleRouterApi = new OracleApi(this.config);
+    this.buildApi = new BuildApi(this.config);
   }
 }
 

@@ -51,7 +51,8 @@
     "indexer-codegen:watch": "npx dotenv-cli -e .env -- graphql-codegen --config ./src/types/codegen.yaml --watch",
     "example:vault-api": "tsx examples/test-vault-api.ts",
     "example:oracle-api": "tsx examples/test-oracle-api.ts",
-    "example:scmd-api": "tsx examples/test-scmd-config.ts"
+    "example:scmd-api": "tsx examples/test-scmd-config.ts",
+    "example:build-api": "tsx examples/test-build-api.ts"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^2.0.1",
