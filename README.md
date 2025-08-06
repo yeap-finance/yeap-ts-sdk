@@ -16,7 +16,28 @@ A comprehensive TypeScript SDK for interacting with the Yeap DeFi protocol on Ap
 
 ## Installation
 
+### From GitHub (Recommended for direct usage)
+
 ```bash
+# Install from GitHub repository
+npm install git+https://github.com/your-username/yeap-ts-sdk.git
+
+# Using yarn
+yarn add git+https://github.com/your-username/yeap-ts-sdk.git
+
+# Using pnpm
+pnpm add git+https://github.com/your-username/yeap-ts-sdk.git
+```
+
+The package will automatically build when installed from GitHub.
+
+### For Development
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/yeap-ts-sdk.git
+cd yeap-ts-sdk
+
 # Install dependencies
 pnpm install
 

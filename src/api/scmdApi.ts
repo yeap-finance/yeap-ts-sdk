@@ -5,7 +5,7 @@ import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
 import { getPositionsByOwner } from "../internal";
 import {
   getBorrowRiskParametersByConfigAddress,
-  getCollateralRiskParametersByConfigAddress
+  getCollateralRiskParametersByConfigAddress,
 } from "../internal/riskParameters";
 import { ScmdConfig, SCMDPosition } from "./entities";
 import { YeapConfig } from "./yeapConfig";
@@ -19,6 +19,7 @@ import { YeapConfig } from "./yeapConfig";
 export class ScmdApi {
   readonly config: YeapConfig;
   readonly protocolAddress: AccountAddress;
+
   /**
    * @param config - The Yeap configuration instance
    */
@@ -27,11 +28,9 @@ export class ScmdApi {
     this.protocolAddress = AccountAddress.fromString(config.yeapScmdProtocolAddress);
   }
 
-
   get configAddress(): AccountAddress {
     return createObjectAddress(this.protocolAddress, "scmd_protocol_config");
   }
-
 
   /**
    * Get SCMD configuration including collateral and borrow risk parameters.
