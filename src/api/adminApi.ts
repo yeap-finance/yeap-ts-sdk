@@ -3,7 +3,7 @@
  */
 
 import {YeapConfig} from "./yeapConfig";
-import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
+import {InputGenerateTransactionPayloadData} from "@aptos-labs/ts-sdk";
 
 /**
  * A class for interacting with the Yeap admin APIs.
@@ -23,9 +23,9 @@ export class AdminApi {
 
   /**
    * Builds transaction data for creating an oracle router.
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildCreateOracleRouterTxn(): InputViewFunctionData {
+  buildCreateOracleRouterTxn(): InputGenerateTransactionPayloadData {
     const yeapAdminApiAddress = this.config.yeapAdminApiAddress;
     return {
       function: `${yeapAdminApiAddress}::oracle_admin_api::create_oracle_router`,
@@ -40,14 +40,14 @@ export class AdminApi {
    * @param pythId - The Pyth ID
    * @param maxAgeInSeconds - The max age in seconds (u64)
    * @param maxConfidence - The max confidence (u64)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildSetPythOracleConfigTxn(
     assetAddress: string,
     pythId: number[],
     maxAgeInSeconds: bigint,
     maxConfidence: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapAdminApiAddress = this.config.yeapAdminApiAddress;
     return {
       function: `${yeapAdminApiAddress}::oracle_admin_api::set_pyth_oracle_config`,
@@ -62,14 +62,14 @@ export class AdminApi {
    * @param switchboardId - The Switchboard ID
    * @param maxAgeInSeconds - The max age in seconds (u64)
    * @param maxStdev - The max standard deviation (u128)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildSetSwitchboardOracleConfigTxn(
     assetAddress: string,
     switchboardId: string,
     maxAgeInSeconds: bigint,
     maxStdev: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapAdminApiAddress = this.config.yeapAdminApiAddress;
     return {
       function: `${yeapAdminApiAddress}::oracle_admin_api::set_switchboard_oracle_config`,
@@ -81,9 +81,9 @@ export class AdminApi {
   /**
    * Builds transaction data for setting vault oracle configuration.
    * @param vaultAddress - The vault address
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildSetVaultOracleConfigTxn(vaultAddress: string): InputViewFunctionData {
+  buildSetVaultOracleConfigTxn(vaultAddress: string): InputGenerateTransactionPayloadData {
     const yeapAdminApiAddress = this.config.yeapAdminApiAddress;
     return {
       function: `${yeapAdminApiAddress}::oracle_admin_api::set_vault_oracle_config`,

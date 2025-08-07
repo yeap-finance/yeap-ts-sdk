@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import {YeapConfig} from "./yeapConfig";
-import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
+import {InputGenerateTransactionPayloadData} from "@aptos-labs/ts-sdk";
 
 /**
  * BuildApi is a utility class for constructing transaction data related to Yeap Earn and Borrow APIs.
- * It provides methods to generate InputViewFunctionData for deposit, redeem, withdraw, borrow, repay, and collateral operations.
+ * It provides methods to generate InputGenerateTransactionPayloadData for deposit, redeem, withdraw, borrow, repay, and collateral operations.
  */
 export class BuildApi {
   readonly config: YeapConfig;
@@ -25,9 +25,9 @@ export class BuildApi {
    * Builds transaction data for deposit operation.
    * @param vaultAddress - The vault address
    * @param amount - The deposit amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildDepositTxn(vaultAddress: string, amount: bigint): InputViewFunctionData {
+  buildDepositTxn(vaultAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapEarnApiAddress = this.config.yeapEarnApiAddress;
     return {
       function: `${yeapEarnApiAddress}::earn_api::deposit`,
@@ -40,9 +40,9 @@ export class BuildApi {
    * Builds transaction data for redeem operation.
    * @param vaultAddress - The vault address
    * @param shares - The shares to redeem (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildRedeemTxn(vaultAddress: string, shares: bigint): InputViewFunctionData {
+  buildRedeemTxn(vaultAddress: string, shares: bigint): InputGenerateTransactionPayloadData {
     const yeapEarnApiAddress = this.config.yeapEarnApiAddress;
     return {
       function: `${yeapEarnApiAddress}::earn_api::redeem`,
@@ -55,9 +55,9 @@ export class BuildApi {
    * Builds transaction data for withdraw operation.
    * @param vaultAddress - The vault address
    * @param amount - The withdraw amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildWithdrawTxn(vaultAddress: string, amount: bigint): InputViewFunctionData {
+  buildWithdrawTxn(vaultAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapEarnApiAddress = this.config.yeapEarnApiAddress;
     return {
       function: `${yeapEarnApiAddress}::earn_api::withdraw`,
@@ -71,9 +71,9 @@ export class BuildApi {
   /**
    * Builds transaction data for opening a borrow position.
    * @param collateralVaultAddress - The collateral vault address
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildOpenPositionTxn(collateralVaultAddress: string): InputViewFunctionData {
+  buildOpenPositionTxn(collateralVaultAddress: string): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::open_position`,
@@ -88,14 +88,14 @@ export class BuildApi {
    * @param borrowVaultAddress - The borrow vault address
    * @param collateralAmount - The collateral amount (bigint)
    * @param borrowAmount - The borrow amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildAddCollateralAndBorrowTxn(
     collateralVaultAddress: string,
     borrowVaultAddress: string,
     collateralAmount: bigint,
     borrowAmount: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::add_collateral_and_borrow`,
@@ -110,14 +110,14 @@ export class BuildApi {
    * @param borrowVaultAddress - The borrow vault address
    * @param collateralAmount - The collateral amount (bigint)
    * @param borrowAmount - The borrow amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildAddCollateralAndBorrowMore(
     positionAddress: string,
     borrowVaultAddress: string,
     collateralAmount: bigint,
     borrowAmount: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::add_collateral_and_borrow_more`,
@@ -132,14 +132,14 @@ export class BuildApi {
    * @param repayVaultAddress - The vault address for repayment
    * @param repayAmount - The amount to repay (bigint)
    * @param withdrawAmount - The amount to withdraw (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildRepayAndWithdrawCollateralTxn(
     positionAddress: string,
     repayVaultAddress: string,
     repayAmount: bigint,
     withdrawAmount: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::repay_and_withdraw_collateral`,
@@ -154,14 +154,14 @@ export class BuildApi {
    * @param repayVaultAddress - The vault address for repayment
    * @param repayAmount - The amount to repay (bigint)
    * @param withdrawAmount - The amount to withdraw (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildRepayAndWithdrawCollateralSharesTxn(
     positionAddress: string,
     repayVaultAddress: string,
     repayAmount: bigint,
     withdrawAmount: bigint,
-  ): InputViewFunctionData {
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::repay_and_withdraw_collateral_shares`,
@@ -174,9 +174,9 @@ export class BuildApi {
    * Builds transaction data for depositing collateral.
    * @param positionAddress - The position address
    * @param amount - The collateral amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildDepositCollateralTxn(positionAddress: string, amount: bigint): InputViewFunctionData {
+  buildDepositCollateralTxn(positionAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::deposit_collateral`,
@@ -189,9 +189,9 @@ export class BuildApi {
    * Builds transaction data for depositing vault assets as collateral.
    * @param positionAddress - The position address
    * @param shares - The shares amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildDepositVaultAssetAsCollateralTxn(positionAddress: string, shares: bigint): InputViewFunctionData {
+  buildDepositVaultAssetAsCollateralTxn(positionAddress: string, shares: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::deposit_vault_asset_as_collateral`,
@@ -204,9 +204,9 @@ export class BuildApi {
    * Builds transaction data for withdrawing collateral.
    * @param positionAddress - The position address
    * @param amount - The withdraw amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildWithdrawCollateralTxn(positionAddress: string, amount: bigint): InputViewFunctionData {
+  buildWithdrawCollateralTxn(positionAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::withdraw_collateral`,
@@ -219,9 +219,9 @@ export class BuildApi {
    * Builds transaction data for withdrawing collateral shares.
    * @param positionAddress - The position address
    * @param amount - The withdraw amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildWithdrawCollateralShareTxn(positionAddress: string, amount: bigint): InputViewFunctionData {
+  buildWithdrawCollateralShareTxn(positionAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::withdraw_collateral_share`,
@@ -235,9 +235,9 @@ export class BuildApi {
    * @param positionAddress - The position address
    * @param vaultAddress - The vault address
    * @param amount - The borrow amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildBorrowTxn(positionAddress: string, vaultAddress: string, amount: bigint): InputViewFunctionData {
+  buildBorrowTxn(positionAddress: string, vaultAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::borrow`,
@@ -251,9 +251,9 @@ export class BuildApi {
    * @param positionAddress - The position address
    * @param vaultAddress - The vault address
    * @param amount - The repay amount (bigint)
-   * @returns InputViewFunctionData transaction data
+   * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildRepayTxn(positionAddress: string, vaultAddress: string, amount: bigint): InputViewFunctionData {
+  buildRepayTxn(positionAddress: string, vaultAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::repay`,
