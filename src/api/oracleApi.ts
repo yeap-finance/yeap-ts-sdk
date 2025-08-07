@@ -1,9 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { getOracleRouterConfigByPrimaryKey, getOracleRouterConfigsByOracle } from "../internal";
-import { YeapConfig } from "./yeapConfig";
-import { OracleConfig, OracleRouter } from "./entities";
+import {getOracleRouterConfigsByOracle} from "../internal";
+import {YeapConfig} from "./yeapConfig";
+import {OracleRouter} from "./entities";
 
 /**
  * A class to query oracle router configuration data from the Yeap indexer.
@@ -59,8 +59,23 @@ export class OracleApi {
       offset: 0,
     });
     if (rawConfigs.length === 0) {
-      return null; // No configurations found for this router
+      if (this.config.aptosClient) {
+        let resource = await this.config.aptosClient.getAccountResource({
+          accountAddress: oracleRouter,
+          resourceType: `${this.config.getYeapOracleAddress()}::oracle_router::OracleRouterConfig`
+        });
+        if (!resource) {
+          // If no resource found, it means the router does not exist
+          return null;
+        } else {
+          // If the resource exists but no configurations, return an empty OracleRouter
+          return new OracleRouter(oracleRouter, [], this.config);
+        }
+      } else {
+        return null; // No configurations found for this router
+      }
     }
+
 
     return new OracleRouter(oracleRouter, rawConfigs, this.config);
   }
