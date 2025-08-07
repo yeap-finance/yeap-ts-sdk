@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
+import {Aptos, AptosConfig} from "@aptos-labs/ts-sdk";
 
 /**
  * Known contract address names in the Yeap protocol
@@ -13,7 +13,8 @@ export type YeapAddressName =
   | "yeap_irm"
   | "yeap_lens"
   | "yeap_earn_api"
-  | "yeap_borrow_api";
+  | "yeap_borrow_api"
+  | "yeap_admin_api";
 
 /**
  * Contract addresses mapping for the Yeap protocol
@@ -131,6 +132,26 @@ export class YeapConfig {
     }
   }
 
+  get yeapLensAddress(): string {
+    return this.getAddress("yeap_lens");
+  }
+
+  get yeapScmdProtocolAddress(): string {
+    return this.getAddress("yeap_scmd_protocol");
+  }
+
+  get yeapEarnApiAddress(): string {
+    return this.getAddress("yeap_earn_api");
+  }
+
+  get yeapBorrowApiAddress(): string {
+    return this.getAddress("yeap_borrow_api");
+  }
+
+  get yeapAdminApiAddress(): string {
+    return this.getAddress("yeap_admin_api");
+  }
+
   /**
    * Get a contract address by name
    * @param addressName - The name of the contract address to retrieve
@@ -163,21 +184,5 @@ export class YeapConfig {
    */
   getYeapOracleAddress(): string {
     return this.getAddress("yeap_oracle");
-  }
-
-  get yeapLensAddress(): string {
-    return this.getAddress("yeap_lens");
-  }
-
-  get yeapScmdProtocolAddress(): string {
-    return this.getAddress("yeap_scmd_protocol");
-  }
-
-  get yeapEarnApiAddress(): string {
-    return this.getAddress("yeap_earn_api");
-  }
-
-  get yeapBorrowApiAddress(): string {
-    return this.getAddress("yeap_borrow_api");
   }
 }

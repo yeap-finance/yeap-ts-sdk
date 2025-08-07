@@ -1,8 +1,8 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { YeapConfig } from "./yeapConfig";
-import { InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import {YeapConfig} from "./yeapConfig";
+import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
 
 /**
  * BuildApi is a utility class for constructing transaction data related to Yeap Earn and Borrow APIs.
@@ -100,12 +100,7 @@ export class BuildApi {
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::add_collateral_and_borrow`,
       typeArguments: [],
-      functionArguments: [
-        collateralVaultAddress,
-        borrowVaultAddress,
-        collateralAmount.toString(),
-        borrowAmount.toString(),
-      ],
+      functionArguments: [collateralVaultAddress, borrowVaultAddress, collateralAmount.toString(), borrowAmount.toString()],
     };
   }
 
