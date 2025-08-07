@@ -1,0 +1,7 @@
+fragment FixedPriceOracleConfigFields on fixed_price_oracle_current_config {
+    oracle_address
+    base_asset
+    quote_asset
+    price
+    deleted
+}

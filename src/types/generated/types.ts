@@ -7792,11 +7792,17 @@ export type OracleRouterCurrentConfig = {
   base_asset: Scalars['String']['output'];
   base_asset_metadata?: Maybe<FungibleAssetMetadata>;
   deleted?: Maybe<Scalars['Boolean']['output']>;
+  /** An object relationship */
+  fixed_price_oracle_config?: Maybe<FixedPriceOracleCurrentConfig>;
   oracle?: Maybe<Scalars['String']['output']>;
   oracle_kind?: Maybe<Scalars['numeric']['output']>;
   oracle_router: Scalars['String']['output'];
+  /** An object relationship */
+  pyth_oracle_config?: Maybe<PythOracleCurrentConfig>;
   quote_asset: Scalars['String']['output'];
   quote_asset_metadata?: Maybe<FungibleAssetMetadata>;
+  /** An object relationship */
+  switchboard_oracle_config?: Maybe<SwitchboardOracleCurrentConfig>;
 };
 
 /** Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'. */
@@ -7806,20 +7812,26 @@ export type OracleRouterCurrentConfigBoolExp = {
   _or?: InputMaybe<Array<OracleRouterCurrentConfigBoolExp>>;
   base_asset?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
+  fixed_price_oracle_config?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
   oracle?: InputMaybe<StringComparisonExp>;
   oracle_kind?: InputMaybe<NumericComparisonExp>;
   oracle_router?: InputMaybe<StringComparisonExp>;
+  pyth_oracle_config?: InputMaybe<PythOracleCurrentConfigBoolExp>;
   quote_asset?: InputMaybe<StringComparisonExp>;
+  switchboard_oracle_config?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
 };
 
 /** Ordering options when selecting data from "oracle_router_current_config". */
 export type OracleRouterCurrentConfigOrderBy = {
   base_asset?: InputMaybe<OrderBy>;
   deleted?: InputMaybe<OrderBy>;
+  fixed_price_oracle_config?: InputMaybe<FixedPriceOracleCurrentConfigOrderBy>;
   oracle?: InputMaybe<OrderBy>;
   oracle_kind?: InputMaybe<OrderBy>;
   oracle_router?: InputMaybe<OrderBy>;
+  pyth_oracle_config?: InputMaybe<PythOracleCurrentConfigOrderBy>;
   quote_asset?: InputMaybe<OrderBy>;
+  switchboard_oracle_config?: InputMaybe<SwitchboardOracleCurrentConfigOrderBy>;
 };
 
 /** select columns of table "oracle_router_current_config" */

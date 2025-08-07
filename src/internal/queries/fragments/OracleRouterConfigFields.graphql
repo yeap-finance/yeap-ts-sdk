@@ -11,4 +11,13 @@ fragment OracleRouterConfigFields on oracle_router_current_config {
   quote_asset_metadata {
     ...FungibleAssetMetadataFields
   }
+  fixed_price_oracle_config {
+    ...FixedPriceOracleConfigFields
+  }
+    pyth_oracle_config {
+    ...PythOracleConfigFields
+    }
+  switchboard_oracle_config {
+    ...SwitchboardOracleConfigFields
+  }
 }

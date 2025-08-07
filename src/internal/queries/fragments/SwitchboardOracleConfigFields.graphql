@@ -1,0 +1,8 @@
+fragment SwitchboardOracleConfigFields on switchboard_oracle_current_config {
+    oracle_address
+    asset_identifier
+    aggregator_address
+    max_age_in_seconds
+    max_stdev
+    deleted
+}

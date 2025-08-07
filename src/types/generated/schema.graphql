@@ -8482,11 +8482,17 @@ type oracle_router_current_config {
   base_asset: String!
   base_asset_metadata: fungible_asset_metadata
   deleted: Boolean
+  """An object relationship"""
+  fixed_price_oracle_config: fixed_price_oracle_current_config
   oracle: String
   oracle_kind: numeric
   oracle_router: String!
+  """An object relationship"""
+  pyth_oracle_config: pyth_oracle_current_config
   quote_asset: String!
   quote_asset_metadata: fungible_asset_metadata
+  """An object relationship"""
+  switchboard_oracle_config: switchboard_oracle_current_config
 }
 
 """
@@ -8498,10 +8504,13 @@ input oracle_router_current_config_bool_exp {
   _or: [oracle_router_current_config_bool_exp!]
   base_asset: String_comparison_exp
   deleted: Boolean_comparison_exp
+  fixed_price_oracle_config: fixed_price_oracle_current_config_bool_exp
   oracle: String_comparison_exp
   oracle_kind: numeric_comparison_exp
   oracle_router: String_comparison_exp
+  pyth_oracle_config: pyth_oracle_current_config_bool_exp
   quote_asset: String_comparison_exp
+  switchboard_oracle_config: switchboard_oracle_current_config_bool_exp
 }
 
 """
@@ -8510,10 +8519,13 @@ Ordering options when selecting data from "oracle_router_current_config".
 input oracle_router_current_config_order_by {
   base_asset: order_by
   deleted: order_by
+  fixed_price_oracle_config: fixed_price_oracle_current_config_order_by
   oracle: order_by
   oracle_kind: order_by
   oracle_router: order_by
+  pyth_oracle_config: pyth_oracle_current_config_order_by
   quote_asset: order_by
+  switchboard_oracle_config: switchboard_oracle_current_config_order_by
 }
 
 """

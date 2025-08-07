@@ -1,0 +1,7 @@
+fragment PythOracleConfigFields on pyth_oracle_current_config {
+    oracle_address
+    asset_identifier
+    pyth_id
+    max_age_in_seconds
+    max_confidence
+}

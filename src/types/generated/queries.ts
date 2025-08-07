@@ -53,6 +53,34 @@ export const FungibleAssetMetadataFieldsFragmentDoc = `
   project_uri
 }
     `;
+export const FixedPriceOracleConfigFieldsFragmentDoc = `
+    fragment FixedPriceOracleConfigFields on fixed_price_oracle_current_config {
+  oracle_address
+  base_asset
+  quote_asset
+  price
+  deleted
+}
+    `;
+export const PythOracleConfigFieldsFragmentDoc = `
+    fragment PythOracleConfigFields on pyth_oracle_current_config {
+  oracle_address
+  asset_identifier
+  pyth_id
+  max_age_in_seconds
+  max_confidence
+}
+    `;
+export const SwitchboardOracleConfigFieldsFragmentDoc = `
+    fragment SwitchboardOracleConfigFields on switchboard_oracle_current_config {
+  oracle_address
+  asset_identifier
+  aggregator_address
+  max_age_in_seconds
+  max_stdev
+  deleted
+}
+    `;
 export const OracleRouterConfigFieldsFragmentDoc = `
     fragment OracleRouterConfigFields on oracle_router_current_config {
   base_asset
@@ -66,6 +94,15 @@ export const OracleRouterConfigFieldsFragmentDoc = `
   quote_asset
   quote_asset_metadata {
     ...FungibleAssetMetadataFields
+  }
+  fixed_price_oracle_config {
+    ...FixedPriceOracleConfigFields
+  }
+  pyth_oracle_config {
+    ...PythOracleConfigFields
+  }
+  switchboard_oracle_config {
+    ...SwitchboardOracleConfigFields
   }
 }
     `;
@@ -308,7 +345,10 @@ export const GetOracleRouterConfigByPrimaryKey = `
   }
 }
     ${OracleRouterConfigFieldsFragmentDoc}
-${FungibleAssetMetadataFieldsFragmentDoc}`;
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}`;
 export const GetOracleRouterConfigsByOracle = `
     query getOracleRouterConfigsByOracle($oracleRouter: String!, $limit: Int, $offset: Int) {
   oracle_router_current_config(
@@ -321,7 +361,10 @@ export const GetOracleRouterConfigsByOracle = `
   }
 }
     ${OracleRouterConfigFieldsFragmentDoc}
-${FungibleAssetMetadataFieldsFragmentDoc}`;
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}`;
 export const GetPositionsByOwner = `
     query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(

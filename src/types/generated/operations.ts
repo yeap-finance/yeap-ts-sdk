@@ -10,6 +10,8 @@ export type CollateralRiskParametersFieldsFragment = Pick<Types.CollateralRiskPa
 
 export type CurrentObjectFieldsFragment = Pick<Types.CurrentObjects, 'object_address' | 'owner_address' | 'state_key_hash' | 'allow_ungated_transfer' | 'is_deleted'>;
 
+export type FixedPriceOracleConfigFieldsFragment = Pick<Types.FixedPriceOracleCurrentConfig, 'oracle_address' | 'base_asset' | 'quote_asset' | 'price' | 'deleted'>;
+
 export type FixedRateIrmConfigFieldsFragment = Pick<Types.FixedRateIrmCurrentConfig, 'config_address' | 'rate_per_second'>;
 
 export type FungibleAssetBalanceFieldsFragment = (
@@ -25,7 +27,7 @@ export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivi
 
 export type OracleRouterConfigFieldsFragment = (
   Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>
-  & { base_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, quote_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment> }
+  & { base_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, quote_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, fixed_price_oracle_config?: Types.Maybe<FixedPriceOracleConfigFieldsFragment>, pyth_oracle_config?: Types.Maybe<PythOracleConfigFieldsFragment>, switchboard_oracle_config?: Types.Maybe<SwitchboardOracleConfigFieldsFragment> }
 );
 
 export type PositionFieldsFragment = (
@@ -35,6 +37,10 @@ export type PositionFieldsFragment = (
     & { debt_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment> }
   )> }
 );
+
+export type PythOracleConfigFieldsFragment = Pick<Types.PythOracleCurrentConfig, 'oracle_address' | 'asset_identifier' | 'pyth_id' | 'max_age_in_seconds' | 'max_confidence'>;
+
+export type SwitchboardOracleConfigFieldsFragment = Pick<Types.SwitchboardOracleCurrentConfig, 'oracle_address' | 'asset_identifier' | 'aggregator_address' | 'max_age_in_seconds' | 'max_stdev' | 'deleted'>;
 
 export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'borrow_protocol' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
 

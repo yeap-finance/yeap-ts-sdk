@@ -60612,6 +60612,18 @@
             "deprecationReason": null
           },
           {
+            "name": "fixed_price_oracle_config",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "fixed_price_oracle_current_config",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "oracle",
             "description": null,
             "args": [],
@@ -60652,6 +60664,18 @@
             "deprecationReason": null
           },
           {
+            "name": "pyth_oracle_config",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "pyth_oracle_current_config",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "quote_asset",
             "description": null,
             "args": [],
@@ -60674,6 +60698,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "fungible_asset_metadata",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "switchboard_oracle_config",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "switchboard_oracle_current_config",
               "ofType": null
             },
             "isDeprecated": false,
@@ -60769,6 +60805,18 @@
             "deprecationReason": null
           },
           {
+            "name": "fixed_price_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "fixed_price_oracle_current_config_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "oracle",
             "description": null,
             "type": {
@@ -60805,11 +60853,35 @@
             "deprecationReason": null
           },
           {
+            "name": "pyth_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "pyth_oracle_current_config_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "quote_asset",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "switchboard_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "switchboard_oracle_current_config_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -60853,6 +60925,18 @@
             "deprecationReason": null
           },
           {
+            "name": "fixed_price_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "fixed_price_oracle_current_config_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "oracle",
             "description": null,
             "type": {
@@ -60889,11 +60973,35 @@
             "deprecationReason": null
           },
           {
+            "name": "pyth_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "pyth_oracle_current_config_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "quote_asset",
             "description": null,
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "switchboard_oracle_config",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "switchboard_oracle_current_config_order_by",
               "ofType": null
             },
             "defaultValue": null,
