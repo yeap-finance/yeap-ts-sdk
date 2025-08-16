@@ -71,6 +71,7 @@ export async function initializeYeapFromEnv(): Promise<Yeap> {
     apiKey: apiKey,
     aptosClient: aptosClient,
     addresses: addresses,
+    hermesUrl: process.env.HERMES_URL || 'https://hermes-beta.pyth.network',
   });
 
   // Initialize and return Yeap client

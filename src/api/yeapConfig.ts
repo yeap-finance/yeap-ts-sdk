@@ -1,8 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
-import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
+import {Aptos, AptosConfig} from "@aptos-labs/ts-sdk";
+import {AptosPriceServiceConnection} from "@pythnetwork/pyth-aptos-js";
+
 /**
  * Known contract address names in the Yeap protocol
  */
@@ -101,7 +102,7 @@ export class YeapConfig {
   /** Contract addresses mapping for the Yeap protocol */
   readonly addresses: YeapAddresses;
 
-  readonly hermesPriceService?: AptosPriceServiceConnection;
+  readonly hermesPriceService: AptosPriceServiceConnection;
 
   /**
    * Create a new YeapConfig instance
@@ -127,6 +128,7 @@ export class YeapConfig {
       throw new Error("Yeap endpoint is required in configuration");
     }
     if (!settings?.hermesUrl) {
+      console.log(settings)
       throw new Error("Hermes URL is required in configuration");
     }
     this.hermesPriceService = new AptosPriceServiceConnection(settings.hermesUrl, {
@@ -135,6 +137,22 @@ export class YeapConfig {
       }
     });
 
+  }
+
+  get yeapLensAddress(): string {
+    return this.getAddress("yeap_lens");
+  }
+
+  get yeapScmdProtocolAddress(): string {
+    return this.getAddress("yeap_scmd_protocol");
+  }
+
+  get yeapEarnApiAddress(): string {
+    return this.getAddress("yeap_earn_api");
+  }
+
+  get yeapBorrowApiAddress(): string {
+    return this.getAddress("yeap_borrow_api");
   }
 
   /**
@@ -169,21 +187,5 @@ export class YeapConfig {
    */
   getYeapOracleAddress(): string {
     return this.getAddress("yeap_oracle");
-  }
-
-  get yeapLensAddress(): string {
-    return this.getAddress("yeap_lens");
-  }
-
-  get yeapScmdProtocolAddress(): string {
-    return this.getAddress("yeap_scmd_protocol");
-  }
-
-  get yeapEarnApiAddress(): string {
-    return this.getAddress("yeap_earn_api");
-  }
-
-  get yeapBorrowApiAddress(): string {
-    return this.getAddress("yeap_borrow_api");
   }
 }

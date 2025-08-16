@@ -15,10 +15,10 @@
  * 3. Run: pnpm tsx examples/test-oracle-api.ts
  */
 
-import { configDotenv } from 'dotenv';
+import {configDotenv} from 'dotenv';
 
-import { initializeYeapFromEnv, printEnvSetupHelp } from './shared/yeapUtils';
-import { OracleRouter } from '../src/api/entities';
+import {initializeYeapFromEnv, printEnvSetupHelp} from './shared/yeapUtils';
+import {OracleRouter} from '../src/api/entities';
 
 async function testOracleApi() {
   console.log('🔮 Starting Yeap OracleApi Test with Environment Configuration');
@@ -327,6 +327,28 @@ async function testOracleApi() {
 
     if (yeap.config.hasAddress('yeap_oracle')) {
       console.log(`✅ Yeap Oracle Address: ${yeap.config.getAddress('yeap_oracle')}`);
+    }
+
+    // Step 6: Test fetching latest Pyth price updates via Hermes
+    if (oracleRouter) {
+      console.log('\n6. Fetching latest Pyth price updates via Hermes...');
+      try {
+        const updates = await oracleRouter.getPythPriceUpdate();
+        if (updates && updates.length > 0) {
+          console.log(`   ✅ Retrieved ${updates.length} Pyth price feeds`);
+          const sample = updates.slice(0, 3);
+          sample.forEach((u, idx) => {
+            const f = u;
+            console.log(`   ${idx + 1}. id=${f.id ?? 'unknown'} price=${f.getPriceUnchecked().price ?? 'n/a'} expo=${f.getPriceUnchecked().expo ?? 'n/a'} publishTime=${f.getPriceUnchecked().publishTime ?? 'n/a'}`);
+          });
+        } else {
+          console.log('   ℹ️  No Pyth price updates returned');
+        }
+      } catch (e: any) {
+        console.log(`   ❌ Error fetching Pyth price updates: ${e?.message ?? e}`);
+      }
+    } else {
+      console.log('\n6. Skipping Pyth price updates test (no oracle router found)');
     }
 
     console.log('\n🎉 Oracle API test completed successfully!');

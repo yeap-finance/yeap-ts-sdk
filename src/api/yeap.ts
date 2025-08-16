@@ -69,7 +69,6 @@ export class Yeap {
    * Initializes a new instance of the Yeap client with the provided configuration settings.
    * This allows you to interact with various Yeap functionalities such as vaults and other DeFi features.
    *
-   * @param settings - Configuration settings for the Yeap client.
    *
    * @example
    * ```typescript
@@ -87,9 +86,10 @@ export class Yeap {
    * runExample().catch(console.error);
    * ```
    * @group Client
+   * @param config
    */
-  constructor(settings?: YeapConfig) {
-    this.config = new YeapConfig(settings);
+  constructor(config: YeapConfig) {
+    this.config = config;
     this.vaultApi = new VaultApi(this.config);
     this.scmdApi = new ScmdApi(this.config);
     this.oracleRouterApi = new OracleApi(this.config);

@@ -5,6 +5,7 @@ import { InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
 import { OracleConfig } from "./oracleConfig";
+import { PriceFeed } from "@pythnetwork/pyth-aptos-js";
 
 /**
  * Oracle Router entity representing a collection of oracle configurations.
@@ -109,7 +110,7 @@ export class OracleRouter {
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for asset pair ${baseAsset}/${quoteAsset}. ` +
-          `Expected at most one configuration per pair, but found ${configs.length}.`,
+        `Expected at most one configuration per pair, but found ${configs.length}.`,
       );
     }
 
@@ -181,7 +182,7 @@ export class OracleRouter {
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for base asset ${baseAsset}. ` +
-          `Expected at most one configuration per base asset, but found ${configs.length}.`,
+        `Expected at most one configuration per base asset, but found ${configs.length}.`,
       );
     }
 
@@ -528,6 +529,52 @@ export class OracleRouter {
         return "Delegate Oracle (Recursive routing)";
       default:
         return `Unknown Oracle Kind (${oracleKind})`;
+    }
+  }
+
+  /**
+   * Get latest Pyth price updates by fetching from Hermes price service.
+   *
+   * This method collects all unique Pyth feed IDs from the router configurations
+   * and retrieves their latest price update data from the configured Hermes price service.
+   *
+   * @returns Promise resolving to an array of PriceFeed containing the latest price updates for Pyth feeds
+   *
+   * @example
+   * ```typescript
+   * const updates = await oracleRouter.getPythPriceUpdate();
+   * console.log(`Received ${updates.length} Pyth price updates`);
+   * ```
+   */
+  async getPythPriceUpdate(): Promise<PriceFeed[] | undefined> {
+    if (!this.config) {
+      throw new Error("YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.");
+    }
+
+    // Collect unique Pyth feed IDs from the router configurations
+    const feedIds = Array.from(
+      new Set(
+        this.data
+          .map((c) => c.pyth_oracle_config?.pyth_id)
+          .filter((id): id is string => Boolean(id))
+      )
+    );
+
+    if (feedIds.length === 0) {
+      return [];
+    }
+
+    try {
+      const updates = await this.config.hermesPriceService.getLatestPriceFeeds(feedIds);
+      if (!updates || updates.length === 0) {
+        console.warn(`No Pyth price updates found for ${feedIds.length} feeds.`);
+        return undefined;
+      } else {
+        return updates;
+      }
+    } catch (error: any) {
+      console.warn(`Failed to fetch Pyth price updates for ${feedIds.length} feeds: ${error?.message ?? error}`);
+      return undefined;
     }
   }
 }
