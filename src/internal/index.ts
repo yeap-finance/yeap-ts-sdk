@@ -5,4 +5,4 @@ export * from "./yeapIndexer";
 export * from "./vault";
 export * from "./position";
 export * from "./oracleRouter";
-export * from "./riskParameters";
+export * from "./borrowMarket";

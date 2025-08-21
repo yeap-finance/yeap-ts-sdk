@@ -1,7 +1,6 @@
 fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
   brw
   collateral
-  config_address
-  enabled
+  market
   vault
 }

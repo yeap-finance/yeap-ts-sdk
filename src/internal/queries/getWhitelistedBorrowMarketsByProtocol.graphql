@@ -1,0 +1,19 @@
+#import "./fragments/BorrowMarketFields.graphql"
+
+query GetWhitelistedBorrowMarketsByProtocol(
+  $protocol: String!
+  $limit: Int
+  $offset: Int
+) {
+  borrow_market(
+    where: {
+      protocol: { _eq: $protocol }
+      whitelisted: { _eq: true }
+    }
+    order_by: [{ market: asc }]
+    limit: $limit
+    offset: $offset
+  ) {
+    ...BorrowMarketFields
+  }
+}

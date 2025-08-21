@@ -13,7 +13,7 @@ import {
   YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
-  YeapVaultProtocolCaps,
+
 } from "../interfaces";
 import {
   transformVaultState,
@@ -24,9 +24,8 @@ import {
   transformAdaptiveIrmState,
   transformFixedRateIrmConfig,
   transformKinkedIrmConfig,
-  transformVaultProtocolCaps,
 } from "../transforms";
-import { GetVaultInfoByAddressQuery, VaultInfoFieldsFragment } from "../../types";
+import { VaultInfoFieldsFragment } from "../../types";
 import { VaultState } from "./vaultState";
 
 // Field transformers type
@@ -113,16 +112,6 @@ export class Vault {
   get kinkedIrmConfig(): YeapKinkedIrmConfig | null {
     const rawConfig = this._rawVaultData.kinked_irm_config;
     return rawConfig ? transformKinkedIrmConfig(rawConfig) : null;
-  }
-
-  /**
-   * Get all protocol configurations for this vault.
-   */
-  get protocolConfigs(): YeapVaultProtocolCaps[] {
-    const rawConfigs = this._rawVaultData.protocol_configs;
-    return rawConfigs
-      .map((config) => transformVaultProtocolCaps(config))
-      .filter((config): config is YeapVaultProtocolCaps => config !== null);
   }
 
   /**

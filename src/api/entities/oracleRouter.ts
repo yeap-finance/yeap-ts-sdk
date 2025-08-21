@@ -551,7 +551,7 @@ export class OracleRouter {
       throw new Error("YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.");
     }
 
-    // Collect unique Pyth feed IDs from the router configurations
+    // FIXME: Collect unique Pyth feed IDs from the router configurations
     const feedIds = Array.from(
       new Set(
         this.data
@@ -565,7 +565,7 @@ export class OracleRouter {
     }
 
     try {
-      const updates = await this.config.hermesPriceService.getLatestPriceFeeds(feedIds);
+      const updates = await this.config.hermesPriceService?.getLatestPriceFeeds(feedIds);
       if (!updates || updates.length === 0) {
         console.warn(`No Pyth price updates found for ${feedIds.length} feeds.`);
         return undefined;

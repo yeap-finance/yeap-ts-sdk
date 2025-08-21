@@ -1,0 +1,18 @@
+#import "./BorrowRiskParametersFields.graphql"
+
+fragment BorrowMarketFields on borrow_market {
+  market
+  protocol
+  collateral
+  oracle
+  crf
+  ltv
+  lltv
+  liquidation_bonus_bps
+  max_borrowable_vaults
+  status
+  whitelisted
+  borrow_risk_parameters {
+    ...BorrowRiskParametersFields
+  }
+}

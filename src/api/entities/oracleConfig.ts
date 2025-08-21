@@ -7,11 +7,11 @@ import {
     OracleRouterConfigFieldsFragment,
     PythOracleCurrentConfig,
     SwitchboardOracleCurrentConfig,
-    YeapFungibleAssetMetadata
 } from "../../types";
 import {YeapConfig} from "../yeapConfig";
 import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
 import {transformFungibleAssetMetadata} from "../transforms";
+import { YeapFungibleAssetMetadata } from "../interfaces";
 
 export const PRICE_PRECISION = BigInt(10 ** 18); // 18 decimal places for price values, adjust as needed
 export const ORACLE_UNIT_ASSET = "0x0"; // Placeholder for the unit asset address

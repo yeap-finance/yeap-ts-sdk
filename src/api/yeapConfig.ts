@@ -1,13 +1,13 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {Aptos, AptosConfig} from "@aptos-labs/ts-sdk";
-import {AptosPriceServiceConnection} from "@pythnetwork/pyth-aptos-js";
+import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
+import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
 
 /**
  * Known contract address names in the Yeap protocol
  */
-export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_lens" | "yeap_earn_api" | "yeap_borrow_api";
+export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_lens" | "yeap_earn_api" | "yeap_borrow_api" | "yeap_admin_api";
 
 /**
  * Contract addresses mapping for the Yeap protocol
@@ -46,7 +46,10 @@ export interface YeapSettings {
    * Contract addresses mapping for the Yeap protocol
    */
   addresses?: YeapAddresses;
-  hermesUrl: string;
+  hermes?: {
+    url: string;
+    apiKey?: string;
+  };
 }
 
 /**
@@ -102,7 +105,7 @@ export class YeapConfig {
   /** Contract addresses mapping for the Yeap protocol */
   readonly addresses: YeapAddresses;
 
-  readonly hermesPriceService: AptosPriceServiceConnection;
+  readonly hermesPriceService?: AptosPriceServiceConnection;
 
   /**
    * Create a new YeapConfig instance
@@ -127,16 +130,13 @@ export class YeapConfig {
     if (!this.endpoint) {
       throw new Error("Yeap endpoint is required in configuration");
     }
-    if (!settings?.hermesUrl) {
-      console.log(settings)
-      throw new Error("Hermes URL is required in configuration");
+    if (settings?.hermes) {
+      this.hermesPriceService = new AptosPriceServiceConnection(settings.hermes.url, {
+        priceFeedRequestConfig: {
+          binary: true
+        }
+      });
     }
-    this.hermesPriceService = new AptosPriceServiceConnection(settings.hermesUrl, {
-      priceFeedRequestConfig: {
-        binary: true
-      }
-    });
-
   }
 
   get yeapLensAddress(): string {
@@ -153,6 +153,18 @@ export class YeapConfig {
 
   get yeapBorrowApiAddress(): string {
     return this.getAddress("yeap_borrow_api");
+  }
+  /**
+     * Get the Yeap Oracle address
+     * @returns The Yeap Oracle contract address
+     * @throws Error if the address is not configured
+     */
+  get yeapOracleAddress(): string {
+    return this.getAddress("yeap_oracle");
+  }
+
+  get yeapAdminApiAddress(): string {
+    return this.getAddress("yeap_admin_api");
   }
 
   /**
@@ -180,12 +192,5 @@ export class YeapConfig {
     return addressName in this.addresses;
   }
 
-  /**
-   * Get the Yeap Oracle address
-   * @returns The Yeap Oracle contract address
-   * @throws Error if the address is not configured
-   */
-  getYeapOracleAddress(): string {
-    return this.getAddress("yeap_oracle");
-  }
+
 }

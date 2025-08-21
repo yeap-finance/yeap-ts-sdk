@@ -27,8 +27,8 @@ export * from "./client";
 export * from "./internal";
 export * from "./utils";
 
-// Export types specifically to avoid conflicts
+// Export types in a namespaced way to avoid name collisions with API entities
 export * from "./types/types";
-export * from "./types/generated/types";
-export * from "./types/generated/queries";
-export * from "./types/generated/operations";
+export * as YeapGeneratedTypes from "./types/generated/types";
+export * as YeapGeneratedQueries from "./types/generated/queries";
+export * as YeapGeneratedOperations from "./types/generated/operations";

@@ -4,9 +4,12 @@ export type AdaptiveIrmConfigFieldsFragment = Pick<Types.AdaptiveIrmCurrentConfi
 
 export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState, 'state_address' | 'current_rate_at_target' | 'last_update_timestamp_secs'>;
 
-export type BorrowRiskParametersFieldsFragment = Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'config_address' | 'enabled' | 'vault'>;
+export type BorrowMarketFieldsFragment = (
+  Pick<Types.BorrowMarket, 'market' | 'protocol' | 'collateral' | 'oracle' | 'crf' | 'ltv' | 'lltv' | 'liquidation_bonus_bps' | 'max_borrowable_vaults' | 'status' | 'whitelisted'>
+  & { borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment> }
+);
 
-export type CollateralRiskParametersFieldsFragment = Pick<Types.CollateralRiskParametersCurrent, 'borrow_vault_max_num' | 'collateral' | 'config_address' | 'liquidation_bonus_bps' | 'lltv' | 'ltv' | 'oracle' | 'risk_factor'>;
+export type BorrowRiskParametersFieldsFragment = Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'market' | 'vault'>;
 
 export type CurrentObjectFieldsFragment = Pick<Types.CurrentObjects, 'object_address' | 'owner_address' | 'state_key_hash' | 'allow_ungated_transfer' | 'is_deleted'>;
 
@@ -23,7 +26,7 @@ export type FungibleAssetMetadataFieldsFragment = Pick<Types.FungibleAssetMetada
 
 export type KinkedIrmConfigFieldsFragment = Pick<Types.KinkedIrmCurrentConfig, 'config_address' | 'max_borrow_rate' | 'min_borrow_rate' | 'optimal_borrow_rate' | 'optimal_utilization'>;
 
-export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivities, 'event_index' | 'transaction_version' | 'timestamp' | 'position_address' | 'vault_address' | 'collateral_liquidation_amount' | 'collateral_value_before' | 'loan_value_before' | 'repay_amount'>;
+export type LiquidationActivityFieldsFragment = Pick<Types.ScmdLiquidationActivities, 'event_index' | 'transaction_version' | 'timestamp' | 'position' | 'vault' | 'collateral_liquidation_amount' | 'collateral_value_before' | 'loan_value_before' | 'repay_amount'>;
 
 export type OracleRouterConfigFieldsFragment = (
   Pick<Types.OracleRouterCurrentConfig, 'base_asset' | 'deleted' | 'oracle' | 'oracle_kind' | 'oracle_router' | 'quote_asset'>
@@ -31,9 +34,9 @@ export type OracleRouterConfigFieldsFragment = (
 );
 
 export type PositionFieldsFragment = (
-  Pick<Types.ScmdPositionCurrent, 'position_address' | 'owner_address' | 'collateral' | 'collateral_type' | 'status'>
-  & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, debt_stores: Array<(
-    Pick<Types.ScmdPositionDebtStores, 'debt_store_address' | 'vault_address'>
+  Pick<Types.ScmdPositionCurrent, 'position' | 'owner' | 'market' | 'collateral' | 'status'>
+  & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, market_info?: Types.Maybe<BorrowMarketFieldsFragment>, debt_stores: Array<(
+    Pick<Types.ScmdPositionDebtStores, 'debt_store' | 'vault'>
     & { debt_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment> }
   )> }
 );
@@ -42,7 +45,7 @@ export type PythOracleConfigFieldsFragment = Pick<Types.PythOracleCurrentConfig,
 
 export type SwitchboardOracleConfigFieldsFragment = Pick<Types.SwitchboardOracleCurrentConfig, 'oracle_address' | 'asset_identifier' | 'aggregator_address' | 'max_age_in_seconds' | 'max_stdev' | 'deleted'>;
 
-export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'borrow_protocol' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
+export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
 
 export type VaultEmergencyActivitiesFieldsFragment = Pick<Types.VaultEmergencyActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'timestamp' | 'amount' | 'withdrawn_by'>;
 
@@ -50,14 +53,14 @@ export type VaultFlashloanActivitiesFieldsFragment = Pick<Types.VaultFlashloanAc
 
 export type VaultInfoFieldsFragment = (
   Pick<Types.VaultInfo, 'vault_address' | 'creator' | 'underlying_asset' | 'debt_asset' | 'underlying_asset_store' | 'governance_object_address'>
-  & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment>, protocol_configs: Array<VaultProtocolCapsFieldsFragment> }
+  & { underlying_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, debt_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, vault_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, underlying_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, governance_object?: Types.Maybe<CurrentObjectFieldsFragment>, settings?: Types.Maybe<VaultSettingsFieldsFragment>, adaptive_irm_config?: Types.Maybe<AdaptiveIrmConfigFieldsFragment>, fixed_rate_irm_config?: Types.Maybe<FixedRateIrmConfigFieldsFragment>, kinked_irm_config?: Types.Maybe<KinkedIrmConfigFieldsFragment> }
 );
 
-export type VaultProtocolCapsFieldsFragment = Pick<Types.VaultProtocolCaps, 'vault_address' | 'protocol_module_address' | 'protocol_module_name' | 'protocol_struct_name' | 'borrow_cap' | 'borrow_enabled' | 'supply_enabled'>;
-
-export type VaultSettingsFieldsFragment = Pick<Types.VaultSettings, 'vault_address' | 'auto_socialize_debt_enabled' | 'emergency_withdraw_enabled' | 'fee_store_address' | 'flashloan_enabled' | 'flashloan_fee_rate' | 'flashloan_fee_store_address' | 'interest_fee_rate' | 'irm_kind' | 'is_paused'>;
+export type VaultSettingsFieldsFragment = Pick<Types.VaultSettings, 'vault_address' | 'auto_socialize_debt_enabled' | 'emergency_withdraw_enabled' | 'fee_store_address' | 'flashloan_enabled' | 'flashloan_fee_rate' | 'flashloan_fee_store_address' | 'interest_fee_rate' | 'irm_kind' | 'paused'>;
 
 export type VaultStateActivitiesFieldsFragment = Pick<Types.VaultStatesActivities, 'bad_debt' | 'cash' | 'current_interest_rate' | 'event_index' | 'last_interest_update_time' | 'timestamp' | 'total_borrows' | 'total_debt_shares' | 'total_shares' | 'transaction_version' | 'vault_address'>;
+
+export type VaultUserSettingFieldsFragment = Pick<Types.VaultUserSetting, 'vault' | 'user' | 'borrow_cap' | 'borrow_permission' | 'deposit_permission' | 'withdraw_permission'>;
 
 export type GetActiveVaultsQueryVariables = Types.Exact<{
   limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
@@ -66,24 +69,6 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
-
-export type GetBorrowRiskParametersByConfigAddressQueryVariables = Types.Exact<{
-  configAddress: Types.Scalars['String']['input'];
-  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-}>;
-
-
-export type GetBorrowRiskParametersByConfigAddressQuery = { borrow_risk_parameters_current: Array<BorrowRiskParametersFieldsFragment> };
-
-export type GetCollateralRiskParametersByConfigAddressQueryVariables = Types.Exact<{
-  configAddress: Types.Scalars['String']['input'];
-  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-}>;
-
-
-export type GetCollateralRiskParametersByConfigAddressQuery = { collateral_risk_parameters_current: Array<CollateralRiskParametersFieldsFragment> };
 
 export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
   baseAsset: Types.Scalars['String']['input'];
@@ -181,3 +166,12 @@ export type GetVaultsWithHighYieldQueryVariables = Types.Exact<{
 
 
 export type GetVaultsWithHighYieldQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetWhitelistedBorrowMarketsByProtocolQueryVariables = Types.Exact<{
+  protocol: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetWhitelistedBorrowMarketsByProtocolQuery = { borrow_market: Array<BorrowMarketFieldsFragment> };

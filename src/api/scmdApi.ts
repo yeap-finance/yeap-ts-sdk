@@ -3,12 +3,9 @@
 
 import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
 import { getPositionsByOwner } from "../internal";
-import {
-  getBorrowRiskParametersByConfigAddress,
-  getCollateralRiskParametersByConfigAddress,
-} from "../internal/riskParameters";
-import { ScmdConfig, SCMDPosition } from "./entities";
+import { SCMDPosition, BorrowMarket } from "./entities";
 import { YeapConfig } from "./yeapConfig";
+import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
 
 /**
  * A class to query SCMD position-related data from the Yeap indexer.
@@ -28,45 +25,9 @@ export class ScmdApi {
     this.protocolAddress = AccountAddress.fromString(config.yeapScmdProtocolAddress);
   }
 
-  get configAddress(): AccountAddress {
-    return createObjectAddress(this.protocolAddress, "scmd_protocol_config");
-  }
-
-  /**
-   * Get SCMD configuration including collateral and borrow risk parameters.
-   *
-   * @returns Promise containing the SCMD configuration with risk parameters
-   *
-   * @example
-   * ```typescript
-   * const scmdConfig = await yeap.scmdApi.getConfig();
-   *
-   * // Get supported collateral configurations
-   * const collateralConfigs = scmdConfig.supportedCollateralConfigs();
-   * console.log(`${collateralConfigs.size} collateral types supported`);
-   *
-   * // Get supported vault configurations
-   * const vaultConfigs = scmdConfig.supportedVaultConfigs();
-   * console.log(`${vaultConfigs.size} vault configurations available`);
-   * ```
-   * @group Configuration
-   */
-  async getConfig(): Promise<ScmdConfig> {
-    // Fetch both collateral and borrow risk parameters in parallel
-    const [collateralParams, borrowParams] = await Promise.all([
-      getCollateralRiskParametersByConfigAddress({
-        yeapConfig: this.config,
-        configAddress: this.configAddress.toString(),
-      }),
-      getBorrowRiskParametersByConfigAddress({
-        yeapConfig: this.config,
-        configAddress: this.configAddress.toString(),
-      }),
-    ]);
-
-    // Create and return the ScmdConfig with the fetched data
-    return new ScmdConfig(this.config, collateralParams, borrowParams);
-  }
+  // get goveranceObjectAddress(): AccountAddress {
+  //   return createObjectAddress(this.protocolAddress, "scmd_protocol_config");
+  // }
 
   /**
    * Get positions by owner address.
@@ -101,5 +62,28 @@ export class ScmdApi {
     });
 
     return positions.map((position) => new SCMDPosition(this.config, position));
+  }
+
+  /**
+   * Get all whitelisted borrow markets for this SCMD protocol.
+   * @param limit - Max number of markets to return (optional)
+   * @param offset - Pagination offset (optional)
+   * @returns Array of BorrowMarket entities
+   * @group Markets
+   */
+  async getAllMarkets(limit?: number, offset?: number): Promise<BorrowMarket[]> {
+    const protocol = this.protocolAddress.toString();
+    const markets = await getWhitelistedBorrowMarketsByProtocol({
+      yeapConfig: this.config,
+      protocol,
+      limit,
+      offset,
+    });
+
+    return markets.map((m) => new BorrowMarket(this.config, m));
+  }
+
+  get protocolName(): string {
+    return `${this.config.yeapScmdProtocolAddress}::protocol_handle::SCMDProtocol`;
   }
 }

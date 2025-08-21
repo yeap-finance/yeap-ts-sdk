@@ -8,5 +8,5 @@ fragment VaultSettingsFields on vault_settings {
   flashloan_fee_store_address
   interest_fee_rate
   irm_kind
-  is_paused
+  paused
 }

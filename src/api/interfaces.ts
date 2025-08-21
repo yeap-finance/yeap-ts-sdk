@@ -615,15 +615,15 @@ export interface CollateralRiskParameters {
 }
 
 /**
- * Borrow risk parameters configuration (clean interface)
+ * Borrow risk parameters (aligned to current fragment fields)
  */
 export interface BorrowRiskParameters {
   /** Borrowing weight (brw) */
   brw: number;
   /** Collateral asset address */
   collateral: AccountAddress;
-  /** Risk configuration address */
-  configAddress: AccountAddress;
+  /** Borrow market address */
+  market: AccountAddress;
   /** Vault address */
   vault: AccountAddress;
 }
