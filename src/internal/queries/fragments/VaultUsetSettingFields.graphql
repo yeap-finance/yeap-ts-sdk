@@ -1,0 +1,8 @@
+fragment VaultUserSettingFields on vault_user_setting {
+  vault
+  user
+  borrow_cap
+  borrow_permission
+  deposit_permission
+  withdraw_permission
+}

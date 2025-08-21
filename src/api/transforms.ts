@@ -12,15 +12,8 @@ import {
   YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
-  YeapVaultBadDebtActivity,
-  YeapVaultEmergencyActivity,
-  YeapVaultFlashloanActivity,
   YeapVaultProtocolCaps,
-  YeapVaultStateActivity,
-  YeapPosition,
   YeapOracleRouterConfig,
-  CollateralRiskParameters,
-  BorrowRiskParameters,
 } from "./interfaces";
 import {
   FungibleAssetBalanceFieldsFragment,
@@ -29,8 +22,6 @@ import {
   VaultInfoFieldsFragment,
   OracleRouterConfigFieldsFragment,
 } from "../types/generated/operations";
-import { CollateralRiskParametersFieldsFragment, BorrowRiskParametersFieldsFragment } from "../types";
-import { AccountAddress } from "@aptos-labs/ts-sdk";
 
 type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
 type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
@@ -40,7 +31,6 @@ type RawVaultSettings = RawVaultInfo["settings"];
 type RawAdaptiveIrmConfig = VaultInfoFieldsFragment["adaptive_irm_config"];
 type RawFixedRateIrmConfig = VaultInfoFieldsFragment["fixed_rate_irm_config"];
 type RawKinkedIrmConfig = VaultInfoFieldsFragment["kinked_irm_config"];
-type RawVaultProtocolCaps = VaultInfoFieldsFragment["protocol_configs"][0];
 type RawOracleRouterConfig = OracleRouterConfigFieldsFragment;
 
 /**
@@ -90,7 +80,7 @@ export function transformVaultSettings(raw: RawVaultSettings): YeapVaultSettings
     flashloanFeeStoreAddress: raw.flashloan_fee_store_address || null,
     interestFeeRate: raw.interest_fee_rate || null,
     irmKind: raw.irm_kind ? Number(raw.irm_kind) : null,
-    isPaused: raw.is_paused ?? false,
+  isPaused: raw.paused ?? false,
   };
 }
 
@@ -201,22 +191,6 @@ export function transformKinkedIrmConfig(raw: RawKinkedIrmConfig): YeapKinkedIrm
   };
 }
 
-/**
- * Transform raw GraphQL vault protocol caps to clean interface
- * @internal
- */
-export function transformVaultProtocolCaps(raw: RawVaultProtocolCaps): YeapVaultProtocolCaps | null {
-  if (!raw) return null;
-  return {
-    vaultAddress: raw.vault_address || "",
-    protocolModuleAddress: raw.protocol_module_address || null,
-    protocolModuleName: raw.protocol_module_name || null,
-    protocolStructName: raw.protocol_struct_name || null,
-    borrowCap: raw.borrow_cap || null,
-    borrowEnabled: raw.borrow_enabled ?? null,
-    supplyEnabled: raw.supply_enabled ?? null,
-  };
-}
 
 /**
  * Transform raw GraphQL fungible asset balance to clean interface
@@ -250,36 +224,5 @@ export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOra
   };
 }
 
-/**
- * Transform raw GraphQL collateral risk parameters to clean interface
- * @internal
- */
-export function transformCollateralRiskParameters(
-  raw: CollateralRiskParametersFieldsFragment,
-): CollateralRiskParameters | null {
-  if (!raw) return null;
-  return {
-    borrowVaultMaxNum: Number(raw.borrow_vault_max_num || 0),
-    collateral: AccountAddress.fromString(raw.collateral),
-    configAddress: AccountAddress.fromString(raw.config_address),
-    liquidationBonusBps: Number(raw.liquidation_bonus_bps || 0),
-    lltv: Number(raw.lltv || 0),
-    ltv: Number(raw.ltv || 0),
-    oracle: AccountAddress.fromString(raw.oracle || "0x0"),
-    riskFactor: Number(raw.risk_factor || 0),
-  };
-}
 
-/**
- * Transform raw GraphQL borrow risk parameters to clean interface
- * @internal
- */
-export function transformBorrowRiskParameters(raw: BorrowRiskParametersFieldsFragment): BorrowRiskParameters | null {
-  if (!raw) return null;
-  return {
-    brw: Number(raw.brw || 0),
-    collateral: AccountAddress.fromString(raw.collateral),
-    configAddress: AccountAddress.fromString(raw.config_address),
-    vault: AccountAddress.fromString(raw.vault),
-  };
-}
+

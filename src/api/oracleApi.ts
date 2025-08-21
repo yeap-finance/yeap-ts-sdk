@@ -62,7 +62,7 @@ export class OracleApi {
       if (this.config.aptosClient) {
         let resource = await this.config.aptosClient.getAccountResource({
           accountAddress: oracleRouter,
-          resourceType: `${this.config.getYeapOracleAddress()}::oracle_router::OracleRouterConfig`
+          resourceType: `${this.config.yeapOracleAddress}::oracle_router::OracleRouterConfig`
         });
         if (!resource) {
           // If no resource found, it means the router does not exist

@@ -5,6 +5,7 @@ import { YeapConfig } from "../yeapConfig";
 import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata, YeapVaultInfo } from "../interfaces";
 import { transformFungibleAssetBalance, transformFungibleAssetMetadata, transformVaultInfo } from "../transforms";
 import { PositionFieldsFragment } from "../../types/generated/operations";
+import { BorrowMarket } from "./borrowMarket";
 
 // Raw data type from GraphQL
 type RawPositionData = PositionFieldsFragment;
@@ -58,28 +59,32 @@ export class SCMDPosition {
   constructor(config: YeapConfig, rawData: RawPositionData) {
     this.config = config;
     this._rawPositionData = rawData;
-    this.positionAddress = rawData.position_address;
+    this.positionAddress = rawData.position;
   }
 
   /**
    * Get the position owner address.
    */
-  get ownerAddress(): string | null {
-    return this._rawPositionData.owner_address || null;
+  get ownerAddress(): string {
+    return this._rawPositionData.owner!;
   }
 
   /**
-   * Get the collateral asset address.
+   * Get the collateral store address.
    */
-  get collateral(): string | null {
-    return this._rawPositionData.collateral || null;
+  get collateral(): string {
+    return this._rawPositionData.collateral!;
   }
 
   /**
    * Get the collateral type.
    */
-  get collateralType(): string | null {
-    return this._rawPositionData.collateral_type || null;
+  get market(): BorrowMarket  {
+    if (!this._rawPositionData.market) {
+      throw new Error("Market data is not available for this position");
+    }
+
+    return new BorrowMarket(this.config,  this._rawPositionData.market_info!);
   }
 
   /**
@@ -124,8 +129,8 @@ export class SCMDPosition {
     const rawDebtStores = this._rawPositionData.debt_stores || [];
 
     return rawDebtStores.map((store) => ({
-      debtStoreAddress: store.debt_store_address!,
-      vaultAddress: store.vault_address!,
+      debtStoreAddress: store.debt_store!,
+      vaultAddress: store.vault!,
       debtAssetBalance: store.debt_asset_balance ? transformFungibleAssetBalance(store.debt_asset_balance)! : undefined,
       //   vaultInfo: store.vault_info ? transformVaultInfo(store.vault_info) : null,
     }));

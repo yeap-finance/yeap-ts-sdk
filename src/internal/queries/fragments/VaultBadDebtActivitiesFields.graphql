@@ -6,7 +6,6 @@ fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
   timestamp
   bad_debt_amount
   bad_debt_shares
-  borrow_protocol
   debt_store_address
   total_bad_debt_after
   total_bad_debt_before

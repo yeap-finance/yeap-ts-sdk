@@ -6,4 +6,4 @@ export { Vault } from "./vault";
 export { SCMDPosition, PositionDebtStore } from "./scmdPosition";
 export { OracleConfig } from "./oracleConfig";
 export { OracleRouter } from "./oracleRouter";
-export { ScmdConfig } from "./scmdConfig";
+export { BorrowMarket } from "./borrowMarket";

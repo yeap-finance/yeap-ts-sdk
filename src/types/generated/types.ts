@@ -1611,13 +1611,143 @@ export type BlockMetadataTransactionsStreamCursorValueInput = {
   version?: InputMaybe<Scalars['bigint']['input']>;
 };
 
+/** columns and relationships of "borrow_market" */
+export type BorrowMarket = {
+  /** An array relationship */
+  borrow_risk_parameters: Array<BorrowRiskParametersCurrent>;
+  collateral?: Maybe<Scalars['String']['output']>;
+  crf?: Maybe<Scalars['numeric']['output']>;
+  liquidation_bonus_bps?: Maybe<Scalars['numeric']['output']>;
+  lltv?: Maybe<Scalars['numeric']['output']>;
+  ltv?: Maybe<Scalars['numeric']['output']>;
+  market: Scalars['String']['output'];
+  max_borrowable_vaults?: Maybe<Scalars['numeric']['output']>;
+  oracle?: Maybe<Scalars['String']['output']>;
+  protocol?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['numeric']['output']>;
+  whitelisted?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+/** columns and relationships of "borrow_market" */
+export type BorrowMarketBorrowRiskParametersArgs = {
+  distinct_on?: InputMaybe<Array<BorrowRiskParametersCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowRiskParametersCurrentOrderBy>>;
+  where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+/** Boolean expression to filter rows from the table "borrow_market". All fields are combined with a logical 'AND'. */
+export type BorrowMarketBoolExp = {
+  _and?: InputMaybe<Array<BorrowMarketBoolExp>>;
+  _not?: InputMaybe<BorrowMarketBoolExp>;
+  _or?: InputMaybe<Array<BorrowMarketBoolExp>>;
+  borrow_risk_parameters?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  crf?: InputMaybe<NumericComparisonExp>;
+  liquidation_bonus_bps?: InputMaybe<NumericComparisonExp>;
+  lltv?: InputMaybe<NumericComparisonExp>;
+  ltv?: InputMaybe<NumericComparisonExp>;
+  market?: InputMaybe<StringComparisonExp>;
+  max_borrowable_vaults?: InputMaybe<NumericComparisonExp>;
+  oracle?: InputMaybe<StringComparisonExp>;
+  protocol?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+  whitelisted?: InputMaybe<BooleanComparisonExp>;
+};
+
+/** Ordering options when selecting data from "borrow_market". */
+export type BorrowMarketOrderBy = {
+  borrow_risk_parameters_aggregate?: InputMaybe<BorrowRiskParametersCurrentAggregateOrderBy>;
+  collateral?: InputMaybe<OrderBy>;
+  crf?: InputMaybe<OrderBy>;
+  liquidation_bonus_bps?: InputMaybe<OrderBy>;
+  lltv?: InputMaybe<OrderBy>;
+  ltv?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
+  max_borrowable_vaults?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  protocol?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  whitelisted?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "borrow_market" */
+export enum BorrowMarketSelectColumn {
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  Crf = 'crf',
+  /** column name */
+  LiquidationBonusBps = 'liquidation_bonus_bps',
+  /** column name */
+  Lltv = 'lltv',
+  /** column name */
+  Ltv = 'ltv',
+  /** column name */
+  Market = 'market',
+  /** column name */
+  MaxBorrowableVaults = 'max_borrowable_vaults',
+  /** column name */
+  Oracle = 'oracle',
+  /** column name */
+  Protocol = 'protocol',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  Whitelisted = 'whitelisted'
+}
+
+/** Streaming cursor of the table "borrow_market" */
+export type BorrowMarketStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: BorrowMarketStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BorrowMarketStreamCursorValueInput = {
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  crf?: InputMaybe<Scalars['numeric']['input']>;
+  liquidation_bonus_bps?: InputMaybe<Scalars['numeric']['input']>;
+  lltv?: InputMaybe<Scalars['numeric']['input']>;
+  ltv?: InputMaybe<Scalars['numeric']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
+  max_borrowable_vaults?: InputMaybe<Scalars['numeric']['input']>;
+  oracle?: InputMaybe<Scalars['String']['input']>;
+  protocol?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+  whitelisted?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** columns and relationships of "borrow_risk_parameters_current" */
 export type BorrowRiskParametersCurrent = {
   brw?: Maybe<Scalars['numeric']['output']>;
   collateral: Scalars['String']['output'];
-  config_address: Scalars['String']['output'];
-  enabled?: Maybe<Scalars['Boolean']['output']>;
+  market: Scalars['String']['output'];
   vault: Scalars['String']['output'];
+};
+
+/** order by aggregate values of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentAggregateOrderBy = {
+  avg?: InputMaybe<BorrowRiskParametersCurrentAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<BorrowRiskParametersCurrentMaxOrderBy>;
+  min?: InputMaybe<BorrowRiskParametersCurrentMinOrderBy>;
+  stddev?: InputMaybe<BorrowRiskParametersCurrentStddevOrderBy>;
+  stddev_pop?: InputMaybe<BorrowRiskParametersCurrentStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<BorrowRiskParametersCurrentStddevSampOrderBy>;
+  sum?: InputMaybe<BorrowRiskParametersCurrentSumOrderBy>;
+  var_pop?: InputMaybe<BorrowRiskParametersCurrentVarPopOrderBy>;
+  var_samp?: InputMaybe<BorrowRiskParametersCurrentVarSampOrderBy>;
+  variance?: InputMaybe<BorrowRiskParametersCurrentVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentAvgOrderBy = {
+  brw?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to filter rows from the table "borrow_risk_parameters_current". All fields are combined with a logical 'AND'. */
@@ -1627,17 +1757,31 @@ export type BorrowRiskParametersCurrentBoolExp = {
   _or?: InputMaybe<Array<BorrowRiskParametersCurrentBoolExp>>;
   brw?: InputMaybe<NumericComparisonExp>;
   collateral?: InputMaybe<StringComparisonExp>;
-  config_address?: InputMaybe<StringComparisonExp>;
-  enabled?: InputMaybe<BooleanComparisonExp>;
+  market?: InputMaybe<StringComparisonExp>;
   vault?: InputMaybe<StringComparisonExp>;
+};
+
+/** order by max() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentMaxOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+  collateral?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentMinOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+  collateral?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** Ordering options when selecting data from "borrow_risk_parameters_current". */
 export type BorrowRiskParametersCurrentOrderBy = {
   brw?: InputMaybe<OrderBy>;
   collateral?: InputMaybe<OrderBy>;
-  config_address?: InputMaybe<OrderBy>;
-  enabled?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
   vault?: InputMaybe<OrderBy>;
 };
 
@@ -1648,12 +1792,25 @@ export enum BorrowRiskParametersCurrentSelectColumn {
   /** column name */
   Collateral = 'collateral',
   /** column name */
-  ConfigAddress = 'config_address',
-  /** column name */
-  Enabled = 'enabled',
+  Market = 'market',
   /** column name */
   Vault = 'vault'
 }
+
+/** order by stddev() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentStddevOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentStddevPopOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentStddevSampOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
 
 /** Streaming cursor of the table "borrow_risk_parameters_current" */
 export type BorrowRiskParametersCurrentStreamCursorInput = {
@@ -1667,9 +1824,28 @@ export type BorrowRiskParametersCurrentStreamCursorInput = {
 export type BorrowRiskParametersCurrentStreamCursorValueInput = {
   brw?: InputMaybe<Scalars['numeric']['input']>;
   collateral?: InputMaybe<Scalars['String']['input']>;
-  config_address?: InputMaybe<Scalars['String']['input']>;
-  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
   vault?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentSumOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentVarPopOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentVarSampOrderBy = {
+  brw?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "borrow_risk_parameters_current" */
+export type BorrowRiskParametersCurrentVarianceOrderBy = {
+  brw?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "legacy_migration_v1.coin_activities" */
@@ -2377,85 +2553,6 @@ export type CoinSupplyStreamCursorValueInput = {
   transaction_epoch?: InputMaybe<Scalars['bigint']['input']>;
   transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "collateral_risk_parameters_current" */
-export type CollateralRiskParametersCurrent = {
-  borrow_vault_max_num?: Maybe<Scalars['numeric']['output']>;
-  collateral: Scalars['String']['output'];
-  config_address: Scalars['String']['output'];
-  liquidation_bonus_bps?: Maybe<Scalars['numeric']['output']>;
-  lltv?: Maybe<Scalars['numeric']['output']>;
-  ltv?: Maybe<Scalars['numeric']['output']>;
-  oracle?: Maybe<Scalars['String']['output']>;
-  risk_factor?: Maybe<Scalars['numeric']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "collateral_risk_parameters_current". All fields are combined with a logical 'AND'. */
-export type CollateralRiskParametersCurrentBoolExp = {
-  _and?: InputMaybe<Array<CollateralRiskParametersCurrentBoolExp>>;
-  _not?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
-  _or?: InputMaybe<Array<CollateralRiskParametersCurrentBoolExp>>;
-  borrow_vault_max_num?: InputMaybe<NumericComparisonExp>;
-  collateral?: InputMaybe<StringComparisonExp>;
-  config_address?: InputMaybe<StringComparisonExp>;
-  liquidation_bonus_bps?: InputMaybe<NumericComparisonExp>;
-  lltv?: InputMaybe<NumericComparisonExp>;
-  ltv?: InputMaybe<NumericComparisonExp>;
-  oracle?: InputMaybe<StringComparisonExp>;
-  risk_factor?: InputMaybe<NumericComparisonExp>;
-};
-
-/** Ordering options when selecting data from "collateral_risk_parameters_current". */
-export type CollateralRiskParametersCurrentOrderBy = {
-  borrow_vault_max_num?: InputMaybe<OrderBy>;
-  collateral?: InputMaybe<OrderBy>;
-  config_address?: InputMaybe<OrderBy>;
-  liquidation_bonus_bps?: InputMaybe<OrderBy>;
-  lltv?: InputMaybe<OrderBy>;
-  ltv?: InputMaybe<OrderBy>;
-  oracle?: InputMaybe<OrderBy>;
-  risk_factor?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "collateral_risk_parameters_current" */
-export enum CollateralRiskParametersCurrentSelectColumn {
-  /** column name */
-  BorrowVaultMaxNum = 'borrow_vault_max_num',
-  /** column name */
-  Collateral = 'collateral',
-  /** column name */
-  ConfigAddress = 'config_address',
-  /** column name */
-  LiquidationBonusBps = 'liquidation_bonus_bps',
-  /** column name */
-  Lltv = 'lltv',
-  /** column name */
-  Ltv = 'ltv',
-  /** column name */
-  Oracle = 'oracle',
-  /** column name */
-  RiskFactor = 'risk_factor'
-}
-
-/** Streaming cursor of the table "collateral_risk_parameters_current" */
-export type CollateralRiskParametersCurrentStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CollateralRiskParametersCurrentStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CollateralRiskParametersCurrentStreamCursorValueInput = {
-  borrow_vault_max_num?: InputMaybe<Scalars['numeric']['input']>;
-  collateral?: InputMaybe<Scalars['String']['input']>;
-  config_address?: InputMaybe<Scalars['String']['input']>;
-  liquidation_bonus_bps?: InputMaybe<Scalars['numeric']['input']>;
-  lltv?: InputMaybe<Scalars['numeric']['input']>;
-  ltv?: InputMaybe<Scalars['numeric']['input']>;
-  oracle?: InputMaybe<Scalars['String']['input']>;
-  risk_factor?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "legacy_migration_v1.collection_datas" */
@@ -6847,12 +6944,12 @@ export type FungibleAssetMetadataStreamCursorValueInput = {
 export type HyperionLlpBadDebtActivities = {
   bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
   bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
-  debt_store_address?: Maybe<Scalars['String']['output']>;
+  debt_store?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "hyperion_llp_bad_debt_activities". All fields are combined with a logical 'AND'. */
@@ -6862,24 +6959,24 @@ export type HyperionLlpBadDebtActivitiesBoolExp = {
   _or?: InputMaybe<Array<HyperionLlpBadDebtActivitiesBoolExp>>;
   bad_debt_amount?: InputMaybe<NumericComparisonExp>;
   bad_debt_shares?: InputMaybe<NumericComparisonExp>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_bad_debt_activities". */
 export type HyperionLlpBadDebtActivitiesOrderBy = {
   bad_debt_amount?: InputMaybe<OrderBy>;
   bad_debt_shares?: InputMaybe<OrderBy>;
-  debt_store_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "hyperion_llp_bad_debt_activities" */
@@ -6889,17 +6986,17 @@ export enum HyperionLlpBadDebtActivitiesSelectColumn {
   /** column name */
   BadDebtShares = 'bad_debt_shares',
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
   EventIndex = 'event_index',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Timestamp = 'timestamp',
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "hyperion_llp_bad_debt_activities" */
@@ -6914,23 +7011,23 @@ export type HyperionLlpBadDebtActivitiesStreamCursorInput = {
 export type HyperionLlpBadDebtActivitiesStreamCursorValueInput = {
   bad_debt_amount?: InputMaybe<Scalars['numeric']['input']>;
   bad_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "hyperion_llp_debt_status_activities" */
 export type HyperionLlpDebtStatusActivities = {
-  debt_store_address?: Maybe<Scalars['String']['output']>;
+  debt_store?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "hyperion_llp_debt_status_activities". All fields are combined with a logical 'AND'. */
@@ -6938,34 +7035,34 @@ export type HyperionLlpDebtStatusActivitiesBoolExp = {
   _and?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesBoolExp>>;
   _not?: InputMaybe<HyperionLlpDebtStatusActivitiesBoolExp>;
   _or?: InputMaybe<Array<HyperionLlpDebtStatusActivitiesBoolExp>>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   status?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_debt_status_activities". */
 export type HyperionLlpDebtStatusActivitiesOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   status?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "hyperion_llp_debt_status_activities" */
 export enum HyperionLlpDebtStatusActivitiesSelectColumn {
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
   EventIndex = 'event_index',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Status = 'status',
   /** column name */
@@ -6973,7 +7070,7 @@ export enum HyperionLlpDebtStatusActivitiesSelectColumn {
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "hyperion_llp_debt_status_activities" */
@@ -6986,13 +7083,13 @@ export type HyperionLlpDebtStatusActivitiesStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type HyperionLlpDebtStatusActivitiesStreamCursorValueInput = {
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "hyperion_llp_liquidation_activities" */
@@ -7001,11 +7098,11 @@ export type HyperionLlpLiquidationActivities = {
   collateral_value_before?: Maybe<Scalars['numeric']['output']>;
   event_index: Scalars['numeric']['output'];
   loan_value_before?: Maybe<Scalars['numeric']['output']>;
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   repay_amount?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "hyperion_llp_liquidation_activities". All fields are combined with a logical 'AND'. */
@@ -7017,11 +7114,11 @@ export type HyperionLlpLiquidationActivitiesBoolExp = {
   collateral_value_before?: InputMaybe<NumericComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   loan_value_before?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   repay_amount?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_liquidation_activities". */
@@ -7030,11 +7127,11 @@ export type HyperionLlpLiquidationActivitiesOrderBy = {
   collateral_value_before?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   loan_value_before?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   repay_amount?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "hyperion_llp_liquidation_activities" */
@@ -7048,7 +7145,7 @@ export enum HyperionLlpLiquidationActivitiesSelectColumn {
   /** column name */
   LoanValueBefore = 'loan_value_before',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   RepayAmount = 'repay_amount',
   /** column name */
@@ -7056,7 +7153,7 @@ export enum HyperionLlpLiquidationActivitiesSelectColumn {
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "hyperion_llp_liquidation_activities" */
@@ -7073,19 +7170,19 @@ export type HyperionLlpLiquidationActivitiesStreamCursorValueInput = {
   collateral_value_before?: InputMaybe<Scalars['numeric']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   loan_value_before?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   repay_amount?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "hyperion_llp_position_current" */
 export type HyperionLlpPositionCurrent = {
-  collateral?: Maybe<Scalars['String']['output']>;
-  collateral_type?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  position_address: Scalars['String']['output'];
+  collateral: Scalars['String']['output'];
+  market: Scalars['String']['output'];
+  owner: Scalars['String']['output'];
+  position: Scalars['String']['output'];
   status?: Maybe<Scalars['numeric']['output']>;
 };
 
@@ -7095,18 +7192,18 @@ export type HyperionLlpPositionCurrentBoolExp = {
   _not?: InputMaybe<HyperionLlpPositionCurrentBoolExp>;
   _or?: InputMaybe<Array<HyperionLlpPositionCurrentBoolExp>>;
   collateral?: InputMaybe<StringComparisonExp>;
-  collateral_type?: InputMaybe<StringComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  market?: InputMaybe<StringComparisonExp>;
+  owner?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   status?: InputMaybe<NumericComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_position_current". */
 export type HyperionLlpPositionCurrentOrderBy = {
   collateral?: InputMaybe<OrderBy>;
-  collateral_type?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
+  owner?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   status?: InputMaybe<OrderBy>;
 };
 
@@ -7115,11 +7212,11 @@ export enum HyperionLlpPositionCurrentSelectColumn {
   /** column name */
   Collateral = 'collateral',
   /** column name */
-  CollateralType = 'collateral_type',
+  Market = 'market',
   /** column name */
-  OwnerAddress = 'owner_address',
+  Owner = 'owner',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Status = 'status'
 }
@@ -7135,17 +7232,18 @@ export type HyperionLlpPositionCurrentStreamCursorInput = {
 /** Initial value of the column from where the streaming should start */
 export type HyperionLlpPositionCurrentStreamCursorValueInput = {
   collateral?: InputMaybe<Scalars['String']['input']>;
-  collateral_type?: InputMaybe<Scalars['String']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "hyperion_llp_position_debt_stores" */
 export type HyperionLlpPositionDebtStores = {
-  debt_store_address?: Maybe<Scalars['String']['output']>;
-  position_address: Scalars['String']['output'];
-  vault_address: Scalars['String']['output'];
+  debt_store?: Maybe<Scalars['String']['output']>;
+  position: Scalars['String']['output'];
+  status?: Maybe<Scalars['numeric']['output']>;
+  vault: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "hyperion_llp_position_debt_stores". All fields are combined with a logical 'AND'. */
@@ -7153,26 +7251,30 @@ export type HyperionLlpPositionDebtStoresBoolExp = {
   _and?: InputMaybe<Array<HyperionLlpPositionDebtStoresBoolExp>>;
   _not?: InputMaybe<HyperionLlpPositionDebtStoresBoolExp>;
   _or?: InputMaybe<Array<HyperionLlpPositionDebtStoresBoolExp>>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "hyperion_llp_position_debt_stores". */
 export type HyperionLlpPositionDebtStoresOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "hyperion_llp_position_debt_stores" */
 export enum HyperionLlpPositionDebtStoresSelectColumn {
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
-  VaultAddress = 'vault_address'
+  Status = 'status',
+  /** column name */
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "hyperion_llp_position_debt_stores" */
@@ -7185,9 +7287,10 @@ export type HyperionLlpPositionDebtStoresStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type HyperionLlpPositionDebtStoresStreamCursorValueInput = {
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "indexer_status" */
@@ -8476,6 +8579,10 @@ export type QueryRoot = {
   block_metadata_transactions: Array<BlockMetadataTransactions>;
   /** fetch data from the table: "block_metadata_transactions" using primary key columns */
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
+  /** fetch data from the table: "borrow_market" */
+  borrow_market: Array<BorrowMarket>;
+  /** fetch data from the table: "borrow_market" using primary key columns */
+  borrow_market_by_pk?: Maybe<BorrowMarket>;
   /** fetch data from the table: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
@@ -8492,10 +8599,6 @@ export type QueryRoot = {
   coin_supply: Array<CoinSupply>;
   /** fetch data from the table: "coin_supply" using primary key columns */
   coin_supply_by_pk?: Maybe<CoinSupply>;
-  /** fetch data from the table: "collateral_risk_parameters_current" */
-  collateral_risk_parameters_current: Array<CollateralRiskParametersCurrent>;
-  /** fetch data from the table: "collateral_risk_parameters_current" using primary key columns */
-  collateral_risk_parameters_current_by_pk?: Maybe<CollateralRiskParametersCurrent>;
   /** fetch data from the table: "legacy_migration_v1.collection_datas" */
   collection_datas: Array<CollectionDatas>;
   /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
@@ -8782,10 +8885,6 @@ export type QueryRoot = {
   vault_info_aggregate: VaultInfoAggregate;
   /** fetch data from the table: "vault_info" using primary key columns */
   vault_info_by_pk?: Maybe<VaultInfo>;
-  /** fetch data from the table: "vault_protocol_caps" */
-  vault_protocol_caps: Array<VaultProtocolCaps>;
-  /** fetch aggregated fields from the table: "vault_protocol_caps" */
-  vault_protocol_caps_aggregate: VaultProtocolCapsAggregate;
   /** fetch data from the table: "vault_settings" */
   vault_settings: Array<VaultSettings>;
   /** fetch data from the table: "vault_settings" using primary key columns */
@@ -8796,6 +8895,10 @@ export type QueryRoot = {
   vault_states_activities_aggregate: VaultStatesActivitiesAggregate;
   /** fetch data from the table: "vault_states_activities" using primary key columns */
   vault_states_activities_by_pk?: Maybe<VaultStatesActivities>;
+  /** fetch data from the table: "vault_user_setting" */
+  vault_user_setting: Array<VaultUserSetting>;
+  /** fetch data from the table: "vault_user_setting" using primary key columns */
+  vault_user_setting_by_pk?: Maybe<VaultUserSetting>;
 };
 
 
@@ -8981,6 +9084,20 @@ export type QueryRootBlockMetadataTransactionsByPkArgs = {
 };
 
 
+export type QueryRootBorrowMarketArgs = {
+  distinct_on?: InputMaybe<Array<BorrowMarketSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowMarketOrderBy>>;
+  where?: InputMaybe<BorrowMarketBoolExp>;
+};
+
+
+export type QueryRootBorrowMarketByPkArgs = {
+  market: Scalars['String']['input'];
+};
+
+
 export type QueryRootBorrowRiskParametersCurrentArgs = {
   distinct_on?: InputMaybe<Array<BorrowRiskParametersCurrentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -8992,7 +9109,7 @@ export type QueryRootBorrowRiskParametersCurrentArgs = {
 
 export type QueryRootBorrowRiskParametersCurrentByPkArgs = {
   collateral: Scalars['String']['input'];
-  config_address: Scalars['String']['input'];
+  market: Scalars['String']['input'];
   vault: Scalars['String']['input'];
 };
 
@@ -9045,21 +9162,6 @@ export type QueryRootCoinSupplyArgs = {
 export type QueryRootCoinSupplyByPkArgs = {
   coin_type_hash: Scalars['String']['input'];
   transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type QueryRootCollateralRiskParametersCurrentArgs = {
-  distinct_on?: InputMaybe<Array<CollateralRiskParametersCurrentSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollateralRiskParametersCurrentOrderBy>>;
-  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
-};
-
-
-export type QueryRootCollateralRiskParametersCurrentByPkArgs = {
-  collateral: Scalars['String']['input'];
-  config_address: Scalars['String']['input'];
 };
 
 
@@ -9605,7 +9707,7 @@ export type QueryRootHyperionLlpPositionCurrentArgs = {
 
 
 export type QueryRootHyperionLlpPositionCurrentByPkArgs = {
-  position_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
 };
 
 
@@ -9619,8 +9721,8 @@ export type QueryRootHyperionLlpPositionDebtStoresArgs = {
 
 
 export type QueryRootHyperionLlpPositionDebtStoresByPkArgs = {
-  position_address: Scalars['String']['input'];
-  vault_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
 };
 
 
@@ -9902,7 +10004,7 @@ export type QueryRootScmdPositionCurrentArgs = {
 
 
 export type QueryRootScmdPositionCurrentByPkArgs = {
-  position_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
 };
 
 
@@ -9916,8 +10018,8 @@ export type QueryRootScmdPositionDebtStoresArgs = {
 
 
 export type QueryRootScmdPositionDebtStoresByPkArgs = {
-  position_address: Scalars['String']['input'];
-  vault_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
 };
 
 
@@ -10175,24 +10277,6 @@ export type QueryRootVaultInfoByPkArgs = {
 };
 
 
-export type QueryRootVaultProtocolCapsArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
-export type QueryRootVaultProtocolCapsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
 export type QueryRootVaultSettingsArgs = {
   distinct_on?: InputMaybe<Array<VaultSettingsSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -10230,16 +10314,31 @@ export type QueryRootVaultStatesActivitiesByPkArgs = {
   transaction_version: Scalars['numeric']['input'];
 };
 
+
+export type QueryRootVaultUserSettingArgs = {
+  distinct_on?: InputMaybe<Array<VaultUserSettingSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<VaultUserSettingOrderBy>>;
+  where?: InputMaybe<VaultUserSettingBoolExp>;
+};
+
+
+export type QueryRootVaultUserSettingByPkArgs = {
+  user: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
 /** columns and relationships of "scmd_bad_debt_activities" */
 export type ScmdBadDebtActivities = {
   bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
   bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
-  debt_store_address?: Maybe<Scalars['String']['output']>;
+  debt_store?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "scmd_bad_debt_activities". All fields are combined with a logical 'AND'. */
@@ -10249,24 +10348,24 @@ export type ScmdBadDebtActivitiesBoolExp = {
   _or?: InputMaybe<Array<ScmdBadDebtActivitiesBoolExp>>;
   bad_debt_amount?: InputMaybe<NumericComparisonExp>;
   bad_debt_shares?: InputMaybe<NumericComparisonExp>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "scmd_bad_debt_activities". */
 export type ScmdBadDebtActivitiesOrderBy = {
   bad_debt_amount?: InputMaybe<OrderBy>;
   bad_debt_shares?: InputMaybe<OrderBy>;
-  debt_store_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "scmd_bad_debt_activities" */
@@ -10276,17 +10375,17 @@ export enum ScmdBadDebtActivitiesSelectColumn {
   /** column name */
   BadDebtShares = 'bad_debt_shares',
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
   EventIndex = 'event_index',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Timestamp = 'timestamp',
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "scmd_bad_debt_activities" */
@@ -10301,23 +10400,23 @@ export type ScmdBadDebtActivitiesStreamCursorInput = {
 export type ScmdBadDebtActivitiesStreamCursorValueInput = {
   bad_debt_amount?: InputMaybe<Scalars['numeric']['input']>;
   bad_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "scmd_debt_status_activities" */
 export type ScmdDebtStatusActivities = {
-  debt_store_address?: Maybe<Scalars['String']['output']>;
+  debt_store?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "scmd_debt_status_activities". All fields are combined with a logical 'AND'. */
@@ -10325,34 +10424,34 @@ export type ScmdDebtStatusActivitiesBoolExp = {
   _and?: InputMaybe<Array<ScmdDebtStatusActivitiesBoolExp>>;
   _not?: InputMaybe<ScmdDebtStatusActivitiesBoolExp>;
   _or?: InputMaybe<Array<ScmdDebtStatusActivitiesBoolExp>>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   status?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "scmd_debt_status_activities". */
 export type ScmdDebtStatusActivitiesOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   status?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "scmd_debt_status_activities" */
 export enum ScmdDebtStatusActivitiesSelectColumn {
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
   EventIndex = 'event_index',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Status = 'status',
   /** column name */
@@ -10360,7 +10459,7 @@ export enum ScmdDebtStatusActivitiesSelectColumn {
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** Streaming cursor of the table "scmd_debt_status_activities" */
@@ -10373,13 +10472,13 @@ export type ScmdDebtStatusActivitiesStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type ScmdDebtStatusActivitiesStreamCursorValueInput = {
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "scmd_liquidation_activities" */
@@ -10388,11 +10487,11 @@ export type ScmdLiquidationActivities = {
   collateral_value_before?: Maybe<Scalars['numeric']['output']>;
   event_index: Scalars['numeric']['output'];
   loan_value_before?: Maybe<Scalars['numeric']['output']>;
-  position_address?: Maybe<Scalars['String']['output']>;
+  position?: Maybe<Scalars['String']['output']>;
   repay_amount?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
-  vault_address?: Maybe<Scalars['String']['output']>;
+  vault?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "scmd_liquidation_activities" */
@@ -10429,11 +10528,11 @@ export type ScmdLiquidationActivitiesBoolExp = {
   collateral_value_before?: InputMaybe<NumericComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   loan_value_before?: InputMaybe<NumericComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   repay_amount?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
 };
 
 /** order by max() on columns of table "scmd_liquidation_activities" */
@@ -10442,11 +10541,11 @@ export type ScmdLiquidationActivitiesMaxOrderBy = {
   collateral_value_before?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   loan_value_before?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   repay_amount?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** order by min() on columns of table "scmd_liquidation_activities" */
@@ -10455,11 +10554,11 @@ export type ScmdLiquidationActivitiesMinOrderBy = {
   collateral_value_before?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   loan_value_before?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   repay_amount?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** Ordering options when selecting data from "scmd_liquidation_activities". */
@@ -10468,11 +10567,11 @@ export type ScmdLiquidationActivitiesOrderBy = {
   collateral_value_before?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   loan_value_before?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   repay_amount?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "scmd_liquidation_activities" */
@@ -10486,7 +10585,7 @@ export enum ScmdLiquidationActivitiesSelectColumn {
   /** column name */
   LoanValueBefore = 'loan_value_before',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   RepayAmount = 'repay_amount',
   /** column name */
@@ -10494,7 +10593,7 @@ export enum ScmdLiquidationActivitiesSelectColumn {
   /** column name */
   TransactionVersion = 'transaction_version',
   /** column name */
-  VaultAddress = 'vault_address'
+  Vault = 'vault'
 }
 
 /** order by stddev() on columns of table "scmd_liquidation_activities" */
@@ -10541,11 +10640,11 @@ export type ScmdLiquidationActivitiesStreamCursorValueInput = {
   collateral_value_before?: InputMaybe<Scalars['numeric']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   loan_value_before?: InputMaybe<Scalars['numeric']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   repay_amount?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "scmd_liquidation_activities" */
@@ -10590,15 +10689,17 @@ export type ScmdLiquidationActivitiesVarianceOrderBy = {
 
 /** columns and relationships of "scmd_position_current" */
 export type ScmdPositionCurrent = {
-  collateral?: Maybe<Scalars['String']['output']>;
+  collateral: Scalars['String']['output'];
   collateral_asset_balance?: Maybe<CurrentFungibleAssetBalances>;
-  collateral_type?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   debt_stores: Array<ScmdPositionDebtStores>;
   /** An array relationship */
   liquidation_activities: Array<ScmdLiquidationActivities>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  position_address: Scalars['String']['output'];
+  market: Scalars['String']['output'];
+  /** An object relationship */
+  market_info?: Maybe<BorrowMarket>;
+  owner: Scalars['String']['output'];
+  position: Scalars['String']['output'];
   status?: Maybe<Scalars['numeric']['output']>;
 };
 
@@ -10628,22 +10729,24 @@ export type ScmdPositionCurrentBoolExp = {
   _not?: InputMaybe<ScmdPositionCurrentBoolExp>;
   _or?: InputMaybe<Array<ScmdPositionCurrentBoolExp>>;
   collateral?: InputMaybe<StringComparisonExp>;
-  collateral_type?: InputMaybe<StringComparisonExp>;
   debt_stores?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
   liquidation_activities?: InputMaybe<ScmdLiquidationActivitiesBoolExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
+  market?: InputMaybe<StringComparisonExp>;
+  market_info?: InputMaybe<BorrowMarketBoolExp>;
+  owner?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
   status?: InputMaybe<NumericComparisonExp>;
 };
 
 /** Ordering options when selecting data from "scmd_position_current". */
 export type ScmdPositionCurrentOrderBy = {
   collateral?: InputMaybe<OrderBy>;
-  collateral_type?: InputMaybe<OrderBy>;
   debt_stores_aggregate?: InputMaybe<ScmdPositionDebtStoresAggregateOrderBy>;
   liquidation_activities_aggregate?: InputMaybe<ScmdLiquidationActivitiesAggregateOrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
+  market?: InputMaybe<OrderBy>;
+  market_info?: InputMaybe<BorrowMarketOrderBy>;
+  owner?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
   status?: InputMaybe<OrderBy>;
 };
 
@@ -10652,11 +10755,11 @@ export enum ScmdPositionCurrentSelectColumn {
   /** column name */
   Collateral = 'collateral',
   /** column name */
-  CollateralType = 'collateral_type',
+  Market = 'market',
   /** column name */
-  OwnerAddress = 'owner_address',
+  Owner = 'owner',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
   Status = 'status'
 }
@@ -10672,27 +10775,41 @@ export type ScmdPositionCurrentStreamCursorInput = {
 /** Initial value of the column from where the streaming should start */
 export type ScmdPositionCurrentStreamCursorValueInput = {
   collateral?: InputMaybe<Scalars['String']['input']>;
-  collateral_type?: InputMaybe<Scalars['String']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "scmd_position_debt_stores" */
 export type ScmdPositionDebtStores = {
   debt_asset_balance?: Maybe<CurrentFungibleAssetBalances>;
-  debt_store_address?: Maybe<Scalars['String']['output']>;
-  position_address: Scalars['String']['output'];
-  vault_address: Scalars['String']['output'];
+  debt_store?: Maybe<Scalars['String']['output']>;
+  position: Scalars['String']['output'];
+  status?: Maybe<Scalars['numeric']['output']>;
+  vault: Scalars['String']['output'];
   /** An object relationship */
   vault_info?: Maybe<VaultInfo>;
 };
 
 /** order by aggregate values of table "scmd_position_debt_stores" */
 export type ScmdPositionDebtStoresAggregateOrderBy = {
+  avg?: InputMaybe<ScmdPositionDebtStoresAvgOrderBy>;
   count?: InputMaybe<OrderBy>;
   max?: InputMaybe<ScmdPositionDebtStoresMaxOrderBy>;
   min?: InputMaybe<ScmdPositionDebtStoresMinOrderBy>;
+  stddev?: InputMaybe<ScmdPositionDebtStoresStddevOrderBy>;
+  stddev_pop?: InputMaybe<ScmdPositionDebtStoresStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<ScmdPositionDebtStoresStddevSampOrderBy>;
+  sum?: InputMaybe<ScmdPositionDebtStoresSumOrderBy>;
+  var_pop?: InputMaybe<ScmdPositionDebtStoresVarPopOrderBy>;
+  var_samp?: InputMaybe<ScmdPositionDebtStoresVarSampOrderBy>;
+  variance?: InputMaybe<ScmdPositionDebtStoresVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresAvgOrderBy = {
+  status?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to filter rows from the table "scmd_position_debt_stores". All fields are combined with a logical 'AND'. */
@@ -10700,43 +10817,64 @@ export type ScmdPositionDebtStoresBoolExp = {
   _and?: InputMaybe<Array<ScmdPositionDebtStoresBoolExp>>;
   _not?: InputMaybe<ScmdPositionDebtStoresBoolExp>;
   _or?: InputMaybe<Array<ScmdPositionDebtStoresBoolExp>>;
-  debt_store_address?: InputMaybe<StringComparisonExp>;
-  position_address?: InputMaybe<StringComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
+  debt_store?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
   vault_info?: InputMaybe<VaultInfoBoolExp>;
 };
 
 /** order by max() on columns of table "scmd_position_debt_stores" */
 export type ScmdPositionDebtStoresMaxOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** order by min() on columns of table "scmd_position_debt_stores" */
 export type ScmdPositionDebtStoresMinOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
 };
 
 /** Ordering options when selecting data from "scmd_position_debt_stores". */
 export type ScmdPositionDebtStoresOrderBy = {
-  debt_store_address?: InputMaybe<OrderBy>;
-  position_address?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
   vault_info?: InputMaybe<VaultInfoOrderBy>;
 };
 
 /** select columns of table "scmd_position_debt_stores" */
 export enum ScmdPositionDebtStoresSelectColumn {
   /** column name */
-  DebtStoreAddress = 'debt_store_address',
+  DebtStore = 'debt_store',
   /** column name */
-  PositionAddress = 'position_address',
+  Position = 'position',
   /** column name */
-  VaultAddress = 'vault_address'
+  Status = 'status',
+  /** column name */
+  Vault = 'vault'
 }
+
+/** order by stddev() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresStddevOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresStddevPopOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresStddevSampOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
 
 /** Streaming cursor of the table "scmd_position_debt_stores" */
 export type ScmdPositionDebtStoresStreamCursorInput = {
@@ -10748,9 +10886,30 @@ export type ScmdPositionDebtStoresStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type ScmdPositionDebtStoresStreamCursorValueInput = {
-  debt_store_address?: InputMaybe<Scalars['String']['input']>;
-  position_address?: InputMaybe<Scalars['String']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
+  debt_store?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresSumOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresVarPopOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresVarSampOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "scmd_position_debt_stores" */
+export type ScmdPositionDebtStoresVarianceOrderBy = {
+  status?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "signatures" */
@@ -10923,6 +11082,12 @@ export type SubscriptionRoot = {
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
   /** fetch data from the table in a streaming manner: "block_metadata_transactions" */
   block_metadata_transactions_stream: Array<BlockMetadataTransactions>;
+  /** fetch data from the table: "borrow_market" */
+  borrow_market: Array<BorrowMarket>;
+  /** fetch data from the table: "borrow_market" using primary key columns */
+  borrow_market_by_pk?: Maybe<BorrowMarket>;
+  /** fetch data from the table in a streaming manner: "borrow_market" */
+  borrow_market_stream: Array<BorrowMarket>;
   /** fetch data from the table: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
@@ -10949,12 +11114,6 @@ export type SubscriptionRoot = {
   coin_supply_by_pk?: Maybe<CoinSupply>;
   /** fetch data from the table in a streaming manner: "coin_supply" */
   coin_supply_stream: Array<CoinSupply>;
-  /** fetch data from the table: "collateral_risk_parameters_current" */
-  collateral_risk_parameters_current: Array<CollateralRiskParametersCurrent>;
-  /** fetch data from the table: "collateral_risk_parameters_current" using primary key columns */
-  collateral_risk_parameters_current_by_pk?: Maybe<CollateralRiskParametersCurrent>;
-  /** fetch data from the table in a streaming manner: "collateral_risk_parameters_current" */
-  collateral_risk_parameters_current_stream: Array<CollateralRiskParametersCurrent>;
   /** fetch data from the table: "legacy_migration_v1.collection_datas" */
   collection_datas: Array<CollectionDatas>;
   /** fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas" */
@@ -11383,12 +11542,6 @@ export type SubscriptionRoot = {
   vault_info_by_pk?: Maybe<VaultInfo>;
   /** fetch data from the table in a streaming manner: "vault_info" */
   vault_info_stream: Array<VaultInfo>;
-  /** fetch data from the table: "vault_protocol_caps" */
-  vault_protocol_caps: Array<VaultProtocolCaps>;
-  /** fetch aggregated fields from the table: "vault_protocol_caps" */
-  vault_protocol_caps_aggregate: VaultProtocolCapsAggregate;
-  /** fetch data from the table in a streaming manner: "vault_protocol_caps" */
-  vault_protocol_caps_stream: Array<VaultProtocolCaps>;
   /** fetch data from the table: "vault_settings" */
   vault_settings: Array<VaultSettings>;
   /** fetch data from the table: "vault_settings" using primary key columns */
@@ -11403,6 +11556,12 @@ export type SubscriptionRoot = {
   vault_states_activities_by_pk?: Maybe<VaultStatesActivities>;
   /** fetch data from the table in a streaming manner: "vault_states_activities" */
   vault_states_activities_stream: Array<VaultStatesActivities>;
+  /** fetch data from the table: "vault_user_setting" */
+  vault_user_setting: Array<VaultUserSetting>;
+  /** fetch data from the table: "vault_user_setting" using primary key columns */
+  vault_user_setting_by_pk?: Maybe<VaultUserSetting>;
+  /** fetch data from the table in a streaming manner: "vault_user_setting" */
+  vault_user_setting_stream: Array<VaultUserSetting>;
 };
 
 
@@ -11658,6 +11817,27 @@ export type SubscriptionRootBlockMetadataTransactionsStreamArgs = {
 };
 
 
+export type SubscriptionRootBorrowMarketArgs = {
+  distinct_on?: InputMaybe<Array<BorrowMarketSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowMarketOrderBy>>;
+  where?: InputMaybe<BorrowMarketBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowMarketByPkArgs = {
+  market: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootBorrowMarketStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BorrowMarketStreamCursorInput>>;
+  where?: InputMaybe<BorrowMarketBoolExp>;
+};
+
+
 export type SubscriptionRootBorrowRiskParametersCurrentArgs = {
   distinct_on?: InputMaybe<Array<BorrowRiskParametersCurrentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -11669,7 +11849,7 @@ export type SubscriptionRootBorrowRiskParametersCurrentArgs = {
 
 export type SubscriptionRootBorrowRiskParametersCurrentByPkArgs = {
   collateral: Scalars['String']['input'];
-  config_address: Scalars['String']['input'];
+  market: Scalars['String']['input'];
   vault: Scalars['String']['input'];
 };
 
@@ -11757,28 +11937,6 @@ export type SubscriptionRootCoinSupplyStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CoinSupplyStreamCursorInput>>;
   where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type SubscriptionRootCollateralRiskParametersCurrentArgs = {
-  distinct_on?: InputMaybe<Array<CollateralRiskParametersCurrentSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollateralRiskParametersCurrentOrderBy>>;
-  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
-};
-
-
-export type SubscriptionRootCollateralRiskParametersCurrentByPkArgs = {
-  collateral: Scalars['String']['input'];
-  config_address: Scalars['String']['input'];
-};
-
-
-export type SubscriptionRootCollateralRiskParametersCurrentStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CollateralRiskParametersCurrentStreamCursorInput>>;
-  where?: InputMaybe<CollateralRiskParametersCurrentBoolExp>;
 };
 
 
@@ -12569,7 +12727,7 @@ export type SubscriptionRootHyperionLlpPositionCurrentArgs = {
 
 
 export type SubscriptionRootHyperionLlpPositionCurrentByPkArgs = {
-  position_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
 };
 
 
@@ -12590,8 +12748,8 @@ export type SubscriptionRootHyperionLlpPositionDebtStoresArgs = {
 
 
 export type SubscriptionRootHyperionLlpPositionDebtStoresByPkArgs = {
-  position_address: Scalars['String']['input'];
-  vault_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
 };
 
 
@@ -12999,7 +13157,7 @@ export type SubscriptionRootScmdPositionCurrentArgs = {
 
 
 export type SubscriptionRootScmdPositionCurrentByPkArgs = {
-  position_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
 };
 
 
@@ -13020,8 +13178,8 @@ export type SubscriptionRootScmdPositionDebtStoresArgs = {
 
 
 export type SubscriptionRootScmdPositionDebtStoresByPkArgs = {
-  position_address: Scalars['String']['input'];
-  vault_address: Scalars['String']['input'];
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
 };
 
 
@@ -13391,31 +13549,6 @@ export type SubscriptionRootVaultInfoStreamArgs = {
 };
 
 
-export type SubscriptionRootVaultProtocolCapsArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
-export type SubscriptionRootVaultProtocolCapsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
-export type SubscriptionRootVaultProtocolCapsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<VaultProtocolCapsStreamCursorInput>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
 export type SubscriptionRootVaultSettingsArgs = {
   distinct_on?: InputMaybe<Array<VaultSettingsSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -13465,6 +13598,28 @@ export type SubscriptionRootVaultStatesActivitiesStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<VaultStatesActivitiesStreamCursorInput>>;
   where?: InputMaybe<VaultStatesActivitiesBoolExp>;
+};
+
+
+export type SubscriptionRootVaultUserSettingArgs = {
+  distinct_on?: InputMaybe<Array<VaultUserSettingSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<VaultUserSettingOrderBy>>;
+  where?: InputMaybe<VaultUserSettingBoolExp>;
+};
+
+
+export type SubscriptionRootVaultUserSettingByPkArgs = {
+  user: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootVaultUserSettingStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<VaultUserSettingStreamCursorInput>>;
+  where?: InputMaybe<VaultUserSettingBoolExp>;
 };
 
 /** columns and relationships of "switchboard_oracle_activities" */
@@ -15196,7 +15351,6 @@ export type UserTransactionsStreamCursorValueInput = {
 export type VaultBadDebtActivities = {
   bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
   bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
-  borrow_protocol?: Maybe<Scalars['String']['output']>;
   debt_store_address?: Maybe<Scalars['String']['output']>;
   event_index: Scalars['numeric']['output'];
   event_type?: Maybe<Scalars['String']['output']>;
@@ -15252,7 +15406,6 @@ export type VaultBadDebtActivitiesBoolExp = {
   _or?: InputMaybe<Array<VaultBadDebtActivitiesBoolExp>>;
   bad_debt_amount?: InputMaybe<NumericComparisonExp>;
   bad_debt_shares?: InputMaybe<NumericComparisonExp>;
-  borrow_protocol?: InputMaybe<StringComparisonExp>;
   debt_store_address?: InputMaybe<StringComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   event_type?: InputMaybe<StringComparisonExp>;
@@ -15267,7 +15420,6 @@ export type VaultBadDebtActivitiesBoolExp = {
 export type VaultBadDebtActivitiesMaxFields = {
   bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
   bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
-  borrow_protocol?: Maybe<Scalars['String']['output']>;
   debt_store_address?: Maybe<Scalars['String']['output']>;
   event_index?: Maybe<Scalars['numeric']['output']>;
   event_type?: Maybe<Scalars['String']['output']>;
@@ -15282,7 +15434,6 @@ export type VaultBadDebtActivitiesMaxFields = {
 export type VaultBadDebtActivitiesMinFields = {
   bad_debt_amount?: Maybe<Scalars['numeric']['output']>;
   bad_debt_shares?: Maybe<Scalars['numeric']['output']>;
-  borrow_protocol?: Maybe<Scalars['String']['output']>;
   debt_store_address?: Maybe<Scalars['String']['output']>;
   event_index?: Maybe<Scalars['numeric']['output']>;
   event_type?: Maybe<Scalars['String']['output']>;
@@ -15297,7 +15448,6 @@ export type VaultBadDebtActivitiesMinFields = {
 export type VaultBadDebtActivitiesOrderBy = {
   bad_debt_amount?: InputMaybe<OrderBy>;
   bad_debt_shares?: InputMaybe<OrderBy>;
-  borrow_protocol?: InputMaybe<OrderBy>;
   debt_store_address?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   event_type?: InputMaybe<OrderBy>;
@@ -15314,8 +15464,6 @@ export enum VaultBadDebtActivitiesSelectColumn {
   BadDebtAmount = 'bad_debt_amount',
   /** column name */
   BadDebtShares = 'bad_debt_shares',
-  /** column name */
-  BorrowProtocol = 'borrow_protocol',
   /** column name */
   DebtStoreAddress = 'debt_store_address',
   /** column name */
@@ -15376,7 +15524,6 @@ export type VaultBadDebtActivitiesStreamCursorInput = {
 export type VaultBadDebtActivitiesStreamCursorValueInput = {
   bad_debt_amount?: InputMaybe<Scalars['numeric']['input']>;
   bad_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
-  borrow_protocol?: InputMaybe<Scalars['String']['input']>;
   debt_store_address?: InputMaybe<Scalars['String']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   event_type?: InputMaybe<Scalars['String']['input']>;
@@ -15790,10 +15937,6 @@ export type VaultInfo = {
   governance_object_address?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   kinked_irm_config?: Maybe<KinkedIrmCurrentConfig>;
-  /** An array relationship */
-  protocol_configs: Array<VaultProtocolCaps>;
-  /** An aggregate relationship */
-  protocol_configs_aggregate: VaultProtocolCapsAggregate;
   /** An object relationship */
   settings?: Maybe<VaultSettings>;
   underlying_asset?: Maybe<Scalars['String']['output']>;
@@ -15802,26 +15945,6 @@ export type VaultInfo = {
   underlying_asset_store?: Maybe<Scalars['String']['output']>;
   vault_address: Scalars['String']['output'];
   vault_asset_metadata?: Maybe<FungibleAssetMetadata>;
-};
-
-
-/** columns and relationships of "vault_info" */
-export type VaultInfoProtocolConfigsArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
-};
-
-
-/** columns and relationships of "vault_info" */
-export type VaultInfoProtocolConfigsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<VaultProtocolCapsOrderBy>>;
-  where?: InputMaybe<VaultProtocolCapsBoolExp>;
 };
 
 /** aggregated selection of "vault_info" */
@@ -15855,8 +15978,6 @@ export type VaultInfoBoolExp = {
   fixed_rate_irm_config?: InputMaybe<FixedRateIrmCurrentConfigBoolExp>;
   governance_object_address?: InputMaybe<StringComparisonExp>;
   kinked_irm_config?: InputMaybe<KinkedIrmCurrentConfigBoolExp>;
-  protocol_configs?: InputMaybe<VaultProtocolCapsBoolExp>;
-  protocol_configs_aggregate?: InputMaybe<VaultProtocolCapsAggregateBoolExp>;
   settings?: InputMaybe<VaultSettingsBoolExp>;
   underlying_asset?: InputMaybe<StringComparisonExp>;
   underlying_asset_store?: InputMaybe<StringComparisonExp>;
@@ -15891,7 +16012,6 @@ export type VaultInfoOrderBy = {
   fixed_rate_irm_config?: InputMaybe<FixedRateIrmCurrentConfigOrderBy>;
   governance_object_address?: InputMaybe<OrderBy>;
   kinked_irm_config?: InputMaybe<KinkedIrmCurrentConfigOrderBy>;
-  protocol_configs_aggregate?: InputMaybe<VaultProtocolCapsAggregateOrderBy>;
   settings?: InputMaybe<VaultSettingsOrderBy>;
   underlying_asset?: InputMaybe<OrderBy>;
   underlying_asset_store?: InputMaybe<OrderBy>;
@@ -15932,281 +16052,6 @@ export type VaultInfoStreamCursorValueInput = {
   vault_address?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** columns and relationships of "vault_protocol_caps" */
-export type VaultProtocolCaps = {
-  borrow_cap?: Maybe<Scalars['numeric']['output']>;
-  borrow_enabled?: Maybe<Scalars['Boolean']['output']>;
-  protocol_module_address?: Maybe<Scalars['String']['output']>;
-  protocol_module_name?: Maybe<Scalars['String']['output']>;
-  protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  supply_enabled?: Maybe<Scalars['Boolean']['output']>;
-  vault_address?: Maybe<Scalars['String']['output']>;
-};
-
-/** aggregated selection of "vault_protocol_caps" */
-export type VaultProtocolCapsAggregate = {
-  aggregate?: Maybe<VaultProtocolCapsAggregateFields>;
-  nodes: Array<VaultProtocolCaps>;
-};
-
-export type VaultProtocolCapsAggregateBoolExp = {
-  bool_and?: InputMaybe<VaultProtocolCapsAggregateBoolExpBoolAnd>;
-  bool_or?: InputMaybe<VaultProtocolCapsAggregateBoolExpBoolOr>;
-  count?: InputMaybe<VaultProtocolCapsAggregateBoolExpCount>;
-};
-
-export type VaultProtocolCapsAggregateBoolExpBoolAnd = {
-  arguments: VaultProtocolCapsSelectColumnVaultProtocolCapsAggregateBoolExpBoolAndArgumentsColumns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<VaultProtocolCapsBoolExp>;
-  predicate: BooleanComparisonExp;
-};
-
-export type VaultProtocolCapsAggregateBoolExpBoolOr = {
-  arguments: VaultProtocolCapsSelectColumnVaultProtocolCapsAggregateBoolExpBoolOrArgumentsColumns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<VaultProtocolCapsBoolExp>;
-  predicate: BooleanComparisonExp;
-};
-
-export type VaultProtocolCapsAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<VaultProtocolCapsBoolExp>;
-  predicate: IntComparisonExp;
-};
-
-/** aggregate fields of "vault_protocol_caps" */
-export type VaultProtocolCapsAggregateFields = {
-  avg?: Maybe<VaultProtocolCapsAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<VaultProtocolCapsMaxFields>;
-  min?: Maybe<VaultProtocolCapsMinFields>;
-  stddev?: Maybe<VaultProtocolCapsStddevFields>;
-  stddev_pop?: Maybe<VaultProtocolCapsStddevPopFields>;
-  stddev_samp?: Maybe<VaultProtocolCapsStddevSampFields>;
-  sum?: Maybe<VaultProtocolCapsSumFields>;
-  var_pop?: Maybe<VaultProtocolCapsVarPopFields>;
-  var_samp?: Maybe<VaultProtocolCapsVarSampFields>;
-  variance?: Maybe<VaultProtocolCapsVarianceFields>;
-};
-
-
-/** aggregate fields of "vault_protocol_caps" */
-export type VaultProtocolCapsAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<VaultProtocolCapsSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** order by aggregate values of table "vault_protocol_caps" */
-export type VaultProtocolCapsAggregateOrderBy = {
-  avg?: InputMaybe<VaultProtocolCapsAvgOrderBy>;
-  count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<VaultProtocolCapsMaxOrderBy>;
-  min?: InputMaybe<VaultProtocolCapsMinOrderBy>;
-  stddev?: InputMaybe<VaultProtocolCapsStddevOrderBy>;
-  stddev_pop?: InputMaybe<VaultProtocolCapsStddevPopOrderBy>;
-  stddev_samp?: InputMaybe<VaultProtocolCapsStddevSampOrderBy>;
-  sum?: InputMaybe<VaultProtocolCapsSumOrderBy>;
-  var_pop?: InputMaybe<VaultProtocolCapsVarPopOrderBy>;
-  var_samp?: InputMaybe<VaultProtocolCapsVarSampOrderBy>;
-  variance?: InputMaybe<VaultProtocolCapsVarianceOrderBy>;
-};
-
-/** aggregate avg on columns */
-export type VaultProtocolCapsAvgFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsAvgOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** Boolean expression to filter rows from the table "vault_protocol_caps". All fields are combined with a logical 'AND'. */
-export type VaultProtocolCapsBoolExp = {
-  _and?: InputMaybe<Array<VaultProtocolCapsBoolExp>>;
-  _not?: InputMaybe<VaultProtocolCapsBoolExp>;
-  _or?: InputMaybe<Array<VaultProtocolCapsBoolExp>>;
-  borrow_cap?: InputMaybe<NumericComparisonExp>;
-  borrow_enabled?: InputMaybe<BooleanComparisonExp>;
-  protocol_module_address?: InputMaybe<StringComparisonExp>;
-  protocol_module_name?: InputMaybe<StringComparisonExp>;
-  protocol_struct_name?: InputMaybe<StringComparisonExp>;
-  supply_enabled?: InputMaybe<BooleanComparisonExp>;
-  vault_address?: InputMaybe<StringComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type VaultProtocolCapsMaxFields = {
-  borrow_cap?: Maybe<Scalars['numeric']['output']>;
-  protocol_module_address?: Maybe<Scalars['String']['output']>;
-  protocol_module_name?: Maybe<Scalars['String']['output']>;
-  protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  vault_address?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by max() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsMaxOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-  protocol_module_address?: InputMaybe<OrderBy>;
-  protocol_module_name?: InputMaybe<OrderBy>;
-  protocol_struct_name?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
-};
-
-/** aggregate min on columns */
-export type VaultProtocolCapsMinFields = {
-  borrow_cap?: Maybe<Scalars['numeric']['output']>;
-  protocol_module_address?: Maybe<Scalars['String']['output']>;
-  protocol_module_name?: Maybe<Scalars['String']['output']>;
-  protocol_struct_name?: Maybe<Scalars['String']['output']>;
-  vault_address?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by min() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsMinOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-  protocol_module_address?: InputMaybe<OrderBy>;
-  protocol_module_name?: InputMaybe<OrderBy>;
-  protocol_struct_name?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
-};
-
-/** Ordering options when selecting data from "vault_protocol_caps". */
-export type VaultProtocolCapsOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-  borrow_enabled?: InputMaybe<OrderBy>;
-  protocol_module_address?: InputMaybe<OrderBy>;
-  protocol_module_name?: InputMaybe<OrderBy>;
-  protocol_struct_name?: InputMaybe<OrderBy>;
-  supply_enabled?: InputMaybe<OrderBy>;
-  vault_address?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "vault_protocol_caps" */
-export enum VaultProtocolCapsSelectColumn {
-  /** column name */
-  BorrowCap = 'borrow_cap',
-  /** column name */
-  BorrowEnabled = 'borrow_enabled',
-  /** column name */
-  ProtocolModuleAddress = 'protocol_module_address',
-  /** column name */
-  ProtocolModuleName = 'protocol_module_name',
-  /** column name */
-  ProtocolStructName = 'protocol_struct_name',
-  /** column name */
-  SupplyEnabled = 'supply_enabled',
-  /** column name */
-  VaultAddress = 'vault_address'
-}
-
-/** select "vault_protocol_caps_aggregate_bool_exp_bool_and_arguments_columns" columns of table "vault_protocol_caps" */
-export enum VaultProtocolCapsSelectColumnVaultProtocolCapsAggregateBoolExpBoolAndArgumentsColumns {
-  /** column name */
-  BorrowEnabled = 'borrow_enabled',
-  /** column name */
-  SupplyEnabled = 'supply_enabled'
-}
-
-/** select "vault_protocol_caps_aggregate_bool_exp_bool_or_arguments_columns" columns of table "vault_protocol_caps" */
-export enum VaultProtocolCapsSelectColumnVaultProtocolCapsAggregateBoolExpBoolOrArgumentsColumns {
-  /** column name */
-  BorrowEnabled = 'borrow_enabled',
-  /** column name */
-  SupplyEnabled = 'supply_enabled'
-}
-
-/** aggregate stddev on columns */
-export type VaultProtocolCapsStddevFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsStddevOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_pop on columns */
-export type VaultProtocolCapsStddevPopFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_pop() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsStddevPopOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_samp on columns */
-export type VaultProtocolCapsStddevSampFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsStddevSampOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "vault_protocol_caps" */
-export type VaultProtocolCapsStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: VaultProtocolCapsStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type VaultProtocolCapsStreamCursorValueInput = {
-  borrow_cap?: InputMaybe<Scalars['numeric']['input']>;
-  borrow_enabled?: InputMaybe<Scalars['Boolean']['input']>;
-  protocol_module_address?: InputMaybe<Scalars['String']['input']>;
-  protocol_module_name?: InputMaybe<Scalars['String']['input']>;
-  protocol_struct_name?: InputMaybe<Scalars['String']['input']>;
-  supply_enabled?: InputMaybe<Scalars['Boolean']['input']>;
-  vault_address?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** aggregate sum on columns */
-export type VaultProtocolCapsSumFields = {
-  borrow_cap?: Maybe<Scalars['numeric']['output']>;
-};
-
-/** order by sum() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsSumOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_pop on columns */
-export type VaultProtocolCapsVarPopFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_pop() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsVarPopOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_samp on columns */
-export type VaultProtocolCapsVarSampFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_samp() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsVarSampOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
-/** aggregate variance on columns */
-export type VaultProtocolCapsVarianceFields = {
-  borrow_cap?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "vault_protocol_caps" */
-export type VaultProtocolCapsVarianceOrderBy = {
-  borrow_cap?: InputMaybe<OrderBy>;
-};
-
 /** columns and relationships of "vault_settings" */
 export type VaultSettings = {
   auto_socialize_debt_enabled?: Maybe<Scalars['Boolean']['output']>;
@@ -16217,8 +16062,9 @@ export type VaultSettings = {
   flashloan_fee_store_address?: Maybe<Scalars['String']['output']>;
   interest_fee_rate?: Maybe<Scalars['numeric']['output']>;
   irm_kind?: Maybe<Scalars['numeric']['output']>;
-  is_paused?: Maybe<Scalars['Boolean']['output']>;
+  paused?: Maybe<Scalars['Boolean']['output']>;
   vault_address: Scalars['String']['output'];
+  whitelisted?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "vault_settings". All fields are combined with a logical 'AND'. */
@@ -16234,8 +16080,9 @@ export type VaultSettingsBoolExp = {
   flashloan_fee_store_address?: InputMaybe<StringComparisonExp>;
   interest_fee_rate?: InputMaybe<NumericComparisonExp>;
   irm_kind?: InputMaybe<NumericComparisonExp>;
-  is_paused?: InputMaybe<BooleanComparisonExp>;
+  paused?: InputMaybe<BooleanComparisonExp>;
   vault_address?: InputMaybe<StringComparisonExp>;
+  whitelisted?: InputMaybe<BooleanComparisonExp>;
 };
 
 /** Ordering options when selecting data from "vault_settings". */
@@ -16248,8 +16095,9 @@ export type VaultSettingsOrderBy = {
   flashloan_fee_store_address?: InputMaybe<OrderBy>;
   interest_fee_rate?: InputMaybe<OrderBy>;
   irm_kind?: InputMaybe<OrderBy>;
-  is_paused?: InputMaybe<OrderBy>;
+  paused?: InputMaybe<OrderBy>;
   vault_address?: InputMaybe<OrderBy>;
+  whitelisted?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "vault_settings" */
@@ -16271,9 +16119,11 @@ export enum VaultSettingsSelectColumn {
   /** column name */
   IrmKind = 'irm_kind',
   /** column name */
-  IsPaused = 'is_paused',
+  Paused = 'paused',
   /** column name */
-  VaultAddress = 'vault_address'
+  VaultAddress = 'vault_address',
+  /** column name */
+  Whitelisted = 'whitelisted'
 }
 
 /** Streaming cursor of the table "vault_settings" */
@@ -16294,8 +16144,9 @@ export type VaultSettingsStreamCursorValueInput = {
   flashloan_fee_store_address?: InputMaybe<Scalars['String']['input']>;
   interest_fee_rate?: InputMaybe<Scalars['numeric']['input']>;
   irm_kind?: InputMaybe<Scalars['numeric']['input']>;
-  is_paused?: InputMaybe<Scalars['Boolean']['input']>;
+  paused?: InputMaybe<Scalars['Boolean']['input']>;
   vault_address?: InputMaybe<Scalars['String']['input']>;
+  whitelisted?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** columns and relationships of "vault_states_activities" */
@@ -16304,6 +16155,7 @@ export type VaultStatesActivities = {
   cash?: Maybe<Scalars['numeric']['output']>;
   current_interest_rate?: Maybe<Scalars['numeric']['output']>;
   event_index: Scalars['numeric']['output'];
+  kind?: Maybe<Scalars['numeric']['output']>;
   last_interest_update_time?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   total_borrows?: Maybe<Scalars['numeric']['output']>;
@@ -16347,6 +16199,7 @@ export type VaultStatesActivitiesAvgFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16363,6 +16216,7 @@ export type VaultStatesActivitiesBoolExp = {
   cash?: InputMaybe<NumericComparisonExp>;
   current_interest_rate?: InputMaybe<NumericComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
+  kind?: InputMaybe<NumericComparisonExp>;
   last_interest_update_time?: InputMaybe<NumericComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   total_borrows?: InputMaybe<NumericComparisonExp>;
@@ -16378,6 +16232,7 @@ export type VaultStatesActivitiesMaxFields = {
   cash?: Maybe<Scalars['numeric']['output']>;
   current_interest_rate?: Maybe<Scalars['numeric']['output']>;
   event_index?: Maybe<Scalars['numeric']['output']>;
+  kind?: Maybe<Scalars['numeric']['output']>;
   last_interest_update_time?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   total_borrows?: Maybe<Scalars['numeric']['output']>;
@@ -16393,6 +16248,7 @@ export type VaultStatesActivitiesMinFields = {
   cash?: Maybe<Scalars['numeric']['output']>;
   current_interest_rate?: Maybe<Scalars['numeric']['output']>;
   event_index?: Maybe<Scalars['numeric']['output']>;
+  kind?: Maybe<Scalars['numeric']['output']>;
   last_interest_update_time?: Maybe<Scalars['numeric']['output']>;
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   total_borrows?: Maybe<Scalars['numeric']['output']>;
@@ -16408,6 +16264,7 @@ export type VaultStatesActivitiesOrderBy = {
   cash?: InputMaybe<OrderBy>;
   current_interest_rate?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
+  kind?: InputMaybe<OrderBy>;
   last_interest_update_time?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   total_borrows?: InputMaybe<OrderBy>;
@@ -16427,6 +16284,8 @@ export enum VaultStatesActivitiesSelectColumn {
   CurrentInterestRate = 'current_interest_rate',
   /** column name */
   EventIndex = 'event_index',
+  /** column name */
+  Kind = 'kind',
   /** column name */
   LastInterestUpdateTime = 'last_interest_update_time',
   /** column name */
@@ -16449,6 +16308,7 @@ export type VaultStatesActivitiesStddevFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16462,6 +16322,7 @@ export type VaultStatesActivitiesStddevPopFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16475,6 +16336,7 @@ export type VaultStatesActivitiesStddevSampFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16496,6 +16358,7 @@ export type VaultStatesActivitiesStreamCursorValueInput = {
   cash?: InputMaybe<Scalars['numeric']['input']>;
   current_interest_rate?: InputMaybe<Scalars['numeric']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
+  kind?: InputMaybe<Scalars['numeric']['input']>;
   last_interest_update_time?: InputMaybe<Scalars['numeric']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   total_borrows?: InputMaybe<Scalars['numeric']['input']>;
@@ -16511,6 +16374,7 @@ export type VaultStatesActivitiesSumFields = {
   cash?: Maybe<Scalars['numeric']['output']>;
   current_interest_rate?: Maybe<Scalars['numeric']['output']>;
   event_index?: Maybe<Scalars['numeric']['output']>;
+  kind?: Maybe<Scalars['numeric']['output']>;
   last_interest_update_time?: Maybe<Scalars['numeric']['output']>;
   total_borrows?: Maybe<Scalars['numeric']['output']>;
   total_debt_shares?: Maybe<Scalars['numeric']['output']>;
@@ -16524,6 +16388,7 @@ export type VaultStatesActivitiesVarPopFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16537,6 +16402,7 @@ export type VaultStatesActivitiesVarSampFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
@@ -16550,9 +16416,77 @@ export type VaultStatesActivitiesVarianceFields = {
   cash?: Maybe<Scalars['Float']['output']>;
   current_interest_rate?: Maybe<Scalars['Float']['output']>;
   event_index?: Maybe<Scalars['Float']['output']>;
+  kind?: Maybe<Scalars['Float']['output']>;
   last_interest_update_time?: Maybe<Scalars['Float']['output']>;
   total_borrows?: Maybe<Scalars['Float']['output']>;
   total_debt_shares?: Maybe<Scalars['Float']['output']>;
   total_shares?: Maybe<Scalars['Float']['output']>;
   transaction_version?: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "vault_user_setting" */
+export type VaultUserSetting = {
+  borrow_cap?: Maybe<Scalars['numeric']['output']>;
+  borrow_permission?: Maybe<Scalars['Boolean']['output']>;
+  deposit_permission?: Maybe<Scalars['Boolean']['output']>;
+  user: Scalars['String']['output'];
+  vault: Scalars['String']['output'];
+  withdraw_permission?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "vault_user_setting". All fields are combined with a logical 'AND'. */
+export type VaultUserSettingBoolExp = {
+  _and?: InputMaybe<Array<VaultUserSettingBoolExp>>;
+  _not?: InputMaybe<VaultUserSettingBoolExp>;
+  _or?: InputMaybe<Array<VaultUserSettingBoolExp>>;
+  borrow_cap?: InputMaybe<NumericComparisonExp>;
+  borrow_permission?: InputMaybe<BooleanComparisonExp>;
+  deposit_permission?: InputMaybe<BooleanComparisonExp>;
+  user?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
+  withdraw_permission?: InputMaybe<BooleanComparisonExp>;
+};
+
+/** Ordering options when selecting data from "vault_user_setting". */
+export type VaultUserSettingOrderBy = {
+  borrow_cap?: InputMaybe<OrderBy>;
+  borrow_permission?: InputMaybe<OrderBy>;
+  deposit_permission?: InputMaybe<OrderBy>;
+  user?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+  withdraw_permission?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "vault_user_setting" */
+export enum VaultUserSettingSelectColumn {
+  /** column name */
+  BorrowCap = 'borrow_cap',
+  /** column name */
+  BorrowPermission = 'borrow_permission',
+  /** column name */
+  DepositPermission = 'deposit_permission',
+  /** column name */
+  User = 'user',
+  /** column name */
+  Vault = 'vault',
+  /** column name */
+  WithdrawPermission = 'withdraw_permission'
+}
+
+/** Streaming cursor of the table "vault_user_setting" */
+export type VaultUserSettingStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: VaultUserSettingStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type VaultUserSettingStreamCursorValueInput = {
+  borrow_cap?: InputMaybe<Scalars['numeric']['input']>;
+  borrow_permission?: InputMaybe<Scalars['Boolean']['input']>;
+  deposit_permission?: InputMaybe<Scalars['Boolean']['input']>;
+  user?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
+  withdraw_permission?: InputMaybe<Scalars['Boolean']['input']>;
 };

@@ -244,7 +244,7 @@ export function generateDebtReport(position: SCMDPosition, ltv: number = 75, llt
   // 基本信息
   report += `所有者: ${position.ownerAddress}\n`;
   report += `状态: ${position.isActive ? "活跃" : "非活跃"}\n`;
-  report += `抵押品: ${position.collateralType}\n`;
+  report += `抵押品: ${position.market.collateral}\n`;
 
   // 抵押品信息
   if (position.collateralAssetBalance) {
