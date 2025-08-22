@@ -1,17 +1,12 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-    FixedPriceOracleCurrentConfig,
-    Maybe,
-    OracleRouterConfigFieldsFragment,
-    PythOracleCurrentConfig,
-    SwitchboardOracleCurrentConfig,
-} from "../../types";
-import {YeapConfig} from "../yeapConfig";
-import {InputViewFunctionData} from "@aptos-labs/ts-sdk";
-import {transformFungibleAssetMetadata} from "../transforms";
-import { YeapFungibleAssetMetadata } from "../interfaces";
+
+import { Maybe, OracleRouterConfigFieldsFragment } from "../../types";
+import { YeapConfig } from "../yeapConfig";
+import { AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import { transformFungibleAssetMetadata } from "../transforms";
+import { YeapFungibleAssetMetadata, ChainlinkOracleConfig, PythOracleConfig, FixedPriceOracleConfig, SwitchboardOracleConfig, } from "../interfaces";
 
 export const PRICE_PRECISION = BigInt(10 ** 18); // 18 decimal places for price values, adjust as needed
 export const ORACLE_UNIT_ASSET = "0x0"; // Placeholder for the unit asset address
@@ -41,8 +36,8 @@ export class OracleConfig {
      * Get the base asset address for this oracle configuration.
      * @returns The base asset address
      */
-    get baseAsset(): string {
-        return this.data.base_asset;
+    get baseAsset(): AccountAddress {
+        return AccountAddress.from(this.data.base_asset);
     }
 
     get baseAssetMetadata(): Maybe<YeapFungibleAssetMetadata> {
@@ -65,55 +60,53 @@ export class OracleConfig {
      * Get the quote asset address for this oracle configuration.
      * @returns The quote asset address
      */
-    get quoteAsset(): string {
-        return this.data.quote_asset;
+    get quoteAsset(): AccountAddress {
+        return AccountAddress.from(this.data.quote_asset);
     }
 
     /**
      * Get the oracle router address.
      * @returns The oracle router address
      */
-    get oracleRouter(): string {
-        return this.data.oracle_router;
+    get oracleRouter(): AccountAddress {
+        return AccountAddress.from(this.data.oracle_router);
     }
 
     /**
      * Get the oracle address (if available).
      * @returns The oracle address or null if not set
      */
-    get oracle(): string | null {
-        return this.data.oracle ?? null;
+    get oracle(): AccountAddress {
+        return AccountAddress.from(this.data.oracle!);
     }
 
     /**
      * Get the oracle kind/type identifier.
      * @returns The oracle kind as a number, or null if not set
      */
-    get oracleKind(): number | null {
-        if (this.data.oracle_kind == null) {
-            return null;
-        }
-        const parsed = parseInt(this.data.oracle_kind, 10);
-        return isNaN(parsed) ? null : parsed;
+    get oracleKind(): number {
+
+        const parsed = parseInt(this.data.oracle_kind!, 10);
+        return parsed;
     }
 
-    /**
-     * Check if this configuration is marked as deleted.
-     * @returns True if the configuration is deleted, false otherwise
-     */
-    get isDeleted(): boolean {
-        return this.data.deleted === true;
-    }
+    // /**
+    //  * Check if this configuration is marked as deleted.
+    //  * @returns True if the configuration is deleted, false otherwise
+    //  */
+    // get isDeleted(): boolean {
+    //     return this.data.deleted === true;
+    // }
 
-    // ===== Utility Methods =====
+    // // ===== Utility Methods =====
 
-    /**
-     * Check if this oracle configuration is active (not deleted).
-     * @returns True if the configuration is active, false if deleted
-     */
-    get isActive(): boolean {
-        return !this.isDeleted;
-    }
+    // /**
+    //  * Check if this oracle configuration is active (not deleted).
+    //  * @returns True if the configuration is active, false if deleted
+    //  */
+    // get isActive(): boolean {
+    //     return !this.isDeleted;
+    // }
 
     /**
      * Get a string representation of the asset pair for this oracle.
@@ -130,7 +123,7 @@ export class OracleConfig {
     get oracleTypeDescription(): string {
         switch (this.oracleKind) {
             case 0:
-                return "Primary Backup Oracle"; // Uses Pyth as primary with Switchboard as backup
+                return "Primary Backup Oracle"; // Uses Chainlink primary, then Pyth, then Switchboard fallback
             case 1:
                 return "Vault Oracle"; // Calculates prices for vault shares/LP tokens
             case 2:
@@ -149,7 +142,7 @@ export class OracleConfig {
     get oracleTypeDetails(): string {
         switch (this.oracleKind) {
             case 0:
-                return "Primary Backup Oracle: Uses Pyth as the primary price source with Switchboard as a backup fallback when Pyth data is stale or unreliable.";
+                return "Primary Backup Oracle: Uses Chainlink as the primary price source, falling back to Pyth, then Switchboard when earlier sources are stale or unavailable.";
             case 1:
                 return "Vault Oracle: Calculates prices for vault shares/LP tokens based on their underlying asset values.";
             case 2:
@@ -161,14 +154,14 @@ export class OracleConfig {
         }
     }
 
-    /**
-     * Check if this oracle configuration has a valid oracle address.
-     * @returns True if oracle address is set and not empty
-     */
-    get hasOracle(): boolean {
-        const oracle = this.oracle;
-        return oracle !== null && oracle.length > 0;
-    }
+    // /**
+    //  * Check if this oracle configuration has a valid oracle address.
+    //  * @returns True if oracle address is set and not empty
+    //  */
+    // get hasOracle(): boolean {
+    //     const oracle = this.oracle;
+    //     return oracle !== null && oracle.length > 0;
+    // }
 
     /**
      * Check if this is a Primary Backup Oracle configuration.
@@ -203,33 +196,90 @@ export class OracleConfig {
     }
 
     /**
+     * Check if this is a Chainlink Oracle configuration.
+     * @returns True if this oracle uses Chainlink as the primary source
+     */
+    get isChainlinkOracle(): boolean {
+        return this.oracleKind === 4;
+    }
+
+    /**
      * Get the current configuration for the Fixed Price Oracle.
      */
-    get fixedPriceConfig(): Maybe<FixedPriceOracleCurrentConfig> {
+
+    get fixedPriceConfig(): Maybe<FixedPriceOracleConfig> {
         if (!this.isFixedPriceOracle) {
             return null;
         }
-        return this.data.fixed_price_oracle_config!;
+        const cfg = this.data.fixed_price_oracle_config;
+        if (!cfg) return null;
+        return {
+            oracle_address: AccountAddress.from(cfg.oracle_address),
+            base: AccountAddress.from(cfg.base_asset),
+            quote: AccountAddress.from(cfg.quote_asset),
+            price: cfg.price!,
+        };
     }
 
     /**
      * Get the current configuration for the Pyth Oracle.
      */
-    get pythOracleConfig(): Maybe<PythOracleCurrentConfig> {
+
+    get pythOracleConfig(): Maybe<PythOracleConfig> {
         if (!this.isPrimaryBackupOracle) {
             return null;
         }
-        return this.data.pyth_oracle_config!;
+        const cfg = this.data.pyth_oracle_config;
+        if (!cfg) return null;
+        return {
+            oracle_address: AccountAddress.from(cfg.oracle_address),
+            base: AccountAddress.from(cfg.base),
+            quote: AccountAddress.from(cfg.quote),
+            pyth_id: cfg.pyth_id,
+            max_age_in_seconds: Number(cfg.max_age_in_seconds),
+            max_confidence: cfg.max_confidence,
+        };
     }
 
     /**
      * Get the current configuration for the Switchboard Oracle.
      */
-    get switchboardOracleConfig(): Maybe<SwitchboardOracleCurrentConfig> {
+
+    get switchboardOracleConfig(): Maybe<SwitchboardOracleConfig> {
         if (!this.isPrimaryBackupOracle) {
             return null;
         }
-        return this.data.switchboard_oracle_config || null;
+        const cfg = this.data.switchboard_oracle_config;
+        if (!cfg) return null;
+        return {
+            oracle_address: AccountAddress.from(cfg.oracle_address),
+            base: AccountAddress.from(cfg.base),
+            quote: AccountAddress.from(cfg.quote),
+            aggregator_address: cfg.aggregator_address!,
+            max_age_in_seconds: Number(cfg.max_age_in_seconds),
+            max_stdev: cfg.max_stdev,
+        };
+    }
+
+    /**
+     * Get the current configuration for the Chainlink Oracle.
+     */
+
+    get chainlinkOracleConfig(): Maybe<ChainlinkOracleConfig> {
+        if (!this.isPrimaryBackupOracle) {
+            return null;
+        }
+        const cfg = this.data.chainlink_oracle_config;
+        if (!cfg) return null;
+
+        return {
+            oracle_address: AccountAddress.from(cfg.oracle_address),
+            base: AccountAddress.from(cfg.base),
+            quote: AccountAddress.from(cfg.quote),
+            feed_id: cfg.feed_id,
+            max_age_in_seconds: parseInt(cfg.max_age_in_seconds, 10),
+            feed_decimals: Number(cfg.feed_decimals),
+        };
     }
 
     /**
@@ -245,14 +295,15 @@ export class OracleConfig {
             oracleKind: this.oracleKind,
             oracleTypeDescription: this.oracleTypeDescription,
             oracleTypeDetails: this.oracleTypeDetails,
-            isDeleted: this.isDeleted,
-            isActive: this.isActive,
             assetPair: this.assetPair,
-            hasOracle: this.hasOracle,
             isPrimaryBackupOracle: this.isPrimaryBackupOracle,
             isVaultOracle: this.isVaultOracle,
             isFixedPriceOracle: this.isFixedPriceOracle,
             isDelegateOracle: this.isDelegateOracle,
+            chainlinkOracleConfig: this.chainlinkOracleConfig ?? undefined,
+            pythOracleConfig: this.pythOracleConfig ?? undefined,
+            switchboardOracleConfig: this.switchboardOracleConfig ?? undefined,
+            fixedPriceConfig: this.fixedPriceConfig ?? undefined,
         };
     }
 
@@ -261,10 +312,9 @@ export class OracleConfig {
      * @returns A formatted string describing the configuration
      */
     toString(): string {
-        const status = this.isActive ? "Active" : "Deleted";
-        const oracleInfo = this.hasOracle ? `Oracle: ${this.oracle} (${this.oracleTypeDescription})` : "No Oracle";
+        const oracleInfo = `Oracle: ${this.oracle} (${this.oracleTypeDescription})`;
 
-        return `OracleConfig[${this.assetPair}] - Router: ${this.oracleRouter}, ${oracleInfo}, Status: ${status}`;
+        return `OracleConfig[${this.assetPair}] - Router: ${this.oracleRouter}, ${oracleInfo}`;
     }
 
     /**
@@ -277,8 +327,8 @@ export class OracleConfig {
      *
      * @example
      * ```typescript
-     * const oracleRouter = await yeap.oracleRouterApi.getRouter("0xrouter...");
-     * const config = oracleRouter?.getOracleConfig("0xbase...", "0xquote...");
+     * const oracleRouter = await yeap.oracleRouterApi.getRouter "0xrouter...";
+     * const config = oracleRouter?.getOracleConfig "0xbase...", "0xquote...";
      * if (config) {
      *   try {
      *     const price = await config.get_price();
@@ -298,10 +348,6 @@ export class OracleConfig {
             throw new Error(
                 "Aptos client is required to fetch on-chain price. Please provide an AptosConfig or Aptos client in YeapConfig.",
             );
-        }
-
-        if (!this.hasOracle) {
-            throw new Error("No oracle address configured for this oracle router configuration.");
         }
 
         try {

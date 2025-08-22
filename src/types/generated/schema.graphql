@@ -1993,6 +1993,89 @@ input borrow_risk_parameters_current_variance_order_by {
 }
 
 """
+columns and relationships of "chainlink_oracle_current_config"
+"""
+type chainlink_oracle_current_config {
+  base: String!
+  deleted: Boolean
+  feed_decimals: numeric!
+  feed_id: String!
+  max_age_in_seconds: numeric!
+  oracle_address: String!
+  quote: String!
+}
+
+"""
+Boolean expression to filter rows from the table "chainlink_oracle_current_config". All fields are combined with a logical 'AND'.
+"""
+input chainlink_oracle_current_config_bool_exp {
+  _and: [chainlink_oracle_current_config_bool_exp!]
+  _not: chainlink_oracle_current_config_bool_exp
+  _or: [chainlink_oracle_current_config_bool_exp!]
+  base: String_comparison_exp
+  deleted: Boolean_comparison_exp
+  feed_decimals: numeric_comparison_exp
+  feed_id: String_comparison_exp
+  max_age_in_seconds: numeric_comparison_exp
+  oracle_address: String_comparison_exp
+  quote: String_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "chainlink_oracle_current_config".
+"""
+input chainlink_oracle_current_config_order_by {
+  base: order_by
+  deleted: order_by
+  feed_decimals: order_by
+  feed_id: order_by
+  max_age_in_seconds: order_by
+  oracle_address: order_by
+  quote: order_by
+}
+
+"""
+select columns of table "chainlink_oracle_current_config"
+"""
+enum chainlink_oracle_current_config_select_column {
+  """column name"""
+  base
+  """column name"""
+  deleted
+  """column name"""
+  feed_decimals
+  """column name"""
+  feed_id
+  """column name"""
+  max_age_in_seconds
+  """column name"""
+  oracle_address
+  """column name"""
+  quote
+}
+
+"""
+Streaming cursor of the table "chainlink_oracle_current_config"
+"""
+input chainlink_oracle_current_config_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: chainlink_oracle_current_config_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input chainlink_oracle_current_config_stream_cursor_value_input {
+  base: String
+  deleted: Boolean
+  feed_decimals: numeric
+  feed_id: String
+  max_age_in_seconds: numeric
+  oracle_address: String
+  quote: String
+}
+
+"""
 columns and relationships of "legacy_migration_v1.coin_activities"
 """
 type coin_activities {
@@ -8605,6 +8688,8 @@ columns and relationships of "oracle_router_current_config"
 type oracle_router_current_config {
   base_asset: String!
   base_asset_metadata: fungible_asset_metadata
+  """An object relationship"""
+  chainlink_oracle_config: chainlink_oracle_current_config
   deleted: Boolean
   """An object relationship"""
   fixed_price_oracle_config: fixed_price_oracle_current_config
@@ -8627,6 +8712,7 @@ input oracle_router_current_config_bool_exp {
   _not: oracle_router_current_config_bool_exp
   _or: [oracle_router_current_config_bool_exp!]
   base_asset: String_comparison_exp
+  chainlink_oracle_config: chainlink_oracle_current_config_bool_exp
   deleted: Boolean_comparison_exp
   fixed_price_oracle_config: fixed_price_oracle_current_config_bool_exp
   oracle: String_comparison_exp
@@ -8642,6 +8728,7 @@ Ordering options when selecting data from "oracle_router_current_config".
 """
 input oracle_router_current_config_order_by {
   base_asset: order_by
+  chainlink_oracle_config: chainlink_oracle_current_config_order_by
   deleted: order_by
   fixed_price_oracle_config: fixed_price_oracle_current_config_order_by
   oracle: order_by
@@ -9123,13 +9210,14 @@ type public_key_auth_keys_variance_fields {
 columns and relationships of "pyth_oracle_activities"
 """
 type pyth_oracle_activities {
-  asset_identifier: String
+  base: String!
   deleted: Boolean
   event_index: numeric!
   max_age_in_seconds: numeric
   max_confidence: numeric
   oracle_address: String
   pyth_id: String
+  quote: String!
   timestamp: timestamp
   transaction_version: numeric!
 }
@@ -9141,26 +9229,28 @@ input pyth_oracle_activities_bool_exp {
   _and: [pyth_oracle_activities_bool_exp!]
   _not: pyth_oracle_activities_bool_exp
   _or: [pyth_oracle_activities_bool_exp!]
-  asset_identifier: String_comparison_exp
+  base: String_comparison_exp
   deleted: Boolean_comparison_exp
   event_index: numeric_comparison_exp
   max_age_in_seconds: numeric_comparison_exp
   max_confidence: numeric_comparison_exp
   oracle_address: String_comparison_exp
   pyth_id: String_comparison_exp
+  quote: String_comparison_exp
   timestamp: timestamp_comparison_exp
   transaction_version: numeric_comparison_exp
 }
 
 """Ordering options when selecting data from "pyth_oracle_activities"."""
 input pyth_oracle_activities_order_by {
-  asset_identifier: order_by
+  base: order_by
   deleted: order_by
   event_index: order_by
   max_age_in_seconds: order_by
   max_confidence: order_by
   oracle_address: order_by
   pyth_id: order_by
+  quote: order_by
   timestamp: order_by
   transaction_version: order_by
 }
@@ -9170,7 +9260,7 @@ select columns of table "pyth_oracle_activities"
 """
 enum pyth_oracle_activities_select_column {
   """column name"""
-  asset_identifier
+  base
   """column name"""
   deleted
   """column name"""
@@ -9183,6 +9273,8 @@ enum pyth_oracle_activities_select_column {
   oracle_address
   """column name"""
   pyth_id
+  """column name"""
+  quote
   """column name"""
   timestamp
   """column name"""
@@ -9201,13 +9293,14 @@ input pyth_oracle_activities_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input pyth_oracle_activities_stream_cursor_value_input {
-  asset_identifier: String
+  base: String
   deleted: Boolean
   event_index: numeric
   max_age_in_seconds: numeric
   max_confidence: numeric
   oracle_address: String
   pyth_id: String
+  quote: String
   timestamp: timestamp
   transaction_version: numeric
 }
@@ -9216,12 +9309,13 @@ input pyth_oracle_activities_stream_cursor_value_input {
 columns and relationships of "pyth_oracle_current_config"
 """
 type pyth_oracle_current_config {
-  asset_identifier: String!
+  base: String!
   deleted: Boolean
-  max_age_in_seconds: numeric
-  max_confidence: numeric
+  max_age_in_seconds: numeric!
+  max_confidence: numeric!
   oracle_address: String!
-  pyth_id: String
+  pyth_id: String!
+  quote: String!
 }
 
 """
@@ -9231,24 +9325,26 @@ input pyth_oracle_current_config_bool_exp {
   _and: [pyth_oracle_current_config_bool_exp!]
   _not: pyth_oracle_current_config_bool_exp
   _or: [pyth_oracle_current_config_bool_exp!]
-  asset_identifier: String_comparison_exp
+  base: String_comparison_exp
   deleted: Boolean_comparison_exp
   max_age_in_seconds: numeric_comparison_exp
   max_confidence: numeric_comparison_exp
   oracle_address: String_comparison_exp
   pyth_id: String_comparison_exp
+  quote: String_comparison_exp
 }
 
 """
 Ordering options when selecting data from "pyth_oracle_current_config".
 """
 input pyth_oracle_current_config_order_by {
-  asset_identifier: order_by
+  base: order_by
   deleted: order_by
   max_age_in_seconds: order_by
   max_confidence: order_by
   oracle_address: order_by
   pyth_id: order_by
+  quote: order_by
 }
 
 """
@@ -9256,7 +9352,7 @@ select columns of table "pyth_oracle_current_config"
 """
 enum pyth_oracle_current_config_select_column {
   """column name"""
-  asset_identifier
+  base
   """column name"""
   deleted
   """column name"""
@@ -9267,6 +9363,8 @@ enum pyth_oracle_current_config_select_column {
   oracle_address
   """column name"""
   pyth_id
+  """column name"""
+  quote
 }
 
 """
@@ -9281,12 +9379,13 @@ input pyth_oracle_current_config_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input pyth_oracle_current_config_stream_cursor_value_input {
-  asset_identifier: String
+  base: String
   deleted: Boolean
   max_age_in_seconds: numeric
   max_confidence: numeric
   oracle_address: String
   pyth_id: String
+  quote: String
 }
 
 type query_root {
@@ -9594,6 +9693,25 @@ type query_root {
   fetch data from the table: "borrow_risk_parameters_current" using primary key columns
   """
   borrow_risk_parameters_current_by_pk(collateral: String!, market: String!, vault: String!): borrow_risk_parameters_current
+  """
+  fetch data from the table: "chainlink_oracle_current_config"
+  """
+  chainlink_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [chainlink_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [chainlink_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: chainlink_oracle_current_config_bool_exp
+  ): [chainlink_oracle_current_config!]!
+  """
+  fetch data from the table: "chainlink_oracle_current_config" using primary key columns
+  """
+  chainlink_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): chainlink_oracle_current_config
   """An array relationship"""
   coin_activities(
     """distinct select on columns"""
@@ -10729,7 +10847,7 @@ type query_root {
   """
   fetch data from the table: "pyth_oracle_current_config" using primary key columns
   """
-  pyth_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): pyth_oracle_current_config
+  pyth_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): pyth_oracle_current_config
   """
   fetch data from the table: "scmd_bad_debt_activities"
   """
@@ -10879,7 +10997,7 @@ type query_root {
   """
   fetch data from the table: "switchboard_oracle_current_config" using primary key columns
   """
-  switchboard_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): switchboard_oracle_current_config
+  switchboard_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): switchboard_oracle_current_config
   """
   fetch data from the table: "table_items"
   """
@@ -12458,6 +12576,36 @@ type subscription_root {
     """filter the rows returned"""
     where: borrow_risk_parameters_current_bool_exp
   ): [borrow_risk_parameters_current!]!
+  """
+  fetch data from the table: "chainlink_oracle_current_config"
+  """
+  chainlink_oracle_current_config(
+    """distinct select on columns"""
+    distinct_on: [chainlink_oracle_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [chainlink_oracle_current_config_order_by!]
+    """filter the rows returned"""
+    where: chainlink_oracle_current_config_bool_exp
+  ): [chainlink_oracle_current_config!]!
+  """
+  fetch data from the table: "chainlink_oracle_current_config" using primary key columns
+  """
+  chainlink_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): chainlink_oracle_current_config
+  """
+  fetch data from the table in a streaming manner: "chainlink_oracle_current_config"
+  """
+  chainlink_oracle_current_config_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [chainlink_oracle_current_config_stream_cursor_input]!
+    """filter the rows returned"""
+    where: chainlink_oracle_current_config_bool_exp
+  ): [chainlink_oracle_current_config!]!
   """An array relationship"""
   coin_activities(
     """distinct select on columns"""
@@ -14187,7 +14335,7 @@ type subscription_root {
   """
   fetch data from the table: "pyth_oracle_current_config" using primary key columns
   """
-  pyth_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): pyth_oracle_current_config
+  pyth_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): pyth_oracle_current_config
   """
   fetch data from the table in a streaming manner: "pyth_oracle_current_config"
   """
@@ -14425,7 +14573,7 @@ type subscription_root {
   """
   fetch data from the table: "switchboard_oracle_current_config" using primary key columns
   """
-  switchboard_oracle_current_config_by_pk(asset_identifier: String!, oracle_address: String!): switchboard_oracle_current_config
+  switchboard_oracle_current_config_by_pk(base: String!, oracle_address: String!, quote: String!): switchboard_oracle_current_config
   """
   fetch data from the table in a streaming manner: "switchboard_oracle_current_config"
   """
@@ -14966,13 +15114,14 @@ type subscription_root {
 columns and relationships of "switchboard_oracle_activities"
 """
 type switchboard_oracle_activities {
-  aggregator_address: String
-  asset_identifier: String
+  aggregator_address: String!
+  base: String!
   deleted: Boolean
   event_index: numeric!
-  max_age_in_seconds: numeric
-  max_stdev: numeric
-  oracle_address: String
+  max_age_in_seconds: numeric!
+  max_stdev: numeric!
+  oracle_address: String!
+  quote: String!
   timestamp: timestamp
   transaction_version: numeric!
 }
@@ -14985,12 +15134,13 @@ input switchboard_oracle_activities_bool_exp {
   _not: switchboard_oracle_activities_bool_exp
   _or: [switchboard_oracle_activities_bool_exp!]
   aggregator_address: String_comparison_exp
-  asset_identifier: String_comparison_exp
+  base: String_comparison_exp
   deleted: Boolean_comparison_exp
   event_index: numeric_comparison_exp
   max_age_in_seconds: numeric_comparison_exp
   max_stdev: numeric_comparison_exp
   oracle_address: String_comparison_exp
+  quote: String_comparison_exp
   timestamp: timestamp_comparison_exp
   transaction_version: numeric_comparison_exp
 }
@@ -15000,12 +15150,13 @@ Ordering options when selecting data from "switchboard_oracle_activities".
 """
 input switchboard_oracle_activities_order_by {
   aggregator_address: order_by
-  asset_identifier: order_by
+  base: order_by
   deleted: order_by
   event_index: order_by
   max_age_in_seconds: order_by
   max_stdev: order_by
   oracle_address: order_by
+  quote: order_by
   timestamp: order_by
   transaction_version: order_by
 }
@@ -15017,7 +15168,7 @@ enum switchboard_oracle_activities_select_column {
   """column name"""
   aggregator_address
   """column name"""
-  asset_identifier
+  base
   """column name"""
   deleted
   """column name"""
@@ -15028,6 +15179,8 @@ enum switchboard_oracle_activities_select_column {
   max_stdev
   """column name"""
   oracle_address
+  """column name"""
+  quote
   """column name"""
   timestamp
   """column name"""
@@ -15047,12 +15200,13 @@ input switchboard_oracle_activities_stream_cursor_input {
 """Initial value of the column from where the streaming should start"""
 input switchboard_oracle_activities_stream_cursor_value_input {
   aggregator_address: String
-  asset_identifier: String
+  base: String
   deleted: Boolean
   event_index: numeric
   max_age_in_seconds: numeric
   max_stdev: numeric
   oracle_address: String
+  quote: String
   timestamp: timestamp
   transaction_version: numeric
 }
@@ -15062,11 +15216,12 @@ columns and relationships of "switchboard_oracle_current_config"
 """
 type switchboard_oracle_current_config {
   aggregator_address: String
-  asset_identifier: String!
+  base: String!
   deleted: Boolean
-  max_age_in_seconds: numeric
-  max_stdev: numeric
+  max_age_in_seconds: numeric!
+  max_stdev: numeric!
   oracle_address: String!
+  quote: String!
 }
 
 """
@@ -15077,11 +15232,12 @@ input switchboard_oracle_current_config_bool_exp {
   _not: switchboard_oracle_current_config_bool_exp
   _or: [switchboard_oracle_current_config_bool_exp!]
   aggregator_address: String_comparison_exp
-  asset_identifier: String_comparison_exp
+  base: String_comparison_exp
   deleted: Boolean_comparison_exp
   max_age_in_seconds: numeric_comparison_exp
   max_stdev: numeric_comparison_exp
   oracle_address: String_comparison_exp
+  quote: String_comparison_exp
 }
 
 """
@@ -15089,11 +15245,12 @@ Ordering options when selecting data from "switchboard_oracle_current_config".
 """
 input switchboard_oracle_current_config_order_by {
   aggregator_address: order_by
-  asset_identifier: order_by
+  base: order_by
   deleted: order_by
   max_age_in_seconds: order_by
   max_stdev: order_by
   oracle_address: order_by
+  quote: order_by
 }
 
 """
@@ -15103,7 +15260,7 @@ enum switchboard_oracle_current_config_select_column {
   """column name"""
   aggregator_address
   """column name"""
-  asset_identifier
+  base
   """column name"""
   deleted
   """column name"""
@@ -15112,6 +15269,8 @@ enum switchboard_oracle_current_config_select_column {
   max_stdev
   """column name"""
   oracle_address
+  """column name"""
+  quote
 }
 
 """
@@ -15127,11 +15286,12 @@ input switchboard_oracle_current_config_stream_cursor_input {
 """Initial value of the column from where the streaming should start"""
 input switchboard_oracle_current_config_stream_cursor_value_input {
   aggregator_address: String
-  asset_identifier: String
+  base: String
   deleted: Boolean
   max_age_in_seconds: numeric
   max_stdev: numeric
   oracle_address: String
+  quote: String
 }
 
 """

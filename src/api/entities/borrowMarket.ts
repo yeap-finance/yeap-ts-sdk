@@ -43,8 +43,8 @@ export class BorrowMarket {
   }
 
   /** Collateral risk factor */
-  get crf(): number | null {
-    return this.parseNumeric(this._raw.crf);
+  get crf(): number {
+    return this.parseNumeric(this._raw.crf)!;
   }
 
   /** Loan-to-Value ratio */

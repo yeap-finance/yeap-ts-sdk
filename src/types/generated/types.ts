@@ -1848,6 +1848,79 @@ export type BorrowRiskParametersCurrentVarianceOrderBy = {
   brw?: InputMaybe<OrderBy>;
 };
 
+/** columns and relationships of "chainlink_oracle_current_config" */
+export type ChainlinkOracleCurrentConfig = {
+  base: Scalars['String']['output'];
+  deleted?: Maybe<Scalars['Boolean']['output']>;
+  feed_decimals: Scalars['numeric']['output'];
+  feed_id: Scalars['String']['output'];
+  max_age_in_seconds: Scalars['numeric']['output'];
+  oracle_address: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "chainlink_oracle_current_config". All fields are combined with a logical 'AND'. */
+export type ChainlinkOracleCurrentConfigBoolExp = {
+  _and?: InputMaybe<Array<ChainlinkOracleCurrentConfigBoolExp>>;
+  _not?: InputMaybe<ChainlinkOracleCurrentConfigBoolExp>;
+  _or?: InputMaybe<Array<ChainlinkOracleCurrentConfigBoolExp>>;
+  base?: InputMaybe<StringComparisonExp>;
+  deleted?: InputMaybe<BooleanComparisonExp>;
+  feed_decimals?: InputMaybe<NumericComparisonExp>;
+  feed_id?: InputMaybe<StringComparisonExp>;
+  max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
+  oracle_address?: InputMaybe<StringComparisonExp>;
+  quote?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "chainlink_oracle_current_config". */
+export type ChainlinkOracleCurrentConfigOrderBy = {
+  base?: InputMaybe<OrderBy>;
+  deleted?: InputMaybe<OrderBy>;
+  feed_decimals?: InputMaybe<OrderBy>;
+  feed_id?: InputMaybe<OrderBy>;
+  max_age_in_seconds?: InputMaybe<OrderBy>;
+  oracle_address?: InputMaybe<OrderBy>;
+  quote?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "chainlink_oracle_current_config" */
+export enum ChainlinkOracleCurrentConfigSelectColumn {
+  /** column name */
+  Base = 'base',
+  /** column name */
+  Deleted = 'deleted',
+  /** column name */
+  FeedDecimals = 'feed_decimals',
+  /** column name */
+  FeedId = 'feed_id',
+  /** column name */
+  MaxAgeInSeconds = 'max_age_in_seconds',
+  /** column name */
+  OracleAddress = 'oracle_address',
+  /** column name */
+  Quote = 'quote'
+}
+
+/** Streaming cursor of the table "chainlink_oracle_current_config" */
+export type ChainlinkOracleCurrentConfigStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ChainlinkOracleCurrentConfigStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ChainlinkOracleCurrentConfigStreamCursorValueInput = {
+  base?: InputMaybe<Scalars['String']['input']>;
+  deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  feed_decimals?: InputMaybe<Scalars['numeric']['input']>;
+  feed_id?: InputMaybe<Scalars['String']['input']>;
+  max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
+  oracle_address?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** columns and relationships of "legacy_migration_v1.coin_activities" */
 export type CoinActivities = {
   activity_type?: Maybe<Scalars['String']['output']>;
@@ -7894,6 +7967,8 @@ export type OracleRouterActivitiesStreamCursorValueInput = {
 export type OracleRouterCurrentConfig = {
   base_asset: Scalars['String']['output'];
   base_asset_metadata?: Maybe<FungibleAssetMetadata>;
+  /** An object relationship */
+  chainlink_oracle_config?: Maybe<ChainlinkOracleCurrentConfig>;
   deleted?: Maybe<Scalars['Boolean']['output']>;
   /** An object relationship */
   fixed_price_oracle_config?: Maybe<FixedPriceOracleCurrentConfig>;
@@ -7914,6 +7989,7 @@ export type OracleRouterCurrentConfigBoolExp = {
   _not?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
   _or?: InputMaybe<Array<OracleRouterCurrentConfigBoolExp>>;
   base_asset?: InputMaybe<StringComparisonExp>;
+  chainlink_oracle_config?: InputMaybe<ChainlinkOracleCurrentConfigBoolExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   fixed_price_oracle_config?: InputMaybe<FixedPriceOracleCurrentConfigBoolExp>;
   oracle?: InputMaybe<StringComparisonExp>;
@@ -7927,6 +8003,7 @@ export type OracleRouterCurrentConfigBoolExp = {
 /** Ordering options when selecting data from "oracle_router_current_config". */
 export type OracleRouterCurrentConfigOrderBy = {
   base_asset?: InputMaybe<OrderBy>;
+  chainlink_oracle_config?: InputMaybe<ChainlinkOracleCurrentConfigOrderBy>;
   deleted?: InputMaybe<OrderBy>;
   fixed_price_oracle_config?: InputMaybe<FixedPriceOracleCurrentConfigOrderBy>;
   oracle?: InputMaybe<OrderBy>;
@@ -8382,13 +8459,14 @@ export type PublicKeyAuthKeysVarianceFields = {
 
 /** columns and relationships of "pyth_oracle_activities" */
 export type PythOracleActivities = {
-  asset_identifier?: Maybe<Scalars['String']['output']>;
+  base: Scalars['String']['output'];
   deleted?: Maybe<Scalars['Boolean']['output']>;
   event_index: Scalars['numeric']['output'];
   max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
   max_confidence?: Maybe<Scalars['numeric']['output']>;
   oracle_address?: Maybe<Scalars['String']['output']>;
   pyth_id?: Maybe<Scalars['String']['output']>;
+  quote: Scalars['String']['output'];
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
 };
@@ -8398,26 +8476,28 @@ export type PythOracleActivitiesBoolExp = {
   _and?: InputMaybe<Array<PythOracleActivitiesBoolExp>>;
   _not?: InputMaybe<PythOracleActivitiesBoolExp>;
   _or?: InputMaybe<Array<PythOracleActivitiesBoolExp>>;
-  asset_identifier?: InputMaybe<StringComparisonExp>;
+  base?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
   max_confidence?: InputMaybe<NumericComparisonExp>;
   oracle_address?: InputMaybe<StringComparisonExp>;
   pyth_id?: InputMaybe<StringComparisonExp>;
+  quote?: InputMaybe<StringComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
 };
 
 /** Ordering options when selecting data from "pyth_oracle_activities". */
 export type PythOracleActivitiesOrderBy = {
-  asset_identifier?: InputMaybe<OrderBy>;
+  base?: InputMaybe<OrderBy>;
   deleted?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   max_age_in_seconds?: InputMaybe<OrderBy>;
   max_confidence?: InputMaybe<OrderBy>;
   oracle_address?: InputMaybe<OrderBy>;
   pyth_id?: InputMaybe<OrderBy>;
+  quote?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
 };
@@ -8425,7 +8505,7 @@ export type PythOracleActivitiesOrderBy = {
 /** select columns of table "pyth_oracle_activities" */
 export enum PythOracleActivitiesSelectColumn {
   /** column name */
-  AssetIdentifier = 'asset_identifier',
+  Base = 'base',
   /** column name */
   Deleted = 'deleted',
   /** column name */
@@ -8438,6 +8518,8 @@ export enum PythOracleActivitiesSelectColumn {
   OracleAddress = 'oracle_address',
   /** column name */
   PythId = 'pyth_id',
+  /** column name */
+  Quote = 'quote',
   /** column name */
   Timestamp = 'timestamp',
   /** column name */
@@ -8454,25 +8536,27 @@ export type PythOracleActivitiesStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type PythOracleActivitiesStreamCursorValueInput = {
-  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  base?: InputMaybe<Scalars['String']['input']>;
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
   max_confidence?: InputMaybe<Scalars['numeric']['input']>;
   oracle_address?: InputMaybe<Scalars['String']['input']>;
   pyth_id?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "pyth_oracle_current_config" */
 export type PythOracleCurrentConfig = {
-  asset_identifier: Scalars['String']['output'];
+  base: Scalars['String']['output'];
   deleted?: Maybe<Scalars['Boolean']['output']>;
-  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
-  max_confidence?: Maybe<Scalars['numeric']['output']>;
+  max_age_in_seconds: Scalars['numeric']['output'];
+  max_confidence: Scalars['numeric']['output'];
   oracle_address: Scalars['String']['output'];
-  pyth_id?: Maybe<Scalars['String']['output']>;
+  pyth_id: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "pyth_oracle_current_config". All fields are combined with a logical 'AND'. */
@@ -8480,28 +8564,30 @@ export type PythOracleCurrentConfigBoolExp = {
   _and?: InputMaybe<Array<PythOracleCurrentConfigBoolExp>>;
   _not?: InputMaybe<PythOracleCurrentConfigBoolExp>;
   _or?: InputMaybe<Array<PythOracleCurrentConfigBoolExp>>;
-  asset_identifier?: InputMaybe<StringComparisonExp>;
+  base?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
   max_confidence?: InputMaybe<NumericComparisonExp>;
   oracle_address?: InputMaybe<StringComparisonExp>;
   pyth_id?: InputMaybe<StringComparisonExp>;
+  quote?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "pyth_oracle_current_config". */
 export type PythOracleCurrentConfigOrderBy = {
-  asset_identifier?: InputMaybe<OrderBy>;
+  base?: InputMaybe<OrderBy>;
   deleted?: InputMaybe<OrderBy>;
   max_age_in_seconds?: InputMaybe<OrderBy>;
   max_confidence?: InputMaybe<OrderBy>;
   oracle_address?: InputMaybe<OrderBy>;
   pyth_id?: InputMaybe<OrderBy>;
+  quote?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "pyth_oracle_current_config" */
 export enum PythOracleCurrentConfigSelectColumn {
   /** column name */
-  AssetIdentifier = 'asset_identifier',
+  Base = 'base',
   /** column name */
   Deleted = 'deleted',
   /** column name */
@@ -8511,7 +8597,9 @@ export enum PythOracleCurrentConfigSelectColumn {
   /** column name */
   OracleAddress = 'oracle_address',
   /** column name */
-  PythId = 'pyth_id'
+  PythId = 'pyth_id',
+  /** column name */
+  Quote = 'quote'
 }
 
 /** Streaming cursor of the table "pyth_oracle_current_config" */
@@ -8524,12 +8612,13 @@ export type PythOracleCurrentConfigStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type PythOracleCurrentConfigStreamCursorValueInput = {
-  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  base?: InputMaybe<Scalars['String']['input']>;
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
   max_confidence?: InputMaybe<Scalars['numeric']['input']>;
   oracle_address?: InputMaybe<Scalars['String']['input']>;
   pyth_id?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryRoot = {
@@ -8587,6 +8676,10 @@ export type QueryRoot = {
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
   borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "chainlink_oracle_current_config" */
+  chainlink_oracle_current_config: Array<ChainlinkOracleCurrentConfig>;
+  /** fetch data from the table: "chainlink_oracle_current_config" using primary key columns */
+  chainlink_oracle_current_config_by_pk?: Maybe<ChainlinkOracleCurrentConfig>;
   /** An array relationship */
   coin_activities: Array<CoinActivities>;
   /** An aggregate relationship */
@@ -9111,6 +9204,22 @@ export type QueryRootBorrowRiskParametersCurrentByPkArgs = {
   collateral: Scalars['String']['input'];
   market: Scalars['String']['input'];
   vault: Scalars['String']['input'];
+};
+
+
+export type QueryRootChainlinkOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<ChainlinkOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ChainlinkOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<ChainlinkOracleCurrentConfigBoolExp>;
+};
+
+
+export type QueryRootChainlinkOracleCurrentConfigByPkArgs = {
+  base: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
 };
 
 
@@ -9944,8 +10053,9 @@ export type QueryRootPythOracleCurrentConfigArgs = {
 
 
 export type QueryRootPythOracleCurrentConfigByPkArgs = {
-  asset_identifier: Scalars['String']['input'];
+  base: Scalars['String']['input'];
   oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
 };
 
 
@@ -10065,8 +10175,9 @@ export type QueryRootSwitchboardOracleCurrentConfigArgs = {
 
 
 export type QueryRootSwitchboardOracleCurrentConfigByPkArgs = {
-  asset_identifier: Scalars['String']['input'];
+  base: Scalars['String']['input'];
   oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
 };
 
 
@@ -11094,6 +11205,12 @@ export type SubscriptionRoot = {
   borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
   /** fetch data from the table in a streaming manner: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current_stream: Array<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "chainlink_oracle_current_config" */
+  chainlink_oracle_current_config: Array<ChainlinkOracleCurrentConfig>;
+  /** fetch data from the table: "chainlink_oracle_current_config" using primary key columns */
+  chainlink_oracle_current_config_by_pk?: Maybe<ChainlinkOracleCurrentConfig>;
+  /** fetch data from the table in a streaming manner: "chainlink_oracle_current_config" */
+  chainlink_oracle_current_config_stream: Array<ChainlinkOracleCurrentConfig>;
   /** An array relationship */
   coin_activities: Array<CoinActivities>;
   /** An aggregate relationship */
@@ -11858,6 +11975,29 @@ export type SubscriptionRootBorrowRiskParametersCurrentStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<BorrowRiskParametersCurrentStreamCursorInput>>;
   where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootChainlinkOracleCurrentConfigArgs = {
+  distinct_on?: InputMaybe<Array<ChainlinkOracleCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ChainlinkOracleCurrentConfigOrderBy>>;
+  where?: InputMaybe<ChainlinkOracleCurrentConfigBoolExp>;
+};
+
+
+export type SubscriptionRootChainlinkOracleCurrentConfigByPkArgs = {
+  base: Scalars['String']['input'];
+  oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootChainlinkOracleCurrentConfigStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ChainlinkOracleCurrentConfigStreamCursorInput>>;
+  where?: InputMaybe<ChainlinkOracleCurrentConfigBoolExp>;
 };
 
 
@@ -13069,8 +13209,9 @@ export type SubscriptionRootPythOracleCurrentConfigArgs = {
 
 
 export type SubscriptionRootPythOracleCurrentConfigByPkArgs = {
-  asset_identifier: Scalars['String']['input'];
+  base: Scalars['String']['input'];
   oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
 };
 
 
@@ -13246,8 +13387,9 @@ export type SubscriptionRootSwitchboardOracleCurrentConfigArgs = {
 
 
 export type SubscriptionRootSwitchboardOracleCurrentConfigByPkArgs = {
-  asset_identifier: Scalars['String']['input'];
+  base: Scalars['String']['input'];
   oracle_address: Scalars['String']['input'];
+  quote: Scalars['String']['input'];
 };
 
 
@@ -13624,13 +13766,14 @@ export type SubscriptionRootVaultUserSettingStreamArgs = {
 
 /** columns and relationships of "switchboard_oracle_activities" */
 export type SwitchboardOracleActivities = {
-  aggregator_address?: Maybe<Scalars['String']['output']>;
-  asset_identifier?: Maybe<Scalars['String']['output']>;
+  aggregator_address: Scalars['String']['output'];
+  base: Scalars['String']['output'];
   deleted?: Maybe<Scalars['Boolean']['output']>;
   event_index: Scalars['numeric']['output'];
-  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
-  max_stdev?: Maybe<Scalars['numeric']['output']>;
-  oracle_address?: Maybe<Scalars['String']['output']>;
+  max_age_in_seconds: Scalars['numeric']['output'];
+  max_stdev: Scalars['numeric']['output'];
+  oracle_address: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
   timestamp?: Maybe<Scalars['timestamp']['output']>;
   transaction_version: Scalars['numeric']['output'];
 };
@@ -13641,12 +13784,13 @@ export type SwitchboardOracleActivitiesBoolExp = {
   _not?: InputMaybe<SwitchboardOracleActivitiesBoolExp>;
   _or?: InputMaybe<Array<SwitchboardOracleActivitiesBoolExp>>;
   aggregator_address?: InputMaybe<StringComparisonExp>;
-  asset_identifier?: InputMaybe<StringComparisonExp>;
+  base?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   event_index?: InputMaybe<NumericComparisonExp>;
   max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
   max_stdev?: InputMaybe<NumericComparisonExp>;
   oracle_address?: InputMaybe<StringComparisonExp>;
+  quote?: InputMaybe<StringComparisonExp>;
   timestamp?: InputMaybe<TimestampComparisonExp>;
   transaction_version?: InputMaybe<NumericComparisonExp>;
 };
@@ -13654,12 +13798,13 @@ export type SwitchboardOracleActivitiesBoolExp = {
 /** Ordering options when selecting data from "switchboard_oracle_activities". */
 export type SwitchboardOracleActivitiesOrderBy = {
   aggregator_address?: InputMaybe<OrderBy>;
-  asset_identifier?: InputMaybe<OrderBy>;
+  base?: InputMaybe<OrderBy>;
   deleted?: InputMaybe<OrderBy>;
   event_index?: InputMaybe<OrderBy>;
   max_age_in_seconds?: InputMaybe<OrderBy>;
   max_stdev?: InputMaybe<OrderBy>;
   oracle_address?: InputMaybe<OrderBy>;
+  quote?: InputMaybe<OrderBy>;
   timestamp?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
 };
@@ -13669,7 +13814,7 @@ export enum SwitchboardOracleActivitiesSelectColumn {
   /** column name */
   AggregatorAddress = 'aggregator_address',
   /** column name */
-  AssetIdentifier = 'asset_identifier',
+  Base = 'base',
   /** column name */
   Deleted = 'deleted',
   /** column name */
@@ -13680,6 +13825,8 @@ export enum SwitchboardOracleActivitiesSelectColumn {
   MaxStdev = 'max_stdev',
   /** column name */
   OracleAddress = 'oracle_address',
+  /** column name */
+  Quote = 'quote',
   /** column name */
   Timestamp = 'timestamp',
   /** column name */
@@ -13697,12 +13844,13 @@ export type SwitchboardOracleActivitiesStreamCursorInput = {
 /** Initial value of the column from where the streaming should start */
 export type SwitchboardOracleActivitiesStreamCursorValueInput = {
   aggregator_address?: InputMaybe<Scalars['String']['input']>;
-  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  base?: InputMaybe<Scalars['String']['input']>;
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   event_index?: InputMaybe<Scalars['numeric']['input']>;
   max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
   max_stdev?: InputMaybe<Scalars['numeric']['input']>;
   oracle_address?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['timestamp']['input']>;
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
 };
@@ -13710,11 +13858,12 @@ export type SwitchboardOracleActivitiesStreamCursorValueInput = {
 /** columns and relationships of "switchboard_oracle_current_config" */
 export type SwitchboardOracleCurrentConfig = {
   aggregator_address?: Maybe<Scalars['String']['output']>;
-  asset_identifier: Scalars['String']['output'];
+  base: Scalars['String']['output'];
   deleted?: Maybe<Scalars['Boolean']['output']>;
-  max_age_in_seconds?: Maybe<Scalars['numeric']['output']>;
-  max_stdev?: Maybe<Scalars['numeric']['output']>;
+  max_age_in_seconds: Scalars['numeric']['output'];
+  max_stdev: Scalars['numeric']['output'];
   oracle_address: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "switchboard_oracle_current_config". All fields are combined with a logical 'AND'. */
@@ -13723,21 +13872,23 @@ export type SwitchboardOracleCurrentConfigBoolExp = {
   _not?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
   _or?: InputMaybe<Array<SwitchboardOracleCurrentConfigBoolExp>>;
   aggregator_address?: InputMaybe<StringComparisonExp>;
-  asset_identifier?: InputMaybe<StringComparisonExp>;
+  base?: InputMaybe<StringComparisonExp>;
   deleted?: InputMaybe<BooleanComparisonExp>;
   max_age_in_seconds?: InputMaybe<NumericComparisonExp>;
   max_stdev?: InputMaybe<NumericComparisonExp>;
   oracle_address?: InputMaybe<StringComparisonExp>;
+  quote?: InputMaybe<StringComparisonExp>;
 };
 
 /** Ordering options when selecting data from "switchboard_oracle_current_config". */
 export type SwitchboardOracleCurrentConfigOrderBy = {
   aggregator_address?: InputMaybe<OrderBy>;
-  asset_identifier?: InputMaybe<OrderBy>;
+  base?: InputMaybe<OrderBy>;
   deleted?: InputMaybe<OrderBy>;
   max_age_in_seconds?: InputMaybe<OrderBy>;
   max_stdev?: InputMaybe<OrderBy>;
   oracle_address?: InputMaybe<OrderBy>;
+  quote?: InputMaybe<OrderBy>;
 };
 
 /** select columns of table "switchboard_oracle_current_config" */
@@ -13745,7 +13896,7 @@ export enum SwitchboardOracleCurrentConfigSelectColumn {
   /** column name */
   AggregatorAddress = 'aggregator_address',
   /** column name */
-  AssetIdentifier = 'asset_identifier',
+  Base = 'base',
   /** column name */
   Deleted = 'deleted',
   /** column name */
@@ -13753,7 +13904,9 @@ export enum SwitchboardOracleCurrentConfigSelectColumn {
   /** column name */
   MaxStdev = 'max_stdev',
   /** column name */
-  OracleAddress = 'oracle_address'
+  OracleAddress = 'oracle_address',
+  /** column name */
+  Quote = 'quote'
 }
 
 /** Streaming cursor of the table "switchboard_oracle_current_config" */
@@ -13767,11 +13920,12 @@ export type SwitchboardOracleCurrentConfigStreamCursorInput = {
 /** Initial value of the column from where the streaming should start */
 export type SwitchboardOracleCurrentConfigStreamCursorValueInput = {
   aggregator_address?: InputMaybe<Scalars['String']['input']>;
-  asset_identifier?: InputMaybe<Scalars['String']['input']>;
+  base?: InputMaybe<Scalars['String']['input']>;
   deleted?: InputMaybe<Scalars['Boolean']['input']>;
   max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
   max_stdev?: InputMaybe<Scalars['numeric']['input']>;
   oracle_address?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "table_items" */
