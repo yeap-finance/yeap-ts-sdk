@@ -72,7 +72,7 @@ export class ScmdApi {
    * @group Markets
    */
   async getAllMarkets(limit?: number, offset?: number): Promise<BorrowMarket[]> {
-    const protocol = this.protocolAddress.toString();
+    const protocol = this.protocolName;
     const markets = await getWhitelistedBorrowMarketsByProtocol({
       yeapConfig: this.config,
       protocol,
