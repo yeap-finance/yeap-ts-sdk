@@ -1,0 +1,9 @@
+fragment ChainlinkOracleConfigFields on chainlink_oracle_current_config {
+  oracle_address
+  base
+  quote
+  feed_id
+  max_age_in_seconds
+  feed_decimals
+  deleted
+}

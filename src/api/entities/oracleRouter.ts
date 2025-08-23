@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import { Account, AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
 import { OracleConfig } from "./oracleConfig";
@@ -72,7 +72,7 @@ export class OracleRouter {
    * }
    * ```
    */
-  getOracleConfig(baseAsset: string, quoteAsset: string): OracleConfig | undefined {
+  getOracleConfig(baseAsset: AccountAddress, quoteAsset: AccountAddress): OracleConfig | undefined {
     const configFragment = this.getConfigForPair(baseAsset, quoteAsset);
     if (!configFragment) {
       return undefined;
@@ -104,8 +104,14 @@ export class OracleRouter {
    * }
    * ```
    */
-  private getConfigForPair(baseAsset: string, quoteAsset: string): OracleRouterConfigFieldsFragment | undefined {
-    const configs = this.data.filter((config) => config.base_asset === baseAsset && config.quote_asset === quoteAsset);
+  private getConfigForPair(baseAsset: AccountAddress, quoteAsset: AccountAddress): OracleRouterConfigFieldsFragment | undefined {
+    const configs = this.data.filter((config) => {
+      try {
+        return AccountAddress.from(config.base_asset).equals(baseAsset) && AccountAddress.from(config.quote_asset).equals(quoteAsset);
+      } catch (_e) {
+        return false;
+      }
+    });
 
     if (configs.length > 1) {
       throw new Error(
@@ -129,8 +135,15 @@ export class OracleRouter {
    * console.log(`Found ${pythConfigs.length} Pyth configurations`);
    * ```
    */
-  getConfigsByOracle(oracleAddress: string): OracleConfig[] {
-    const fragments = this.data.filter((config) => config.oracle === oracleAddress);
+  getConfigsByOracle(oracleAddress: AccountAddress): OracleConfig[] {
+    const fragments = this.data.filter((config) => {
+      if (!config.oracle) return false;
+      try {
+        return AccountAddress.from(config.oracle).equals(oracleAddress);
+      } catch (_e) {
+        return false;
+      }
+    });
     return fragments.map((fragment) => new OracleConfig(fragment, this.config));
   }
 
@@ -176,8 +189,14 @@ export class OracleRouter {
    * }
    * ```
    */
-  getConfigForBaseAsset(baseAsset: string): OracleConfig | undefined {
-    const configs = this.data.filter((config) => config.base_asset === baseAsset);
+  getConfigForBaseAsset(baseAsset: AccountAddress): OracleConfig | undefined {
+    const configs = this.data.filter((config) => {
+      try {
+        return AccountAddress.from(config.base_asset).equals(baseAsset);
+      } catch (_e) {
+        return false;
+      }
+    });
 
     if (configs.length > 1) {
       throw new Error(
@@ -201,8 +220,14 @@ export class OracleRouter {
    * console.log(`${usdQuotedPairs.length} assets have USD pricing`);
    * ```
    */
-  getConfigsForQuoteAsset(quoteAsset: string): OracleConfig[] {
-    const fragments = this.data.filter((config) => config.quote_asset === quoteAsset);
+  getConfigsForQuoteAsset(quoteAsset: AccountAddress): OracleConfig[] {
+    const fragments = this.data.filter((config) => {
+      try {
+        return AccountAddress.from(config.quote_asset).equals(quoteAsset);
+      } catch (_e) {
+        return false;
+      }
+    });
     return fragments.map((fragment) => new OracleConfig(fragment, this.config));
   }
 
@@ -225,8 +250,8 @@ export class OracleRouter {
    * }
    * ```
    */
-  getAvailableAssetPairs(): Map<string, string> {
-    const pairs = new Map<string, string>();
+  getAvailableAssetPairs(): Map<AccountAddress, AccountAddress> {
+    const pairs = new Map();
     this.getAllConfigs().forEach((config) => {
       if (config.baseAsset && config.quoteAsset) {
         pairs.set(config.baseAsset, config.quoteAsset);
@@ -246,11 +271,11 @@ export class OracleRouter {
    * console.log(`Router uses ${oracles.length} different oracle implementations`);
    * ```
    */
-  getUniqueOracles(): string[] {
-    const oracles = new Set<string>();
+  getUniqueOracles(): AccountAddress[] {
+    const oracles = new Set<AccountAddress>();
     this.data.forEach((config) => {
       if (config.oracle) {
-        oracles.add(config.oracle);
+        oracles.add(AccountAddress.from(config.oracle));
       }
     });
     return Array.from(oracles);
@@ -333,7 +358,7 @@ export class OracleRouter {
    * }
    * ```
    */
-  hasPricing(baseAsset: string, quoteAsset: string): boolean {
+  hasPricing(baseAsset: AccountAddress, quoteAsset: AccountAddress): boolean {
     return this.getCommonAncestor(baseAsset, quoteAsset) !== null;
   }
 
@@ -356,9 +381,9 @@ export class OracleRouter {
    * }
    * ```
    */
-  private getCommonAncestor(a: string, b: string): string | null {
+  private getCommonAncestor(a: AccountAddress, b: AccountAddress): AccountAddress | null {
     // If both assets are the same, return that asset
-    if (a === b) {
+    if (a.equals(b)) {
       return a;
     }
 
@@ -367,15 +392,15 @@ export class OracleRouter {
     const pathBA = this.getPathsToRoot(b, a);
 
     // Check if one asset is directly reachable from the other
-    if (pathAB.length > 0 && pathAB[pathAB.length - 1] === b) {
+    if (pathAB.length > 0 && pathAB[pathAB.length - 1].equals(b)) {
       return b;
     }
-    if (pathBA.length > 0 && pathBA[pathBA.length - 1] === a) {
+    if (pathBA.length > 0 && pathBA[pathBA.length - 1].equals(a)) {
       return a;
     }
 
     // Find common ancestor by comparing paths from the roots (end of vectors)
-    let commonAncestor: string | null = null;
+    let commonAncestor: AccountAddress | null = null;
     let i = pathAB.length;
     let j = pathBA.length;
 
@@ -386,7 +411,7 @@ export class OracleRouter {
       const nodeA = pathAB[i];
       const nodeB = pathBA[j];
 
-      if (nodeA === nodeB) {
+      if (nodeA.equals(nodeB)) {
         // This node is common to both paths
         commonAncestor = nodeA;
       } else {
@@ -408,16 +433,16 @@ export class OracleRouter {
    * @param until - Target asset to stop at (if reachable)
    * @returns Array of asset addresses in the path from `a` towards `until` or to the root
    */
-  private getPathsToRoot(a: string, until: string): string[] {
+  private getPathsToRoot(a: AccountAddress, until: AccountAddress): AccountAddress[] {
     const assetPairs = this.getAvailableAssetPairs();
-    const path: string[] = [];
+    const path: AccountAddress[] = [];
     let currentNode = a;
 
     while (true) {
       path.push(currentNode);
 
       // Stop if we find the target
-      if (currentNode === until) {
+      if (currentNode.equals(until)) {
         break;
       }
 
@@ -454,7 +479,7 @@ export class OracleRouter {
    * }
    * ```
    */
-  async getPrice(baseAsset: string, quoteAsset: string): Promise<bigint | null> {
+  async getPrice(baseAsset: AccountAddress, quoteAsset: AccountAddress): Promise<bigint | null> {
     if (!this.config?.aptosClient) {
       throw new Error(
         "Aptos client is required to fetch on-chain price. Please provide an AptosConfig or Aptos client in YeapConfig.",
@@ -475,7 +500,8 @@ export class OracleRouter {
       const viewFunctionData: InputViewFunctionData = {
         function: `${yeapLensAddress}::oracle_lens::get_price_of_pair` as `${string}::${string}::${string}`,
         typeArguments: [],
-        functionArguments: [this.routerAddress, baseAsset, quoteAsset],
+        // convert AccountAddress to string for on-chain call
+        functionArguments: [this.routerAddress, baseAsset.toString(), quoteAsset.toString()],
       };
 
       // Call the view function on-chain

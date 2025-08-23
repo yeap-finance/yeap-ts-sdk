@@ -1,0 +1,33 @@
+name: PR - Build Yeap TS SDK
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@8.15.1 --activate
+
+      - name: Install dependencies
+        working-directory: ./
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        working-directory: ./
+        run: pnpm run lint
+
+      - name: Build
+        working-directory: ./
+        run: pnpm run build

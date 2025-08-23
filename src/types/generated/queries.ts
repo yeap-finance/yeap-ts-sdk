@@ -44,7 +44,8 @@ export const FixedPriceOracleConfigFieldsFragmentDoc = `
 export const PythOracleConfigFieldsFragmentDoc = `
     fragment PythOracleConfigFields on pyth_oracle_current_config {
   oracle_address
-  asset_identifier
+  base
+  quote
   pyth_id
   max_age_in_seconds
   max_confidence
@@ -53,10 +54,22 @@ export const PythOracleConfigFieldsFragmentDoc = `
 export const SwitchboardOracleConfigFieldsFragmentDoc = `
     fragment SwitchboardOracleConfigFields on switchboard_oracle_current_config {
   oracle_address
-  asset_identifier
+  base
+  quote
   aggregator_address
   max_age_in_seconds
   max_stdev
+  deleted
+}
+    `;
+export const ChainlinkOracleConfigFieldsFragmentDoc = `
+    fragment ChainlinkOracleConfigFields on chainlink_oracle_current_config {
+  oracle_address
+  base
+  quote
+  feed_id
+  max_age_in_seconds
+  feed_decimals
   deleted
 }
     `;
@@ -82,6 +95,9 @@ export const OracleRouterConfigFieldsFragmentDoc = `
   }
   switchboard_oracle_config {
     ...SwitchboardOracleConfigFields
+  }
+  chainlink_oracle_config {
+    ...ChainlinkOracleConfigFields
   }
 }
     `;
@@ -326,7 +342,8 @@ export const GetOracleRouterConfigByPrimaryKey = `
 ${FungibleAssetMetadataFieldsFragmentDoc}
 ${FixedPriceOracleConfigFieldsFragmentDoc}
 ${PythOracleConfigFieldsFragmentDoc}
-${SwitchboardOracleConfigFieldsFragmentDoc}`;
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetOracleRouterConfigsByOracle = `
     query getOracleRouterConfigsByOracle($oracleRouter: String!, $limit: Int, $offset: Int) {
   oracle_router_current_config(
@@ -342,7 +359,8 @@ export const GetOracleRouterConfigsByOracle = `
 ${FungibleAssetMetadataFieldsFragmentDoc}
 ${FixedPriceOracleConfigFieldsFragmentDoc}
 ${PythOracleConfigFieldsFragmentDoc}
-${SwitchboardOracleConfigFieldsFragmentDoc}`;
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetPositionsByOwner = `
     query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(

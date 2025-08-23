@@ -627,3 +627,78 @@ export interface BorrowRiskParameters {
   /** Vault address */
   vault: AccountAddress;
 }
+
+/**
+ * Chainlink Oracle configuration (clean interface)
+ */
+export interface ChainlinkOracleConfig {
+  /** Oracle address (admin/owner of the config resource) */
+  oracle_address: AccountAddress;
+  /** Base asset address */
+  base: AccountAddress;
+  /** Quote asset address */
+  quote: AccountAddress;
+  /** Chainlink feed id (32 bytes, hex or base64) */
+  feed_id: string;
+  /** Max age in seconds for price freshness */
+  max_age_in_seconds: number;
+  /** Feed decimals (native decimals of the feed) */
+  feed_decimals: number;
+  /** Whether the config is deleted (soft delete) */
+  deleted?: boolean | null;
+}
+/**
+ * Fixed Price Oracle configuration (clean interface, matches fixed_price_oracle_current_config)
+ */
+export interface FixedPriceOracleConfig {
+  /** Oracle address (admin/owner of the config resource) */
+  oracle_address: AccountAddress;
+  /** Base asset address */
+  base: AccountAddress;
+  /** Quote asset address */
+  quote: AccountAddress;
+  /** Fixed price value (as string) */
+  price: string;
+  /** Whether the config is deleted (soft delete) */
+  deleted?: boolean | null;
+}
+
+/**
+ * Pyth Oracle configuration (clean interface, matches pyth_oracle_current_config)
+ */
+export interface PythOracleConfig {
+  /** Oracle address (admin/owner of the config resource) */
+  oracle_address: AccountAddress;
+  /** Base asset address */
+  base: AccountAddress;
+  /** Quote asset address */
+  quote: AccountAddress;
+  /** Pyth price feed id (hex or base64) */
+  pyth_id: string;
+  /** Max age in seconds for price freshness */
+  max_age_in_seconds: number;
+  /** Max confidence (optional, as string to handle u64) */
+  max_confidence: string;
+  /** Whether the config is deleted (soft delete) */
+  deleted?: boolean | null;
+}
+
+/**
+ * Switchboard Oracle configuration (clean interface, matches switchboard_oracle_current_config)
+ */
+export interface SwitchboardOracleConfig {
+  /** Oracle address (admin/owner of the config resource) */
+  oracle_address: AccountAddress;
+  /** Base asset address */
+  base: AccountAddress;
+  /** Quote asset address */
+  quote: AccountAddress;
+  /** Switchboard aggregator address */
+  aggregator_address: string;
+  /** Max age in seconds for price freshness */
+  max_age_in_seconds: number;
+  /** Max stdev (optional, as string to handle u128) */
+  max_stdev: string;
+  /** Whether the config is deleted (soft delete) */
+  deleted?: boolean | null;
+}
