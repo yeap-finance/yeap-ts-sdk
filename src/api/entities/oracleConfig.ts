@@ -264,7 +264,7 @@ export class OracleConfig {
     /**
      * Get the current configuration for the Chainlink Oracle.
      */
-
+    getChainlinkOracleConfig(): Maybe<ChainlinkOracleConfig> {
         if (!this.isChainlinkOracle) {
             return null;
         }
