@@ -265,8 +265,7 @@ export class OracleConfig {
      * Get the current configuration for the Chainlink Oracle.
      */
 
-    get chainlinkOracleConfig(): Maybe<ChainlinkOracleConfig> {
-        if (!this.isPrimaryBackupOracle) {
+        if (!this.isChainlinkOracle) {
             return null;
         }
         const cfg = this.data.chainlink_oracle_config;
