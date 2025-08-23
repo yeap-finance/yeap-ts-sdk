@@ -21,13 +21,13 @@ jobs:
         run: corepack enable && corepack prepare pnpm@8.15.1 --activate
 
       - name: Install dependencies
-        working-directory: sdk/yeap-ts-sdk
+        working-directory: ./
         run: pnpm install --frozen-lockfile
 
       - name: Lint
-        working-directory: sdk/yeap-ts-sdk
+        working-directory: ./
         run: pnpm run lint
 
       - name: Build
-        working-directory: sdk/yeap-ts-sdk
+        working-directory: ./
         run: pnpm run build
