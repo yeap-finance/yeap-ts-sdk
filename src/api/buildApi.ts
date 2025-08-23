@@ -70,28 +70,41 @@ export class BuildApi {
 
   /**
    * Builds transaction data for opening a borrow position.
-   * @param collateralVaultAddress - The collateral vault address
-   * @returns InputGenerateTransactionPayloadData transaction data
+   * Mirrors Move: open_position(user, market, borrow_vault, collateral_amount, borrow_amount)
+   * @param marketAddress - Borrow market address
+   * @param borrowVaultAddress - The borrow vault address (debt vault)
+   * @param collateralAmount - Amount of collateral to deposit (bigint)
+   * @param borrowAmount - Amount to borrow (bigint)
    */
-  buildOpenPositionTxn(collateralVaultAddress: string): InputGenerateTransactionPayloadData {
+  buildOpenPositionTxn(
+    marketAddress: string,
+    borrowVaultAddress: string,
+    collateralAmount: bigint,
+    borrowAmount: bigint,
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::open_position`,
       typeArguments: [],
-      functionArguments: [collateralVaultAddress],
+      functionArguments: [
+        marketAddress,
+        borrowVaultAddress,
+        collateralAmount.toString(),
+        borrowAmount.toString(),
+      ],
     };
   }
 
   /**
-   * Builds transaction data for adding collateral and borrowing.
-   * @param collateralVaultAddress - The collateral vault address
-   * @param borrowVaultAddress - The borrow vault address
-   * @param collateralAmount - The collateral amount (bigint)
-   * @param borrowAmount - The borrow amount (bigint)
-   * @returns InputGenerateTransactionPayloadData transaction data
+   * Builds transaction data for adding collateral and borrowing more.
+   * Mirrors Move: add_collateral_and_borrow(user, position, borrow_vault, collateral_amount, borrrow_amount)
+   * @param positionAddress - Existing position object address
+   * @param borrowVaultAddress - Borrow (debt) vault address
+   * @param collateralAmount - Collateral amount (bigint) (use MAX to indicate all)
+   * @param borrowAmount - Borrow amount (bigint)
    */
   buildAddCollateralAndBorrowTxn(
-    collateralVaultAddress: string,
+    positionAddress: string,
     borrowVaultAddress: string,
     collateralAmount: bigint,
     borrowAmount: bigint,
@@ -100,31 +113,16 @@ export class BuildApi {
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::add_collateral_and_borrow`,
       typeArguments: [],
-      functionArguments: [collateralVaultAddress, borrowVaultAddress, collateralAmount.toString(), borrowAmount.toString()],
+      functionArguments: [
+        positionAddress,
+        borrowVaultAddress,
+        collateralAmount.toString(),
+        borrowAmount.toString(),
+      ],
     };
   }
 
-  /**
-   * Builds transaction data for adding more collateral and borrowing more.
-   * @param positionAddress - The position address
-   * @param borrowVaultAddress - The borrow vault address
-   * @param collateralAmount - The collateral amount (bigint)
-   * @param borrowAmount - The borrow amount (bigint)
-   * @returns InputGenerateTransactionPayloadData transaction data
-   */
-  buildAddCollateralAndBorrowMore(
-    positionAddress: string,
-    borrowVaultAddress: string,
-    collateralAmount: bigint,
-    borrowAmount: bigint,
-  ): InputGenerateTransactionPayloadData {
-    const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
-    return {
-      function: `${yeapBorrowApiAddress}::borrow_api::add_collateral_and_borrow_more`,
-      typeArguments: [],
-      functionArguments: [positionAddress, borrowVaultAddress, collateralAmount.toString(), borrowAmount.toString()],
-    };
-  }
+  // Removed buildAddCollateralAndBorrowMore: no corresponding Move entry function.
 
   /**
    * Builds transaction data for repaying and withdrawing collateral.
