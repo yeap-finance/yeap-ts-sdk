@@ -4,7 +4,7 @@
 import { YeapConfig } from "../yeapConfig";
 import { BorrowMarketFieldsFragment } from "../../types/generated/operations";
 import { BorrowRiskParameters } from "../interfaces";
-import { AccountAddress } from "@aptos-labs/ts-sdk";
+import { AccountAddress, InputViewFunctionData, MoveUint128Type } from "@aptos-labs/ts-sdk";
 
 type RawBorrowMarket = BorrowMarketFieldsFragment;
 
@@ -86,5 +86,52 @@ export class BorrowMarket {
       market: AccountAddress.fromString(rp.market),
       vault: AccountAddress.fromString(rp.vault),
     }));
+  }
+
+  /**
+  * Batch fetch on-chain prices for multiple asset pairs via the oracle lens.
+  *
+  * Utilizes the `oracle_lens::batch_get_price_of_pairs` view to reduce RPC round trips
+  * compared to calling a single-pair price function repeatedly.
+  *
+  * Requirements:
+  * - `YeapConfig` must include an Aptos client.
+  * - `yeap_lens` address must be configured in the address map.
+  *
+  * Notes:
+  * - The order of returned prices matches the order of the supplied `pairs` array.
+  * - If a pair can't be priced on-chain the corresponding value may be `0n` (no explicit
+  *   sentinel handling is performed here—interpret according to protocol semantics).
+  * - When a `quote` is omitted it defaults to USD (protocol USD quote asset). Current implementation
+  *   passes `AccountAddress.ZERO` as a sentinel that the on-chain lens interprets as USD.
+  *
+  * @param routerAddress Oracle router address used for routing
+  * @param pairs Array of base / optional quote asset address pairs
+  * @returns Array of bigint prices (same length and ordering as `pairs`)
+  */
+  async getPrices(routerAddress: string, pairs: { base: AccountAddress, quote?: AccountAddress }[]): Promise<bigint[]> {
+    if (!this.config?.aptosClient) {
+      throw new Error(
+        "Aptos client is required to fetch on-chain price. Please provide an Aptos client in YeapConfig.",
+      );
+    }
+
+    if (!this.config.hasAddress("yeap_lens")) {
+      throw new Error(
+        "yeap_lens address not found in configuration. Please add 'yeap_lens' to the addresses mapping in YeapConfig.",
+      );
+    }
+
+    const yeapLensAddress = this.config.yeapLensAddress;
+    const viewFunctionData: InputViewFunctionData = {
+      function: `${yeapLensAddress}::oracle_lens::batch_get_price_of_pairs` as `${string}::${string}::${string}`,
+      typeArguments: [],
+      functionArguments: [routerAddress, pairs.map(v => v.base.toString()), pairs.map(v => (v.quote || AccountAddress.ZERO).toString())],
+    };
+
+    const result = await this.config.aptosClient.view({ payload: viewFunctionData });
+    const prices = result[0] as MoveUint128Type[];
+
+    return prices.map((price) => { return BigInt(price); });
   }
 }
