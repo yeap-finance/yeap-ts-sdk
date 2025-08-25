@@ -25,6 +25,8 @@ export interface YeapFungibleAssetMetadata {
   iconUri?: string | null;
   /** Project URI for the asset */
   projectUri?: string | null;
+  maximum?: string | null;
+  totalSupply?: string | null;
 }
 
 /**
