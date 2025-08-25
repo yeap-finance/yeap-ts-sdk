@@ -24,7 +24,7 @@ export type FungibleAssetBalanceFieldsFragment = (
   & { metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment> }
 );
 
-export type FungibleAssetMetadataFieldsFragment = Pick<Types.FungibleAssetMetadata, 'token_standard' | 'name' | 'symbol' | 'decimals' | 'icon_uri' | 'project_uri'>;
+export type FungibleAssetMetadataFieldsFragment = Pick<Types.FungibleAssetMetadata, 'token_standard' | 'name' | 'symbol' | 'decimals' | 'icon_uri' | 'project_uri' | 'maximum_v2' | 'supply_v2'>;
 
 export type KinkedIrmConfigFieldsFragment = Pick<Types.KinkedIrmCurrentConfig, 'config_address' | 'max_borrow_rate' | 'min_borrow_rate' | 'optimal_borrow_rate' | 'optimal_utilization'>;
 

@@ -46,6 +46,8 @@ export function transformFungibleAssetMetadata(raw: RawFungibleAssetMetadata): Y
     decimals: raw.decimals,
     iconUri: raw.icon_uri || null,
     projectUri: raw.project_uri || null,
+    maximum: raw.maximum_v2 || null,
+    totalSupply: raw.supply_v2 || null,
   };
 }
 

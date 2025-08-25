@@ -30,6 +30,8 @@ export const FungibleAssetMetadataFieldsFragmentDoc = `
   decimals
   icon_uri
   project_uri
+  maximum_v2
+  supply_v2
 }
     `;
 export const FixedPriceOracleConfigFieldsFragmentDoc = `
