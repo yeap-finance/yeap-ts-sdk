@@ -1,4 +1,4 @@
-// Copyright © Aptos Foundation
+// Copyright © Yeap Finance
 // SPDX-License-Identifier: Apache-2.0
 
 import {
@@ -12,42 +12,40 @@ import {
   YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
-  YeapVaultProtocolCaps,
+
   YeapOracleRouterConfig,
 } from "./interfaces";
 import {
   FungibleAssetBalanceFieldsFragment,
-  GetVaultInfoQuery,
-  GetVaultLatestStateQuery,
   VaultInfoFieldsFragment,
   OracleRouterConfigFieldsFragment,
+  FungibleAssetMetadataFieldsFragment,
+  CurrentObjectFieldsFragment,
+  VaultSettingsFieldsFragment,
+  VaultStateActivitiesFieldsFragment,
+  AdaptiveIrmConfigFieldsFragment,
+  AdaptiveIrmStateFieldsFragment, FixedRateIrmConfigFieldsFragment, KinkedIrmConfigFieldsFragment,
 } from "../types/generated/operations";
+import {Maybe} from "../types";
 
-type RawVaultInfo = GetVaultInfoQuery["vault_info"][0];
-type RawVaultState = GetVaultLatestStateQuery["vault_states_activities"][0];
-type RawFungibleAssetMetadata = RawVaultInfo["underlying_asset_metadata"];
-type RawCurrentObject = RawVaultInfo["governance_object"];
-type RawVaultSettings = RawVaultInfo["settings"];
-type RawAdaptiveIrmConfig = VaultInfoFieldsFragment["adaptive_irm_config"];
-type RawFixedRateIrmConfig = VaultInfoFieldsFragment["fixed_rate_irm_config"];
-type RawKinkedIrmConfig = VaultInfoFieldsFragment["kinked_irm_config"];
-type RawOracleRouterConfig = OracleRouterConfigFieldsFragment;
+
 
 /**
  * Transform raw GraphQL fungible asset metadata to clean interface
  * @internal
  */
-export function transformFungibleAssetMetadata(raw: RawFungibleAssetMetadata): YeapFungibleAssetMetadata | null {
+export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataFieldsFragment>| undefined): Maybe<YeapFungibleAssetMetadata> {
   if (!raw) return null;
   return {
+    assetType: raw.asset_type,
     tokenStandard: raw.token_standard,
     name: raw.name,
     symbol: raw.symbol,
     decimals: raw.decimals,
-    iconUri: raw.icon_uri || null,
-    projectUri: raw.project_uri || null,
-    maximum: raw.maximum_v2 || null,
-    totalSupply: raw.supply_v2 || null,
+    iconUri: raw.icon_uri,
+    projectUri: raw.project_uri,
+    maximum: raw.maximum_v2,
+    totalSupply: raw.supply_v2,
   };
 }
 
@@ -55,7 +53,7 @@ export function transformFungibleAssetMetadata(raw: RawFungibleAssetMetadata): Y
  * Transform raw GraphQL current object to clean interface
  * @internal
  */
-export function transformCurrentObject(raw: RawCurrentObject): YeapCurrentObject | null {
+export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment>|undefined): YeapCurrentObject | null {
   if (!raw) return null;
   return {
     objectAddress: raw.object_address,
@@ -70,7 +68,7 @@ export function transformCurrentObject(raw: RawCurrentObject): YeapCurrentObject
  * Transform raw GraphQL vault settings to clean interface
  * @internal
  */
-export function transformVaultSettings(raw: RawVaultSettings): YeapVaultSettings | null {
+export function transformVaultSettings(raw: Maybe<VaultSettingsFieldsFragment>|undefined): YeapVaultSettings | null {
   if (!raw) return null;
   return {
     vaultAddress: raw.vault_address,
@@ -90,7 +88,7 @@ export function transformVaultSettings(raw: RawVaultSettings): YeapVaultSettings
  * Transform raw GraphQL vault info to clean interface
  * @internal
  */
-export function transformVaultInfo(raw: RawVaultInfo): YeapVaultInfo | null {
+export function transformVaultInfo(raw: Maybe<VaultInfoFieldsFragment>|undefined): YeapVaultInfo | null {
   if (!raw || !raw.underlying_asset) return null;
   return {
     vaultAddress: raw.vault_address,
@@ -119,7 +117,7 @@ export function transformVaultInfo(raw: RawVaultInfo): YeapVaultInfo | null {
  * Transform raw GraphQL vault state to clean interface
  * @internal
  */
-export function transformVaultState(raw: RawVaultState): YeapVaultState | null {
+export function transformVaultState(raw: Maybe<VaultStateActivitiesFieldsFragment>): YeapVaultState | null {
   if (!raw) return null;
   return {
     badDebt: raw.bad_debt,
@@ -140,7 +138,7 @@ export function transformVaultState(raw: RawVaultState): YeapVaultState | null {
  * Transform raw GraphQL adaptive IRM config to clean interface
  * @internal
  */
-export function transformAdaptiveIrmConfig(raw: RawAdaptiveIrmConfig): YeapAdaptiveIrmConfig | null {
+export function transformAdaptiveIrmConfig(raw: Maybe<AdaptiveIrmConfigFieldsFragment>|undefined): YeapAdaptiveIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -157,7 +155,7 @@ export function transformAdaptiveIrmConfig(raw: RawAdaptiveIrmConfig): YeapAdapt
  * Transform raw GraphQL adaptive IRM state to clean interface
  * @internal
  */
-export function transformAdaptiveIrmState(raw: any): YeapAdaptiveIrmState | null {
+export function transformAdaptiveIrmState(raw: Maybe<AdaptiveIrmStateFieldsFragment>|undefined): YeapAdaptiveIrmState | null {
   if (!raw) return null;
   return {
     stateAddress: raw.state_address,
@@ -170,7 +168,7 @@ export function transformAdaptiveIrmState(raw: any): YeapAdaptiveIrmState | null
  * Transform raw GraphQL fixed rate IRM config to clean interface
  * @internal
  */
-export function transformFixedRateIrmConfig(raw: RawFixedRateIrmConfig): YeapFixedRateIrmConfig | null {
+export function transformFixedRateIrmConfig(raw: Maybe<FixedRateIrmConfigFieldsFragment>|undefined): YeapFixedRateIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -182,7 +180,7 @@ export function transformFixedRateIrmConfig(raw: RawFixedRateIrmConfig): YeapFix
  * Transform raw GraphQL kinked IRM config to clean interface
  * @internal
  */
-export function transformKinkedIrmConfig(raw: RawKinkedIrmConfig): YeapKinkedIrmConfig | null {
+export function transformKinkedIrmConfig(raw: Maybe<KinkedIrmConfigFieldsFragment>|undefined): YeapKinkedIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -214,7 +212,7 @@ export function transformFungibleAssetBalance(
  * Transform raw GraphQL oracle router config to clean interface
  * @internal
  */
-export function transformOracleRouterConfig(raw: RawOracleRouterConfig): YeapOracleRouterConfig | null {
+export function transformOracleRouterConfig(raw: Maybe<OracleRouterConfigFieldsFragment>|undefined): YeapOracleRouterConfig | null {
   if (!raw) return null;
   return {
     baseAsset: raw.base_asset,
