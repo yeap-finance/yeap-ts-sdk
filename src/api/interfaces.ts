@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
+import {Maybe} from "../types";
 
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
@@ -13,6 +14,7 @@ import { AccountAddress } from "@aptos-labs/ts-sdk";
  * Fungible asset metadata information (clean interface)
  */
 export interface YeapFungibleAssetMetadata {
+  assetType: string;
   /** Token standard (e.g., "v1", "v2") */
   tokenStandard: string;
   /** Asset name */
@@ -22,11 +24,11 @@ export interface YeapFungibleAssetMetadata {
   /** Number of decimal places */
   decimals: number;
   /** Icon URI for the asset */
-  iconUri?: string | null;
+  iconUri?: Maybe<string>;
   /** Project URI for the asset */
-  projectUri?: string | null;
-  maximum?: string | null;
-  totalSupply?: string | null;
+  projectUri?: Maybe<string>;
+  maximum?: Maybe<string>;
+  totalSupply?: Maybe<string>;
 }
 
 /**

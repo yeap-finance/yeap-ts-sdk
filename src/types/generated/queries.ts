@@ -24,6 +24,8 @@ export const LiquidationActivityFieldsFragmentDoc = `
     `;
 export const FungibleAssetMetadataFieldsFragmentDoc = `
     fragment FungibleAssetMetadataFields on fungible_asset_metadata {
+  asset_type
+  creator_address
   token_standard
   name
   symbol
