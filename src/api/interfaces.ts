@@ -253,104 +253,205 @@ export interface SwitchboardOracleConfig {
 // ---------------------------------------------------------------------------------------------------------------------
 // Raw GraphQL backing types (exposed for advanced users, kept stable via fragments)
 // ---------------------------------------------------------------------------------------------------------------------
+/** Raw GraphQL fragment backing a Vault (internal escape hatch). */
 export type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
+/** Raw GraphQL row backing a VaultState (latest state activity). */
 export type RawVaultStateData = NonNullable<GetVaultLatestStateQuery["vault_states_activities"][0]>;
+/** Raw GraphQL fragment backing an SCMD position. */
 export type RawPositionData = PositionFieldsFragment;
+/** Raw GraphQL fragment backing a borrow market configuration. */
 export type RawBorrowMarket = BorrowMarketFieldsFragment;
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Entity interfaces (migrated from entities/interfaces.ts)
 // ---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Canonical vault metadata + static configuration.
+ * A vault represents an interest‑bearing pool for an underlying asset with a defined interest rate model.
+ */
 export interface Vault {
+  /** On‑chain vault account address (standard 0x... string). */
   vaultAddress: string;
+  /** Transformed settings object (feature flags, fees, IRM kind, paused state). */
   settings: YeapVaultSettings;
+  /** Metadata for the underlying (deposit) fungible asset (token icon, symbol, decimals). */
   underlyingAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Metadata for the debt accounting asset (if distinct from underlying). */
   debtAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Metadata for the vault share token (receipt token). */
   vaultAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Governance object address controlling admin actions. */
   governanceObjectAddress: string;
+  /** Current governance object details (owner, transfer gating). */
   governanceObject?: AptosObject;
+  /** Adaptive interest rate model configuration (present if irmKind == adaptive). */
   adaptiveIrmConfig?: YeapAdaptiveIrmConfig;
+  /** Fixed rate interest model configuration (present if irmKind == fixed). */
   fixedRateIrmConfig?: YeapFixedRateIrmConfig;
+  /** Kinked model configuration (present if irmKind == kinked). */
   kinkedIrmConfig?: YeapKinkedIrmConfig;
+  /** Vault creator address. */
   creator: string;
+  /** Underlying asset address whose deposits the vault manages. */
   underlyingAsset: string;
+  /** Debt asset address (denominator for debt shares). */
   debtAsset: string;
+  /** Backing raw GraphQL fragment (escape hatch). */
   __raw?: RawVaultData;
 }
 
+/**
+ * Point‑in‑time on-chain derived state for a vault (rates, totals, utilization).
+ * Numeric big integer fields are raw smallest units (no decimal adjustment applied).
+ */
 export interface VaultState {
+  /** Vault address this state corresponds to. */
   vaultAddress: string;
+  /** Aggregate unrecoverable debt (risk / loss) in underlying units. */
   badDebt: bigint;
+  /** Unlent underlying balance held by the vault (liquidity). */
   cash: bigint;
+  /** Per‑second interest rate (fixed‑point scaled by 2^96). */
   currentInterestRate: bigint;
+  /** Unix timestamp (seconds) of last interest accrual. */
   lastInterestUpdateTime: bigint;
+  /** Total outstanding borrowed principal (underlying units). */
   totalBorrows: bigint;
+  /** Total issued debt share tokens (denominator for debtShareExchangeRate). */
   totalDebtShares: bigint;
+  /** Total issued vault share tokens (denominator for shareExchangeRate). */
   totalShares: bigint;
+  /** Aggregate supply = totalBorrows + cash + badDebt (underlying units). */
   totalSupply: bigint;
+  /** Utilization ratio = borrows / (borrows + cash + badDebt) (0..1). */
   utilizationRate: BigNumber;
+  /** Underlying per share (exchange rate) = totalSupply / totalShares (0 if no shares). */
   shareExchangeRate: BigNumber;
+  /** Underlying per debt share = totalBorrows / totalDebtShares (0 if none). */
   debtShareExchangeRate: BigNumber;
+  /** Nominal borrow APY (%) approximated from current interest rate. */
   borrowApy?: BigNumber;
+  /** Nominal supply APY (%) = borrowApy * utilizationRate. */
   supplyApy?: BigNumber;
+  /** Raw backing row (escape hatch). */
   __raw?: RawVaultStateData;
 }
 
+/**
+ * Component of a position representing debt in a specific borrowable vault.
+ * Indexed by vaultAddress inside SCMDPosition.debtStores for O(1) lookups.
+ */
 export interface PositionDebtStore {
+  /** Address of the debt store resource/account. */
   debtStoreAddress: string;
+  /** Debt vault address this store relates to. */
   vaultAddress: string;
+  /** Current debt asset balance (principal + accrued interest) for this vault. */
   debtAssetBalance?: YeapFungibleAssetBalance;
+  /** Cached vault metadata for convenience. */
   vaultInfo?: Vault;
 }
 
+/**
+ * Smart Collateral Multi‑Debt position. Holds collateral in one market and borrows from multiple vaults.
+ */
 export interface SCMDPosition {
+  /** Position account address. */
   positionAddress: string;
+  /** Owner (user) account address. */
   ownerAddress: string;
+  /** Collateral asset (fungible asset address deposited). */
   collateral: string;
+  /** Market configuration address linking collateral to borrow vaults. */
   market: string;
+  /** Full borrow market metadata (optional if not hydrated). */
   marketInfo?: BorrowMarket;
+  /** Numeric status code (0 = active, others = closed / liquidated). */
   status?: number;
+  /** Convenience boolean for active status. */
   isActive?: boolean;
+  /** Balance of collateral asset in the position (raw units). */
   collateralAssetBalance?: YeapFungibleAssetBalance;
+  /** Metadata for the collateral asset. */
   collateralAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Map of debt vault address -> debt store detail. */
   debtStores: Record<string, PositionDebtStore>;
+  /** True if any debt store has non‑zero debt. */
   hasAnyDebt?: boolean;
+  /** Count of debt stores with non‑zero debt. */
   activeDebtVaultCount?: number;
+  /** Raw fragment (escape hatch). */
   __raw?: RawPositionData;
 }
 
+/**
+ * Unified oracle configuration record for a base/quote pair. One of the *OracleConfig variants may be present
+ * depending on oracleKind (fixed price, pyth, switchboard, chainlink). Optional sub‑configs are undefined when not applicable.
+ */
 export interface OracleConfig {
+  /** Base asset (price numerator). */
   baseAsset: AccountAddress;
+  /** Quote asset (price denominator). Typically USD or a canonical stable). */
   quoteAsset: AccountAddress;
+  /** Metadata for base asset. */
   baseAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Metadata for quote asset. */
   quoteAssetMetadata?: YeapFungibleAssetMetadata;
+  /** Oracle router resource address managing this config. */
   oracleRouter: AccountAddress;
+  /** Specific oracle implementation address (if set). */
   oracle: AccountAddress;
+  /** Discriminant for oracle type (matches on‑chain enum / constant). */
   oracleKind: number;
+  /** Human readable asset pair key (base/quote). */
   assetPair: string;
+  /** Short oracle type label. */
   oracleTypeDescription?: string;
+  /** Detailed description or JSON of configuration. */
   oracleTypeDetails?: string;
+  /** Fixed price oracle sub‑config (when oracleKind == fixed). */
   fixedPriceConfig?: FixedPriceOracleConfig;
+  /** Pyth oracle sub‑config. */
   pythOracleConfig?: PythOracleConfig;
+  /** Switchboard oracle sub‑config. */
   switchboardOracleConfig?: SwitchboardOracleConfig;
+  /** Chainlink oracle sub‑config. */
   chainlinkOracleConfig?: ChainlinkOracleConfig;
+  /** Raw fragment (escape hatch). */
   __raw?: OracleRouterConfigFieldsFragment;
 }
 
+/**
+ * Borrow market linking a single collateral asset (vault) to multiple borrowable vaults with risk parameters.
+ * borrowRiskParameters is a map keyed by debt vault address (standard string) for deterministic ordering and fast access.
+ */
 export interface BorrowMarket {
+  /** Borrow market config address. */
   market: AccountAddress;
+  /** Collateral vault address (single collateral per market). */
   collateral: AccountAddress;
+  /** Collateral vault metadata (if hydrated). */
   collateralVault?: Vault;
+  /** Oracle router / price source used for risk and valuation. */
   oracle: AccountAddress;
+  /** Collateral requirement factor (scaled, see CRF_PRECISION in client). */
   crf: number;
+  /** Maximum standard loan‑to‑value (scaled by LTV precision). */
   ltv: number;
+  /** Liquidation loan‑to‑value threshold (scaled by LTV precision). */
   lltv: number;
+  /** Liquidation bonus expressed in basis points. */
   liquidationBonusBps: number;
+  /** Upper bound on number of borrowable debt vaults allowed. */
   maxBorrowableVaults: number;
+  /** Optional status (enable / pause codes). */
   status?: number;
+  /** Whether access is restricted / whitelisted. */
   whitelisted?: boolean;
+  /** Mapping of debt vault address -> per‑vault risk parameters. */
   borrowRiskParameters: Record<string, BorrowRiskParameters>;
+  /** Raw fragment backing this market (escape hatch). */
   __raw?: RawBorrowMarket;
 }
 
