@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { getVaultInfoByAddress, getVaultsByUnderlyingAsset, getActiveVaults, getAllVaults, getLatestVaultState, getLatestVaultStates } from "../internal";
-import { createVault, Vault } from "./entities/vault";
-import { createVaultState, VaultState } from "./entities/vaultState";
+import { createVault } from "./entities/vault";
+import { createVaultState } from "./entities/vaultState";
+import { Vault,VaultState } from "./interfaces";
 import { YeapConfig } from "./yeapConfig";
 
 /**

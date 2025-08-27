@@ -3,7 +3,7 @@
 
 import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
 import { getPositionsByOwner } from "../internal";
-import { SCMDPosition, BorrowMarket } from "./entities";
+import { SCMDPosition, BorrowMarket } from "./interfaces";
 import { createScmdPosition } from "./entities/scmdPosition";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";

@@ -1,12 +1,12 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { Account, AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import {  AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
-import { OracleConfig, createOracleConfig } from "./oracleConfig";
+import { createOracleConfig } from "./oracleConfig";
 import { PriceFeed } from "@pythnetwork/pyth-aptos-js";
-
+import { OracleConfig } from "../interfaces";
 /**
  * Oracle Router entity representing a collection of oracle configurations.
  *

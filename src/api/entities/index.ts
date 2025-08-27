@@ -1,9 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-export { VaultState } from "./vaultState";
-export { Vault } from "./vault";
-export { SCMDPosition, PositionDebtStore } from "./scmdPosition";
-export { OracleConfig } from "./oracleConfig";
+export { createVault, vaultFromAddress } from "./vault";
+export { createVaultState, rate2Apy } from "./vaultState";
+export { createScmdPosition } from "./scmdPosition";
+export { createOracleConfig } from "./oracleConfig";
 export { OracleRouter } from "./oracleRouter";
-export { BorrowMarket } from "./borrowMarket";
+export { createBorrowMarket } from "./borrowMarket";

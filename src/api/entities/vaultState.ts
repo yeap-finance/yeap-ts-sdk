@@ -1,9 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { GetVaultLatestStateQuery } from "../../types";
 import { Decimal } from "decimal.js";
-import {bignumber, BigNumber} from "mathjs";
+import { bignumber, BigNumber } from "mathjs";
+import { VaultState, RawVaultStateData } from "../interfaces";
 // Configure decimal.js for financial calculations
 Decimal.set({
   precision: 38, // Handle large blockchain numbers with precision
@@ -11,9 +11,6 @@ Decimal.set({
   toExpNeg: -18, // Handle small percentages
   toExpPos: 38, // Handle large token amounts
 });
-
-// Raw type for vault state data
-type RawVaultStateData = NonNullable<GetVaultLatestStateQuery["vault_states_activities"][0]>;
 
 export function rate2Apy(rate: Decimal | bigint | number, precision: number = 2 ** 96): BigNumber {
   if (rate === 0 || !rate) {
@@ -24,39 +21,7 @@ export function rate2Apy(rate: Decimal | bigint | number, precision: number = 2 
   return bignumber(rate).div(precision).mul(365 * 24 * 60 * 60).mul(100)
 }
 
-/** Interface representation of a vault's state */
-export interface VaultState {
-  /** On-chain vault address (hex string) */
-  vaultAddress: string;
-  /** Total bad debt (unrecoverable borrows) in underlying smallest units */
-  badDebt: bigint;
-  /** Cash (unlent liquidity) currently held by the vault in underlying smallest units */
-  cash: bigint;
-  /** Current per-second interest rate (fixed‑point 96 bit precision on chain) */
-  currentInterestRate: bigint;
-  /** Unix timestamp (seconds) when interest was last accrued */
-  lastInterestUpdateTime: bigint;
-  /** Total outstanding borrows in underlying smallest units */
-  totalBorrows: bigint;
-  /** Total outstanding debt share tokens (denominator for debtShareExchangeRate) */
-  totalDebtShares: bigint;
-  /** Total outstanding vault share tokens (denominator for shareExchangeRate) */
-  totalShares: bigint;
-  /** Aggregate supply = totalBorrows + cash + badDebt (underlying smallest units) */
-  totalSupply: bigint;
-  /** Utilization ratio (borrows / (borrows + cash + badDebt)) in [0,1] */
-  utilizationRate: BigNumber;
-  /** Underlying per share (totalSupply / totalShares) as Decimal; 0 if no shares */
-  shareExchangeRate: BigNumber;
-  /** Borrowed underlying per debt share (totalBorrows / totalDebtShares); 0 if no debt shares */
-  debtShareExchangeRate: BigNumber;
-  /** Nominal borrow APY (percentage form, e.g. 5.5 == 5.5%) derived from currentInterestRate */
-  borrowApy?: BigNumber;
-  /** Nominal supply APY (borrowApy * utilizationRate) in percentage form */
-  supplyApy?: BigNumber;
-  /** Raw GraphQL state object for advanced / debugging usage */
-  __raw?: RawVaultStateData;
-}
+// VaultState interface moved to interfaces.ts
 
 /** Factory to create an immutable VaultState */
 export function createVaultState(rawStateData: RawVaultStateData): VaultState {

@@ -2,45 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata, YeapVaultInfo } from "../interfaces";
+import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata } from "../interfaces";
 import { transformFungibleAssetBalance, transformFungibleAssetMetadata } from "../transforms";
 import { PositionFieldsFragment } from "../../types/generated/operations";
-import { BorrowMarket, createBorrowMarket } from "./borrowMarket";
+import { createBorrowMarket } from "./borrowMarket";
+import { SCMDPosition, PositionDebtStore } from "../interfaces";
 
 // Raw data type from GraphQL
 type RawPositionData = PositionFieldsFragment;
-
-/**
- * Represents a debt store within a position
- */
-export interface PositionDebtStore {
-  /** Debt store address */
-  debtStoreAddress: string;
-  /** Vault address */
-  vaultAddress: string;
-  /** Debt asset balance */
-  debtAssetBalance?: YeapFungibleAssetBalance;
-  /** Vault information */
-  vaultInfo?: YeapVaultInfo;
-}
-
-/** Interface-form SCMDPosition replacing previous class. */
-export interface SCMDPosition {
-  positionAddress: string;
-  ownerAddress: string;
-  collateral: string;
-  market: string;
-  marketInfo?: BorrowMarket; // optional if not present in raw
-  status?: number;
-  isActive?: boolean;
-  collateralAssetBalance?: YeapFungibleAssetBalance;
-  collateralAssetMetadata?: YeapFungibleAssetMetadata;
-  /** Map of vault address -> PositionDebtStore */
-  debtStores: Record<string, PositionDebtStore>;
-  hasAnyDebt?: boolean;
-  activeDebtVaultCount?: number;
-  readonly __raw?: RawPositionData;
-}
 
 /** Factory to create an SCMDPosition */
 export function createScmdPosition(config: YeapConfig, rawData: RawPositionData): SCMDPosition {

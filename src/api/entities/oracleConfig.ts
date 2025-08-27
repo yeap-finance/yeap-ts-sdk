@@ -6,30 +6,7 @@ import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
 import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { transformFungibleAssetMetadata, transformOracleRouterConfig, transformFixedPriceOracleSubConfig, transformPythOracleSubConfig, transformSwitchboardOracleSubConfig, transformChainlinkOracleSubConfig } from "../transforms";
-import { YeapFungibleAssetMetadata, ChainlinkOracleConfig, PythOracleConfig, FixedPriceOracleConfig, SwitchboardOracleConfig, } from "../interfaces";
-
-export const PRICE_PRECISION = BigInt(10 ** 18); // 18 decimal places for price values, adjust as needed
-export const ORACLE_UNIT_ASSET = "0x0"; // Placeholder for the unit asset address
-
-/** Interface variant of OracleConfig previously implemented as a class. */
-export interface OracleConfig {
-    baseAsset: AccountAddress;
-    quoteAsset: AccountAddress;
-    baseAssetMetadata?: YeapFungibleAssetMetadata;
-    quoteAssetMetadata?: YeapFungibleAssetMetadata;
-    oracleRouter: AccountAddress;
-    oracle: AccountAddress;
-    oracleKind: number;
-    assetPair: string;
-    oracleTypeDescription?: string;
-    oracleTypeDetails?: string;
-    fixedPriceConfig?: FixedPriceOracleConfig;
-    pythOracleConfig?: PythOracleConfig;
-    switchboardOracleConfig?: SwitchboardOracleConfig;
-    chainlinkOracleConfig?: ChainlinkOracleConfig;
-    readonly __raw?: OracleRouterConfigFieldsFragment;
-}
-
+import { OracleConfig } from "../interfaces";
 /** Factory creating an OracleConfig interface instance. */
 export function createOracleConfig(data: OracleRouterConfigFieldsFragment, config?: YeapConfig): OracleConfig {
     const core = transformOracleRouterConfig(data)!;

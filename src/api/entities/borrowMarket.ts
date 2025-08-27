@@ -5,28 +5,11 @@ import { YeapConfig } from "../yeapConfig";
 import { BorrowMarketFieldsFragment } from "../../types/generated/operations";
 import { BorrowRiskParameters } from "../interfaces";
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import {createVault, Vault} from "./vault";
+import { createVault } from "./vault";
+import { BorrowMarket } from "../interfaces";
 
 type RawBorrowMarket = BorrowMarketFieldsFragment;
 
-/** Public interface for a BorrowMarket entity (factory-created). */
-export interface BorrowMarket {
-  market: AccountAddress;
-  collateral: AccountAddress;
-  collateralVault?: Vault;
-  oracle: AccountAddress;
-  crf: number;
-  ltv: number;
-  lltv: number;
-  liquidationBonusBps: number;
-  maxBorrowableVaults: number;
-  status?: number;
-  whitelisted?: boolean;
-  /** Map of vault address (standard string) -> BorrowRiskParameters */
-  borrowRiskParameters: Record<string, BorrowRiskParameters>;
-  /** Raw data (advanced/escape hatch) */
-  readonly __raw?: RawBorrowMarket;
-}
 
 function parseNumeric(v?: string | null): number {
   const n = Number(v);

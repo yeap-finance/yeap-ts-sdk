@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import {FungibleAssetBalance, FungibleAssetMetadata} from "@aptos-labs/js-pro";
+import { FungibleAssetBalance, FungibleAssetMetadata } from "@aptos-labs/js-pro";
+import { BigNumber } from "mathjs";
+import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFieldsFragment } from "../types";
+import { PositionFieldsFragment, BorrowMarketFieldsFragment } from "../types/generated/operations";
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
@@ -17,7 +20,7 @@ export type YeapFungibleAssetMetadata = FungibleAssetMetadata;
 /**
  * Current object information (clean interface)
  */
-export interface YeapCurrentObject {
+export interface AptosObject {
   /** Object address */
   objectAddress: string;
   /** Owner address */
@@ -59,64 +62,6 @@ export interface YeapVaultSettings {
   irmKind?: number | null;
   /** Whether the vault is paused */
   isPaused: boolean;
-}
-
-/**
- * Complete vault information interface (clean interface)
- */
-export interface YeapVaultInfo {
-  /** Vault address */
-  vaultAddress: string;
-  /** Creator address */
-  creator?: string | null;
-  /** Underlying asset address */
-  underlyingAsset: string;
-  /** Debt asset address */
-  debtAsset?: string | null;
-  /** Underlying asset store address */
-  underlyingAssetStore?: string | null;
-  /** Governance object address */
-  governanceObjectAddress?: string | null;
-  /** Underlying asset metadata */
-  underlyingAssetMetadata?: YeapFungibleAssetMetadata | null;
-  /** Debt asset metadata */
-  debtAssetMetadata?: YeapFungibleAssetMetadata | null;
-  /** Vault asset metadata */
-  vaultAssetMetadata?: YeapFungibleAssetMetadata | null;
-  /** Underlying asset balance */
-  underlyingAssetBalance?: YeapFungibleAssetBalance | null;
-  /** Governance object */
-  governanceObject?: YeapCurrentObject | null;
-  /** Vault settings */
-  settings?: YeapVaultSettings | null;
-}
-
-/**
- * Vault state (financial state information)
- */
-export interface YeapVaultState {
-  /** Bad debt amount */
-  badDebt?: string | null;
-  /** Cash amount */
-  cash?: string | null;
-  /** Current interest rate */
-  currentInterestRate?: string | null;
-  /** Event index */
-  eventIndex: string;
-  /** Last interest update time */
-  lastInterestUpdateTime?: string | null;
-  /** Timestamp */
-  timestamp?: Date | null;
-  /** Total borrows */
-  totalBorrows?: string | null;
-  /** Total debt shares */
-  totalDebtShares?: string | null;
-  /** Total shares */
-  totalShares?: string | null;
-  /** Transaction version */
-  transactionVersion: string;
-  /** Vault address */
-  vaultAddress?: string | null;
 }
 
 /**
@@ -177,239 +122,6 @@ export interface YeapKinkedIrmConfig {
   optimalUtilization?: string | null;
 }
 
-/**
- * Vault bad debt activities (clean interface)
- */
-export interface YeapVaultBadDebtActivity {
-  /** Event index */
-  eventIndex: string;
-  /** Transaction version */
-  transactionVersion: string;
-  /** Vault address */
-  vaultAddress: string;
-  /** Event type */
-  eventType?: string | null;
-  /** Timestamp */
-  timestamp?: Date | null;
-  /** Bad debt amount */
-  badDebtAmount?: string | null;
-  /** Bad debt shares */
-  badDebtShares?: string | null;
-  /** Borrow protocol */
-  borrowProtocol?: string | null;
-  /** Debt store address */
-  debtStoreAddress?: string | null;
-  /** Total bad debt after */
-  totalBadDebtAfter?: string | null;
-  /** Total bad debt before */
-  totalBadDebtBefore?: string | null;
-}
-
-/**
- * Vault emergency activities (clean interface)
- */
-export interface YeapVaultEmergencyActivity {
-  /** Event index */
-  eventIndex: string;
-  /** Transaction version */
-  transactionVersion: string;
-  /** Vault address */
-  vaultAddress: string;
-  /** Timestamp */
-  timestamp?: Date | null;
-  /** Amount */
-  amount?: string | null;
-  /** Withdrawn by address */
-  withdrawnBy?: string | null;
-}
-
-/**
- * Vault flashloan activities (clean interface)
- */
-export interface YeapVaultFlashloanActivity {
-  /** Event index */
-  eventIndex: string;
-  /** Transaction version */
-  transactionVersion: string;
-  /** Vault address */
-  vaultAddress: string;
-  /** Timestamp */
-  timestamp?: Date | null;
-  /** Amount */
-  amount?: string | null;
-  /** Fee */
-  fee?: string | null;
-}
-
-/**
- * Vault protocol capabilities (clean interface)
- */
-export interface YeapVaultProtocolCaps {
-  /** Vault address */
-  vaultAddress: string;
-  /** Protocol module address */
-  protocolModuleAddress?: string | null;
-  /** Protocol module name */
-  protocolModuleName?: string | null;
-  /** Protocol struct name */
-  protocolStructName?: string | null;
-  /** Borrow cap */
-  borrowCap?: string | null;
-  /** Whether borrowing is enabled */
-  borrowEnabled?: boolean | null;
-  /** Whether supply is enabled */
-  supplyEnabled?: boolean | null;
-}
-
-/**
- * Vault state activities (clean interface)
- */
-export interface YeapVaultStateActivity {
-  /** Bad debt amount */
-  badDebt?: string | null;
-  /** Cash amount */
-  cash?: string | null;
-  /** Current interest rate */
-  currentInterestRate?: string | null;
-  /** Event index */
-  eventIndex: string;
-  /** Last interest update time */
-  lastInterestUpdateTime?: string | null;
-  /** Timestamp */
-  timestamp?: Date | null;
-  /** Total borrows */
-  totalBorrows?: string | null;
-  /** Total debt shares */
-  totalDebtShares?: string | null;
-  /** Total shares */
-  totalShares?: string | null;
-  /** Transaction version */
-  transactionVersion: string;
-  /** Vault address */
-  vaultAddress: string;
-}
-
-/**
- * SCMD Position debt store information (clean interface)
- */
-export interface YeapPositionDebtStore {
-  /** Position address */
-  positionAddress: string;
-  /** Debt store address */
-  debtStoreAddress?: string | null;
-  /** Vault address */
-  vaultAddress: string;
-  /** Debt asset balance */
-  debtAssetBalance?: YeapFungibleAssetBalance | null;
-  /** Vault information */
-  vaultInfo?: YeapVaultInfo | null;
-}
-
-
-/**
- * Query variable interfaces for type safety
- */
-
-/**
- * Variables for vault info queries
- */
-export interface VaultInfoQueryVariables {
-  where?: any; // vault_info_bool_exp
-  orderBy?: any[]; // vault_info_order_by[]
-  limit?: number;
-  offset?: number;
-}
-
-/**
- * Variables for vault info by address query
- */
-export interface VaultInfoByAddressQueryVariables {
-  vaultAddress: string;
-}
-
-/**
- * Variables for vault settings queries
- */
-export interface VaultSettingsQueryVariables {
-  where?: any; // vault_settings_bool_exp
-  orderBy?: any[]; // vault_settings_order_by[]
-  limit?: number;
-  offset?: number;
-}
-
-/**
- * Variables for vault settings by address query
- */
-export interface VaultSettingsByAddressQueryVariables {
-  vaultAddress: string;
-}
-
-/**
- * Variables for high yield vaults query
- */
-export interface VaultsWithHighYieldQueryVariables {
-  minInterestRate: string; // numeric
-  limit?: number;
-  offset?: number;
-}
-
-/**
- * Variables for active vaults query
- */
-export interface ActiveVaultsQueryVariables {
-  limit?: number;
-  offset?: number;
-}
-
-/**
- * Response type for vault info queries (returns array)
- */
-export interface YeapVaultInfoQueryResponse {
-  vaultInfo: YeapVaultInfo[];
-}
-
-/**
- * Response type for vault info by address query (returns single item or null)
- */
-export interface YeapVaultInfoByAddressQueryResponse {
-  vaultInfo: YeapVaultInfo | null;
-}
-
-/**
- * Response type for vault settings queries (returns array)
- */
-export interface YeapVaultSettingsQueryResponse {
-  vaultSettings: YeapVaultSettings[];
-}
-
-/**
- * Response type for vault settings by address query (returns single item or null)
- */
-export interface YeapVaultSettingsByAddressQueryResponse {
-  vaultSettings: YeapVaultSettings | null;
-}
-
-/**
- * Response type for high yield vaults query (returns array)
- */
-export interface YeapVaultsWithHighYieldQueryResponse {
-  vaultInfo: YeapVaultInfo[];
-}
-
-/**
- * Response type for active vaults query (returns array)
- */
-export interface YeapActiveVaultsQueryResponse {
-  vaultInfo: YeapVaultInfo[];
-}
-
-/**
- * Response type for vault latest state query (returns single state or null)
- */
-export interface YeapVaultLatestStateQueryResponse {
-  vaultState: YeapVaultState | null;
-}
-
 
 /**
  * Pagination information for queries
@@ -427,40 +139,6 @@ export interface QueryOptions {
   pagination?: PaginationInfo;
   orderBy?: any[];
   where?: any;
-}
-
-/**
- * Filter options for vault queries
- */
-export interface VaultFilterOptions {
-  /** Filter by vault status */
-  isActive?: boolean;
-  /** Filter by flashloan availability */
-  flashloanEnabled?: boolean;
-  /** Filter by minimum interest rate */
-  minInterestRate?: string;
-  /** Filter by vault addresses */
-  vaultAddresses?: string[];
-}
-
-/**
- * Sort options for vault queries
- */
-export interface VaultSortOptions {
-  /** Sort by field */
-  field: "vaultAddress" | "interestFeeRate" | "underlyingAsset";
-  /** Sort direction */
-  direction: "asc" | "desc";
-}
-
-/**
- * Comprehensive query options for vault queries
- */
-export interface VaultQueryOptions extends QueryOptions {
-  /** Filter options */
-  filter?: VaultFilterOptions;
-  /** Sort options */
-  sort?: VaultSortOptions;
 }
 
 /**
@@ -489,11 +167,12 @@ export interface BorrowRiskParameters {
   /** Borrowing weight (brw) */
   brw: number;
   /** Collateral asset address */
-  collateral: AccountAddress;
+  collateral?: AccountAddress;
   /** Borrow market address */
-  market: AccountAddress;
+  market?: AccountAddress;
   /** Vault address */
   vault: AccountAddress;
+  vaultInfo?: Vault | null;
 }
 
 /**
@@ -570,3 +249,108 @@ export interface SwitchboardOracleConfig {
   /** Whether the config is deleted (soft delete) */
   deleted?: boolean | null;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Raw GraphQL backing types (exposed for advanced users, kept stable via fragments)
+// ---------------------------------------------------------------------------------------------------------------------
+export type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
+export type RawVaultStateData = NonNullable<GetVaultLatestStateQuery["vault_states_activities"][0]>;
+export type RawPositionData = PositionFieldsFragment;
+export type RawBorrowMarket = BorrowMarketFieldsFragment;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Entity interfaces (migrated from entities/interfaces.ts)
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface Vault {
+  vaultAddress: string;
+  settings: YeapVaultSettings;
+  underlyingAssetMetadata?: YeapFungibleAssetMetadata;
+  debtAssetMetadata?: YeapFungibleAssetMetadata;
+  vaultAssetMetadata?: YeapFungibleAssetMetadata;
+  governanceObjectAddress: string;
+  governanceObject?: AptosObject;
+  adaptiveIrmConfig?: YeapAdaptiveIrmConfig;
+  fixedRateIrmConfig?: YeapFixedRateIrmConfig;
+  kinkedIrmConfig?: YeapKinkedIrmConfig;
+  creator: string;
+  underlyingAsset: string;
+  debtAsset: string;
+  __raw?: RawVaultData;
+}
+
+export interface VaultState {
+  vaultAddress: string;
+  badDebt: bigint;
+  cash: bigint;
+  currentInterestRate: bigint;
+  lastInterestUpdateTime: bigint;
+  totalBorrows: bigint;
+  totalDebtShares: bigint;
+  totalShares: bigint;
+  totalSupply: bigint;
+  utilizationRate: BigNumber;
+  shareExchangeRate: BigNumber;
+  debtShareExchangeRate: BigNumber;
+  borrowApy?: BigNumber;
+  supplyApy?: BigNumber;
+  __raw?: RawVaultStateData;
+}
+
+export interface PositionDebtStore {
+  debtStoreAddress: string;
+  vaultAddress: string;
+  debtAssetBalance?: YeapFungibleAssetBalance;
+  vaultInfo?: Vault;
+}
+
+export interface SCMDPosition {
+  positionAddress: string;
+  ownerAddress: string;
+  collateral: string;
+  market: string;
+  marketInfo?: BorrowMarket;
+  status?: number;
+  isActive?: boolean;
+  collateralAssetBalance?: YeapFungibleAssetBalance;
+  collateralAssetMetadata?: YeapFungibleAssetMetadata;
+  debtStores: Record<string, PositionDebtStore>;
+  hasAnyDebt?: boolean;
+  activeDebtVaultCount?: number;
+  __raw?: RawPositionData;
+}
+
+export interface OracleConfig {
+  baseAsset: AccountAddress;
+  quoteAsset: AccountAddress;
+  baseAssetMetadata?: YeapFungibleAssetMetadata;
+  quoteAssetMetadata?: YeapFungibleAssetMetadata;
+  oracleRouter: AccountAddress;
+  oracle: AccountAddress;
+  oracleKind: number;
+  assetPair: string;
+  oracleTypeDescription?: string;
+  oracleTypeDetails?: string;
+  fixedPriceConfig?: FixedPriceOracleConfig;
+  pythOracleConfig?: PythOracleConfig;
+  switchboardOracleConfig?: SwitchboardOracleConfig;
+  chainlinkOracleConfig?: ChainlinkOracleConfig;
+  __raw?: OracleRouterConfigFieldsFragment;
+}
+
+export interface BorrowMarket {
+  market: AccountAddress;
+  collateral: AccountAddress;
+  collateralVault?: Vault;
+  oracle: AccountAddress;
+  crf: number;
+  ltv: number;
+  lltv: number;
+  liquidationBonusBps: number;
+  maxBorrowableVaults: number;
+  status?: number;
+  whitelisted?: boolean;
+  borrowRiskParameters: Record<string, BorrowRiskParameters>;
+  __raw?: RawBorrowMarket;
+}
+

@@ -6,7 +6,7 @@ import { getVaultInfoByAddress } from "../../internal";
 import {
   YeapVaultSettings,
   YeapFungibleAssetMetadata,
-  YeapCurrentObject,
+  AptosObject,
   YeapAdaptiveIrmConfig,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
@@ -20,31 +20,7 @@ import {
   transformFixedRateIrmConfig,
   transformKinkedIrmConfig,
 } from "../transforms";
-import { VaultInfoFieldsFragment } from "../../types";
-
-// Field transformers type
-type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
-
-/** Interface describing a Vault entity (previously a class). */
-export interface Vault {
-  vaultAddress: string;
-  settings: YeapVaultSettings;
-  underlyingAssetMetadata?: YeapFungibleAssetMetadata;
-  debtAssetMetadata?: YeapFungibleAssetMetadata;
-  vaultAssetMetadata?: YeapFungibleAssetMetadata;
-  governanceObjectAddress: string;
-  governanceObject?: YeapCurrentObject;
-  adaptiveIrmConfig?: YeapAdaptiveIrmConfig;
-  fixedRateIrmConfig?: YeapFixedRateIrmConfig;
-  kinkedIrmConfig?: YeapKinkedIrmConfig;
-  creator: string;
-  underlyingAsset: string;
-  debtAsset: string;
-  // getLatestState?(): Promise<VaultState>;
-  // getUnderlyingAssetBalance?(): Promise<YeapFungibleAssetBalance | null>;
-  /** Internal raw accessor if needed for advanced users */
-  readonly __raw?: RawVaultData;
-}
+import { RawVaultData, Vault } from "../interfaces";
 
 /** Factory to create a Vault interface instance from raw data */
 export function createVault(config: YeapConfig, rawData: RawVaultData): Vault {

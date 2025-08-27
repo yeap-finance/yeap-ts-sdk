@@ -221,6 +221,9 @@ export const BorrowRiskParametersFieldsFragmentDoc = `
   collateral
   market
   vault
+  vault_info {
+    ...VaultInfoFields
+  }
 }
     `;
 export const BorrowMarketFieldsFragmentDoc = `
