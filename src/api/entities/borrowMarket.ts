@@ -25,6 +25,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
       collateral: AccountAddress.fromString(rp.collateral),
       market: AccountAddress.fromString(rp.market),
       vault: AccountAddress.fromString(rp.vault),
+      vaultInfo: rp.vault_info ? createVault(config, rp.vault_info)??undefined: undefined,
     };
     borrowRiskParameters[entry.vault.toString()] = entry;
   }
