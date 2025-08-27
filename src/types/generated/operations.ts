@@ -123,6 +123,13 @@ export type GetVaultLatestStateQueryVariables = Types.Exact<{
 
 export type GetVaultLatestStateQuery = { vault_states_activities: Array<VaultStateActivitiesFieldsFragment> };
 
+export type GetVaultLatestStatesQueryVariables = Types.Exact<{
+  vault_addresses: Array<Types.Scalars['String']['input']> | Types.Scalars['String']['input'];
+}>;
+
+
+export type GetVaultLatestStatesQuery = { vault_states_activities: Array<VaultStateActivitiesFieldsFragment> };
+
 export type GetVaultSettingsQueryVariables = Types.Exact<{
   where?: Types.InputMaybe<Types.VaultSettingsBoolExp>;
   orderBy?: Types.InputMaybe<Array<Types.VaultSettingsOrderBy> | Types.VaultSettingsOrderBy>;

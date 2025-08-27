@@ -474,9 +474,9 @@ export interface YeapOracleRouterConfig {
   /** Oracle router address */
   oracleRouter: string;
   /** Oracle address (if set) */
-  oracle?: string | null;
+  oracle: string;
   /** Oracle kind/type identifier */
-  oracleKind?: number | null;
+  oracleKind: number;
   /** Whether the configuration is deleted */
   isDeleted?: boolean;
 }

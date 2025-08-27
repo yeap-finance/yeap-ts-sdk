@@ -14,6 +14,10 @@ import {
   YeapKinkedIrmConfig,
 
   YeapOracleRouterConfig,
+  FixedPriceOracleConfig,
+  PythOracleConfig,
+  SwitchboardOracleConfig,
+  ChainlinkOracleConfig,
 } from "./interfaces";
 import {
   FungibleAssetBalanceFieldsFragment,
@@ -219,10 +223,64 @@ export function transformOracleRouterConfig(raw: Maybe<OracleRouterConfigFieldsF
     baseAsset: raw.base_asset,
     quoteAsset: raw.quote_asset,
     oracleRouter: raw.oracle_router,
-    oracle: raw.oracle ?? null,
-    oracleKind: raw.oracle_kind ? Number(raw.oracle_kind) : null,
+    oracle: raw.oracle!,
+    oracleKind: Number(raw.oracle_kind!),
     isDeleted: raw.deleted ?? false,
   };
+}
+
+/** Transform nested fixed_price_oracle_config object */
+export function transformFixedPriceOracleSubConfig(raw: any | undefined | null): FixedPriceOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address ? (raw.oracle_address) : raw.oracle_address,
+    base: raw.base_asset ? (raw.base_asset) : raw.base,
+    quote: raw.quote_asset ? (raw.quote_asset) : raw.quote,
+    price: raw.price!,
+    deleted: raw.deleted ?? null,
+  } as FixedPriceOracleConfig;
+}
+
+/** Transform nested pyth_oracle_config object */
+export function transformPythOracleSubConfig(raw: any | undefined | null): PythOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    pyth_id: raw.pyth_id,
+    max_age_in_seconds: Number(raw.max_age_in_seconds),
+    max_confidence: raw.max_confidence,
+    deleted: raw.deleted ?? null,
+  } as PythOracleConfig;
+}
+
+/** Transform nested switchboard_oracle_config object */
+export function transformSwitchboardOracleSubConfig(raw: any | undefined | null): SwitchboardOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    aggregator_address: raw.aggregator_address!,
+    max_age_in_seconds: Number(raw.max_age_in_seconds),
+    max_stdev: raw.max_stdev,
+    deleted: raw.deleted ?? null,
+  } as SwitchboardOracleConfig;
+}
+
+/** Transform nested chainlink_oracle_config object */
+export function transformChainlinkOracleSubConfig(raw: any | undefined | null): ChainlinkOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    feed_id: raw.feed_id,
+    max_age_in_seconds: parseInt(raw.max_age_in_seconds, 10),
+    feed_decimals: Number(raw.feed_decimals),
+    deleted: raw.deleted ?? null,
+  } as ChainlinkOracleConfig;
 }
 
 

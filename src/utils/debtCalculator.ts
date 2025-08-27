@@ -104,8 +104,8 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
     totalBorrowAmount,
     borrowByAsset,
     debtDetails,
-    activeDebtVaultCount: position.getActiveDebtVaultCount(),
-    hasAnyDebt: position.hasAnyDebt(),
+    activeDebtVaultCount: position.debtStores.length,
+    hasAnyDebt: position.debtStores.some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n),
   };
 }
 
@@ -244,7 +244,7 @@ export function generateDebtReport(position: SCMDPosition, ltv: number = 75, llt
   // 基本信息
   report += `所有者: ${position.ownerAddress}\n`;
   report += `状态: ${position.isActive ? "活跃" : "非活跃"}\n`;
-  report += `抵押品: ${position.market.collateral}\n`;
+  report += `抵押品: ${position.marketInfo?.collateral}\n`;
 
   // 抵押品信息
   if (position.collateralAssetBalance) {

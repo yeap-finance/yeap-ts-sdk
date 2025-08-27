@@ -427,6 +427,17 @@ export const GetVaultLatestState = `
   }
 }
     ${VaultStateActivitiesFieldsFragmentDoc}`;
+export const GetVaultLatestStates = `
+    query GetVaultLatestStates($vault_addresses: [String!]!) {
+  vault_states_activities(
+    where: {vault_address: {_in: $vault_addresses}}
+    distinct_on: vault_address
+    order_by: [{vault_address: asc}, {transaction_version: desc}, {event_index: desc}]
+  ) {
+    ...VaultStateActivitiesFields
+  }
+}
+    ${VaultStateActivitiesFieldsFragmentDoc}`;
 export const GetVaultSettings = `
     query GetVaultSettings($where: vault_settings_bool_exp, $orderBy: [vault_settings_order_by!], $limit: Int, $offset: Int) {
   vault_settings(
@@ -529,6 +540,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetVaultLatestState(variables: Types.GetVaultLatestStateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultLatestStateQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultLatestStateQuery>({ document: GetVaultLatestState, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultLatestState', 'query', variables);
+    },
+    GetVaultLatestStates(variables: Types.GetVaultLatestStatesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultLatestStatesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultLatestStatesQuery>({ document: GetVaultLatestStates, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultLatestStates', 'query', variables);
     },
     GetVaultSettings(variables?: Types.GetVaultSettingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultSettingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultSettingsQuery>({ document: GetVaultSettings, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultSettings', 'query', variables);

@@ -27,6 +27,7 @@ import {
   GetVaultsWithHighYieldQuery,
   GetActiveVaultsQuery,
   GetVaultLatestStateQuery,
+  GetVaultLatestStatesQuery,
   GetVaultUnderlyingAssetBalanceQuery,
   GetVaultInfoQueryResponse,
   GetVaultInfoByAddressQueryResponse,
@@ -46,6 +47,7 @@ import {
   GetVaultsWithHighYield,
   GetActiveVaults,
   GetVaultLatestState,
+  GetVaultLatestStates,
   GetVaultUnderlyingAssetBalance,
 } from "../types/generated/queries";
 
@@ -198,11 +200,66 @@ export async function getLatestVaultState(args: {
     query: graphqlQuery,
     originMethod: "getLatestVaultState",
   });
-  let rawResult = data.vault_states_activities;
+  const rawResult = data.vault_states_activities;
   if (rawResult.length === 0) {
-    throw new Error(`Could not fetch latest state for vault ${vaultAddress}`);
+    return makeDefaultVaultStateActivity(vaultAddress);
   }
-  return data.vault_states_activities[0];
+  return rawResult[0];
+}
+
+/**
+ * Get the latest state activities for multiple vaults (one latest per vault).
+ * Note: The underlying query returns all state activities for the provided addresses sorted
+ * with most recent first per vault address, so we post-process to pick a single latest per vault.
+ * @param args.yeapConfig - The Yeap configuration object.
+ * @param args.vaultAddresses - Array of vault addresses.
+ * @returns Map of vaultAddress -> latest VaultStateActivitiesFieldsFragment
+ * @group Implementation
+ */
+export async function getLatestVaultStates(args: {
+  yeapConfig: YeapConfig;
+  vaultAddresses: string[];
+}): Promise<VaultStateActivitiesFieldsFragment[]> {
+  const { yeapConfig, vaultAddresses } = args;
+  if (vaultAddresses.length === 0) return [];
+
+  const graphqlQuery: GraphqlQuery = {
+    query: GetVaultLatestStates,
+    variables: { vault_addresses: vaultAddresses },
+  };
+
+  const data = await queryYeapIndexer<GetVaultLatestStatesQuery>({
+    yeapConfig,
+    query: graphqlQuery,
+    originMethod: "getLatestVaultStates",
+  });
+
+  // Build a map first for lookup
+  const latestMap = new Map<string, VaultStateActivitiesFieldsFragment>();
+  for (const row of data.vault_states_activities) {
+    const addr = row.vault_address!;
+    if (!latestMap.has(addr)) {
+      latestMap.set(addr, row);
+    }
+  }
+  // Return array aligned with input order; supply default when missing
+  return vaultAddresses.map((addr) => latestMap.get(addr) ?? makeDefaultVaultStateActivity(addr));
+}
+
+/** Create a default zeroed vault state activity fragment for a vault with no historical state */
+function makeDefaultVaultStateActivity(vaultAddress: string): VaultStateActivitiesFieldsFragment {
+  return {
+    vault_address: vaultAddress,
+    event_index: "0",
+    transaction_version: "0",
+    bad_debt: "0",
+    cash: "0",
+    current_interest_rate: "0",
+    last_interest_update_time: "0",
+    total_borrows: "0",
+    total_debt_shares: "0",
+    total_shares: "0",
+  } as VaultStateActivitiesFieldsFragment;
 }
 
 /**

@@ -2,188 +2,100 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import { getLatestVaultState, getVaultInfoByAddress, getVaultUnderlyingAssetBalance } from "../../internal";
+import { getVaultInfoByAddress } from "../../internal";
 import {
   YeapVaultSettings,
   YeapFungibleAssetMetadata,
-  YeapFungibleAssetBalance,
   YeapCurrentObject,
-  YeapVaultState,
   YeapAdaptiveIrmConfig,
-  YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
 
 } from "../interfaces";
 import {
-  transformVaultState,
   transformVaultSettings,
   transformFungibleAssetMetadata,
   transformCurrentObject,
   transformAdaptiveIrmConfig,
-  transformAdaptiveIrmState,
   transformFixedRateIrmConfig,
   transformKinkedIrmConfig,
 } from "../transforms";
 import { VaultInfoFieldsFragment } from "../../types";
-import { VaultState } from "./vaultState";
 
 // Field transformers type
 type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
 
-/**
- * Represents a vault entity with convenient methods to access vault data.
- */
-export class Vault {
-  private readonly config: YeapConfig;
-  private readonly _rawVaultData: RawVaultData;
+/** Interface describing a Vault entity (previously a class). */
+export interface Vault {
+  vaultAddress: string;
+  settings: YeapVaultSettings;
+  underlyingAssetMetadata?: YeapFungibleAssetMetadata;
+  debtAssetMetadata?: YeapFungibleAssetMetadata;
+  vaultAssetMetadata?: YeapFungibleAssetMetadata;
+  governanceObjectAddress: string;
+  governanceObject?: YeapCurrentObject;
+  adaptiveIrmConfig?: YeapAdaptiveIrmConfig;
+  fixedRateIrmConfig?: YeapFixedRateIrmConfig;
+  kinkedIrmConfig?: YeapKinkedIrmConfig;
+  creator: string;
+  underlyingAsset: string;
+  debtAsset: string;
+  // getLatestState?(): Promise<VaultState>;
+  // getUnderlyingAssetBalance?(): Promise<YeapFungibleAssetBalance | null>;
+  /** Internal raw accessor if needed for advanced users */
+  readonly __raw?: RawVaultData;
+}
 
-  public readonly vaultAddress: string;
+/** Factory to create a Vault interface instance from raw data */
+export function createVault(config: YeapConfig, rawData: RawVaultData): Vault {
+  // Eagerly transform once (simpler, avoids lazy cache complexity)
+  const settings = rawData.settings ? (transformVaultSettings(rawData.settings) ?? undefined) : undefined;
+  const underlyingAssetMetadata = rawData.underlying_asset_metadata ? (transformFungibleAssetMetadata(rawData.underlying_asset_metadata) ?? undefined) : undefined;
+  const debtAssetMetadata = rawData.debt_asset_metadata ? (transformFungibleAssetMetadata(rawData.debt_asset_metadata) ?? undefined) : undefined;
+  const vaultAssetMetadata = rawData.vault_asset_metadata ? (transformFungibleAssetMetadata(rawData.vault_asset_metadata) ?? undefined) : undefined;
+  const governanceObject = rawData.governance_object ? (transformCurrentObject(rawData.governance_object) ?? undefined) : undefined;
+  const adaptiveIrmConfig = rawData.adaptive_irm_config ? (transformAdaptiveIrmConfig(rawData.adaptive_irm_config) ?? undefined) : undefined;
+  const fixedRateIrmConfig = rawData.fixed_rate_irm_config ? (transformFixedRateIrmConfig(rawData.fixed_rate_irm_config) ?? undefined) : undefined;
+  const kinkedIrmConfig = rawData.kinked_irm_config ? (transformKinkedIrmConfig(rawData.kinked_irm_config) ?? undefined) : undefined;
 
-  constructor(config: YeapConfig, rawData: RawVaultData) {
-    this.config = config;
-    this._rawVaultData = rawData;
-    this.vaultAddress = rawData.vault_address;
+  return {
+    vaultAddress: rawData.vault_address,
+    settings: settings!,
+    underlyingAssetMetadata,
+    debtAssetMetadata,
+    vaultAssetMetadata,
+    governanceObjectAddress: rawData.governance_object_address!,
+    governanceObject,
+    adaptiveIrmConfig,
+    fixedRateIrmConfig,
+    kinkedIrmConfig,
+    creator: rawData.creator!,
+    underlyingAsset: rawData.underlying_asset!,
+    debtAsset: rawData.debt_asset!,
+    // async getLatestState(this: Vault): Promise<VaultState> {
+    //   const rawResult = await getLatestVaultState({ yeapConfig: config, vaultAddress: this.vaultAddress });
+    //   if (!rawResult) throw new Error(`Could not get latest state for vault ${this.vaultAddress}`);
+    //   return createVaultState(rawResult);
+    // },
+    // async getUnderlyingAssetBalance(this: Vault): Promise<YeapFungibleAssetBalance | null> {
+    //   const rawBalance = await getVaultUnderlyingAssetBalance({ yeapConfig: config, vaultAddress: this.vaultAddress });
+    //   if (!rawBalance) throw new Error(`Could not find vault info for address ${this.vaultAddress}`);
+    //   const metadata = rawBalance.metadata ? transformFungibleAssetMetadata(rawBalance.metadata) : null;
+    //   return {
+    //     amount: Number(rawBalance.amount),
+    //     isFrozen: rawBalance.is_frozen,
+    //     metadata: metadata!,
+    //   } as YeapFungibleAssetBalance;
+    // },
+    __raw: rawData,
+  };
+}
+
+/** Convenience helper replacing previous static fromAddress */
+export async function vaultFromAddress(config: YeapConfig, vaultAddress: string): Promise<Vault> {
+  const vaultInfo = await getVaultInfoByAddress({ yeapConfig: config, vaultAddress });
+  if (!vaultInfo) {
+    throw new Error(`Vault with address ${vaultAddress} not found`);
   }
-
-  /**
-   * Get the vault settings.
-   */
-  get settings(): YeapVaultSettings | null {
-    const rawSettings = this._rawVaultData.settings;
-    return rawSettings ? transformVaultSettings(rawSettings) : null;
-  }
-
-  /**
-   * Get the underlying asset metadata.
-   */
-  get underlyingAssetMetadata(): YeapFungibleAssetMetadata | null {
-    const rawMetadata = this._rawVaultData.underlying_asset_metadata;
-    return rawMetadata ? transformFungibleAssetMetadata(rawMetadata) : null;
-  }
-
-  /**
-   * Get the debt asset metadata.
-   */
-  get debtAssetMetadata(): YeapFungibleAssetMetadata | null {
-    const rawMetadata = this._rawVaultData.debt_asset_metadata;
-    return rawMetadata ? transformFungibleAssetMetadata(rawMetadata) : null;
-  }
-
-  /**
-   * Get the vault asset metadata.
-   */
-  get vaultAssetMetadata(): YeapFungibleAssetMetadata | null {
-    const rawMetadata = this._rawVaultData.vault_asset_metadata;
-    return rawMetadata ? transformFungibleAssetMetadata(rawMetadata) : null;
-  }
-
-  get governanceObjectAddress(): string {
-    return this._rawVaultData.governance_object_address!;
-  }
-
-  /**
-   * Get the governance object.
-   */
-  get governanceObject(): YeapCurrentObject | null {
-    const rawObject = this._rawVaultData.governance_object;
-    return rawObject ? transformCurrentObject(rawObject) : null;
-  }
-
-  /**
-   * Get the adaptive interest rate model configuration.
-   */
-  get adaptiveIrmConfig(): YeapAdaptiveIrmConfig | null {
-    const rawConfig = this._rawVaultData.adaptive_irm_config;
-    return rawConfig ? transformAdaptiveIrmConfig(rawConfig) : null;
-  }
-
-  /**
-   * Get the fixed rate interest rate model configuration.
-   */
-  get fixedRateIrmConfig(): YeapFixedRateIrmConfig | null {
-    const rawConfig = this._rawVaultData.fixed_rate_irm_config;
-    return rawConfig ? transformFixedRateIrmConfig(rawConfig) : null;
-  }
-
-  /**
-   * Get the kinked interest rate model configuration.
-   */
-  get kinkedIrmConfig(): YeapKinkedIrmConfig | null {
-    const rawConfig = this._rawVaultData.kinked_irm_config;
-    return rawConfig ? transformKinkedIrmConfig(rawConfig) : null;
-  }
-
-  /**
-   * Creates a new YeapVault instance from the given vault address.
-   * @param config The YeapConfig instance.
-   * @param vaultAddress The address of the vault.
-   * @returns A new YeapVault instance.
-   */
-  static async fromAddress(config: YeapConfig, vaultAddress: string): Promise<Vault> {
-    const vaultInfo = await getVaultInfoByAddress({
-      yeapConfig: config,
-      vaultAddress,
-    });
-    if (!vaultInfo) {
-      throw new Error(`Vault with address ${vaultAddress} not found`);
-    }
-    return new Vault(config, vaultInfo);
-  }
-
-  /**
-   * Get the latest vault state with derived financial metrics.
-   * @returns A VaultState instance with computed financial metrics
-   */
-  async getLatestState(): Promise<VaultState> {
-    const rawResult = await getLatestVaultState({
-      yeapConfig: this.config,
-      vaultAddress: this.vaultAddress,
-    });
-
-    if (!rawResult) {
-      throw new Error(`Could not get latest state for vault ${this.vaultAddress}`);
-    }
-
-    return VaultState.fromRawData(rawResult);
-  }
-
-  async getUnderlyingAssetBalance(): Promise<YeapFungibleAssetBalance | null> {
-    const rawBalance = await getVaultUnderlyingAssetBalance({
-      yeapConfig: this.config,
-      vaultAddress: this.vaultAddress,
-    });
-
-    if (!rawBalance) {
-      throw new Error(`Could not find vault info for address ${this.vaultAddress}`);
-    }
-
-    return {
-      amount: rawBalance.amount,
-      isFrozen: rawBalance.is_frozen,
-      storageId: rawBalance.storage_id,
-      metadata: transformFungibleAssetMetadata(rawBalance.metadata),
-    };
-  }
-
-  /**
-   * Get the creator address of the vault.
-   */
-  get creator(): string | null {
-    return this._rawVaultData.creator || null;
-  }
-
-  /**
-   * Get the underlying asset address.
-   */
-  get underlyingAsset(): string | null {
-    return this._rawVaultData.underlying_asset || null;
-  }
-
-  /**
-   * Get the debt asset address.
-   */
-  get debtAsset(): string | null {
-    return this._rawVaultData.debt_asset || null;
-  }
+  return createVault(config, vaultInfo);
 }
