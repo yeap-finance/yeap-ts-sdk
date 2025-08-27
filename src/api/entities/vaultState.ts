@@ -1,9 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { GetVaultLatestStateQuery } from "../../types";
 import { Decimal } from "decimal.js";
-
+import { bignumber, BigNumber } from "mathjs";
+import { VaultState, RawVaultStateData } from "../interfaces";
 // Configure decimal.js for financial calculations
 Decimal.set({
   precision: 38, // Handle large blockchain numbers with precision
@@ -12,122 +12,61 @@ Decimal.set({
   toExpPos: 38, // Handle large token amounts
 });
 
-// Raw type for vault state data
-type RawVaultStateData = NonNullable<GetVaultLatestStateQuery["vault_states_activities"][0]>;
-
-/**
- * Represents a vault state entity with convenient methods to access financial metrics.
- */
-export class VaultState {
-  private readonly _rawStateData: RawVaultStateData;
-
-  public readonly vaultAddress: string;
-  public readonly eventIndex: string;
-  public readonly transactionVersion: string;
-
-  private constructor(rawStateData: RawVaultStateData) {
-    this._rawStateData = rawStateData;
-    this.vaultAddress = rawStateData.vault_address!!;
-    this.eventIndex = rawStateData.event_index;
-    this.transactionVersion = rawStateData.transaction_version;
+export function rate2Apy(rate: Decimal | bigint | number, precision: number = 2 ** 96): BigNumber {
+  if (rate === 0 || !rate) {
+    return bignumber(0);
   }
 
-  /**
-   * Get the bad debt amount.
-   */
-  get badDebt(): bigint {
-    return this._rawStateData.bad_debt ? BigInt(this._rawStateData.bad_debt) : BigInt(0);
-  }
+  // return math.bignumber(rate).div(precision).add(1).pow(365 * 24 * 60 * 60).sub(1).mul(100)
+  return bignumber(rate).div(precision).mul(365 * 24 * 60 * 60).mul(100)
+}
 
-  /**
-   * Get the cash amount.
-   */
-  get cash(): bigint {
-    return this._rawStateData.cash ? BigInt(this._rawStateData.cash) : BigInt(0);
-  }
+// VaultState interface moved to interfaces.ts
 
-  /**
-   * Get the current interest rate.
-   */
-  get currentInterestRate(): bigint {
-    return this._rawStateData.current_interest_rate ? BigInt(this._rawStateData.current_interest_rate) : BigInt(0);
-  }
+/** Factory to create an immutable VaultState */
+export function createVaultState(rawStateData: RawVaultStateData): VaultState {
+  const badDebt = rawStateData.bad_debt ? BigInt(rawStateData.bad_debt) : BigInt(0);
+  const cash = rawStateData.cash ? BigInt(rawStateData.cash) : BigInt(0);
+  const currentInterestRate = rawStateData.current_interest_rate
+    ? BigInt(rawStateData.current_interest_rate)
+    : BigInt(0);
+  const lastInterestUpdateTime = rawStateData.last_interest_update_time
+    ? BigInt(rawStateData.last_interest_update_time)
+    : BigInt(0);
+  const totalBorrows = rawStateData.total_borrows ? BigInt(rawStateData.total_borrows) : BigInt(0);
+  const totalDebtShares = rawStateData.total_debt_shares ? BigInt(rawStateData.total_debt_shares) : BigInt(0);
+  const totalShares = rawStateData.total_shares ? BigInt(rawStateData.total_shares) : BigInt(0);
+  const totalSupply = totalBorrows + cash + badDebt;
 
-  /**
-   * Get the last interest update time.
-   */
-  get lastInterestUpdateTime(): bigint {
-    return this._rawStateData.last_interest_update_time
-      ? BigInt(this._rawStateData.last_interest_update_time)
-      : BigInt(0);
-  }
+  const cashD = Decimal(cash.toString());
+  const badDebtD = Decimal(badDebt.toString());
+  const borrowsD = Decimal(totalBorrows.toString());
+  const totalAvailable = cashD.plus(borrowsD).plus(badDebtD);
+  const utilizationRate = totalAvailable.isZero() ? Decimal(0) : borrowsD.dividedBy(totalAvailable);
+  const shareExchangeRate = totalShares === BigInt(0)
+    ? Decimal(0)
+    : Decimal(totalSupply.toString()).dividedBy(Decimal(totalShares.toString()));
+  const debtShareExchangeRate = totalDebtShares === BigInt(0)
+    ? Decimal(0)
+    : Decimal(totalBorrows.toString()).dividedBy(Decimal(totalDebtShares.toString()));
 
-  /**
-   * Get the total borrows.
-   */
-  get totalBorrows(): bigint {
-    return this._rawStateData.total_borrows ? BigInt(this._rawStateData.total_borrows) : BigInt(0);
-  }
-
-  /**
-   * Get the total debt shares.
-   */
-  get totalDebtShares(): bigint {
-    return this._rawStateData.total_debt_shares ? BigInt(this._rawStateData.total_debt_shares) : BigInt(0);
-  }
-
-  /**
-   * Get the total shares.
-   */
-  get totalShares(): bigint {
-    return this._rawStateData.total_shares ? BigInt(this._rawStateData.total_shares) : BigInt(0);
-  }
-
-  get totalSupply(): bigint {
-    return this.totalBorrows + this.cash + this.badDebt;
-  }
-
-  /**
-   * Calculate the utilization rate of the vault.
-   * @returns Utilization rate as a Decimal (0-1)
-   */
-  get utilizationRate(): Decimal {
-    const cash = Decimal(this.cash.toString());
-    const badDebt = Decimal(this.badDebt.toString());
-    const borrows = Decimal(this.totalBorrows.toString());
-
-    const totalAvailable = cash.plus(borrows).plus(badDebt);
-
-    if (totalAvailable.isZero()) {
-      return Decimal(0);
-    }
-
-    return borrows.dividedBy(totalAvailable);
-  }
-
-  get shareExchangeRate(): Decimal {
-    const shares = Decimal(this.totalShares.toString());
-    const totalSupply = Decimal(this.totalSupply.toString());
-    if (shares.isZero()) {
-      return Decimal(0);
-    }
-    return totalSupply.dividedBy(shares);
-  }
-  get debtShareExchangeRate(): Decimal {
-    const debtShares = Decimal(this.totalDebtShares.toString());
-    const totalBorrows = Decimal(this.totalBorrows.toString());
-    if (debtShares.isZero()) {
-      return Decimal(0);
-    }
-    return totalBorrows.dividedBy(debtShares);
-  }
-
-  /**
-   * Creates a new VaultState instance from raw GraphQL vault state data.
-   * @param rawStateData The raw GraphQL vault state data.
-   * @returns A new VaultState instance.
-   */
-  static fromRawData(rawStateData: RawVaultStateData): VaultState {
-    return new VaultState(rawStateData);
-  }
+  const borrowApy = rate2Apy(currentInterestRate);
+  const supplyApy = utilizationRate.mul(borrowApy);
+  return {
+    vaultAddress: rawStateData.vault_address!!,
+    badDebt,
+    cash,
+    currentInterestRate,
+    lastInterestUpdateTime,
+    totalBorrows,
+    totalDebtShares,
+    totalShares,
+    totalSupply,
+    utilizationRate,
+    shareExchangeRate,
+    debtShareExchangeRate,
+    borrowApy,
+    supplyApy,
+    __raw: rawStateData,
+  };
 }

@@ -4,6 +4,7 @@
 import {getOracleRouterConfigsByOracle} from "../internal";
 import {YeapConfig} from "./yeapConfig";
 import {OracleRouter} from "./entities";
+import { AccountAddress, InputViewFunctionData, MoveUint128Type } from "@aptos-labs/ts-sdk";
 
 /**
  * A class to query oracle router configuration data from the Yeap indexer.
@@ -78,5 +79,35 @@ export class OracleApi {
 
 
     return new OracleRouter(oracleRouter, rawConfigs, this.config);
+  }
+
+  /**
+   * Batch fetch on-chain prices for multiple asset pairs via the oracle lens view.
+   * Replaces former BorrowMarket.getPrices method.
+   *
+   * @param routerAddress Oracle router account address (string or hex)
+   * @param pairs Array of { base, quote? }. If quote omitted, defaults to AccountAddress.ZERO sentinel (protocol USD)
+   * @returns bigint array of prices aligned with input order
+   */
+  async getPrices(routerAddress: string, pairs: { base: AccountAddress; quote?: AccountAddress }[]): Promise<bigint[]> {
+    if (!this.config?.aptosClient) {
+      throw new Error("Aptos client required. Provide aptosClient in YeapConfig.");
+    }
+    if (!this.config.hasAddress("yeap_lens")) {
+      throw new Error("yeap_lens address missing in YeapConfig addresses map.");
+    }
+    const yeapLensAddress = this.config.yeapLensAddress;
+    const viewFunctionData: InputViewFunctionData = {
+      function: `${yeapLensAddress}::oracle_lens::batch_get_price_of_pairs` as `${string}::${string}::${string}`,
+      typeArguments: [],
+      functionArguments: [
+        routerAddress,
+        pairs.map(p => p.base.toString()),
+        pairs.map(p => (p.quote || AccountAddress.ZERO).toString()),
+      ],
+    };
+    const result = await this.config.aptosClient.view({ payload: viewFunctionData });
+    const prices = result[0] as MoveUint128Type[];
+    return prices.map(v => BigInt(v));
   }
 }

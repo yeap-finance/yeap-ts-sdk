@@ -1616,6 +1616,8 @@ export type BorrowMarket = {
   /** An array relationship */
   borrow_risk_parameters: Array<BorrowRiskParametersCurrent>;
   collateral?: Maybe<Scalars['String']['output']>;
+  /** An object relationship */
+  collateral_vault?: Maybe<VaultInfo>;
   crf?: Maybe<Scalars['numeric']['output']>;
   liquidation_bonus_bps?: Maybe<Scalars['numeric']['output']>;
   lltv?: Maybe<Scalars['numeric']['output']>;
@@ -1645,6 +1647,7 @@ export type BorrowMarketBoolExp = {
   _or?: InputMaybe<Array<BorrowMarketBoolExp>>;
   borrow_risk_parameters?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
   collateral?: InputMaybe<StringComparisonExp>;
+  collateral_vault?: InputMaybe<VaultInfoBoolExp>;
   crf?: InputMaybe<NumericComparisonExp>;
   liquidation_bonus_bps?: InputMaybe<NumericComparisonExp>;
   lltv?: InputMaybe<NumericComparisonExp>;
@@ -1661,6 +1664,7 @@ export type BorrowMarketBoolExp = {
 export type BorrowMarketOrderBy = {
   borrow_risk_parameters_aggregate?: InputMaybe<BorrowRiskParametersCurrentAggregateOrderBy>;
   collateral?: InputMaybe<OrderBy>;
+  collateral_vault?: InputMaybe<VaultInfoOrderBy>;
   crf?: InputMaybe<OrderBy>;
   liquidation_bonus_bps?: InputMaybe<OrderBy>;
   lltv?: InputMaybe<OrderBy>;
@@ -1728,6 +1732,8 @@ export type BorrowRiskParametersCurrent = {
   collateral: Scalars['String']['output'];
   market: Scalars['String']['output'];
   vault: Scalars['String']['output'];
+  /** An object relationship */
+  vault_info?: Maybe<VaultInfo>;
 };
 
 /** order by aggregate values of table "borrow_risk_parameters_current" */
@@ -1759,6 +1765,7 @@ export type BorrowRiskParametersCurrentBoolExp = {
   collateral?: InputMaybe<StringComparisonExp>;
   market?: InputMaybe<StringComparisonExp>;
   vault?: InputMaybe<StringComparisonExp>;
+  vault_info?: InputMaybe<VaultInfoBoolExp>;
 };
 
 /** order by max() on columns of table "borrow_risk_parameters_current" */
@@ -1783,6 +1790,7 @@ export type BorrowRiskParametersCurrentOrderBy = {
   collateral?: InputMaybe<OrderBy>;
   market?: InputMaybe<OrderBy>;
   vault?: InputMaybe<OrderBy>;
+  vault_info?: InputMaybe<VaultInfoOrderBy>;
 };
 
 /** select columns of table "borrow_risk_parameters_current" */

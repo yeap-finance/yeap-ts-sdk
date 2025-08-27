@@ -4,16 +4,18 @@
 import {
   YeapFungibleAssetMetadata,
   YeapFungibleAssetBalance,
-  YeapCurrentObject,
+  AptosObject,
   YeapVaultSettings,
-  YeapVaultInfo,
-  YeapVaultState,
   YeapAdaptiveIrmConfig,
   YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
 
   YeapOracleRouterConfig,
+  FixedPriceOracleConfig,
+  PythOracleConfig,
+  SwitchboardOracleConfig,
+  ChainlinkOracleConfig,
 } from "./interfaces";
 import {
   FungibleAssetBalanceFieldsFragment,
@@ -37,6 +39,7 @@ import {Maybe} from "../types";
 export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataFieldsFragment>| undefined): Maybe<YeapFungibleAssetMetadata> {
   if (!raw) return null;
   return {
+    creatorAddress: raw.creator_address,
     assetType: raw.asset_type,
     tokenStandard: raw.token_standard,
     name: raw.name,
@@ -44,8 +47,8 @@ export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataF
     decimals: raw.decimals,
     iconUri: raw.icon_uri,
     projectUri: raw.project_uri,
-    maximum: raw.maximum_v2,
-    totalSupply: raw.supply_v2,
+    maximumV2: Number(raw.maximum_v2),
+    supplyV2: Number(raw.supply_v2),
   };
 }
 
@@ -53,7 +56,7 @@ export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataF
  * Transform raw GraphQL current object to clean interface
  * @internal
  */
-export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment>|undefined): YeapCurrentObject | null {
+export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment>|undefined): AptosObject | null {
   if (!raw) return null;
   return {
     objectAddress: raw.object_address,
@@ -84,55 +87,6 @@ export function transformVaultSettings(raw: Maybe<VaultSettingsFieldsFragment>|u
   };
 }
 
-/**
- * Transform raw GraphQL vault info to clean interface
- * @internal
- */
-export function transformVaultInfo(raw: Maybe<VaultInfoFieldsFragment>|undefined): YeapVaultInfo | null {
-  if (!raw || !raw.underlying_asset) return null;
-  return {
-    vaultAddress: raw.vault_address,
-    creator: raw.creator || null,
-    underlyingAsset: raw.underlying_asset,
-    debtAsset: raw.debt_asset || null,
-    underlyingAssetStore: raw.underlying_asset_store || null,
-    governanceObjectAddress: raw.governance_object_address || null,
-    underlyingAssetMetadata: transformFungibleAssetMetadata(raw.underlying_asset_metadata),
-    debtAssetMetadata: transformFungibleAssetMetadata(raw.debt_asset_metadata),
-    vaultAssetMetadata: transformFungibleAssetMetadata(raw.vault_asset_metadata),
-    underlyingAssetBalance: raw.underlying_asset_balance
-      ? {
-          amount: raw.underlying_asset_balance.amount,
-          isFrozen: raw.underlying_asset_balance.is_frozen,
-          storageId: raw.underlying_asset_balance.storage_id,
-          metadata: transformFungibleAssetMetadata(raw.underlying_asset_balance.metadata),
-        }
-      : null,
-    governanceObject: transformCurrentObject(raw.governance_object),
-    settings: transformVaultSettings(raw.settings),
-  };
-}
-
-/**
- * Transform raw GraphQL vault state to clean interface
- * @internal
- */
-export function transformVaultState(raw: Maybe<VaultStateActivitiesFieldsFragment>): YeapVaultState | null {
-  if (!raw) return null;
-  return {
-    badDebt: raw.bad_debt,
-    cash: raw.cash,
-    currentInterestRate: raw.current_interest_rate,
-    eventIndex: raw.event_index,
-    lastInterestUpdateTime: raw.last_interest_update_time,
-    timestamp: raw.timestamp ? new Date(raw.timestamp) : null,
-    totalBorrows: raw.total_borrows,
-    totalDebtShares: raw.total_debt_shares,
-    totalShares: raw.total_shares,
-    transactionVersion: raw.transaction_version,
-    vaultAddress: raw.vault_address,
-  };
-}
 
 /**
  * Transform raw GraphQL adaptive IRM config to clean interface
@@ -201,10 +155,15 @@ export function transformFungibleAssetBalance(
 ): YeapFungibleAssetBalance | null {
   if (!raw) return null;
   return {
-    amount: raw.amount || "0",
+    assetType: raw.asset_type,
+    assetTypeV1: raw.asset_type_v1,
+    assetTypeV2: raw.asset_type_v2,
+    isPrimary: raw.is_primary,
+    ownerAddress: raw.owner_address,
+    tokenStandard: raw.token_standard,
+    amount: Number(raw.amount || "0"),
     isFrozen: raw.is_frozen || false,
-    storageId: raw.storage_id || "",
-    metadata: raw.metadata ? transformFungibleAssetMetadata(raw.metadata) : null,
+    metadata: transformFungibleAssetMetadata(raw.metadata)!
   };
 }
 
@@ -218,10 +177,64 @@ export function transformOracleRouterConfig(raw: Maybe<OracleRouterConfigFieldsF
     baseAsset: raw.base_asset,
     quoteAsset: raw.quote_asset,
     oracleRouter: raw.oracle_router,
-    oracle: raw.oracle ?? null,
-    oracleKind: raw.oracle_kind ? Number(raw.oracle_kind) : null,
+    oracle: raw.oracle!,
+    oracleKind: Number(raw.oracle_kind!),
     isDeleted: raw.deleted ?? false,
   };
+}
+
+/** Transform nested fixed_price_oracle_config object */
+export function transformFixedPriceOracleSubConfig(raw: any | undefined | null): FixedPriceOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address ? (raw.oracle_address) : raw.oracle_address,
+    base: raw.base_asset ? (raw.base_asset) : raw.base,
+    quote: raw.quote_asset ? (raw.quote_asset) : raw.quote,
+    price: raw.price!,
+    deleted: raw.deleted ?? null,
+  } as FixedPriceOracleConfig;
+}
+
+/** Transform nested pyth_oracle_config object */
+export function transformPythOracleSubConfig(raw: any | undefined | null): PythOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    pyth_id: raw.pyth_id,
+    max_age_in_seconds: Number(raw.max_age_in_seconds),
+    max_confidence: raw.max_confidence,
+    deleted: raw.deleted ?? null,
+  } as PythOracleConfig;
+}
+
+/** Transform nested switchboard_oracle_config object */
+export function transformSwitchboardOracleSubConfig(raw: any | undefined | null): SwitchboardOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    aggregator_address: raw.aggregator_address!,
+    max_age_in_seconds: Number(raw.max_age_in_seconds),
+    max_stdev: raw.max_stdev,
+    deleted: raw.deleted ?? null,
+  } as SwitchboardOracleConfig;
+}
+
+/** Transform nested chainlink_oracle_config object */
+export function transformChainlinkOracleSubConfig(raw: any | undefined | null): ChainlinkOracleConfig | null {
+  if (!raw) return null;
+  return {
+    oracle_address: raw.oracle_address,
+    base: raw.base,
+    quote: raw.quote,
+    feed_id: raw.feed_id,
+    max_age_in_seconds: parseInt(raw.max_age_in_seconds, 10),
+    feed_decimals: Number(raw.feed_decimals),
+    deleted: raw.deleted ?? null,
+  } as ChainlinkOracleConfig;
 }
 
 

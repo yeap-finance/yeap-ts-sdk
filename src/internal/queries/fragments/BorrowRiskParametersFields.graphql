@@ -3,4 +3,7 @@ fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
   collateral
   market
   vault
+  vault_info {
+    ...VaultInfoFields
+  }
 }

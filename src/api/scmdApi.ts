@@ -3,7 +3,9 @@
 
 import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
 import { getPositionsByOwner } from "../internal";
-import { SCMDPosition, BorrowMarket } from "./entities";
+import { SCMDPosition, BorrowMarket } from "./interfaces";
+import { createScmdPosition } from "./entities/scmdPosition";
+import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
 import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
 
@@ -61,7 +63,7 @@ export class ScmdApi {
       offset,
     });
 
-    return positions.map((position) => new SCMDPosition(this.config, position));
+    return positions.map((position) => createScmdPosition(this.config, position));
   }
 
   /**
@@ -80,7 +82,7 @@ export class ScmdApi {
       offset,
     });
 
-    return markets.map((m) => new BorrowMarket(this.config, m));
+    return markets.map((m) => createBorrowMarket(this.config, m));
   }
 
   get protocolName(): string {

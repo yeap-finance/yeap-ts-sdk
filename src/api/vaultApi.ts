@@ -1,8 +1,10 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { getVaultInfoByAddress, getVaultsByUnderlyingAsset, getActiveVaults, getAllVaults } from "../internal";
-import { Vault } from "./entities";
+import { getVaultInfoByAddress, getVaultsByUnderlyingAsset, getActiveVaults, getAllVaults, getLatestVaultState, getLatestVaultStates } from "../internal";
+import { createVault } from "./entities/vault";
+import { createVaultState } from "./entities/vaultState";
+import { Vault,VaultState } from "./interfaces";
 import { YeapConfig } from "./yeapConfig";
 
 /**
@@ -48,7 +50,7 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
 
   /**
@@ -84,7 +86,7 @@ export class VaultApi {
       return null;
     }
 
-    return new Vault(this.config, vaultInfo);
+    return createVault(this.config, vaultInfo);
   }
 
   /**
@@ -112,7 +114,7 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
 
   /**
@@ -140,6 +142,29 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => new Vault(this.config, vaultInfo));
+    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
+
+  /**
+   * Get the latest on-chain/state snapshot for a single vault.
+   * @param vaultAddress Vault address (hex string)
+   * @returns VaultState or null if the vault/state not found
+   */
+  async getVaultState(vaultAddress: string): Promise<VaultState> {
+    const raw = await getLatestVaultState({ yeapConfig: this.config, vaultAddress });
+    return createVaultState(raw);
+  }
+
+  /**
+   * Get latest states for multiple vaults (executed in parallel).
+   * The returned array preserves the ordering of the input addresses.
+   * @param vaultAddresses Array of vault addresses
+   * @returns Array of VaultState | null corresponding to each input address
+   */
+  async getVaultStates(vaultAddresses: string[]): Promise<VaultState[]> {
+    const rawArray = await getLatestVaultStates({ yeapConfig: this.config, vaultAddresses });
+    return rawArray.map((raw) => createVaultState(raw));
+  }
+
+
 }

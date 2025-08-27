@@ -6,10 +6,13 @@ export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState,
 
 export type BorrowMarketFieldsFragment = (
   Pick<Types.BorrowMarket, 'market' | 'protocol' | 'collateral' | 'oracle' | 'crf' | 'ltv' | 'lltv' | 'liquidation_bonus_bps' | 'max_borrowable_vaults' | 'status' | 'whitelisted'>
-  & { borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment> }
+  & { collateral_vault?: Types.Maybe<VaultInfoFieldsFragment>, borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment> }
 );
 
-export type BorrowRiskParametersFieldsFragment = Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'market' | 'vault'>;
+export type BorrowRiskParametersFieldsFragment = (
+  Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'market' | 'vault'>
+  & { vault_info?: Types.Maybe<VaultInfoFieldsFragment> }
+);
 
 export type ChainlinkOracleConfigFieldsFragment = Pick<Types.ChainlinkOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'feed_id' | 'max_age_in_seconds' | 'feed_decimals' | 'deleted'>;
 
@@ -20,7 +23,7 @@ export type FixedPriceOracleConfigFieldsFragment = Pick<Types.FixedPriceOracleCu
 export type FixedRateIrmConfigFieldsFragment = Pick<Types.FixedRateIrmCurrentConfig, 'config_address' | 'rate_per_second'>;
 
 export type FungibleAssetBalanceFieldsFragment = (
-  Pick<Types.CurrentFungibleAssetBalances, 'amount' | 'amount_v1' | 'amount_v2' | 'asset_type' | 'asset_type_v1' | 'asset_type_v2' | 'owner_address' | 'is_frozen' | 'is_primary' | 'storage_id'>
+  Pick<Types.CurrentFungibleAssetBalances, 'amount' | 'amount_v1' | 'amount_v2' | 'asset_type' | 'asset_type_v1' | 'asset_type_v2' | 'owner_address' | 'is_frozen' | 'is_primary' | 'storage_id' | 'token_standard' | 'last_transaction_timestamp' | 'last_transaction_timestamp_v1' | 'last_transaction_timestamp_v2' | 'last_transaction_version' | 'last_transaction_version_v1' | 'last_transaction_version_v2'>
   & { metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment> }
 );
 
@@ -122,6 +125,13 @@ export type GetVaultLatestStateQueryVariables = Types.Exact<{
 
 
 export type GetVaultLatestStateQuery = { vault_states_activities: Array<VaultStateActivitiesFieldsFragment> };
+
+export type GetVaultLatestStatesQueryVariables = Types.Exact<{
+  vault_addresses: Array<Types.Scalars['String']['input']> | Types.Scalars['String']['input'];
+}>;
+
+
+export type GetVaultLatestStatesQuery = { vault_states_activities: Array<VaultStateActivitiesFieldsFragment> };
 
 export type GetVaultSettingsQueryVariables = Types.Exact<{
   where?: Types.InputMaybe<Types.VaultSettingsBoolExp>;

@@ -1,12 +1,12 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { Account, AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import {  AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
-import { OracleConfig } from "./oracleConfig";
+import { createOracleConfig } from "./oracleConfig";
 import { PriceFeed } from "@pythnetwork/pyth-aptos-js";
-
+import { OracleConfig } from "../interfaces";
 /**
  * Oracle Router entity representing a collection of oracle configurations.
  *
@@ -52,7 +52,7 @@ export class OracleRouter {
    * ```
    */
   getAllConfigs(): OracleConfig[] {
-    return this.data.map((configFragment) => new OracleConfig(configFragment, this.config));
+    return this.data.map((configFragment) => createOracleConfig(configFragment, this.config));
   }
 
   /**
@@ -78,7 +78,7 @@ export class OracleRouter {
       return undefined;
     }
 
-    return new OracleConfig(configFragment, this.config);
+    return createOracleConfig(configFragment, this.config);
   }
 
   /**
@@ -144,7 +144,7 @@ export class OracleRouter {
         return false;
       }
     });
-    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
+    return fragments.map((fragment) => createOracleConfig(fragment, this.config));
   }
 
   /**
@@ -167,7 +167,7 @@ export class OracleRouter {
    */
   getConfigsByKind(oracleKind: number): OracleConfig[] {
     const fragments = this.data.filter((config) => config.oracle_kind === oracleKind.toString());
-    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
+    return fragments.map((fragment) => createOracleConfig(fragment, this.config));
   }
 
   /**
@@ -205,7 +205,7 @@ export class OracleRouter {
       );
     }
 
-    return configs[0] ? new OracleConfig(configs[0], this.config) : undefined;
+    return configs[0] ? createOracleConfig(configs[0], this.config) : undefined;
   }
 
   /**
@@ -228,7 +228,7 @@ export class OracleRouter {
         return false;
       }
     });
-    return fragments.map((fragment) => new OracleConfig(fragment, this.config));
+    return fragments.map((fragment) => createOracleConfig(fragment, this.config));
   }
 
   /**

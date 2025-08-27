@@ -1,8 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { SCMDPosition } from "../api/entities";
-import { YeapFungibleAssetBalance } from "../api/interfaces";
+import { SCMDPosition,YeapFungibleAssetMetadata } from "../api/interfaces";
 
 /**
  * 债务余额计算工具
@@ -73,8 +72,8 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
   const borrowByAsset = new Map<string, bigint>();
   let totalBorrowAmount = BigInt(0);
 
-  // 收集所有债务详情
-  position.debtStores.forEach((store) => {
+  // 收集所有债务详情 (debtStores 已转换为 Record)
+  Object.values(position.debtStores).forEach((store) => {
     if (store.debtAssetBalance) {
       const amount = BigInt(store.debtAssetBalance.amount);
       const symbol = store.debtAssetBalance.metadata?.symbol || "Unknown";
@@ -92,7 +91,7 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
       debtDetails.push({
         vaultAddress: store.vaultAddress,
         debtStoreAddress: store.debtStoreAddress,
-        borrowAmount: store.debtAssetBalance.amount,
+        borrowAmount: BigInt(store.debtAssetBalance.amount).toString(),
         borrowAsset: symbol,
         borrowAssetDecimals: decimals,
         borrowAssetName: name,
@@ -104,8 +103,8 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
     totalBorrowAmount,
     borrowByAsset,
     debtDetails,
-    activeDebtVaultCount: position.getActiveDebtVaultCount(),
-    hasAnyDebt: position.hasAnyDebt(),
+    activeDebtVaultCount: position.activeDebtVaultCount || 0,
+    hasAnyDebt: position.hasAnyDebt || false,
   };
 }
 
@@ -244,12 +243,12 @@ export function generateDebtReport(position: SCMDPosition, ltv: number = 75, llt
   // 基本信息
   report += `所有者: ${position.ownerAddress}\n`;
   report += `状态: ${position.isActive ? "活跃" : "非活跃"}\n`;
-  report += `抵押品: ${position.market.collateral}\n`;
+  report += `抵押品: ${position.marketInfo?.collateral}\n`;
 
   // 抵押品信息
   if (position.collateralAssetBalance) {
     const collateralFormatted = formatDebtAmount(
-      position.collateralAssetBalance.amount,
+      BigInt(position.collateralAssetBalance.amount).toString(),
       position.collateralAssetMetadata?.decimals || 0,
       position.collateralAssetMetadata?.symbol || "Unknown",
     );

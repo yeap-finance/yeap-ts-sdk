@@ -13086,6 +13086,18 @@
             "deprecationReason": null
           },
           {
+            "name": "collateral_vault",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "vault_info",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "crf",
             "description": null,
             "args": [],
@@ -13299,6 +13311,18 @@
             "deprecationReason": null
           },
           {
+            "name": "collateral_vault",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_info_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "crf",
             "description": null,
             "type": {
@@ -13448,6 +13472,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "collateral_vault",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_info_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -13906,6 +13942,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "vault_info",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "vault_info",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -14187,6 +14235,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "vault_info",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_info_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -14362,6 +14422,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vault_info",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_info_order_by",
               "ofType": null
             },
             "defaultValue": null,

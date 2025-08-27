@@ -120,88 +120,13 @@ export const FungibleAssetBalanceFieldsFragmentDoc = `
   is_frozen
   is_primary
   storage_id
-}
-    `;
-export const BorrowRiskParametersFieldsFragmentDoc = `
-    fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
-  brw
-  collateral
-  market
-  vault
-}
-    `;
-export const BorrowMarketFieldsFragmentDoc = `
-    fragment BorrowMarketFields on borrow_market {
-  market
-  protocol
-  collateral
-  oracle
-  crf
-  ltv
-  lltv
-  liquidation_bonus_bps
-  max_borrowable_vaults
-  status
-  whitelisted
-  borrow_risk_parameters {
-    ...BorrowRiskParametersFields
-  }
-}
-    `;
-export const PositionFieldsFragmentDoc = `
-    fragment PositionFields on scmd_position_current {
-  position
-  owner
-  market
-  collateral
-  status
-  collateral_asset_balance {
-    ...FungibleAssetBalanceFields
-  }
-  market_info {
-    ...BorrowMarketFields
-  }
-  debt_stores {
-    debt_store
-    vault
-    debt_asset_balance {
-      ...FungibleAssetBalanceFields
-    }
-  }
-}
-    `;
-export const VaultBadDebtActivitiesFieldsFragmentDoc = `
-    fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
-  event_index
-  transaction_version
-  vault_address
-  event_type
-  timestamp
-  bad_debt_amount
-  bad_debt_shares
-  debt_store_address
-  total_bad_debt_after
-  total_bad_debt_before
-}
-    `;
-export const VaultEmergencyActivitiesFieldsFragmentDoc = `
-    fragment VaultEmergencyActivitiesFields on vault_emergency_activities {
-  event_index
-  transaction_version
-  vault_address
-  timestamp
-  amount
-  withdrawn_by
-}
-    `;
-export const VaultFlashloanActivitiesFieldsFragmentDoc = `
-    fragment VaultFlashloanActivitiesFields on vault_flashloan_activities {
-  event_index
-  transaction_version
-  vault_address
-  timestamp
-  amount
-  fee
+  token_standard
+  last_transaction_timestamp
+  last_transaction_timestamp_v1
+  last_transaction_timestamp_v2
+  last_transaction_version
+  last_transaction_version_v1
+  last_transaction_version_v2
 }
     `;
 export const CurrentObjectFieldsFragmentDoc = `
@@ -288,6 +213,94 @@ export const VaultInfoFieldsFragmentDoc = `
   kinked_irm_config {
     ...KinkedIrmConfigFields
   }
+}
+    `;
+export const BorrowRiskParametersFieldsFragmentDoc = `
+    fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
+  brw
+  collateral
+  market
+  vault
+  vault_info {
+    ...VaultInfoFields
+  }
+}
+    `;
+export const BorrowMarketFieldsFragmentDoc = `
+    fragment BorrowMarketFields on borrow_market {
+  market
+  protocol
+  collateral
+  collateral_vault {
+    ...VaultInfoFields
+  }
+  oracle
+  crf
+  ltv
+  lltv
+  liquidation_bonus_bps
+  max_borrowable_vaults
+  status
+  whitelisted
+  borrow_risk_parameters {
+    ...BorrowRiskParametersFields
+  }
+}
+    `;
+export const PositionFieldsFragmentDoc = `
+    fragment PositionFields on scmd_position_current {
+  position
+  owner
+  market
+  collateral
+  status
+  collateral_asset_balance {
+    ...FungibleAssetBalanceFields
+  }
+  market_info {
+    ...BorrowMarketFields
+  }
+  debt_stores {
+    debt_store
+    vault
+    debt_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
+  }
+}
+    `;
+export const VaultBadDebtActivitiesFieldsFragmentDoc = `
+    fragment VaultBadDebtActivitiesFields on vault_bad_debt_activities {
+  event_index
+  transaction_version
+  vault_address
+  event_type
+  timestamp
+  bad_debt_amount
+  bad_debt_shares
+  debt_store_address
+  total_bad_debt_after
+  total_bad_debt_before
+}
+    `;
+export const VaultEmergencyActivitiesFieldsFragmentDoc = `
+    fragment VaultEmergencyActivitiesFields on vault_emergency_activities {
+  event_index
+  transaction_version
+  vault_address
+  timestamp
+  amount
+  withdrawn_by
+}
+    `;
+export const VaultFlashloanActivitiesFieldsFragmentDoc = `
+    fragment VaultFlashloanActivitiesFields on vault_flashloan_activities {
+  event_index
+  transaction_version
+  vault_address
+  timestamp
+  amount
+  fee
 }
     `;
 export const VaultStateActivitiesFieldsFragmentDoc = `
@@ -380,6 +393,12 @@ export const GetPositionsByOwner = `
 ${FungibleAssetBalanceFieldsFragmentDoc}
 ${FungibleAssetMetadataFieldsFragmentDoc}
 ${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
 ${BorrowRiskParametersFieldsFragmentDoc}`;
 export const GetVaultInfo = `
     query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
@@ -415,6 +434,17 @@ export const GetVaultLatestState = `
     where: {vault_address: {_eq: $vault_address}}
     order_by: [{transaction_version: desc}, {event_index: desc}]
     limit: 1
+  ) {
+    ...VaultStateActivitiesFields
+  }
+}
+    ${VaultStateActivitiesFieldsFragmentDoc}`;
+export const GetVaultLatestStates = `
+    query GetVaultLatestStates($vault_addresses: [String!]!) {
+  vault_states_activities(
+    where: {vault_address: {_in: $vault_addresses}}
+    distinct_on: vault_address
+    order_by: [{vault_address: asc}, {transaction_version: desc}, {event_index: desc}]
   ) {
     ...VaultStateActivitiesFields
   }
@@ -493,6 +523,14 @@ export const GetWhitelistedBorrowMarketsByProtocol = `
   }
 }
     ${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
 ${BorrowRiskParametersFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
@@ -522,6 +560,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetVaultLatestState(variables: Types.GetVaultLatestStateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultLatestStateQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultLatestStateQuery>({ document: GetVaultLatestState, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultLatestState', 'query', variables);
+    },
+    GetVaultLatestStates(variables: Types.GetVaultLatestStatesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultLatestStatesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultLatestStatesQuery>({ document: GetVaultLatestStates, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultLatestStates', 'query', variables);
     },
     GetVaultSettings(variables?: Types.GetVaultSettingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultSettingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultSettingsQuery>({ document: GetVaultSettings, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultSettings', 'query', variables);
