@@ -37,6 +37,7 @@ import {Maybe} from "../types";
 export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataFieldsFragment>| undefined): Maybe<YeapFungibleAssetMetadata> {
   if (!raw) return null;
   return {
+    creatorAddress: raw.creator_address,
     assetType: raw.asset_type,
     tokenStandard: raw.token_standard,
     name: raw.name,
@@ -44,8 +45,8 @@ export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataF
     decimals: raw.decimals,
     iconUri: raw.icon_uri,
     projectUri: raw.project_uri,
-    maximum: raw.maximum_v2,
-    totalSupply: raw.supply_v2,
+    maximumV2: Number(raw.maximum_v2),
+    supplyV2: Number(raw.supply_v2),
   };
 }
 
@@ -101,12 +102,7 @@ export function transformVaultInfo(raw: Maybe<VaultInfoFieldsFragment>|undefined
     debtAssetMetadata: transformFungibleAssetMetadata(raw.debt_asset_metadata),
     vaultAssetMetadata: transformFungibleAssetMetadata(raw.vault_asset_metadata),
     underlyingAssetBalance: raw.underlying_asset_balance
-      ? {
-          amount: raw.underlying_asset_balance.amount,
-          isFrozen: raw.underlying_asset_balance.is_frozen,
-          storageId: raw.underlying_asset_balance.storage_id,
-          metadata: transformFungibleAssetMetadata(raw.underlying_asset_balance.metadata),
-        }
+      ? transformFungibleAssetBalance(raw.underlying_asset_balance)
       : null,
     governanceObject: transformCurrentObject(raw.governance_object),
     settings: transformVaultSettings(raw.settings),
@@ -201,10 +197,15 @@ export function transformFungibleAssetBalance(
 ): YeapFungibleAssetBalance | null {
   if (!raw) return null;
   return {
-    amount: raw.amount || "0",
+    assetType: raw.asset_type,
+    assetTypeV1: raw.asset_type_v1,
+    assetTypeV2: raw.asset_type_v2,
+    isPrimary: raw.is_primary,
+    ownerAddress: raw.owner_address,
+    tokenStandard: raw.token_standard,
+    amount: Number(raw.amount || "0"),
     isFrozen: raw.is_frozen || false,
-    storageId: raw.storage_id || "",
-    metadata: raw.metadata ? transformFungibleAssetMetadata(raw.metadata) : null,
+    metadata: transformFungibleAssetMetadata(raw.metadata)!
   };
 }
 

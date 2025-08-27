@@ -20,7 +20,7 @@ export type FixedPriceOracleConfigFieldsFragment = Pick<Types.FixedPriceOracleCu
 export type FixedRateIrmConfigFieldsFragment = Pick<Types.FixedRateIrmCurrentConfig, 'config_address' | 'rate_per_second'>;
 
 export type FungibleAssetBalanceFieldsFragment = (
-  Pick<Types.CurrentFungibleAssetBalances, 'amount' | 'amount_v1' | 'amount_v2' | 'asset_type' | 'asset_type_v1' | 'asset_type_v2' | 'owner_address' | 'is_frozen' | 'is_primary' | 'storage_id'>
+  Pick<Types.CurrentFungibleAssetBalances, 'amount' | 'amount_v1' | 'amount_v2' | 'asset_type' | 'asset_type_v1' | 'asset_type_v2' | 'owner_address' | 'is_frozen' | 'is_primary' | 'storage_id' | 'token_standard' | 'last_transaction_timestamp' | 'last_transaction_timestamp_v1' | 'last_transaction_timestamp_v2' | 'last_transaction_version' | 'last_transaction_version_v1' | 'last_transaction_version_v2'>
   & { metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment> }
 );
 

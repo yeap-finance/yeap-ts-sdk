@@ -198,27 +198,6 @@ export class SCMDPosition {
     return borrowByAsset;
   }
 
-  /**
-   * Get detailed borrow information for each debt store.
-   * @returns Array of borrow details
-   */
-  getBorrowDetails(): Array<{
-    vaultAddress: string;
-    debtStoreAddress: string;
-    borrowAmount: string;
-    borrowAsset: string;
-    borrowAssetDecimals: number;
-  }> {
-    return this.debtStores
-      .filter((store) => store.debtAssetBalance)
-      .map((store) => ({
-        vaultAddress: store.vaultAddress,
-        debtStoreAddress: store.debtStoreAddress,
-        borrowAmount: store.debtAssetBalance!.amount,
-        borrowAsset: store.debtAssetBalance!.metadata?.symbol || "Unknown",
-        borrowAssetDecimals: store.debtAssetBalance!.metadata?.decimals || 0,
-      }));
-  }
 
   /**
    * Check if the position has any active debt.

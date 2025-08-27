@@ -2,8 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import {Maybe} from "../types";
-
+import {FungibleAssetBalance, FungibleAssetMetadata} from "@aptos-labs/js-pro";
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
@@ -13,23 +12,7 @@ import {Maybe} from "../types";
 /**
  * Fungible asset metadata information (clean interface)
  */
-export interface YeapFungibleAssetMetadata {
-  assetType: string;
-  /** Token standard (e.g., "v1", "v2") */
-  tokenStandard: string;
-  /** Asset name */
-  name: string;
-  /** Asset symbol */
-  symbol: string;
-  /** Number of decimal places */
-  decimals: number;
-  /** Icon URI for the asset */
-  iconUri?: Maybe<string>;
-  /** Project URI for the asset */
-  projectUri?: Maybe<string>;
-  maximum?: Maybe<string>;
-  totalSupply?: Maybe<string>;
-}
+export type YeapFungibleAssetMetadata = FungibleAssetMetadata;
 
 /**
  * Current object information (clean interface)
@@ -50,16 +33,7 @@ export interface YeapCurrentObject {
 /**
  * Fungible asset balance information (clean interface)
  */
-export interface YeapFungibleAssetBalance {
-  /** Balance amount */
-  amount: string;
-  /** Whether the balance is frozen */
-  isFrozen: boolean;
-  /** Storage ID */
-  storageId: string;
-  /** Asset metadata */
-  metadata?: YeapFungibleAssetMetadata | null;
-}
+export type YeapFungibleAssetBalance  = FungibleAssetBalance;
 
 /**
  * Vault settings interface (clean interface)
@@ -331,82 +305,6 @@ export interface YeapPositionDebtStore {
   vaultInfo?: YeapVaultInfo | null;
 }
 
-/**
- * SCMD Position information (clean interface)
- */
-export interface YeapPosition {
-  /** Position address (unique identifier) */
-  positionAddress: string;
-  /** Owner address */
-  ownerAddress?: string | null;
-  /** Collateral asset address */
-  collateral?: string | null;
-  /** Collateral type */
-  collateralType?: string | null;
-  /** Position status (1 = active, 0 = inactive) */
-  status?: number | null;
-  /** Collateral asset balance */
-  collateralAssetBalance?: YeapFungibleAssetBalance | null;
-  /** Debt stores (borrowing positions) */
-  debtStores?: YeapPositionDebtStore[];
-}
-
-/**
- * Filter options for SCMD position queries
- */
-export interface PositionFilterOptions {
-  /** Filter by owner address */
-  ownerAddress?: string;
-  /** Filter by position status (1 = active, 0 = inactive) */
-  status?: number;
-  /** Filter by collateral type */
-  collateralType?: string;
-  /** Minimum collateral value */
-  minCollateralValue?: string;
-}
-
-/**
- * Sort options for SCMD position queries
- */
-export interface PositionSortOptions {
-  /** Sort by field */
-  field: "positionAddress" | "ownerAddress" | "collateralType";
-  /** Sort direction */
-  direction: "asc" | "desc";
-}
-
-/**
- * Comprehensive query options for SCMD position queries
- */
-export interface PositionQueryOptions extends QueryOptions {
-  /** Filter options */
-  filter?: PositionFilterOptions;
-  /** Sort options */
-  sort?: PositionSortOptions;
-}
-
-/**
- * Interface for SCMD Position-related operations.
- * Provides methods to query and interact with SCMD (Spot Collateralized Margin Debt) positions.
- */
-export interface ScmdPositionApiInterface {
-  /**
-   * Retrieves all positions owned by a specific address.
-   *
-   * @param ownerAddress - The address of the position owner
-   * @param options - Optional query parameters (limit, offset, etc.)
-   * @returns Promise resolving to an array of positions
-   *
-   * @example
-   * ```typescript
-   * const positions = await yeap.scmdApi.getPositionsByOwner(
-   *   "0x123...",
-   *   { limit: 10, offset: 0 }
-   * );
-   * ```
-   */
-  getPositionsByOwner(ownerAddress: string, options?: QueryOptions): Promise<YeapPosition[]>;
-}
 
 /**
  * Query variable interfaces for type safety
@@ -512,19 +410,6 @@ export interface YeapVaultLatestStateQueryResponse {
   vaultState: YeapVaultState | null;
 }
 
-/**
- * Utility types for working with query responses
- */
-
-/**
- * Extract a single vault info item from array responses
- */
-export type YeapVaultInfoItem = YeapVaultInfo;
-
-/**
- * Extract a single vault settings item from array responses
- */
-export type YeapVaultSettingsItem = YeapVaultSettings;
 
 /**
  * Pagination information for queries
@@ -596,27 +481,6 @@ export interface YeapOracleRouterConfig {
   isDeleted?: boolean;
 }
 
-/**
- * Collateral risk parameters configuration (clean interface)
- */
-export interface CollateralRiskParameters {
-  /** Maximum number of borrow vaults allowed */
-  borrowVaultMaxNum: number;
-  /** Collateral asset address */
-  collateral: AccountAddress;
-  /** Risk configuration address */
-  configAddress: AccountAddress;
-  /** Liquidation bonus in basis points */
-  liquidationBonusBps: number;
-  /** Liquidation Loan-to-Value ratio */
-  lltv: number;
-  /** Loan-to-Value ratio */
-  ltv: number;
-  /** Oracle address for price feeds */
-  oracle: AccountAddress;
-  /** Risk factor for the collateral */
-  riskFactor: number;
-}
 
 /**
  * Borrow risk parameters (aligned to current fragment fields)

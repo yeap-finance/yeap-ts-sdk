@@ -92,7 +92,7 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
       debtDetails.push({
         vaultAddress: store.vaultAddress,
         debtStoreAddress: store.debtStoreAddress,
-        borrowAmount: store.debtAssetBalance.amount,
+        borrowAmount: BigInt(store.debtAssetBalance.amount).toString(),
         borrowAsset: symbol,
         borrowAssetDecimals: decimals,
         borrowAssetName: name,
@@ -249,7 +249,7 @@ export function generateDebtReport(position: SCMDPosition, ltv: number = 75, llt
   // 抵押品信息
   if (position.collateralAssetBalance) {
     const collateralFormatted = formatDebtAmount(
-      position.collateralAssetBalance.amount,
+      BigInt(position.collateralAssetBalance.amount).toString(),
       position.collateralAssetMetadata?.decimals || 0,
       position.collateralAssetMetadata?.symbol || "Unknown",
     );

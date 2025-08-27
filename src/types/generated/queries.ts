@@ -120,6 +120,13 @@ export const FungibleAssetBalanceFieldsFragmentDoc = `
   is_frozen
   is_primary
   storage_id
+  token_standard
+  last_transaction_timestamp
+  last_transaction_timestamp_v1
+  last_transaction_timestamp_v2
+  last_transaction_version
+  last_transaction_version_v1
+  last_transaction_version_v2
 }
     `;
 export const BorrowRiskParametersFieldsFragmentDoc = `
