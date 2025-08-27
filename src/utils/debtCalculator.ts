@@ -73,8 +73,8 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
   const borrowByAsset = new Map<string, bigint>();
   let totalBorrowAmount = BigInt(0);
 
-  // 收集所有债务详情
-  position.debtStores.forEach((store) => {
+  // 收集所有债务详情 (debtStores 已转换为 Record)
+  Object.values(position.debtStores).forEach((store) => {
     if (store.debtAssetBalance) {
       const amount = BigInt(store.debtAssetBalance.amount);
       const symbol = store.debtAssetBalance.metadata?.symbol || "Unknown";
@@ -104,8 +104,8 @@ export function calculateDebtSummary(position: SCMDPosition): DebtSummary {
     totalBorrowAmount,
     borrowByAsset,
     debtDetails,
-    activeDebtVaultCount: position.debtStores.length,
-    hasAnyDebt: position.debtStores.some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n),
+    activeDebtVaultCount: position.activeDebtVaultCount || 0,
+    hasAnyDebt: position.hasAnyDebt || false,
   };
 }
 
