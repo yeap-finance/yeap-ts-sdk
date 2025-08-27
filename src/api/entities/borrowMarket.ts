@@ -5,6 +5,7 @@ import { YeapConfig } from "../yeapConfig";
 import { BorrowMarketFieldsFragment } from "../../types/generated/operations";
 import { BorrowRiskParameters } from "../interfaces";
 import { AccountAddress } from "@aptos-labs/ts-sdk";
+import {createVault, Vault} from "./vault";
 
 type RawBorrowMarket = BorrowMarketFieldsFragment;
 
@@ -12,6 +13,7 @@ type RawBorrowMarket = BorrowMarketFieldsFragment;
 export interface BorrowMarket {
   market: AccountAddress;
   collateral: AccountAddress;
+  collateralVault?: Vault;
   oracle: AccountAddress;
   crf: number;
   ltv: number;
@@ -47,6 +49,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
   return {
     market: AccountAddress.fromString(raw.market),
     collateral: AccountAddress.fromString(raw.collateral!),
+    collateralVault: raw.collateral_vault ? createVault(config, raw.collateral_vault!) ??undefined :undefined,
     oracle: AccountAddress.fromString(raw.oracle!),
     crf: parseNumeric(raw.crf),
     ltv: parseNumeric(raw.ltv),

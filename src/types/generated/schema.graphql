@@ -1732,6 +1732,8 @@ type borrow_market {
     where: borrow_risk_parameters_current_bool_exp
   ): [borrow_risk_parameters_current!]!
   collateral: String
+  """An object relationship"""
+  collateral_vault: vault_info
   crf: numeric
   liquidation_bonus_bps: numeric
   lltv: numeric
@@ -1753,6 +1755,7 @@ input borrow_market_bool_exp {
   _or: [borrow_market_bool_exp!]
   borrow_risk_parameters: borrow_risk_parameters_current_bool_exp
   collateral: String_comparison_exp
+  collateral_vault: vault_info_bool_exp
   crf: numeric_comparison_exp
   liquidation_bonus_bps: numeric_comparison_exp
   lltv: numeric_comparison_exp
@@ -1769,6 +1772,7 @@ input borrow_market_bool_exp {
 input borrow_market_order_by {
   borrow_risk_parameters_aggregate: borrow_risk_parameters_current_aggregate_order_by
   collateral: order_by
+  collateral_vault: vault_info_order_by
   crf: order_by
   liquidation_bonus_bps: order_by
   lltv: order_by
@@ -1842,6 +1846,8 @@ type borrow_risk_parameters_current {
   collateral: String!
   market: String!
   vault: String!
+  """An object relationship"""
+  vault_info: vault_info
 }
 
 """
@@ -1879,6 +1885,7 @@ input borrow_risk_parameters_current_bool_exp {
   collateral: String_comparison_exp
   market: String_comparison_exp
   vault: String_comparison_exp
+  vault_info: vault_info_bool_exp
 }
 
 """
@@ -1909,6 +1916,7 @@ input borrow_risk_parameters_current_order_by {
   collateral: order_by
   market: order_by
   vault: order_by
+  vault_info: vault_info_order_by
 }
 
 """

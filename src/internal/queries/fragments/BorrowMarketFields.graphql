@@ -4,6 +4,9 @@ fragment BorrowMarketFields on borrow_market {
   market
   protocol
   collateral
+  collateral_vault {
+    ...VaultInfoFields
+  }
   oracle
   crf
   ltv
