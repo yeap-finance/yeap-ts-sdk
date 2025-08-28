@@ -82,6 +82,8 @@ async function testVaultApi() {
 
     // Step 3: Get vault details by address (using address from Step 1)
     if (selectedVault) {
+
+
       console.log(`\n3. Getting vault details for address: ${selectedVault.vaultAddress}...`);
       try {
         const vaultDetails = await yeap.vaultApi.vault(selectedVault.vaultAddress);
@@ -107,6 +109,9 @@ async function testVaultApi() {
         } else {
           console.log(`ℹ️  No vault found at address: ${selectedVault.vaultAddress}`);
         }
+
+        const vaultState = await yeap.vaultApi.getVaultState(selectedVault.vaultAddress);
+        console.log(vaultState);
       } catch (error) {
         console.log(`❌ Error looking up vault details: ${error.message}`);
       }

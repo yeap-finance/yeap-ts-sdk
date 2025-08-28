@@ -1,54 +1,43 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { Decimal } from "decimal.js";
 import { bignumber, BigNumber } from "mathjs";
 import { VaultState, RawVaultStateData } from "../interfaces";
-// Configure decimal.js for financial calculations
-Decimal.set({
-  precision: 38, // Handle large blockchain numbers with precision
-  rounding: Decimal.ROUND_DOWN, // Standard financial rounding
-  toExpNeg: -18, // Handle small percentages
-  toExpPos: 38, // Handle large token amounts
-});
-
-export function rate2Apy(rate: Decimal | bigint | number, precision: number = 2 ** 96): BigNumber {
-  if (rate === 0 || !rate) {
+export function rate2Apy(rate: BigNumber | bigint | number, precision: number = 2 ** 96): BigNumber {
+  if (rate === 0 || rate === 0n) {
     return bignumber(0);
   }
-
-  // return math.bignumber(rate).div(precision).add(1).pow(365 * 24 * 60 * 60).sub(1).mul(100)
-  return bignumber(rate).div(precision).mul(365 * 24 * 60 * 60).mul(100)
+  const rateBN = bignumber(rate.toString());
+  // Approximate APY (simple annualization of per-second rate): (rate/precision) * seconds_per_year * 100
+  return rateBN.div(precision).mul(365 * 24 * 60 * 60).mul(100);
 }
 
 // VaultState interface moved to interfaces.ts
 
 /** Factory to create an immutable VaultState */
 export function createVaultState(rawStateData: RawVaultStateData): VaultState {
-  const badDebt = rawStateData.bad_debt ? BigInt(rawStateData.bad_debt) : BigInt(0);
-  const cash = rawStateData.cash ? BigInt(rawStateData.cash) : BigInt(0);
+  const zero = bignumber(0);
+  const badDebt = rawStateData.bad_debt ? bignumber(rawStateData.bad_debt) : zero;
+  const cash = rawStateData.cash ? bignumber(rawStateData.cash) : zero;
   const currentInterestRate = rawStateData.current_interest_rate
-    ? BigInt(rawStateData.current_interest_rate)
-    : BigInt(0);
+    ? bignumber(rawStateData.current_interest_rate)
+    : zero;
   const lastInterestUpdateTime = rawStateData.last_interest_update_time
-    ? BigInt(rawStateData.last_interest_update_time)
-    : BigInt(0);
-  const totalBorrows = rawStateData.total_borrows ? BigInt(rawStateData.total_borrows) : BigInt(0);
-  const totalDebtShares = rawStateData.total_debt_shares ? BigInt(rawStateData.total_debt_shares) : BigInt(0);
-  const totalShares = rawStateData.total_shares ? BigInt(rawStateData.total_shares) : BigInt(0);
-  const totalSupply = totalBorrows + cash + badDebt;
+    ? bignumber(rawStateData.last_interest_update_time)
+    : zero;
+  const totalBorrows = rawStateData.total_borrows ? bignumber(rawStateData.total_borrows) : zero;
+  const totalDebtShares = rawStateData.total_debt_shares ? bignumber(rawStateData.total_debt_shares) : zero;
+  const totalShares = rawStateData.total_shares ? bignumber(rawStateData.total_shares) : zero;
+  const totalSupply = badDebt.plus(cash).plus(totalBorrows);
 
-  const cashD = Decimal(cash.toString());
-  const badDebtD = Decimal(badDebt.toString());
-  const borrowsD = Decimal(totalBorrows.toString());
-  const totalAvailable = cashD.plus(borrowsD).plus(badDebtD);
-  const utilizationRate = totalAvailable.isZero() ? Decimal(0) : borrowsD.dividedBy(totalAvailable);
-  const shareExchangeRate = totalShares === BigInt(0)
-    ? Decimal(0)
-    : Decimal(totalSupply.toString()).dividedBy(Decimal(totalShares.toString()));
-  const debtShareExchangeRate = totalDebtShares === BigInt(0)
-    ? Decimal(0)
-    : Decimal(totalBorrows.toString()).dividedBy(Decimal(totalDebtShares.toString()));
+  const totalAvailableBN = cash.plus(totalBorrows).plus(badDebt);
+  const utilizationRate = totalAvailableBN.eq(0) ? zero : totalBorrows.div(totalAvailableBN);
+  const shareExchangeRate = totalShares.eq(0)
+    ? zero
+    : totalSupply.div(totalShares);
+  const debtShareExchangeRate = totalDebtShares.eq(0)
+    ? zero
+    : totalBorrows.div(totalDebtShares);
 
   const borrowApy = rate2Apy(currentInterestRate);
   const supplyApy = utilizationRate.mul(borrowApy);
