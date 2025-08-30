@@ -309,21 +309,21 @@ export interface VaultState {
   /** Vault address this state corresponds to. */
   vaultAddress: string;
   /** Aggregate unrecoverable debt (risk / loss) in underlying units. */
-  badDebt: bigint;
+  badDebt: BigNumber;
   /** Unlent underlying balance held by the vault (liquidity). */
-  cash: bigint;
+  cash: BigNumber;
   /** Per‑second interest rate (fixed‑point scaled by 2^96). */
-  currentInterestRate: bigint;
+  currentInterestRate: BigNumber;
   /** Unix timestamp (seconds) of last interest accrual. */
-  lastInterestUpdateTime: bigint;
+  lastInterestUpdateTime: BigNumber;
   /** Total outstanding borrowed principal (underlying units). */
-  totalBorrows: bigint;
+  totalBorrows: BigNumber;
   /** Total issued debt share tokens (denominator for debtShareExchangeRate). */
-  totalDebtShares: bigint;
+  totalDebtShares: BigNumber;
   /** Total issued vault share tokens (denominator for shareExchangeRate). */
-  totalShares: bigint;
+  totalShares: BigNumber;
   /** Aggregate supply = totalBorrows + cash + badDebt (underlying units). */
-  totalSupply: bigint;
+  totalSupply: BigNumber;
   /** Utilization ratio = borrows / (borrows + cash + badDebt) (0..1). */
   utilizationRate: BigNumber;
   /** Underlying per share (exchange rate) = totalSupply / totalShares (0 if no shares). */
