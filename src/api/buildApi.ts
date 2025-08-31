@@ -130,12 +130,10 @@ export class BuildApi {
 
   /**
    * Builds transaction data for repaying and withdrawing collateral.
-   * Mirrors Move: repay_and_withdraw_collateral(user, position, repay_vault, repay_amount, withdraw_amount, unwrap)
    * @param positionAddress - The position address
    * @param repayVaultAddress - The vault address for repayment
    * @param repayAmount - The amount to repay (bigint)
    * @param withdrawAmount - The amount to withdraw (bigint)
-   * @param unwrap - Whether to unwrap to underlying asset (boolean)
    * @returns InputGenerateTransactionPayloadData transaction data
    */
   buildRepayAndWithdrawCollateralTxn(
@@ -143,13 +141,12 @@ export class BuildApi {
     repayVaultAddress: string,
     repayAmount: bigint,
     withdrawAmount: bigint,
-    unwrap: boolean = true,
   ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::repay_and_withdraw_collateral`,
       typeArguments: [],
-      functionArguments: [positionAddress, repayVaultAddress, repayAmount.toString(), withdrawAmount.toString(), unwrap],
+      functionArguments: [positionAddress, repayVaultAddress, repayAmount.toString(), withdrawAmount.toString()],
     };
   }
 
@@ -181,27 +178,12 @@ export class BuildApi {
    * @param amount - The collateral amount (bigint)
    * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildDepositCollateralTxn(positionAddress: string, amount: bigint): InputGenerateTransactionPayloadData {
+  buildDepositCollateralTxn(positionAddress: string, amount: bigint, collateralAmountInShares: boolean): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::deposit_collateral`,
       typeArguments: [],
-      functionArguments: [positionAddress, amount.toString()],
-    };
-  }
-
-  /**
-   * Builds transaction data for depositing vault assets as collateral.
-   * @param positionAddress - The position address
-   * @param shares - The shares amount (bigint)
-   * @returns InputGenerateTransactionPayloadData transaction data
-   */
-  buildDepositVaultAssetAsCollateralTxn(positionAddress: string, shares: bigint): InputGenerateTransactionPayloadData {
-    const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
-    return {
-      function: `${yeapBorrowApiAddress}::borrow_api::deposit_vault_asset_as_collateral`,
-      typeArguments: [],
-      functionArguments: [positionAddress, shares.toString()],
+      functionArguments: [positionAddress, amount.toString(), collateralAmountInShares],
     };
   }
 
