@@ -70,14 +70,6 @@ export class BuildApi {
 
   /**
    * Builds transaction data for opening a borrow position.
-   * Mirrors Move: open_position(user, market, borrow_vault, collateral_amount, borrow_amount)
-   * @param marketAddress - Borrow market address
-   * @param borrowVaultAddress - The borrow vault address (debt vault)
-   * @param collateralAmount - Amount of collateral to deposit (bigint)
-   * @param borrowAmount - Amount to borrow (bigint)
-   */
-  /**
-   * Builds transaction data for opening a borrow position.
    * Mirrors Move: open_position(user, market, borrow_vault, collateral_amount, borrow_amount, collateral_amount_in_shares)
    * @param marketAddress - Borrow market address
    * @param borrowVaultAddress - The borrow vault address (debt vault)
@@ -108,14 +100,6 @@ export class BuildApi {
 
   /**
    * Builds transaction data for adding collateral and borrowing more.
-   * Mirrors Move: add_collateral_and_borrow(user, position, borrow_vault, collateral_amount, borrrow_amount)
-   * @param positionAddress - Existing position object address
-   * @param borrowVaultAddress - Borrow (debt) vault address
-   * @param collateralAmount - Collateral amount (bigint) (use MAX to indicate all)
-   * @param borrowAmount - Borrow amount (bigint)
-   */
-  /**
-   * Builds transaction data for adding collateral and borrowing more.
    * Mirrors Move: add_collateral_and_borrow(user, position, borrow_vault, collateral_amount, borrrow_amount, collateral_amount_in_shares)
    * @param positionAddress - Existing position object address
    * @param borrowVaultAddress - Borrow (debt) vault address
@@ -143,8 +127,6 @@ export class BuildApi {
       ],
     };
   }
-
-  // Removed buildAddCollateralAndBorrowMore: no corresponding Move entry function.
 
   /**
    * Builds transaction data for repaying and withdrawing collateral.
