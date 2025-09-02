@@ -16,10 +16,13 @@ import { OracleConfig } from "../interfaces";
  *
  * Based on the Move contract `yeap_oracle::oracle_router`, this class provides
  * access to oracle configurations and routing capabilities for different oracle types:
- * - PrimaryBackupOracle: Pyth primary with Switchboard backup
- * - VaultOracle: Vault asset pricing based on underlying assets
- * - FixPriceOracle: Fixed price configurations for testing/stablecoins
- * - DelegateOracle: Recursive oracle routing for complex scenarios
+ * - PrimaryBackupOracle: Pyth primary with Switchboard backup (kind 0)
+ * - VaultOracle: Vault asset pricing based on underlying assets (kind 1)
+ * - FixPriceOracle: Fixed price configurations for testing/stablecoins (kind 2)
+ * - DelegateOracle: Recursive oracle routing for complex scenarios (kind 3)
+ * - ChainlinkOracle: Chainlink Data Feed integration (kind 4)
+ * - PythOracle: Direct Pyth Network price feed (kind 5)
+ * - SwitchboardOracle: Direct Switchboard price feed (kind 6)
  *
  * @group Oracle Router
  */
@@ -27,6 +30,16 @@ export class OracleRouter {
   private readonly data: Array<OracleRouterConfigFieldsFragment>;
   private readonly config?: YeapConfig;
   public readonly routerAddress: string;
+  /** Oracle kind numeric discriminants mirroring on-chain values. */
+  static readonly KIND = Object.freeze({
+    PRIMARY_BACKUP: 0,
+    VAULT: 1,
+    FIXED_PRICE: 2,
+    DELEGATE: 3,
+    CHAINLINK: 4,
+    PYTH: 5,
+    SWITCHBOARD: 6,
+  });
   /**
    * @param data - Array of oracle router configuration fragments
    * @param config - Optional Yeap configuration for on-chain interactions
@@ -150,19 +163,22 @@ export class OracleRouter {
   /**
    * Get oracle configurations by oracle kind (type).
    *
-   * Oracle kinds correspond to the Move contract enum:
-   * - 0: PrimaryBackupOracle (Pyth + Switchboard)
-   * - 1: VaultOracle (Vault asset pricing)
-   * - 2: FixPriceOracle (Fixed price)
-   * - 3: DelegateOracle (Recursive routing)
+   * Oracle kinds correspond to the Move `yeap_oracle::oracle_kind` discriminants:
+   * - 0: PrimaryBackupOracle (Pyth + Switchboard fallback)
+   * - 1: VaultOracle (Vault asset redemption pricing)
+   * - 2: FixedPriceOracle (Static admin-set price)
+   * - 3: DelegateOracle (Recursive routing via another router)
+   * - 4: ChainlinkOracle (Chainlink Data Feeds)
+   * - 5: PythOracle (Direct Pyth Network feed)
+   * - 6: SwitchboardOracle (Direct Switchboard feed)
    *
    * @param oracleKind - The oracle type number
    * @returns Array of configurations of this type as OracleConfig entities
    *
    * @example
    * ```typescript
-   * const vaultOracles = oracleRouter.getConfigsByKind(1); // Vault oracles
-   * const fixedPriceOracles = oracleRouter.getConfigsByKind(2); // Fixed price oracles
+   * const vaultOracles = oracleRouter.getConfigsByKind(OracleRouter.KIND.VAULT);
+   * const chainlinkOracles = oracleRouter.getConfigsByKind(OracleRouter.KIND.CHAINLINK);
    * ```
    */
   getConfigsByKind(oracleKind: number): OracleConfig[] {
@@ -553,6 +569,12 @@ export class OracleRouter {
         return "Fixed Price Oracle (Static price)";
       case 3:
         return "Delegate Oracle (Recursive routing)";
+      case 4:
+        return "Chainlink Oracle (Chainlink Data Feeds)";
+      case 5:
+        return "Pyth Oracle (Direct Pyth feed)";
+      case 6:
+        return "Switchboard Oracle (Direct Switchboard feed)";
       default:
         return `Unknown Oracle Kind (${oracleKind})`;
     }
