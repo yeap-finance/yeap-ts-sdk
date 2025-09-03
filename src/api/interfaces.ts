@@ -165,7 +165,7 @@ export interface YeapOracleRouterConfig {
  */
 export interface BorrowRiskParameters {
   /** Borrow cap (as string to handle u64) */
-  borrow_cap: string;
+  borrowCap: string;
   /** Borrowing weight (brw) */
   brw: number;
   /** Collateral asset address */
