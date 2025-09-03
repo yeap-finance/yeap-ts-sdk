@@ -6,4 +6,8 @@ fragment BorrowRiskParametersFields on borrow_risk_parameters_current {
   vault_info {
     ...VaultInfoFields
   }
+  borrow_setting {
+    borrow_cap
+    borrow_permission
+  }
 }

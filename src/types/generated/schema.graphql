@@ -1842,6 +1842,8 @@ input borrow_market_stream_cursor_value_input {
 columns and relationships of "borrow_risk_parameters_current"
 """
 type borrow_risk_parameters_current {
+  """An object relationship"""
+  borrow_setting: vault_user_setting
   brw: numeric
   collateral: String!
   market: String!
@@ -1881,6 +1883,7 @@ input borrow_risk_parameters_current_bool_exp {
   _and: [borrow_risk_parameters_current_bool_exp!]
   _not: borrow_risk_parameters_current_bool_exp
   _or: [borrow_risk_parameters_current_bool_exp!]
+  borrow_setting: vault_user_setting_bool_exp
   brw: numeric_comparison_exp
   collateral: String_comparison_exp
   market: String_comparison_exp
@@ -1912,6 +1915,7 @@ input borrow_risk_parameters_current_min_order_by {
 Ordering options when selecting data from "borrow_risk_parameters_current".
 """
 input borrow_risk_parameters_current_order_by {
+  borrow_setting: vault_user_setting_order_by
   brw: order_by
   collateral: order_by
   market: order_by
