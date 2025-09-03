@@ -1728,6 +1728,8 @@ export type BorrowMarketStreamCursorValueInput = {
 
 /** columns and relationships of "borrow_risk_parameters_current" */
 export type BorrowRiskParametersCurrent = {
+  /** An object relationship */
+  borrow_setting?: Maybe<VaultUserSetting>;
   brw?: Maybe<Scalars['numeric']['output']>;
   collateral: Scalars['String']['output'];
   market: Scalars['String']['output'];
@@ -1761,6 +1763,7 @@ export type BorrowRiskParametersCurrentBoolExp = {
   _and?: InputMaybe<Array<BorrowRiskParametersCurrentBoolExp>>;
   _not?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
   _or?: InputMaybe<Array<BorrowRiskParametersCurrentBoolExp>>;
+  borrow_setting?: InputMaybe<VaultUserSettingBoolExp>;
   brw?: InputMaybe<NumericComparisonExp>;
   collateral?: InputMaybe<StringComparisonExp>;
   market?: InputMaybe<StringComparisonExp>;
@@ -1786,6 +1789,7 @@ export type BorrowRiskParametersCurrentMinOrderBy = {
 
 /** Ordering options when selecting data from "borrow_risk_parameters_current". */
 export type BorrowRiskParametersCurrentOrderBy = {
+  borrow_setting?: InputMaybe<VaultUserSettingOrderBy>;
   brw?: InputMaybe<OrderBy>;
   collateral?: InputMaybe<OrderBy>;
   market?: InputMaybe<OrderBy>;

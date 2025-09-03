@@ -224,6 +224,10 @@ export const BorrowRiskParametersFieldsFragmentDoc = `
   vault_info {
     ...VaultInfoFields
   }
+  borrow_setting {
+    borrow_cap
+    borrow_permission
+  }
 }
     `;
 export const BorrowMarketFieldsFragmentDoc = `

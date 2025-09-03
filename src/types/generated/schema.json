@@ -13884,6 +13884,18 @@
         "isOneOf": null,
         "fields": [
           {
+            "name": "borrow_setting",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "vault_user_setting",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "brw",
             "description": null,
             "args": [],
@@ -14189,6 +14201,18 @@
             "deprecationReason": null
           },
           {
+            "name": "borrow_setting",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_user_setting_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "brw",
             "description": null,
             "type": {
@@ -14380,6 +14404,18 @@
         "isOneOf": false,
         "fields": null,
         "inputFields": [
+          {
+            "name": "borrow_setting",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "vault_user_setting_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "brw",
             "description": null,

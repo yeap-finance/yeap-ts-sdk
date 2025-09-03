@@ -11,7 +11,7 @@ export type BorrowMarketFieldsFragment = (
 
 export type BorrowRiskParametersFieldsFragment = (
   Pick<Types.BorrowRiskParametersCurrent, 'brw' | 'collateral' | 'market' | 'vault'>
-  & { vault_info?: Types.Maybe<VaultInfoFieldsFragment> }
+  & { vault_info?: Types.Maybe<VaultInfoFieldsFragment>, borrow_setting?: Types.Maybe<Pick<Types.VaultUserSetting, 'borrow_cap' | 'borrow_permission'>> }
 );
 
 export type ChainlinkOracleConfigFieldsFragment = Pick<Types.ChainlinkOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'feed_id' | 'max_age_in_seconds' | 'feed_decimals' | 'deleted'>;

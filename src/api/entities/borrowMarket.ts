@@ -21,6 +21,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
   const borrowRiskParameters: Record<string, BorrowRiskParameters> = {};
   for (const rp of raw.borrow_risk_parameters ?? []) {
     const entry: BorrowRiskParameters = {
+      borrow_cap: rp.borrow_setting?.borrow_cap ?? "0",
       brw: Number(rp.brw || 0),
       collateral: AccountAddress.fromString(rp.collateral),
       market: AccountAddress.fromString(rp.market),
