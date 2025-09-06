@@ -13174,6 +13174,18 @@
             "deprecationReason": null
           },
           {
+            "name": "object_info",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "current_objects",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "oracle",
             "description": null,
             "args": [],

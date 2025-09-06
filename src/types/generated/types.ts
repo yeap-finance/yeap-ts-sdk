@@ -1624,6 +1624,7 @@ export type BorrowMarket = {
   ltv?: Maybe<Scalars['numeric']['output']>;
   market: Scalars['String']['output'];
   max_borrowable_vaults?: Maybe<Scalars['numeric']['output']>;
+  object_info?: Maybe<CurrentObjects>;
   oracle?: Maybe<Scalars['String']['output']>;
   protocol?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['numeric']['output']>;

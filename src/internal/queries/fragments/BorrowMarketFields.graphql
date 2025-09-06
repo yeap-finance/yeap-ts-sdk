@@ -18,4 +18,7 @@ fragment BorrowMarketFields on borrow_market {
   borrow_risk_parameters {
     ...BorrowRiskParametersFields
   }
+  object_info {
+    ...CurrentObjectFields
+  }
 }

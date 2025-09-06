@@ -33,6 +33,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
 
   return {
     market: AccountAddress.fromString(raw.market),
+    owner: raw.object_info?.owner_address ? AccountAddress.fromString(raw.object_info?.owner_address) : undefined,
     collateral: AccountAddress.fromString(raw.collateral!),
     collateralVault: raw.collateral_vault ? createVault(config, raw.collateral_vault!) ??undefined :undefined,
     oracle: AccountAddress.fromString(raw.oracle!),
