@@ -41,6 +41,7 @@ export class OracleRouter {
     SWITCHBOARD: 6,
   });
   /**
+   * @param routerAddress
    * @param data - Array of oracle router configuration fragments
    * @param config - Optional Yeap configuration for on-chain interactions
    */

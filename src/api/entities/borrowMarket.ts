@@ -7,6 +7,7 @@ import { BorrowRiskParameters } from "../interfaces";
 import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { createVault } from "./vault";
 import { BorrowMarket } from "../interfaces";
+import {createOracleConfig} from "./oracleConfig";
 
 type RawBorrowMarket = BorrowMarketFieldsFragment;
 
@@ -30,13 +31,14 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
     };
     borrowRiskParameters[entry.vault.toString()] = entry;
   }
-
+  const oracleConfigs = raw.oracle_configs.map((configFragment) => createOracleConfig(configFragment, config));
   return {
     market: AccountAddress.fromString(raw.market),
     owner: raw.object_info?.owner_address ? AccountAddress.fromString(raw.object_info?.owner_address) : undefined,
     collateral: AccountAddress.fromString(raw.collateral!),
     collateralVault: raw.collateral_vault ? createVault(config, raw.collateral_vault!) ??undefined :undefined,
     oracle: AccountAddress.fromString(raw.oracle!),
+    oracleConfigs,
     crf: parseNumeric(raw.crf),
     ltv: parseNumeric(raw.ltv),
     lltv: parseNumeric(raw.lltv),

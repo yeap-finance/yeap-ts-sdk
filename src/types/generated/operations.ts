@@ -6,7 +6,7 @@ export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState,
 
 export type BorrowMarketFieldsFragment = (
   Pick<Types.BorrowMarket, 'market' | 'protocol' | 'collateral' | 'oracle' | 'crf' | 'ltv' | 'lltv' | 'liquidation_bonus_bps' | 'max_borrowable_vaults' | 'status' | 'whitelisted'>
-  & { collateral_vault?: Types.Maybe<VaultInfoFieldsFragment>, borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment>, object_info?: Types.Maybe<CurrentObjectFieldsFragment> }
+  & { collateral_vault?: Types.Maybe<VaultInfoFieldsFragment>, borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment>, object_info?: Types.Maybe<CurrentObjectFieldsFragment>, oracle_configs: Array<OracleRouterConfigFieldsFragment> }
 );
 
 export type BorrowRiskParametersFieldsFragment = (

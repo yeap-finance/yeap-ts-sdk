@@ -439,6 +439,7 @@ export interface BorrowMarket {
   collateralVault?: Vault;
   /** Oracle router / price source used for risk and valuation. */
   oracle: AccountAddress;
+  oracleConfigs?: OracleConfig[];
   /** Collateral requirement factor (scaled, see CRF_PRECISION in client). */
   crf: number;
   /** Maximum standard loan‑to‑value (scaled by LTV precision). */

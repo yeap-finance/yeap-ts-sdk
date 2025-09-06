@@ -21,4 +21,7 @@ fragment BorrowMarketFields on borrow_market {
   object_info {
     ...CurrentObjectFields
   }
+  oracle_configs {
+    ...OracleRouterConfigFields
+  }
 }
