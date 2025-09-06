@@ -1,5 +1,5 @@
 {
-  "name": "@aptos-labs/yeap-sdk",
+  "name": "@yeap-labs/yeap-sdk",
   "description": "Yeap DeFi Protocol SDK for Aptos",
   "packageManager": "pnpm@8.15.1",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/aptos-labs/aptos-ts-sdk/issues/new/choose"
   },
-  "homepage": "https://aptos-labs.github.io/aptos-ts-sdk/",
+  "homepage": "https://github.com/aptos-labs/aptos-ts-sdk",
   "version": "1.0.0",
   "sideEffects": false,
   "main": "dist/index.js",
