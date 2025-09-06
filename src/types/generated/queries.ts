@@ -249,6 +249,9 @@ export const BorrowMarketFieldsFragmentDoc = `
   borrow_risk_parameters {
     ...BorrowRiskParametersFields
   }
+  object_info {
+    ...CurrentObjectFields
+  }
 }
     `;
 export const PositionFieldsFragmentDoc = `

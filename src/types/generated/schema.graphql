@@ -1740,6 +1740,7 @@ type borrow_market {
   ltv: numeric
   market: String!
   max_borrowable_vaults: numeric
+  object_info: current_objects
   oracle: String
   protocol: String
   status: numeric

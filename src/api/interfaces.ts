@@ -431,6 +431,8 @@ export interface OracleConfig {
 export interface BorrowMarket {
   /** Borrow market config address. */
   market: AccountAddress;
+  /** Owner (admin) account address. */
+  owner?: AccountAddress;
   /** Collateral vault address (single collateral per market). */
   collateral: AccountAddress;
   /** Collateral vault metadata (if hydrated). */
