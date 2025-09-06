@@ -1742,6 +1742,19 @@ type borrow_market {
   max_borrowable_vaults: numeric
   object_info: current_objects
   oracle: String
+  """An array relationship"""
+  oracle_configs(
+    """distinct select on columns"""
+    distinct_on: [oracle_router_current_config_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [oracle_router_current_config_order_by!]
+    """filter the rows returned"""
+    where: oracle_router_current_config_bool_exp
+  ): [oracle_router_current_config!]!
   protocol: String
   status: numeric
   whitelisted: Boolean
@@ -1764,6 +1777,7 @@ input borrow_market_bool_exp {
   market: String_comparison_exp
   max_borrowable_vaults: numeric_comparison_exp
   oracle: String_comparison_exp
+  oracle_configs: oracle_router_current_config_bool_exp
   protocol: String_comparison_exp
   status: numeric_comparison_exp
   whitelisted: Boolean_comparison_exp
@@ -1781,6 +1795,7 @@ input borrow_market_order_by {
   market: order_by
   max_borrowable_vaults: order_by
   oracle: order_by
+  oracle_configs_aggregate: oracle_router_current_config_aggregate_order_by
   protocol: order_by
   status: order_by
   whitelisted: order_by
@@ -8718,6 +8733,30 @@ type oracle_router_current_config {
 }
 
 """
+order by aggregate values of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_aggregate_order_by {
+  avg: oracle_router_current_config_avg_order_by
+  count: order_by
+  max: oracle_router_current_config_max_order_by
+  min: oracle_router_current_config_min_order_by
+  stddev: oracle_router_current_config_stddev_order_by
+  stddev_pop: oracle_router_current_config_stddev_pop_order_by
+  stddev_samp: oracle_router_current_config_stddev_samp_order_by
+  sum: oracle_router_current_config_sum_order_by
+  var_pop: oracle_router_current_config_var_pop_order_by
+  var_samp: oracle_router_current_config_var_samp_order_by
+  variance: oracle_router_current_config_variance_order_by
+}
+
+"""
+order by avg() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_avg_order_by {
+  oracle_kind: order_by
+}
+
+"""
 Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'.
 """
 input oracle_router_current_config_bool_exp {
@@ -8734,6 +8773,28 @@ input oracle_router_current_config_bool_exp {
   pyth_oracle_config: pyth_oracle_current_config_bool_exp
   quote_asset: String_comparison_exp
   switchboard_oracle_config: switchboard_oracle_current_config_bool_exp
+}
+
+"""
+order by max() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_max_order_by {
+  base_asset: order_by
+  oracle: order_by
+  oracle_kind: order_by
+  oracle_router: order_by
+  quote_asset: order_by
+}
+
+"""
+order by min() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_min_order_by {
+  base_asset: order_by
+  oracle: order_by
+  oracle_kind: order_by
+  oracle_router: order_by
+  quote_asset: order_by
 }
 
 """
@@ -8771,6 +8832,27 @@ enum oracle_router_current_config_select_column {
 }
 
 """
+order by stddev() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_stddev_order_by {
+  oracle_kind: order_by
+}
+
+"""
+order by stddev_pop() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_stddev_pop_order_by {
+  oracle_kind: order_by
+}
+
+"""
+order by stddev_samp() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_stddev_samp_order_by {
+  oracle_kind: order_by
+}
+
+"""
 Streaming cursor of the table "oracle_router_current_config"
 """
 input oracle_router_current_config_stream_cursor_input {
@@ -8788,6 +8870,34 @@ input oracle_router_current_config_stream_cursor_value_input {
   oracle_kind: numeric
   oracle_router: String
   quote_asset: String
+}
+
+"""
+order by sum() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_sum_order_by {
+  oracle_kind: order_by
+}
+
+"""
+order by var_pop() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_var_pop_order_by {
+  oracle_kind: order_by
+}
+
+"""
+order by var_samp() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_var_samp_order_by {
+  oracle_kind: order_by
+}
+
+"""
+order by variance() on columns of table "oracle_router_current_config"
+"""
+input oracle_router_current_config_variance_order_by {
+  oracle_kind: order_by
 }
 
 """column ordering options"""

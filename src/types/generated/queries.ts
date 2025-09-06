@@ -36,75 +36,6 @@ export const FungibleAssetMetadataFieldsFragmentDoc = `
   supply_v2
 }
     `;
-export const FixedPriceOracleConfigFieldsFragmentDoc = `
-    fragment FixedPriceOracleConfigFields on fixed_price_oracle_current_config {
-  oracle_address
-  base_asset
-  quote_asset
-  price
-  deleted
-}
-    `;
-export const PythOracleConfigFieldsFragmentDoc = `
-    fragment PythOracleConfigFields on pyth_oracle_current_config {
-  oracle_address
-  base
-  quote
-  pyth_id
-  max_age_in_seconds
-  max_confidence
-}
-    `;
-export const SwitchboardOracleConfigFieldsFragmentDoc = `
-    fragment SwitchboardOracleConfigFields on switchboard_oracle_current_config {
-  oracle_address
-  base
-  quote
-  aggregator_address
-  max_age_in_seconds
-  max_stdev
-  deleted
-}
-    `;
-export const ChainlinkOracleConfigFieldsFragmentDoc = `
-    fragment ChainlinkOracleConfigFields on chainlink_oracle_current_config {
-  oracle_address
-  base
-  quote
-  feed_id
-  max_age_in_seconds
-  feed_decimals
-  deleted
-}
-    `;
-export const OracleRouterConfigFieldsFragmentDoc = `
-    fragment OracleRouterConfigFields on oracle_router_current_config {
-  base_asset
-  base_asset_metadata {
-    ...FungibleAssetMetadataFields
-  }
-  deleted
-  oracle
-  oracle_kind
-  oracle_router
-  quote_asset
-  quote_asset_metadata {
-    ...FungibleAssetMetadataFields
-  }
-  fixed_price_oracle_config {
-    ...FixedPriceOracleConfigFields
-  }
-  pyth_oracle_config {
-    ...PythOracleConfigFields
-  }
-  switchboard_oracle_config {
-    ...SwitchboardOracleConfigFields
-  }
-  chainlink_oracle_config {
-    ...ChainlinkOracleConfigFields
-  }
-}
-    `;
 export const FungibleAssetBalanceFieldsFragmentDoc = `
     fragment FungibleAssetBalanceFields on current_fungible_asset_balances {
   amount
@@ -230,6 +161,75 @@ export const BorrowRiskParametersFieldsFragmentDoc = `
   }
 }
     `;
+export const FixedPriceOracleConfigFieldsFragmentDoc = `
+    fragment FixedPriceOracleConfigFields on fixed_price_oracle_current_config {
+  oracle_address
+  base_asset
+  quote_asset
+  price
+  deleted
+}
+    `;
+export const PythOracleConfigFieldsFragmentDoc = `
+    fragment PythOracleConfigFields on pyth_oracle_current_config {
+  oracle_address
+  base
+  quote
+  pyth_id
+  max_age_in_seconds
+  max_confidence
+}
+    `;
+export const SwitchboardOracleConfigFieldsFragmentDoc = `
+    fragment SwitchboardOracleConfigFields on switchboard_oracle_current_config {
+  oracle_address
+  base
+  quote
+  aggregator_address
+  max_age_in_seconds
+  max_stdev
+  deleted
+}
+    `;
+export const ChainlinkOracleConfigFieldsFragmentDoc = `
+    fragment ChainlinkOracleConfigFields on chainlink_oracle_current_config {
+  oracle_address
+  base
+  quote
+  feed_id
+  max_age_in_seconds
+  feed_decimals
+  deleted
+}
+    `;
+export const OracleRouterConfigFieldsFragmentDoc = `
+    fragment OracleRouterConfigFields on oracle_router_current_config {
+  base_asset
+  base_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
+  deleted
+  oracle
+  oracle_kind
+  oracle_router
+  quote_asset
+  quote_asset_metadata {
+    ...FungibleAssetMetadataFields
+  }
+  fixed_price_oracle_config {
+    ...FixedPriceOracleConfigFields
+  }
+  pyth_oracle_config {
+    ...PythOracleConfigFields
+  }
+  switchboard_oracle_config {
+    ...SwitchboardOracleConfigFields
+  }
+  chainlink_oracle_config {
+    ...ChainlinkOracleConfigFields
+  }
+}
+    `;
 export const BorrowMarketFieldsFragmentDoc = `
     fragment BorrowMarketFields on borrow_market {
   market
@@ -251,6 +251,9 @@ export const BorrowMarketFieldsFragmentDoc = `
   }
   object_info {
     ...CurrentObjectFields
+  }
+  oracle_configs {
+    ...OracleRouterConfigFields
   }
 }
     `;
@@ -406,7 +409,12 @@ ${VaultSettingsFieldsFragmentDoc}
 ${AdaptiveIrmConfigFieldsFragmentDoc}
 ${FixedRateIrmConfigFieldsFragmentDoc}
 ${KinkedIrmConfigFieldsFragmentDoc}
-${BorrowRiskParametersFieldsFragmentDoc}`;
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetVaultInfo = `
     query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
   vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
@@ -538,7 +546,12 @@ ${VaultSettingsFieldsFragmentDoc}
 ${AdaptiveIrmConfigFieldsFragmentDoc}
 ${FixedRateIrmConfigFieldsFragmentDoc}
 ${KinkedIrmConfigFieldsFragmentDoc}
-${BorrowRiskParametersFieldsFragmentDoc}`;
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 

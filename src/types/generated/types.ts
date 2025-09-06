@@ -1626,6 +1626,8 @@ export type BorrowMarket = {
   max_borrowable_vaults?: Maybe<Scalars['numeric']['output']>;
   object_info?: Maybe<CurrentObjects>;
   oracle?: Maybe<Scalars['String']['output']>;
+  /** An array relationship */
+  oracle_configs: Array<OracleRouterCurrentConfig>;
   protocol?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['numeric']['output']>;
   whitelisted?: Maybe<Scalars['Boolean']['output']>;
@@ -1639,6 +1641,16 @@ export type BorrowMarketBorrowRiskParametersArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<BorrowRiskParametersCurrentOrderBy>>;
   where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
+/** columns and relationships of "borrow_market" */
+export type BorrowMarketOracleConfigsArgs = {
+  distinct_on?: InputMaybe<Array<OracleRouterCurrentConfigSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<OracleRouterCurrentConfigOrderBy>>;
+  where?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
 };
 
 /** Boolean expression to filter rows from the table "borrow_market". All fields are combined with a logical 'AND'. */
@@ -1656,6 +1668,7 @@ export type BorrowMarketBoolExp = {
   market?: InputMaybe<StringComparisonExp>;
   max_borrowable_vaults?: InputMaybe<NumericComparisonExp>;
   oracle?: InputMaybe<StringComparisonExp>;
+  oracle_configs?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
   protocol?: InputMaybe<StringComparisonExp>;
   status?: InputMaybe<NumericComparisonExp>;
   whitelisted?: InputMaybe<BooleanComparisonExp>;
@@ -1673,6 +1686,7 @@ export type BorrowMarketOrderBy = {
   market?: InputMaybe<OrderBy>;
   max_borrowable_vaults?: InputMaybe<OrderBy>;
   oracle?: InputMaybe<OrderBy>;
+  oracle_configs_aggregate?: InputMaybe<OracleRouterCurrentConfigAggregateOrderBy>;
   protocol?: InputMaybe<OrderBy>;
   status?: InputMaybe<OrderBy>;
   whitelisted?: InputMaybe<OrderBy>;
@@ -7996,6 +8010,26 @@ export type OracleRouterCurrentConfig = {
   switchboard_oracle_config?: Maybe<SwitchboardOracleCurrentConfig>;
 };
 
+/** order by aggregate values of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigAggregateOrderBy = {
+  avg?: InputMaybe<OracleRouterCurrentConfigAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<OracleRouterCurrentConfigMaxOrderBy>;
+  min?: InputMaybe<OracleRouterCurrentConfigMinOrderBy>;
+  stddev?: InputMaybe<OracleRouterCurrentConfigStddevOrderBy>;
+  stddev_pop?: InputMaybe<OracleRouterCurrentConfigStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<OracleRouterCurrentConfigStddevSampOrderBy>;
+  sum?: InputMaybe<OracleRouterCurrentConfigSumOrderBy>;
+  var_pop?: InputMaybe<OracleRouterCurrentConfigVarPopOrderBy>;
+  var_samp?: InputMaybe<OracleRouterCurrentConfigVarSampOrderBy>;
+  variance?: InputMaybe<OracleRouterCurrentConfigVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigAvgOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
 /** Boolean expression to filter rows from the table "oracle_router_current_config". All fields are combined with a logical 'AND'. */
 export type OracleRouterCurrentConfigBoolExp = {
   _and?: InputMaybe<Array<OracleRouterCurrentConfigBoolExp>>;
@@ -8011,6 +8045,24 @@ export type OracleRouterCurrentConfigBoolExp = {
   pyth_oracle_config?: InputMaybe<PythOracleCurrentConfigBoolExp>;
   quote_asset?: InputMaybe<StringComparisonExp>;
   switchboard_oracle_config?: InputMaybe<SwitchboardOracleCurrentConfigBoolExp>;
+};
+
+/** order by max() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigMaxOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  oracle_kind?: InputMaybe<OrderBy>;
+  oracle_router?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigMinOrderBy = {
+  base_asset?: InputMaybe<OrderBy>;
+  oracle?: InputMaybe<OrderBy>;
+  oracle_kind?: InputMaybe<OrderBy>;
+  oracle_router?: InputMaybe<OrderBy>;
+  quote_asset?: InputMaybe<OrderBy>;
 };
 
 /** Ordering options when selecting data from "oracle_router_current_config". */
@@ -8043,6 +8095,21 @@ export enum OracleRouterCurrentConfigSelectColumn {
   QuoteAsset = 'quote_asset'
 }
 
+/** order by stddev() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigStddevOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigStddevPopOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigStddevSampOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
 /** Streaming cursor of the table "oracle_router_current_config" */
 export type OracleRouterCurrentConfigStreamCursorInput = {
   /** Stream column input with initial value */
@@ -8059,6 +8126,26 @@ export type OracleRouterCurrentConfigStreamCursorValueInput = {
   oracle_kind?: InputMaybe<Scalars['numeric']['input']>;
   oracle_router?: InputMaybe<Scalars['String']['input']>;
   quote_asset?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigSumOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigVarPopOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigVarSampOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "oracle_router_current_config" */
+export type OracleRouterCurrentConfigVarianceOrderBy = {
+  oracle_kind?: InputMaybe<OrderBy>;
 };
 
 /** column ordering options */
