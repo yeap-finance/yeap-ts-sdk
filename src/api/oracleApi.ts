@@ -93,12 +93,12 @@ export class OracleApi {
     if (!this.config?.aptosClient) {
       throw new Error("Aptos client required. Provide aptosClient in YeapConfig.");
     }
-    if (!this.config.hasAddress("yeap_lens")) {
+    if (!this.config.hasAddress("yeap_oracle_lens")) {
       throw new Error("yeap_lens address missing in YeapConfig addresses map.");
     }
-    const yeapLensAddress = this.config.yeapLensAddress;
+    const oracleLensAddress = this.config.yeapOracleLensAddress;
     const viewFunctionData: InputViewFunctionData = {
-      function: `${yeapLensAddress}::oracle_lens::batch_get_price_of_pairs` as `${string}::${string}::${string}`,
+      function: `${oracleLensAddress}::oracle_lens::batch_get_price_of_pairs` as `${string}::${string}::${string}`,
       typeArguments: [],
       functionArguments: [
         routerAddress,

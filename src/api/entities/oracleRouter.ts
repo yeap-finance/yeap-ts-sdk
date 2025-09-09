@@ -505,13 +505,13 @@ export class OracleRouter {
 
     try {
       // Get the yeap_lens address from configuration
-      if (!this.config.hasAddress("yeap_lens")) {
+      if (!this.config.hasAddress("yeap_oracle_lens")) {
         throw new Error(
           "yeap_lens address not found in configuration. Please add 'yeap_lens' to the addresses mapping in YeapConfig.",
         );
       }
 
-      const yeapLensAddress = this.config.yeapLensAddress;
+      const yeapLensAddress = this.config.yeapOracleLensAddress;
 
       // Prepare the view function call to get price from oracle router
       const viewFunctionData: InputViewFunctionData = {
