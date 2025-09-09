@@ -7,7 +7,7 @@ import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
 /**
  * Known contract address names in the Yeap protocol
  */
-export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_lens" | "yeap_earn_api" | "yeap_borrow_api" | "yeap_admin_api";
+export type YeapAddressName = "yeap_oracle" | "yeap_vault" | "yeap_scmd_protocol" | "yeap_irm" | "yeap_oracle_lens" | "yeap_earn_api" | "yeap_borrow_api" | "yeap_admin_api";
 
 /**
  * Contract addresses mapping for the Yeap protocol
@@ -139,8 +139,8 @@ export class YeapConfig {
     }
   }
 
-  get yeapLensAddress(): string {
-    return this.getAddress("yeap_lens");
+  get yeapOracleLensAddress(): string {
+    return this.getAddress("yeap_oracle_lens");
   }
 
   get yeapScmdProtocolAddress(): string {
