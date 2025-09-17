@@ -17,7 +17,7 @@ export function rate2Apy(rate: BigNumber | bigint | number, precision: number = 
   const secondsPerYear = 365 * 24 * 60 * 60;
   const r = rateBN.div(precision);
   // APY = (1 + r) ^ secondsPerYear - 1
-  return bignumber(1).plus(r).pow(secondsPerYear).minus(1);
+  return bignumber(1).plus(r).pow(secondsPerYear).minus(1).mul(100);
 }
 
 // VaultState interface moved to interfaces.ts
