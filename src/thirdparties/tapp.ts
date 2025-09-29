@@ -4,7 +4,7 @@
 const TAPP_API_BASE_URL = 'https://api.tapp.exchange/api/v1';
 
 // #region Generic JSON-RPC types
-interface JsonRpcRequest<T> {
+export interface JsonRpcRequest<T> {
   method: string;
   jsonrpc: '2.0';
   id: number;
@@ -13,7 +13,7 @@ interface JsonRpcRequest<T> {
   };
 }
 
-interface JsonRpcResponse<T> {
+export interface JsonRpcResponse<T> {
   jsonrpc: '2.0';
   id: number;
   method: string;
@@ -23,21 +23,21 @@ interface JsonRpcResponse<T> {
   usDiff: number;
 }
 
-interface PaginatedResponse<T> {
+export interface PaginatedResponse<T> {
   data: T[];
   total: number;
 }
 // #endregion
 
 // #region API Response Types
-interface Apr {
+export interface Apr {
   feeAprPercentage: number;
   boostedAprPercentage: number;
   campaignAprs: any[];
   totalAprPercentage: number;
 }
 
-interface PoolTokenSummary {
+export interface PoolTokenSummary {
   addr: string;
   symbol: string;
   img: string;
@@ -69,7 +69,7 @@ export interface Pool {
   tokens: PoolTokenSummary[];
 }
 
-interface PoolStatsToken {
+export interface PoolStatsToken {
   idx: number;
   addr: string;
   symbol: string;
@@ -111,7 +111,7 @@ export interface Token {
   price30dPercentage: string;
 }
 
-interface PoolInfoToken {
+export interface PoolInfoToken {
   addr: string;
   decimals: number;
   reserve: number;
@@ -130,7 +130,7 @@ export interface PoolInfo {
   totalShare: string;
 }
 
-interface PositionTokenDetails {
+export interface PositionTokenDetails {
   addr: string;
   amount: string;
   color: string;
@@ -182,7 +182,7 @@ export interface Position {
   userAddr: string;
 }
 
-interface UserTransactionToken {
+export interface UserTransactionToken {
   amount: string;
   decimals: number;
   img: string;
@@ -290,7 +290,7 @@ export type CreatePoolAddLiquidityParams =
   | CreatePoolAddLiquidityClmm
   | CreatePoolAddLiquidityStable;
 
-interface CreatePoolAddLiquidityBase {
+export interface CreatePoolAddLiquidityBase {
   accountAddress: string;
   coins: [string, string];
   amounts: [string, string];
@@ -323,7 +323,7 @@ export type AddLiquidityParams =
   | AddLiquidityClmm
   | AddLiquidityStable;
 
-interface AddLiquidityBase {
+export interface AddLiquidityBase {
   poolId: string;
   accountAddress: string;
   amounts: [string, string];
@@ -352,7 +352,7 @@ export type RemoveLiquidityParams =
   | RemoveLiquidityClmm
   | RemoveLiquidityStable;
 
-interface RemoveLiquidityBase {
+export interface RemoveLiquidityBase {
   poolId: string;
   accountAddress: string;
   positionAddress: string;
@@ -373,13 +373,13 @@ export interface RemoveLiquidityStable extends RemoveLiquidityBase {
   type: 1 | 2 | 3;
 }
 
-interface MultiRemovePosition {
+export interface MultiRemovePosition {
   positionAddress: string;
   minAmounts: [string, string];
   burnedShare: string;
 }
 
-interface MultiRemovePositionStable extends MultiRemovePosition {
+export interface MultiRemovePositionStable extends MultiRemovePosition {
   type: 1 | 2 | 3;
 }
 
@@ -388,7 +388,7 @@ export type RemoveMultiLiquidityParams =
   | RemoveMultiLiquidityClmm
   | RemoveMultiLiquidityStable;
 
-interface RemoveMultiLiquidityBase {
+export interface RemoveMultiLiquidityBase {
   poolId: string;
   accountAddress: string;
 }
