@@ -460,3 +460,34 @@ export interface BorrowMarket {
   __raw?: RawBorrowMarket;
 }
 
+
+
+
+/**
+ * Tapp LLP position.
+ * Hold Tapp Pool position as collateral and borrows from multiple vaults.
+ */
+export interface TappLLPosition {
+  /** Position account address. */
+  positionAddress: string;
+  /** Owner (user) account address. */
+  ownerAddress: string;
+  /** Collateral Pool*/
+  collateral: string;
+  /** Market configuration address linking collateral to borrow vaults. */
+  market: string;
+  /** Full borrow market metadata (optional if not hydrated). */
+  marketInfo?: BorrowMarket;
+  /** Numeric status code (0 = active, others = closed / liquidated). */
+  status?: number;
+  /** Convenience boolean for active status. */
+  isActive?: boolean;
+  /** Map of debt vault address -> debt store detail. */
+  debtStores: Record<string, PositionDebtStore>;
+  /** True if any debt store has non‑zero debt. */
+  hasAnyDebt?: boolean;
+  /** Count of debt stores with non‑zero debt. */
+  activeDebtVaultCount?: number;
+  /** Raw fragment (escape hatch). */
+  __raw?: RawPositionData;
+}

@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata } from "../interfaces";
-import { transformFungibleAssetBalance, transformFungibleAssetMetadata } from "../transforms";
+import { TappLLPosition, PositionDebtStore } from "../interfaces";
+import { transformFungibleAssetBalance } from "../transforms";
 import { PositionFieldsFragment } from "../../types/generated/operations";
 import { createBorrowMarket } from "./borrowMarket";
-import { SCMDPosition, PositionDebtStore } from "../interfaces";
 
 // Raw data type from GraphQL
 type RawPositionData = PositionFieldsFragment;
 
-/** Factory to create an SCMDPosition */
-export function createScmdPosition(config: YeapConfig, rawData: RawPositionData): SCMDPosition {
+/** Factory to create an TappLLPosition */
+export function createTappLLPosition(config: YeapConfig, rawData: RawPositionData): TappLLPosition {
   const debtStores: Record<string, PositionDebtStore> = {};
   for (const store of rawData.debt_stores || []) {
     const entry: PositionDebtStore = {
@@ -33,8 +32,6 @@ export function createScmdPosition(config: YeapConfig, rawData: RawPositionData)
     marketInfo,
     status: status ?? 0,
     isActive: status === 0,
-    collateralAssetBalance: rawData.collateral_asset_balance ? (transformFungibleAssetBalance(rawData.collateral_asset_balance) ?? undefined) : undefined,
-    collateralAssetMetadata: rawData.collateral_asset_balance?.metadata ? (transformFungibleAssetMetadata(rawData.collateral_asset_balance.metadata) ?? undefined) : undefined,
     debtStores,
     get hasAnyDebt(): boolean { return Object.values(debtStores).some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n); },
     get activeDebtVaultCount(): number { return Object.values(debtStores).filter((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n).length; },

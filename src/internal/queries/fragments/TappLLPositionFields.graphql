@@ -1,0 +1,24 @@
+#import "./FungibleAssetBalanceFields.graphql"
+#import "./FungibleAssetMetadataFields.graphql"
+#import "./VaultInfoFields.graphql"
+
+fragment TappLLPositionFields on tapp_llp_position_current {
+  position
+  owner
+  market
+  collateral
+  status
+  market_info {
+    ...BorrowMarketFields
+  }
+  debt_stores {
+    debt_store
+    vault
+    debt_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
+    # vault_info {
+    #   ...VaultInfoFields
+    # }
+  }
+}
