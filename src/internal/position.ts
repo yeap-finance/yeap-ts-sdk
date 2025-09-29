@@ -6,7 +6,7 @@ import { queryYeapIndexer } from "./yeapIndexer";
 import { GraphqlQuery } from "../client";
 import { GetPositionsByOwnerQuery, PositionFieldsFragment } from "../types";
 import { GetPositionsByOwner } from "../types/generated/queries";
-import { P } from "@aptos-labs/ts-sdk/dist/common/accountAddress-AL8HRxQC";
+
 
 /**
  * Query arguments for getting positions by owner

@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 
-import { AccountAddress } from '@aptos-labs/ts-sdk';
-
 // const TAPP_API_BASE_URL = "https://display-engine.dev.tapp-dex.devucc.name/api/v1";
 const TAPP_API_BASE_URL = 'https://api.tapp.exchange/api/v1';
 
