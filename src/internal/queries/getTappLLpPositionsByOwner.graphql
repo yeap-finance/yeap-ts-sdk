@@ -1,0 +1,10 @@
+query GetTappLLPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+  tapp_llp_position_current(
+    where: { owner: { _eq: $ownerAddress }, status: { _eq: "0" } }
+    limit: $limit
+    offset: $offset
+    order_by: { position: asc }
+  ) {
+    ...TappLLPositionFields
+  }
+}

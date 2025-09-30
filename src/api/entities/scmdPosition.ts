@@ -1,17 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import { YeapFungibleAssetBalance, YeapFungibleAssetMetadata } from "../interfaces";
 import { transformFungibleAssetBalance, transformFungibleAssetMetadata } from "../transforms";
-import { PositionFieldsFragment } from "../../types/generated/operations";
+import { ScmdPositionFieldsFragment } from "../../types/generated/operations";
 import { createBorrowMarket } from "./borrowMarket";
 import { SCMDPosition, PositionDebtStore } from "../interfaces";
 
-// Raw data type from GraphQL
-type RawPositionData = PositionFieldsFragment;
-
 /** Factory to create an SCMDPosition */
-export function createScmdPosition(config: YeapConfig, rawData: RawPositionData): SCMDPosition {
+export function createScmdPosition(config: YeapConfig, rawData: ScmdPositionFieldsFragment): SCMDPosition {
   const debtStores: Record<string, PositionDebtStore> = {};
   for (const store of rawData.debt_stores || []) {
     const entry: PositionDebtStore = {

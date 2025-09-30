@@ -2,7 +2,7 @@
 #import "./FungibleAssetMetadataFields.graphql"
 #import "./VaultInfoFields.graphql"
 
-fragment PositionFields on scmd_position_current {
+fragment SCMDPositionFields on scmd_position_current {
   position
   owner
   market

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
-import { getPositionsByOwner } from "../internal";
+import { getSCMDPositionsByOwner } from "../internal";
 import { SCMDPosition, BorrowMarket } from "./interfaces";
 import { createScmdPosition } from "./entities/scmdPosition";
 import { createBorrowMarket } from "./entities/borrowMarket";
@@ -56,7 +56,7 @@ export class ScmdApi {
     limit: number = 10,
     offset: number = 0,
   ): Promise<Array<SCMDPosition>> {
-    const positions = await getPositionsByOwner({
+    const positions = await getSCMDPositionsByOwner({
       yeapConfig: this.config,
       ownerAddress,
       limit,

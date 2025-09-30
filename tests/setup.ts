@@ -1,20 +1,7 @@
-// Copyright © Aptos Foundation
-// SPDX-License-Identifier: Apache-2.0
-
-/**
- * Shared utility functions for example scripts.
- * This provides common functionality for initializing Yeap client with environment configuration.
- */
-
-import { Yeap, YeapConfig, YeapAddresses } from '../../src';
+import { Yeap, YeapConfig, YeapAddresses } from '../src/';
 import { Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk';
+import { configDotenv } from "dotenv";
 
-/**
- * Initialize a Yeap client using environment variables.
- *
- * @returns Promise containing initialized Yeap client
- * @throws Error if required environment variables are missing
- */
 export async function initializeYeapFromEnv(): Promise<Yeap> {
   // Get configuration from environment variables
   const graphqlEndpoint = process.env.GRAPHQL_ENDPOINT || process.env.GRAPHQL_SCHEMA_URL;
@@ -76,14 +63,4 @@ export async function initializeYeapFromEnv(): Promise<Yeap> {
 
   // Initialize and return Yeap client
   return new Yeap(yeapConfig);
-}
-
-/**
- * Print common error help message for environment setup.
- */
-export function printEnvSetupHelp(): void {
-  console.error('\nMake sure you have:');
-  console.error('1. Copied .env.example to .env (if available) or created a .env file');
-  console.error('2. Updated the GRAPHQL_ENDPOINT in .env');
-  console.error('3. Updated all Yeap contract addresses (YEAP_ORACLE, YEAP_VAULT, YEAP_SCMD_PROTOCOL, YEAP_IRM) with real addresses');
 }

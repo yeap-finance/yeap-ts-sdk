@@ -9,7 +9,7 @@ import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
  */
 export type YeapAddressName = "yeap_oracle" | "yeap_vault"
 | "yeap_irm" | "yeap_oracle_lens"
-| "yeap_tapp_llp_protocol"
+| "yeap_tapp_llp"
 | "yeap_scmd_protocol"
 | "yeap_earn_api"
 | "yeap_borrow_api"
@@ -155,7 +155,7 @@ export class YeapConfig {
   }
 
   get tappLlpProtocolAddress(): string {
-    return this.getAddress("yeap_tapp_llp_protocol");
+    return this.getAddress("yeap_tapp_llp");
   }
 
   get yeapEarnApiAddress(): string {

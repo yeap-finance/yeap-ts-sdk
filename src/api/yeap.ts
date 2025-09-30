@@ -1,4 +1,4 @@
-// Copyright © Aptos Foundation
+// Copyright © Yeap Finance
 // SPDX-License-Identifier: Apache-2.0
 
 import {YeapConfig} from "./yeapConfig";
@@ -7,6 +7,7 @@ import {ScmdApi} from "./scmdApi";
 import {OracleApi} from "./oracleApi";
 import {BuildApi} from "./buildApi";
 import {AdminApi} from "./adminApi";
+import { TappLLPApi } from "./tappLLPApi";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -60,7 +61,7 @@ export class Yeap {
   readonly vaultApi: VaultApi;
 
   readonly scmdApi: ScmdApi;
-
+  readonly tappLLPApi: TappLLPApi;
   readonly oracleRouterApi: OracleApi;
 
   readonly buildApi: BuildApi;
@@ -92,6 +93,7 @@ export class Yeap {
     this.config = config;
     this.vaultApi = new VaultApi(this.config);
     this.scmdApi = new ScmdApi(this.config);
+    this.tappLLPApi = new TappLLPApi(this.config);
     this.oracleRouterApi = new OracleApi(this.config);
     this.buildApi = new BuildApi(this.config);
     this.adminApi = new AdminApi(this.config);

@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 
 // const TAPP_API_BASE_URL = "https://display-engine.dev.tapp-dex.devucc.name/api/v1";
-const TAPP_API_BASE_URL = 'https://api.tapp.exchange/api/v1';
+const TAPP_API_BASE_URL = "https://api.tapp.exchange/api/v1";
 
 // #region Generic JSON-RPC types
 export interface JsonRpcRequest<T> {
   method: string;
-  jsonrpc: '2.0';
+  jsonrpc: "2.0";
   id: number;
   params: {
     query: T;
@@ -14,7 +14,7 @@ export interface JsonRpcRequest<T> {
 }
 
 export interface JsonRpcResponse<T> {
-  jsonrpc: '2.0';
+  jsonrpc: "2.0";
   id: number;
   method: string;
   result: T;
@@ -49,7 +49,7 @@ export interface PoolTokenSummary {
 
 export interface Pool {
   poolId: string;
-  poolType: 'AMM' | 'CLMM' | 'STABLE';
+  poolType: "AMM" | "CLMM" | "STABLE";
   createdAt: string;
   fee: string;
   feeTier: string;
@@ -84,7 +84,7 @@ export interface PoolStatsToken {
 
 export interface PoolStats {
   poolId: string;
-  poolType: 'AMM' | 'CLMM' | 'STABLE';
+  poolType: "AMM" | "CLMM" | "STABLE";
   feeTier: string;
   tvl: string;
   volume24h: string | null;
@@ -122,7 +122,7 @@ export interface PoolInfoToken {
 
 export interface PoolInfo {
   poolId: string;
-  poolType: 'AMM' | 'CLMM' | 'STABLE';
+  poolType: "AMM" | "CLMM" | "STABLE";
   feeTier: string;
   sqrtPrice: string;
   tickSpacing: number;
@@ -195,7 +195,7 @@ export interface UserTransactionToken {
 export interface UserTransaction {
   createdAt: string;
   createdBy: string;
-  txType: 'Swap' | 'Add' | 'Remove' | 'Claim';
+  txType: "Swap" | "Add" | "Remove" | "Claim";
   transactionVersion: number;
   volume: string;
   swapData: {
@@ -214,7 +214,7 @@ export interface PayloadResponse {
 
 // #region API Request Types
 export interface PoolListParams {
-  poolType: 'AMM' | 'CLMM' | 'STABLE';
+  poolType: "AMM" | "CLMM" | "STABLE";
   page?: number;
   pageSize?: number;
 }
@@ -244,18 +244,15 @@ export interface PositionParams {
 
 export interface UserTransactionParams {
   userAddr: string;
-  txType?: 'Swap' | 'Add' | 'Remove';
+  txType?: "Swap" | "Add" | "Remove";
   page?: number;
   pageSize?: number;
 }
 
-export type SwapParams =
-  | SwapParamsAmm
-  | SwapParamsClmm
-  | SwapParamsStable;
+export type SwapParams = SwapParamsAmm | SwapParamsClmm | SwapParamsStable;
 
 export interface SwapParamsAmm {
-  version: 'v2';
+  version: "v2";
   poolId: string;
   a2b: boolean;
   fixedAmountIn: boolean;
@@ -265,7 +262,7 @@ export interface SwapParamsAmm {
 }
 
 export interface SwapParamsClmm {
-  version: 'v3';
+  version: "v3";
   poolId: string;
   a2b: boolean;
   fixedAmountIn: boolean;
@@ -276,7 +273,7 @@ export interface SwapParamsClmm {
 }
 
 export interface SwapParamsStable {
-  version: 'stable';
+  version: "stable";
   poolId: string;
   accountAddress: string;
   tokenIn: number;
@@ -298,12 +295,12 @@ export interface CreatePoolAddLiquidityBase {
 }
 
 export interface CreatePoolAddLiquidityAmm extends CreatePoolAddLiquidityBase {
-  version: 'v2';
+  version: "v2";
   minAmounts: [string, string];
 }
 
 export interface CreatePoolAddLiquidityClmm extends CreatePoolAddLiquidityBase {
-  version: 'v3';
+  version: "v3";
   minAmounts: [string, string];
   sqrtPrice: string;
   lowerTick: string;
@@ -312,16 +309,13 @@ export interface CreatePoolAddLiquidityClmm extends CreatePoolAddLiquidityBase {
 }
 
 export interface CreatePoolAddLiquidityStable extends CreatePoolAddLiquidityBase {
-  version: 'stable';
+  version: "stable";
   amplification: string;
   offPegMultiplier: string;
   minMintAmount: string;
 }
 
-export type AddLiquidityParams =
-  | AddLiquidityAmm
-  | AddLiquidityClmm
-  | AddLiquidityStable;
+export type AddLiquidityParams = AddLiquidityAmm | AddLiquidityClmm | AddLiquidityStable;
 
 export interface AddLiquidityBase {
   poolId: string;
@@ -330,12 +324,12 @@ export interface AddLiquidityBase {
 }
 
 export interface AddLiquidityAmm extends AddLiquidityBase {
-  version: 'v2';
+  version: "v2";
   minAmounts: [string, string];
 }
 
 export interface AddLiquidityClmm extends AddLiquidityBase {
-  version: 'v3';
+  version: "v3";
   minAmounts: [string, string];
   lowerTick: string;
   upperTick: string;
@@ -343,14 +337,11 @@ export interface AddLiquidityClmm extends AddLiquidityBase {
 }
 
 export interface AddLiquidityStable extends AddLiquidityBase {
-  version: 'stable';
+  version: "stable";
   minMintAmount: string;
 }
 
-export type RemoveLiquidityParams =
-  | RemoveLiquidityAmm
-  | RemoveLiquidityClmm
-  | RemoveLiquidityStable;
+export type RemoveLiquidityParams = RemoveLiquidityAmm | RemoveLiquidityClmm | RemoveLiquidityStable;
 
 export interface RemoveLiquidityBase {
   poolId: string;
@@ -361,15 +352,15 @@ export interface RemoveLiquidityBase {
 }
 
 export interface RemoveLiquidityAmm extends RemoveLiquidityBase {
-  version: 'v2';
+  version: "v2";
 }
 
 export interface RemoveLiquidityClmm extends RemoveLiquidityBase {
-  version: 'v3';
+  version: "v3";
 }
 
 export interface RemoveLiquidityStable extends RemoveLiquidityBase {
-  version: 'stable';
+  version: "stable";
   type: 1 | 2 | 3;
 }
 
@@ -394,22 +385,22 @@ export interface RemoveMultiLiquidityBase {
 }
 
 export interface RemoveMultiLiquidityAmm extends RemoveMultiLiquidityBase {
-  version: 'v2';
+  version: "v2";
   positions: MultiRemovePosition[];
 }
 
 export interface RemoveMultiLiquidityClmm extends RemoveMultiLiquidityBase {
-  version: 'v3';
+  version: "v3";
   positions: MultiRemovePosition[];
 }
 
 export interface RemoveMultiLiquidityStable extends RemoveMultiLiquidityBase {
-  version: 'stable';
+  version: "stable";
   positions: MultiRemovePositionStable[];
 }
 
 export interface CollectFeeParams {
-  version: 'v3';
+  version: "v3";
   poolId: string;
   accountAddress: string;
   positionAddress: string;
@@ -423,13 +414,10 @@ export class TappApiClient {
     this.baseUrl = baseUrl;
   }
 
-  private async post<TRequest, TResponse>(
-    method: string,
-    params: TRequest,
-  ): Promise<TResponse> {
+  private async post<TRequest, TResponse>(method: string, params: TRequest): Promise<TResponse> {
     const body: JsonRpcRequest<TRequest> = {
       method,
-      jsonrpc: '2.0',
+      jsonrpc: "2.0",
       id: 1, // ID can be static for simple clients
       params: {
         query: params,
@@ -437,9 +425,9 @@ export class TappApiClient {
     };
 
     const response = await fetch(this.baseUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
@@ -453,60 +441,50 @@ export class TappApiClient {
   }
 
   async getPoolList(params: PoolListParams): Promise<PaginatedResponse<Pool>> {
-    return this.post('public/pool', params);
+    return this.post("public/pool", params);
   }
 
   async getPoolStats(params: PoolStatsParams): Promise<PoolStats> {
-    return this.post('public/pool_stats', params);
+    return this.post("public/pool_stats", params);
   }
 
   async getTokenList(params: TokenListParams): Promise<PaginatedResponse<Token>> {
-    return this.post('public/token', params);
+    return this.post("public/token", params);
   }
 
   async getPoolInfo(params: PoolInfoParams): Promise<PoolInfo> {
-    return this.post('public/pool_info', params);
+    return this.post("public/pool_info", params);
   }
 
   async getPositions(params: PositionParams): Promise<PaginatedResponse<Position>> {
-    return this.post('public/position', params);
+    return this.post("public/position", params);
   }
 
   async getUserTransactions(params: UserTransactionParams): Promise<PaginatedResponse<UserTransaction>> {
-    return this.post('public/txns', params);
+    return this.post("public/txns", params);
   }
 
   async getSwapPayload(params: SwapParams): Promise<PayloadResponse> {
-    return this.post('public/swap', params);
+    return this.post("public/swap", params);
   }
 
-  async getCreatePoolAddLiquidityPayload(
-    params: CreatePoolAddLiquidityParams,
-  ): Promise<PayloadResponse> {
-    return this.post('public/create_pool_add_liquidity', params);
+  async getCreatePoolAddLiquidityPayload(params: CreatePoolAddLiquidityParams): Promise<PayloadResponse> {
+    return this.post("public/create_pool_add_liquidity", params);
   }
 
-  async getAddLiquidityPayload(
-    params: AddLiquidityParams,
-  ): Promise<PayloadResponse> {
-    return this.post('public/add_liquidity', params);
+  async getAddLiquidityPayload(params: AddLiquidityParams): Promise<PayloadResponse> {
+    return this.post("public/add_liquidity", params);
   }
 
-  async getRemoveLiquidityPayload(
-    params: RemoveLiquidityParams,
-  ): Promise<PayloadResponse> {
-    return this.post('public/remove_liquidity', params);
+  async getRemoveLiquidityPayload(params: RemoveLiquidityParams): Promise<PayloadResponse> {
+    return this.post("public/remove_liquidity", params);
   }
 
-  async getRemoveMultiLiquidityPayload(
-    params: RemoveMultiLiquidityParams,
-  ): Promise<PayloadResponse> {
-    return this.post('public/remove_multi_liquidity', params);
+  async getRemoveMultiLiquidityPayload(params: RemoveMultiLiquidityParams): Promise<PayloadResponse> {
+    return this.post("public/remove_multi_liquidity", params);
   }
 
-  async getCollectFeePayload(
-    params: CollectFeeParams,
-  ): Promise<PayloadResponse> {
-    return this.post('public/collect_fee', params);
+  async getCollectFeePayload(params: CollectFeeParams): Promise<PayloadResponse> {
+    return this.post("public/collect_fee", params);
   }
 }

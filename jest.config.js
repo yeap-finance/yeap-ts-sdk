@@ -7,8 +7,11 @@ module.exports = {
     "**/*.(test|spec).+(ts|tsx|js)",
   ],
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    "^.+\\.(ts|tsx|js)$": "ts-jest",
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!graphql-request)/',
+  ],
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!src/**/*.d.ts",

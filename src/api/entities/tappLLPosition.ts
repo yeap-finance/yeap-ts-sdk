@@ -3,14 +3,12 @@
 import { YeapConfig } from "../yeapConfig";
 import { TappLLPosition, PositionDebtStore } from "../interfaces";
 import { transformFungibleAssetBalance } from "../transforms";
-import { PositionFieldsFragment } from "../../types/generated/operations";
+import { TappLlPositionFieldsFragment } from "../../types/generated/operations";
 import { createBorrowMarket } from "./borrowMarket";
 
-// Raw data type from GraphQL
-type RawPositionData = PositionFieldsFragment;
 
 /** Factory to create an TappLLPosition */
-export function createTappLLPosition(config: YeapConfig, rawData: RawPositionData): TappLLPosition {
+export function createTappLLPosition(config: YeapConfig, rawData: TappLlPositionFieldsFragment): TappLLPosition {
   const debtStores: Record<string, PositionDebtStore> = {};
   for (const store of rawData.debt_stores || []) {
     const entry: PositionDebtStore = {

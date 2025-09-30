@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import { getPositionsByOwner } from "../internal";
+import { getSCMDPositionsByOwner, getTappLLPositionsByOwner } from "../internal";
 import { BorrowMarket, TappLLPosition } from "./interfaces";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
@@ -56,7 +56,7 @@ export class TappLLPApi {
     limit: number = 10,
     offset: number = 0,
   ): Promise<Array<TappLLPosition>> {
-    const positions = await getPositionsByOwner({
+    const positions = await getTappLLPositionsByOwner({
       yeapConfig: this.config,
       ownerAddress,
       limit,
@@ -86,6 +86,6 @@ export class TappLLPApi {
   }
 
   get protocolName(): string {
-    return `${this.config.yeapScmdProtocolAddress}::protocol_handle::LLProtocol`;
+    return `${this.config.tappLlpProtocolAddress}::protocol_handle::LLProtocol`;
   }
 }
