@@ -1,21 +1,21 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { AccountAddress, createObjectAddress } from "@aptos-labs/ts-sdk";
-import { getSCMDPositionsByOwner } from "../internal";
-import { SCMDPosition, BorrowMarket } from "./interfaces";
-import { createScmdPosition } from "./entities/scmdPosition";
+import { AccountAddress } from "@aptos-labs/ts-sdk";
+import { getSCMDPositionsByOwner, getTappLLPositionsByOwner } from "../internal";
+import { BorrowMarket, TappLLPosition } from "./interfaces";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
 import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
+import { createTappLLPosition } from "./entities/tappLLPosition";
 
 /**
- * A class to query SCMD position-related data from the Yeap indexer.
+ * A class to query Tapp LLP position-related data from the Yeap indexer.
  * This provides high-level methods for interacting with position information.
  * This follows the same pattern as other API classes in the main Aptos SDK.
  * @group Position
  */
-export class ScmdApi {
+export class TappLLPApi {
   readonly config: YeapConfig;
   readonly protocolAddress: AccountAddress;
 
@@ -24,7 +24,7 @@ export class ScmdApi {
    */
   constructor(config: YeapConfig) {
     this.config = config;
-    this.protocolAddress = AccountAddress.fromString(config.yeapScmdProtocolAddress);
+    this.protocolAddress = AccountAddress.fromString(config.tappLlpProtocolAddress);
   }
 
   // get goveranceObjectAddress(): AccountAddress {
@@ -41,11 +41,11 @@ export class ScmdApi {
    *
    * @example
    * ```typescript
-   * const positions = await yeap.scmdApi.getPositionsByOwner("0xabc...", 5);
+   * const positions = await yeap.tappLLPApi.getPositionsByOwner("0xabc...", 5);
    * console.log(`Found ${positions.length} positions for this owner`);
    * positions.forEach(position => {
    *   console.log("Position address:", position.position_address);
-   *   console.log("Collateral type:", position.collateral_type);
+   *   console.log("Collateral type:", position.collateral);
    *   console.log("Status:", position.status);
    * });
    * ```
@@ -55,15 +55,15 @@ export class ScmdApi {
     ownerAddress: string,
     limit: number = 10,
     offset: number = 0,
-  ): Promise<Array<SCMDPosition>> {
-    const positions = await getSCMDPositionsByOwner({
+  ): Promise<Array<TappLLPosition>> {
+    const positions = await getTappLLPositionsByOwner({
       yeapConfig: this.config,
       ownerAddress,
       limit,
       offset,
     });
 
-    return positions.map((position) => createScmdPosition(this.config, position));
+    return positions.map((position) => createTappLLPosition(this.config, position));
   }
 
   /**
@@ -86,6 +86,6 @@ export class ScmdApi {
   }
 
   get protocolName(): string {
-    return `${this.config.yeapScmdProtocolAddress}::protocol_handle::SCMDProtocol`;
+    return `${this.config.tappLlpProtocolAddress}::protocol_handle::LLProtocol`;
   }
 }

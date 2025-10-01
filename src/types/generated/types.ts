@@ -1875,6 +1875,2672 @@ export type BorrowRiskParametersCurrentVarianceOrderBy = {
   brw?: InputMaybe<OrderBy>;
 };
 
+/** columns and relationships of "borrower_usage" */
+export type BorrowerUsage = {
+  borrower: Scalars['String']['output'];
+  new_debt_shares: Scalars['numeric']['output'];
+  vault_address: Scalars['String']['output'];
+};
+
+/** Boolean expression to filter rows from the table "borrower_usage". All fields are combined with a logical 'AND'. */
+export type BorrowerUsageBoolExp = {
+  _and?: InputMaybe<Array<BorrowerUsageBoolExp>>;
+  _not?: InputMaybe<BorrowerUsageBoolExp>;
+  _or?: InputMaybe<Array<BorrowerUsageBoolExp>>;
+  borrower?: InputMaybe<StringComparisonExp>;
+  new_debt_shares?: InputMaybe<NumericComparisonExp>;
+  vault_address?: InputMaybe<StringComparisonExp>;
+};
+
+/** Ordering options when selecting data from "borrower_usage". */
+export type BorrowerUsageOrderBy = {
+  borrower?: InputMaybe<OrderBy>;
+  new_debt_shares?: InputMaybe<OrderBy>;
+  vault_address?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "borrower_usage" */
+export enum BorrowerUsageSelectColumn {
+  /** column name */
+  Borrower = 'borrower',
+  /** column name */
+  NewDebtShares = 'new_debt_shares',
+  /** column name */
+  VaultAddress = 'vault_address'
+}
+
+/** Streaming cursor of the table "borrower_usage" */
+export type BorrowerUsageStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: BorrowerUsageStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BorrowerUsageStreamCursorValueInput = {
+  borrower?: InputMaybe<Scalars['String']['input']>;
+  new_debt_shares?: InputMaybe<Scalars['numeric']['input']>;
+  vault_address?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CaasqueryRoot = {
+  /** fetch data from the table: "account_transactions" */
+  account_transactions: Array<AccountTransactions>;
+  /** fetch aggregated fields from the table: "account_transactions" */
+  account_transactions_aggregate: AccountTransactionsAggregate;
+  /** fetch data from the table: "account_transactions" using primary key columns */
+  account_transactions_by_pk?: Maybe<AccountTransactions>;
+  /** fetch data from the table: "address_events_summary" */
+  address_events_summary: Array<AddressEventsSummary>;
+  /** fetch data from the table: "address_version_from_events" */
+  address_version_from_events: Array<AddressVersionFromEvents>;
+  /** fetch aggregated fields from the table: "address_version_from_events" */
+  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
+  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
+  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
+  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
+  /** fetch data from the table: "auth_key_account_addresses" */
+  auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
+  /** fetch aggregated fields from the table: "auth_key_account_addresses" */
+  auth_key_account_addresses_aggregate: AuthKeyAccountAddressesAggregate;
+  /** fetch data from the table: "auth_key_account_addresses" using primary key columns */
+  auth_key_account_addresses_by_pk?: Maybe<AuthKeyAccountAddresses>;
+  /** fetch data from the table: "block_metadata_transactions" */
+  block_metadata_transactions: Array<BlockMetadataTransactions>;
+  /** fetch data from the table: "block_metadata_transactions" using primary key columns */
+  block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
+  /** An array relationship */
+  coin_activities: Array<CoinActivities>;
+  /** An aggregate relationship */
+  coin_activities_aggregate: CoinActivitiesAggregate;
+  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
+  coin_balances: Array<CoinBalances>;
+  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
+  coin_infos: Array<CoinInfos>;
+  /** fetch data from the table: "coin_supply" */
+  coin_supply: Array<CoinSupply>;
+  /** fetch data from the table: "coin_supply" using primary key columns */
+  coin_supply_by_pk?: Maybe<CoinSupply>;
+  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
+  collection_datas: Array<CollectionDatas>;
+  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
+  current_ans_lookup: Array<CurrentAnsLookup>;
+  /** fetch data from the table: "current_ans_lookup_v2" */
+  current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
+  /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
+  current_ans_lookup_v2_by_pk?: Maybe<CurrentAnsLookupV2>;
+  /** fetch data from the table: "current_aptos_names" */
+  current_aptos_names: Array<CurrentAptosNames>;
+  /** fetch aggregated fields from the table: "current_aptos_names" */
+  current_aptos_names_aggregate: CurrentAptosNamesAggregate;
+  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
+  current_coin_balances: Array<CurrentCoinBalances>;
+  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
+  current_collection_datas: Array<CurrentCollectionDatas>;
+  /** fetch data from the table: "current_collection_ownership_v2_view" */
+  current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
+  /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
+  current_collection_ownership_v2_view_aggregate: CurrentCollectionOwnershipV2ViewAggregate;
+  /** fetch data from the table: "current_collections_v2" */
+  current_collections_v2: Array<CurrentCollectionsV2>;
+  /** fetch data from the table: "current_collections_v2" using primary key columns */
+  current_collections_v2_by_pk?: Maybe<CurrentCollectionsV2>;
+  /** fetch data from the table: "current_delegated_staking_pool_balances" */
+  current_delegated_staking_pool_balances: Array<CurrentDelegatedStakingPoolBalances>;
+  /** fetch data from the table: "current_delegated_staking_pool_balances" using primary key columns */
+  current_delegated_staking_pool_balances_by_pk?: Maybe<CurrentDelegatedStakingPoolBalances>;
+  /** fetch data from the table: "current_delegated_voter" */
+  current_delegated_voter: Array<CurrentDelegatedVoter>;
+  /** fetch data from the table: "current_delegated_voter" using primary key columns */
+  current_delegated_voter_by_pk?: Maybe<CurrentDelegatedVoter>;
+  /** fetch data from the table: "current_delegator_balances" */
+  current_delegator_balances: Array<CurrentDelegatorBalances>;
+  /** fetch data from the table: "current_delegator_balances" using primary key columns */
+  current_delegator_balances_by_pk?: Maybe<CurrentDelegatorBalances>;
+  /** fetch data from the table: "current_fungible_asset_balances" */
+  current_fungible_asset_balances: Array<CurrentFungibleAssetBalances>;
+  /** fetch aggregated fields from the table: "current_fungible_asset_balances" */
+  current_fungible_asset_balances_aggregate: CurrentFungibleAssetBalancesAggregate;
+  /** fetch data from the table: "current_fungible_asset_balances" using primary key columns */
+  current_fungible_asset_balances_by_pk?: Maybe<CurrentFungibleAssetBalances>;
+  /** fetch data from the table: "current_objects" */
+  current_objects: Array<CurrentObjects>;
+  /** fetch data from the table: "current_objects" using primary key columns */
+  current_objects_by_pk?: Maybe<CurrentObjects>;
+  /** fetch data from the table: "current_staking_pool_voter" */
+  current_staking_pool_voter: Array<CurrentStakingPoolVoter>;
+  /** fetch data from the table: "current_staking_pool_voter" using primary key columns */
+  current_staking_pool_voter_by_pk?: Maybe<CurrentStakingPoolVoter>;
+  /** fetch data from the table: "current_table_items" */
+  current_table_items: Array<CurrentTableItems>;
+  /** fetch data from the table: "current_table_items" using primary key columns */
+  current_table_items_by_pk?: Maybe<CurrentTableItems>;
+  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
+  current_token_datas: Array<CurrentTokenDatas>;
+  /** fetch data from the table: "current_token_datas_v2" */
+  current_token_datas_v2: Array<CurrentTokenDatasV2>;
+  /** fetch data from the table: "current_token_datas_v2" using primary key columns */
+  current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
+  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
+  current_token_ownerships: Array<CurrentTokenOwnerships>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
+  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
+  /** fetch data from the table: "current_token_ownerships_v2" */
+  current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
+  /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
+  current_token_ownerships_v2_aggregate: CurrentTokenOwnershipsV2Aggregate;
+  /** fetch data from the table: "current_token_ownerships_v2" using primary key columns */
+  current_token_ownerships_v2_by_pk?: Maybe<CurrentTokenOwnershipsV2>;
+  /** fetch data from the table: "current_token_pending_claims" */
+  current_token_pending_claims: Array<CurrentTokenPendingClaims>;
+  /** fetch data from the table: "current_token_pending_claims" using primary key columns */
+  current_token_pending_claims_by_pk?: Maybe<CurrentTokenPendingClaims>;
+  /** fetch data from the table: "current_token_royalty_v1" */
+  current_token_royalty_v1: Array<CurrentTokenRoyaltyV1>;
+  /** fetch data from the table: "current_token_royalty_v1" using primary key columns */
+  current_token_royalty_v1_by_pk?: Maybe<CurrentTokenRoyaltyV1>;
+  /** An array relationship */
+  delegated_staking_activities: Array<DelegatedStakingActivities>;
+  /** fetch data from the table: "delegated_staking_activities" using primary key columns */
+  delegated_staking_activities_by_pk?: Maybe<DelegatedStakingActivities>;
+  /** fetch data from the table: "delegated_staking_pool_balances" */
+  delegated_staking_pool_balances: Array<DelegatedStakingPoolBalances>;
+  /** fetch aggregated fields from the table: "delegated_staking_pool_balances" */
+  delegated_staking_pool_balances_aggregate: DelegatedStakingPoolBalancesAggregate;
+  /** fetch data from the table: "delegated_staking_pool_balances" using primary key columns */
+  delegated_staking_pool_balances_by_pk?: Maybe<DelegatedStakingPoolBalances>;
+  /** fetch data from the table: "delegated_staking_pools" */
+  delegated_staking_pools: Array<DelegatedStakingPools>;
+  /** fetch data from the table: "delegated_staking_pools" using primary key columns */
+  delegated_staking_pools_by_pk?: Maybe<DelegatedStakingPools>;
+  /** fetch data from the table: "delegator_distinct_pool" */
+  delegator_distinct_pool: Array<DelegatorDistinctPool>;
+  /** fetch aggregated fields from the table: "delegator_distinct_pool" */
+  delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
+  /** fetch data from the table: "events" */
+  events: Array<Events>;
+  /** fetch data from the table: "events" using primary key columns */
+  events_by_pk?: Maybe<Events>;
+  /** An array relationship */
+  fungible_asset_activities: Array<FungibleAssetActivities>;
+  /** fetch data from the table: "fungible_asset_activities" using primary key columns */
+  fungible_asset_activities_by_pk?: Maybe<FungibleAssetActivities>;
+  /** fetch data from the table: "fungible_asset_metadata" */
+  fungible_asset_metadata: Array<FungibleAssetMetadata>;
+  /** fetch data from the table: "fungible_asset_metadata" using primary key columns */
+  fungible_asset_metadata_by_pk?: Maybe<FungibleAssetMetadata>;
+  /** fetch data from the table: "indexer_status" */
+  indexer_status: Array<IndexerStatus>;
+  /** fetch data from the table: "indexer_status" using primary key columns */
+  indexer_status_by_pk?: Maybe<IndexerStatus>;
+  /** fetch data from the table: "processor_metadata.ledger_infos" */
+  ledger_infos: Array<LedgerInfos>;
+  /** fetch data from the table: "processor_metadata.ledger_infos" using primary key columns */
+  ledger_infos_by_pk?: Maybe<LedgerInfos>;
+  /** fetch data from the table: "legacy_migration_v1.move_resources" */
+  move_resources: Array<MoveResources>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
+  move_resources_aggregate: MoveResourcesAggregate;
+  /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
+  nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
+  /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
+  nft_metadata_crawler_parsed_asset_uris_by_pk?: Maybe<NftMetadataCrawlerParsedAssetUris>;
+  /** fetch data from the table: "num_active_delegator_per_pool" */
+  num_active_delegator_per_pool: Array<NumActiveDelegatorPerPool>;
+  /** fetch data from the table: "processor_metadata.processor_status" */
+  processor_status: Array<ProcessorStatus>;
+  /** fetch data from the table: "processor_metadata.processor_status" using primary key columns */
+  processor_status_by_pk?: Maybe<ProcessorStatus>;
+  /** fetch data from the table: "proposal_votes" */
+  proposal_votes: Array<ProposalVotes>;
+  /** fetch aggregated fields from the table: "proposal_votes" */
+  proposal_votes_aggregate: ProposalVotesAggregate;
+  /** fetch data from the table: "proposal_votes" using primary key columns */
+  proposal_votes_by_pk?: Maybe<ProposalVotes>;
+  /** fetch data from the table: "public_key_auth_keys" */
+  public_key_auth_keys: Array<PublicKeyAuthKeys>;
+  /** fetch aggregated fields from the table: "public_key_auth_keys" */
+  public_key_auth_keys_aggregate: PublicKeyAuthKeysAggregate;
+  /** fetch data from the table: "public_key_auth_keys" using primary key columns */
+  public_key_auth_keys_by_pk?: Maybe<PublicKeyAuthKeys>;
+  /** fetch data from the table: "signatures" */
+  signatures: Array<Signatures>;
+  /** fetch data from the table: "signatures" using primary key columns */
+  signatures_by_pk?: Maybe<Signatures>;
+  /** fetch data from the table: "table_items" */
+  table_items: Array<TableItems>;
+  /** fetch data from the table: "table_items" using primary key columns */
+  table_items_by_pk?: Maybe<TableItems>;
+  /** fetch data from the table: "table_metadatas" */
+  table_metadatas: Array<TableMetadatas>;
+  /** fetch data from the table: "table_metadatas" using primary key columns */
+  table_metadatas_by_pk?: Maybe<TableMetadatas>;
+  /** An array relationship */
+  token_activities: Array<TokenActivities>;
+  /** An aggregate relationship */
+  token_activities_aggregate: TokenActivitiesAggregate;
+  /** An array relationship */
+  token_activities_v2: Array<TokenActivitiesV2>;
+  /** An aggregate relationship */
+  token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
+  /** fetch data from the table: "token_activities_v2" using primary key columns */
+  token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
+  /** fetch data from the table: "legacy_migration_v1.token_datas" */
+  token_datas: Array<TokenDatas>;
+  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
+  token_ownerships: Array<TokenOwnerships>;
+  /** fetch data from the table: "legacy_migration_v1.tokens" */
+  tokens: Array<Tokens>;
+  /** fetch data from the table: "user_transactions" */
+  user_transactions: Array<UserTransactions>;
+  /** fetch data from the table: "user_transactions" using primary key columns */
+  user_transactions_by_pk?: Maybe<UserTransactions>;
+};
+
+
+export type CaasqueryRootAccountTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<AccountTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AccountTransactionsOrderBy>>;
+  where?: InputMaybe<AccountTransactionsBoolExp>;
+};
+
+
+export type CaasqueryRootAccountTransactionsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AccountTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AccountTransactionsOrderBy>>;
+  where?: InputMaybe<AccountTransactionsBoolExp>;
+};
+
+
+export type CaasqueryRootAccountTransactionsByPkArgs = {
+  account_address: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootAddressEventsSummaryArgs = {
+  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
+  where?: InputMaybe<AddressEventsSummaryBoolExp>;
+};
+
+
+export type CaasqueryRootAddressVersionFromEventsArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
+  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
+};
+
+
+export type CaasqueryRootAddressVersionFromEventsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
+  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
+};
+
+
+export type CaasqueryRootAddressVersionFromMoveResourcesArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
+  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
+};
+
+
+export type CaasqueryRootAddressVersionFromMoveResourcesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
+  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
+};
+
+
+export type CaasqueryRootAuthKeyAccountAddressesArgs = {
+  distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AuthKeyAccountAddressesOrderBy>>;
+  where?: InputMaybe<AuthKeyAccountAddressesBoolExp>;
+};
+
+
+export type CaasqueryRootAuthKeyAccountAddressesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AuthKeyAccountAddressesOrderBy>>;
+  where?: InputMaybe<AuthKeyAccountAddressesBoolExp>;
+};
+
+
+export type CaasqueryRootAuthKeyAccountAddressesByPkArgs = {
+  account_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootBlockMetadataTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<BlockMetadataTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BlockMetadataTransactionsOrderBy>>;
+  where?: InputMaybe<BlockMetadataTransactionsBoolExp>;
+};
+
+
+export type CaasqueryRootBlockMetadataTransactionsByPkArgs = {
+  version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootCoinActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
+  where?: InputMaybe<CoinActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootCoinActivitiesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
+  where?: InputMaybe<CoinActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootCoinBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
+  where?: InputMaybe<CoinBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCoinInfosArgs = {
+  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
+  where?: InputMaybe<CoinInfosBoolExp>;
+};
+
+
+export type CaasqueryRootCoinSupplyArgs = {
+  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
+  where?: InputMaybe<CoinSupplyBoolExp>;
+};
+
+
+export type CaasqueryRootCoinSupplyByPkArgs = {
+  coin_type_hash: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootCollectionDatasArgs = {
+  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
+  where?: InputMaybe<CollectionDatasBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentAnsLookupArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
+  where?: InputMaybe<CurrentAnsLookupBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentAnsLookupV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAnsLookupV2OrderBy>>;
+  where?: InputMaybe<CurrentAnsLookupV2BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentAnsLookupV2ByPkArgs = {
+  domain: Scalars['String']['input'];
+  subdomain: Scalars['String']['input'];
+  token_standard: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentAptosNamesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
+  where?: InputMaybe<CurrentAptosNamesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentAptosNamesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
+  where?: InputMaybe<CurrentAptosNamesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCoinBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
+  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCollectionDatasArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
+  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCollectionOwnershipV2ViewArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewOrderBy>>;
+  where?: InputMaybe<CurrentCollectionOwnershipV2ViewBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCollectionOwnershipV2ViewAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewOrderBy>>;
+  where?: InputMaybe<CurrentCollectionOwnershipV2ViewBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCollectionsV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionsV2OrderBy>>;
+  where?: InputMaybe<CurrentCollectionsV2BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentCollectionsV2ByPkArgs = {
+  collection_id: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentDelegatedStakingPoolBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<CurrentDelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentDelegatedStakingPoolBalancesByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentDelegatedVoterArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatedVoterSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatedVoterOrderBy>>;
+  where?: InputMaybe<CurrentDelegatedVoterBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentDelegatedVoterByPkArgs = {
+  delegation_pool_address: Scalars['String']['input'];
+  delegator_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentDelegatorBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatorBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatorBalancesOrderBy>>;
+  where?: InputMaybe<CurrentDelegatorBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentDelegatorBalancesByPkArgs = {
+  delegator_address: Scalars['String']['input'];
+  pool_address: Scalars['String']['input'];
+  pool_type: Scalars['String']['input'];
+  table_handle: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentFungibleAssetBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentFungibleAssetBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentFungibleAssetBalancesOrderBy>>;
+  where?: InputMaybe<CurrentFungibleAssetBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentFungibleAssetBalancesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentFungibleAssetBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentFungibleAssetBalancesOrderBy>>;
+  where?: InputMaybe<CurrentFungibleAssetBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentFungibleAssetBalancesByPkArgs = {
+  storage_id: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentObjectsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentObjectsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentObjectsOrderBy>>;
+  where?: InputMaybe<CurrentObjectsBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentObjectsByPkArgs = {
+  object_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentStakingPoolVoterArgs = {
+  distinct_on?: InputMaybe<Array<CurrentStakingPoolVoterSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentStakingPoolVoterOrderBy>>;
+  where?: InputMaybe<CurrentStakingPoolVoterBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentStakingPoolVoterByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentTableItemsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTableItemsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTableItemsOrderBy>>;
+  where?: InputMaybe<CurrentTableItemsBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTableItemsByPkArgs = {
+  key_hash: Scalars['String']['input'];
+  table_handle: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentTokenDatasArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
+  where?: InputMaybe<CurrentTokenDatasBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenDatasV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenDatasV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenDatasV2BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenDatasV2ByPkArgs = {
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentTokenOwnershipsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenOwnershipsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenOwnershipsV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsV2BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenOwnershipsV2AggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsV2BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenOwnershipsV2ByPkArgs = {
+  owner_address: Scalars['String']['input'];
+  property_version_v1: Scalars['numeric']['input'];
+  storage_id: Scalars['String']['input'];
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentTokenPendingClaimsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenPendingClaimsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenPendingClaimsOrderBy>>;
+  where?: InputMaybe<CurrentTokenPendingClaimsBoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenPendingClaimsByPkArgs = {
+  from_address: Scalars['String']['input'];
+  property_version: Scalars['numeric']['input'];
+  to_address: Scalars['String']['input'];
+  token_data_id_hash: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootCurrentTokenRoyaltyV1Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenRoyaltyV1SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenRoyaltyV1OrderBy>>;
+  where?: InputMaybe<CurrentTokenRoyaltyV1BoolExp>;
+};
+
+
+export type CaasqueryRootCurrentTokenRoyaltyV1ByPkArgs = {
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootDelegatedStakingActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingActivitiesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootDelegatedStakingActivitiesByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootDelegatedStakingPoolBalancesArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootDelegatedStakingPoolBalancesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaasqueryRootDelegatedStakingPoolBalancesByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootDelegatedStakingPoolsArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolsOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolsBoolExp>;
+};
+
+
+export type CaasqueryRootDelegatedStakingPoolsByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootDelegatorDistinctPoolArgs = {
+  distinct_on?: InputMaybe<Array<DelegatorDistinctPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatorDistinctPoolOrderBy>>;
+  where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
+};
+
+
+export type CaasqueryRootDelegatorDistinctPoolAggregateArgs = {
+  distinct_on?: InputMaybe<Array<DelegatorDistinctPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatorDistinctPoolOrderBy>>;
+  where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
+};
+
+
+export type CaasqueryRootEventsArgs = {
+  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<EventsOrderBy>>;
+  where?: InputMaybe<EventsBoolExp>;
+};
+
+
+export type CaasqueryRootEventsByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootFungibleAssetActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FungibleAssetActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FungibleAssetActivitiesOrderBy>>;
+  where?: InputMaybe<FungibleAssetActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootFungibleAssetActivitiesByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootFungibleAssetMetadataArgs = {
+  distinct_on?: InputMaybe<Array<FungibleAssetMetadataSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FungibleAssetMetadataOrderBy>>;
+  where?: InputMaybe<FungibleAssetMetadataBoolExp>;
+};
+
+
+export type CaasqueryRootFungibleAssetMetadataByPkArgs = {
+  asset_type: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootIndexerStatusArgs = {
+  distinct_on?: InputMaybe<Array<IndexerStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<IndexerStatusOrderBy>>;
+  where?: InputMaybe<IndexerStatusBoolExp>;
+};
+
+
+export type CaasqueryRootIndexerStatusByPkArgs = {
+  db: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootLedgerInfosArgs = {
+  distinct_on?: InputMaybe<Array<LedgerInfosSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<LedgerInfosOrderBy>>;
+  where?: InputMaybe<LedgerInfosBoolExp>;
+};
+
+
+export type CaasqueryRootLedgerInfosByPkArgs = {
+  chain_id: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootMoveResourcesArgs = {
+  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
+  where?: InputMaybe<MoveResourcesBoolExp>;
+};
+
+
+export type CaasqueryRootMoveResourcesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
+  where?: InputMaybe<MoveResourcesBoolExp>;
+};
+
+
+export type CaasqueryRootNftMetadataCrawlerParsedAssetUrisArgs = {
+  distinct_on?: InputMaybe<Array<NftMetadataCrawlerParsedAssetUrisSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<NftMetadataCrawlerParsedAssetUrisOrderBy>>;
+  where?: InputMaybe<NftMetadataCrawlerParsedAssetUrisBoolExp>;
+};
+
+
+export type CaasqueryRootNftMetadataCrawlerParsedAssetUrisByPkArgs = {
+  asset_uri: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootNumActiveDelegatorPerPoolArgs = {
+  distinct_on?: InputMaybe<Array<NumActiveDelegatorPerPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<NumActiveDelegatorPerPoolOrderBy>>;
+  where?: InputMaybe<NumActiveDelegatorPerPoolBoolExp>;
+};
+
+
+export type CaasqueryRootProcessorStatusArgs = {
+  distinct_on?: InputMaybe<Array<ProcessorStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProcessorStatusOrderBy>>;
+  where?: InputMaybe<ProcessorStatusBoolExp>;
+};
+
+
+export type CaasqueryRootProcessorStatusByPkArgs = {
+  processor: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootProposalVotesArgs = {
+  distinct_on?: InputMaybe<Array<ProposalVotesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProposalVotesOrderBy>>;
+  where?: InputMaybe<ProposalVotesBoolExp>;
+};
+
+
+export type CaasqueryRootProposalVotesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ProposalVotesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProposalVotesOrderBy>>;
+  where?: InputMaybe<ProposalVotesBoolExp>;
+};
+
+
+export type CaasqueryRootProposalVotesByPkArgs = {
+  proposal_id: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+  voter_address: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootPublicKeyAuthKeysArgs = {
+  distinct_on?: InputMaybe<Array<PublicKeyAuthKeysSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PublicKeyAuthKeysOrderBy>>;
+  where?: InputMaybe<PublicKeyAuthKeysBoolExp>;
+};
+
+
+export type CaasqueryRootPublicKeyAuthKeysAggregateArgs = {
+  distinct_on?: InputMaybe<Array<PublicKeyAuthKeysSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PublicKeyAuthKeysOrderBy>>;
+  where?: InputMaybe<PublicKeyAuthKeysBoolExp>;
+};
+
+
+export type CaasqueryRootPublicKeyAuthKeysByPkArgs = {
+  auth_key: Scalars['String']['input'];
+  public_key: Scalars['String']['input'];
+  public_key_type: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootSignaturesArgs = {
+  distinct_on?: InputMaybe<Array<SignaturesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SignaturesOrderBy>>;
+  where?: InputMaybe<SignaturesBoolExp>;
+};
+
+
+export type CaasqueryRootSignaturesByPkArgs = {
+  is_sender_primary: Scalars['Boolean']['input'];
+  multi_agent_index: Scalars['bigint']['input'];
+  multi_sig_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootTableItemsArgs = {
+  distinct_on?: InputMaybe<Array<TableItemsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TableItemsOrderBy>>;
+  where?: InputMaybe<TableItemsBoolExp>;
+};
+
+
+export type CaasqueryRootTableItemsByPkArgs = {
+  transaction_version: Scalars['bigint']['input'];
+  write_set_change_index: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootTableMetadatasArgs = {
+  distinct_on?: InputMaybe<Array<TableMetadatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TableMetadatasOrderBy>>;
+  where?: InputMaybe<TableMetadatasBoolExp>;
+};
+
+
+export type CaasqueryRootTableMetadatasByPkArgs = {
+  handle: Scalars['String']['input'];
+};
+
+
+export type CaasqueryRootTokenActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
+  where?: InputMaybe<TokenActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootTokenActivitiesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
+  where?: InputMaybe<TokenActivitiesBoolExp>;
+};
+
+
+export type CaasqueryRootTokenActivitiesV2Args = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
+  where?: InputMaybe<TokenActivitiesV2BoolExp>;
+};
+
+
+export type CaasqueryRootTokenActivitiesV2AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
+  where?: InputMaybe<TokenActivitiesV2BoolExp>;
+};
+
+
+export type CaasqueryRootTokenActivitiesV2ByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaasqueryRootTokenDatasArgs = {
+  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
+  where?: InputMaybe<TokenDatasBoolExp>;
+};
+
+
+export type CaasqueryRootTokenOwnershipsArgs = {
+  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
+  where?: InputMaybe<TokenOwnershipsBoolExp>;
+};
+
+
+export type CaasqueryRootTokensArgs = {
+  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokensOrderBy>>;
+  where?: InputMaybe<TokensBoolExp>;
+};
+
+
+export type CaasqueryRootUserTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<UserTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<UserTransactionsOrderBy>>;
+  where?: InputMaybe<UserTransactionsBoolExp>;
+};
+
+
+export type CaasqueryRootUserTransactionsByPkArgs = {
+  version: Scalars['bigint']['input'];
+};
+
+export type CaassubscriptionRoot = {
+  /** fetch data from the table: "account_transactions" */
+  account_transactions: Array<AccountTransactions>;
+  /** fetch aggregated fields from the table: "account_transactions" */
+  account_transactions_aggregate: AccountTransactionsAggregate;
+  /** fetch data from the table: "account_transactions" using primary key columns */
+  account_transactions_by_pk?: Maybe<AccountTransactions>;
+  /** fetch data from the table in a streaming manner: "account_transactions" */
+  account_transactions_stream: Array<AccountTransactions>;
+  /** fetch data from the table: "address_events_summary" */
+  address_events_summary: Array<AddressEventsSummary>;
+  /** fetch data from the table in a streaming manner: "address_events_summary" */
+  address_events_summary_stream: Array<AddressEventsSummary>;
+  /** fetch data from the table: "address_version_from_events" */
+  address_version_from_events: Array<AddressVersionFromEvents>;
+  /** fetch aggregated fields from the table: "address_version_from_events" */
+  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
+  /** fetch data from the table in a streaming manner: "address_version_from_events" */
+  address_version_from_events_stream: Array<AddressVersionFromEvents>;
+  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
+  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
+  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.address_version_from_move_resources" */
+  address_version_from_move_resources_stream: Array<AddressVersionFromMoveResources>;
+  /** fetch data from the table: "auth_key_account_addresses" */
+  auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
+  /** fetch aggregated fields from the table: "auth_key_account_addresses" */
+  auth_key_account_addresses_aggregate: AuthKeyAccountAddressesAggregate;
+  /** fetch data from the table: "auth_key_account_addresses" using primary key columns */
+  auth_key_account_addresses_by_pk?: Maybe<AuthKeyAccountAddresses>;
+  /** fetch data from the table in a streaming manner: "auth_key_account_addresses" */
+  auth_key_account_addresses_stream: Array<AuthKeyAccountAddresses>;
+  /** fetch data from the table: "block_metadata_transactions" */
+  block_metadata_transactions: Array<BlockMetadataTransactions>;
+  /** fetch data from the table: "block_metadata_transactions" using primary key columns */
+  block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
+  /** fetch data from the table in a streaming manner: "block_metadata_transactions" */
+  block_metadata_transactions_stream: Array<BlockMetadataTransactions>;
+  /** An array relationship */
+  coin_activities: Array<CoinActivities>;
+  /** An aggregate relationship */
+  coin_activities_aggregate: CoinActivitiesAggregate;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_activities" */
+  coin_activities_stream: Array<CoinActivities>;
+  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
+  coin_balances: Array<CoinBalances>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_balances" */
+  coin_balances_stream: Array<CoinBalances>;
+  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
+  coin_infos: Array<CoinInfos>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_infos" */
+  coin_infos_stream: Array<CoinInfos>;
+  /** fetch data from the table: "coin_supply" */
+  coin_supply: Array<CoinSupply>;
+  /** fetch data from the table: "coin_supply" using primary key columns */
+  coin_supply_by_pk?: Maybe<CoinSupply>;
+  /** fetch data from the table in a streaming manner: "coin_supply" */
+  coin_supply_stream: Array<CoinSupply>;
+  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
+  collection_datas: Array<CollectionDatas>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas" */
+  collection_datas_stream: Array<CollectionDatas>;
+  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
+  current_ans_lookup: Array<CurrentAnsLookup>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_ans_lookup" */
+  current_ans_lookup_stream: Array<CurrentAnsLookup>;
+  /** fetch data from the table: "current_ans_lookup_v2" */
+  current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
+  /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
+  current_ans_lookup_v2_by_pk?: Maybe<CurrentAnsLookupV2>;
+  /** fetch data from the table in a streaming manner: "current_ans_lookup_v2" */
+  current_ans_lookup_v2_stream: Array<CurrentAnsLookupV2>;
+  /** fetch data from the table: "current_aptos_names" */
+  current_aptos_names: Array<CurrentAptosNames>;
+  /** fetch aggregated fields from the table: "current_aptos_names" */
+  current_aptos_names_aggregate: CurrentAptosNamesAggregate;
+  /** fetch data from the table in a streaming manner: "current_aptos_names" */
+  current_aptos_names_stream: Array<CurrentAptosNames>;
+  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
+  current_coin_balances: Array<CurrentCoinBalances>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_coin_balances" */
+  current_coin_balances_stream: Array<CurrentCoinBalances>;
+  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
+  current_collection_datas: Array<CurrentCollectionDatas>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_collection_datas" */
+  current_collection_datas_stream: Array<CurrentCollectionDatas>;
+  /** fetch data from the table: "current_collection_ownership_v2_view" */
+  current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
+  /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
+  current_collection_ownership_v2_view_aggregate: CurrentCollectionOwnershipV2ViewAggregate;
+  /** fetch data from the table in a streaming manner: "current_collection_ownership_v2_view" */
+  current_collection_ownership_v2_view_stream: Array<CurrentCollectionOwnershipV2View>;
+  /** fetch data from the table: "current_collections_v2" */
+  current_collections_v2: Array<CurrentCollectionsV2>;
+  /** fetch data from the table: "current_collections_v2" using primary key columns */
+  current_collections_v2_by_pk?: Maybe<CurrentCollectionsV2>;
+  /** fetch data from the table in a streaming manner: "current_collections_v2" */
+  current_collections_v2_stream: Array<CurrentCollectionsV2>;
+  /** fetch data from the table: "current_delegated_staking_pool_balances" */
+  current_delegated_staking_pool_balances: Array<CurrentDelegatedStakingPoolBalances>;
+  /** fetch data from the table: "current_delegated_staking_pool_balances" using primary key columns */
+  current_delegated_staking_pool_balances_by_pk?: Maybe<CurrentDelegatedStakingPoolBalances>;
+  /** fetch data from the table in a streaming manner: "current_delegated_staking_pool_balances" */
+  current_delegated_staking_pool_balances_stream: Array<CurrentDelegatedStakingPoolBalances>;
+  /** fetch data from the table: "current_delegated_voter" */
+  current_delegated_voter: Array<CurrentDelegatedVoter>;
+  /** fetch data from the table: "current_delegated_voter" using primary key columns */
+  current_delegated_voter_by_pk?: Maybe<CurrentDelegatedVoter>;
+  /** fetch data from the table in a streaming manner: "current_delegated_voter" */
+  current_delegated_voter_stream: Array<CurrentDelegatedVoter>;
+  /** fetch data from the table: "current_delegator_balances" */
+  current_delegator_balances: Array<CurrentDelegatorBalances>;
+  /** fetch data from the table: "current_delegator_balances" using primary key columns */
+  current_delegator_balances_by_pk?: Maybe<CurrentDelegatorBalances>;
+  /** fetch data from the table in a streaming manner: "current_delegator_balances" */
+  current_delegator_balances_stream: Array<CurrentDelegatorBalances>;
+  /** fetch data from the table: "current_fungible_asset_balances" */
+  current_fungible_asset_balances: Array<CurrentFungibleAssetBalances>;
+  /** fetch aggregated fields from the table: "current_fungible_asset_balances" */
+  current_fungible_asset_balances_aggregate: CurrentFungibleAssetBalancesAggregate;
+  /** fetch data from the table: "current_fungible_asset_balances" using primary key columns */
+  current_fungible_asset_balances_by_pk?: Maybe<CurrentFungibleAssetBalances>;
+  /** fetch data from the table in a streaming manner: "current_fungible_asset_balances" */
+  current_fungible_asset_balances_stream: Array<CurrentFungibleAssetBalances>;
+  /** fetch data from the table: "current_objects" */
+  current_objects: Array<CurrentObjects>;
+  /** fetch data from the table: "current_objects" using primary key columns */
+  current_objects_by_pk?: Maybe<CurrentObjects>;
+  /** fetch data from the table in a streaming manner: "current_objects" */
+  current_objects_stream: Array<CurrentObjects>;
+  /** fetch data from the table: "current_staking_pool_voter" */
+  current_staking_pool_voter: Array<CurrentStakingPoolVoter>;
+  /** fetch data from the table: "current_staking_pool_voter" using primary key columns */
+  current_staking_pool_voter_by_pk?: Maybe<CurrentStakingPoolVoter>;
+  /** fetch data from the table in a streaming manner: "current_staking_pool_voter" */
+  current_staking_pool_voter_stream: Array<CurrentStakingPoolVoter>;
+  /** fetch data from the table: "current_table_items" */
+  current_table_items: Array<CurrentTableItems>;
+  /** fetch data from the table: "current_table_items" using primary key columns */
+  current_table_items_by_pk?: Maybe<CurrentTableItems>;
+  /** fetch data from the table in a streaming manner: "current_table_items" */
+  current_table_items_stream: Array<CurrentTableItems>;
+  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
+  current_token_datas: Array<CurrentTokenDatas>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_datas" */
+  current_token_datas_stream: Array<CurrentTokenDatas>;
+  /** fetch data from the table: "current_token_datas_v2" */
+  current_token_datas_v2: Array<CurrentTokenDatasV2>;
+  /** fetch data from the table: "current_token_datas_v2" using primary key columns */
+  current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
+  /** fetch data from the table in a streaming manner: "current_token_datas_v2" */
+  current_token_datas_v2_stream: Array<CurrentTokenDatasV2>;
+  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
+  current_token_ownerships: Array<CurrentTokenOwnerships>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
+  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_ownerships" */
+  current_token_ownerships_stream: Array<CurrentTokenOwnerships>;
+  /** fetch data from the table: "current_token_ownerships_v2" */
+  current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
+  /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
+  current_token_ownerships_v2_aggregate: CurrentTokenOwnershipsV2Aggregate;
+  /** fetch data from the table: "current_token_ownerships_v2" using primary key columns */
+  current_token_ownerships_v2_by_pk?: Maybe<CurrentTokenOwnershipsV2>;
+  /** fetch data from the table in a streaming manner: "current_token_ownerships_v2" */
+  current_token_ownerships_v2_stream: Array<CurrentTokenOwnershipsV2>;
+  /** fetch data from the table: "current_token_pending_claims" */
+  current_token_pending_claims: Array<CurrentTokenPendingClaims>;
+  /** fetch data from the table: "current_token_pending_claims" using primary key columns */
+  current_token_pending_claims_by_pk?: Maybe<CurrentTokenPendingClaims>;
+  /** fetch data from the table in a streaming manner: "current_token_pending_claims" */
+  current_token_pending_claims_stream: Array<CurrentTokenPendingClaims>;
+  /** fetch data from the table: "current_token_royalty_v1" */
+  current_token_royalty_v1: Array<CurrentTokenRoyaltyV1>;
+  /** fetch data from the table: "current_token_royalty_v1" using primary key columns */
+  current_token_royalty_v1_by_pk?: Maybe<CurrentTokenRoyaltyV1>;
+  /** fetch data from the table in a streaming manner: "current_token_royalty_v1" */
+  current_token_royalty_v1_stream: Array<CurrentTokenRoyaltyV1>;
+  /** An array relationship */
+  delegated_staking_activities: Array<DelegatedStakingActivities>;
+  /** fetch data from the table: "delegated_staking_activities" using primary key columns */
+  delegated_staking_activities_by_pk?: Maybe<DelegatedStakingActivities>;
+  /** fetch data from the table in a streaming manner: "delegated_staking_activities" */
+  delegated_staking_activities_stream: Array<DelegatedStakingActivities>;
+  /** fetch data from the table: "delegated_staking_pool_balances" */
+  delegated_staking_pool_balances: Array<DelegatedStakingPoolBalances>;
+  /** fetch aggregated fields from the table: "delegated_staking_pool_balances" */
+  delegated_staking_pool_balances_aggregate: DelegatedStakingPoolBalancesAggregate;
+  /** fetch data from the table: "delegated_staking_pool_balances" using primary key columns */
+  delegated_staking_pool_balances_by_pk?: Maybe<DelegatedStakingPoolBalances>;
+  /** fetch data from the table in a streaming manner: "delegated_staking_pool_balances" */
+  delegated_staking_pool_balances_stream: Array<DelegatedStakingPoolBalances>;
+  /** fetch data from the table: "delegated_staking_pools" */
+  delegated_staking_pools: Array<DelegatedStakingPools>;
+  /** fetch data from the table: "delegated_staking_pools" using primary key columns */
+  delegated_staking_pools_by_pk?: Maybe<DelegatedStakingPools>;
+  /** fetch data from the table in a streaming manner: "delegated_staking_pools" */
+  delegated_staking_pools_stream: Array<DelegatedStakingPools>;
+  /** fetch data from the table: "delegator_distinct_pool" */
+  delegator_distinct_pool: Array<DelegatorDistinctPool>;
+  /** fetch aggregated fields from the table: "delegator_distinct_pool" */
+  delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
+  /** fetch data from the table in a streaming manner: "delegator_distinct_pool" */
+  delegator_distinct_pool_stream: Array<DelegatorDistinctPool>;
+  /** fetch data from the table: "events" */
+  events: Array<Events>;
+  /** fetch data from the table: "events" using primary key columns */
+  events_by_pk?: Maybe<Events>;
+  /** fetch data from the table in a streaming manner: "events" */
+  events_stream: Array<Events>;
+  /** An array relationship */
+  fungible_asset_activities: Array<FungibleAssetActivities>;
+  /** fetch data from the table: "fungible_asset_activities" using primary key columns */
+  fungible_asset_activities_by_pk?: Maybe<FungibleAssetActivities>;
+  /** fetch data from the table in a streaming manner: "fungible_asset_activities" */
+  fungible_asset_activities_stream: Array<FungibleAssetActivities>;
+  /** fetch data from the table: "fungible_asset_metadata" */
+  fungible_asset_metadata: Array<FungibleAssetMetadata>;
+  /** fetch data from the table: "fungible_asset_metadata" using primary key columns */
+  fungible_asset_metadata_by_pk?: Maybe<FungibleAssetMetadata>;
+  /** fetch data from the table in a streaming manner: "fungible_asset_metadata" */
+  fungible_asset_metadata_stream: Array<FungibleAssetMetadata>;
+  /** fetch data from the table: "indexer_status" */
+  indexer_status: Array<IndexerStatus>;
+  /** fetch data from the table: "indexer_status" using primary key columns */
+  indexer_status_by_pk?: Maybe<IndexerStatus>;
+  /** fetch data from the table in a streaming manner: "indexer_status" */
+  indexer_status_stream: Array<IndexerStatus>;
+  /** fetch data from the table: "processor_metadata.ledger_infos" */
+  ledger_infos: Array<LedgerInfos>;
+  /** fetch data from the table: "processor_metadata.ledger_infos" using primary key columns */
+  ledger_infos_by_pk?: Maybe<LedgerInfos>;
+  /** fetch data from the table in a streaming manner: "processor_metadata.ledger_infos" */
+  ledger_infos_stream: Array<LedgerInfos>;
+  /** fetch data from the table: "legacy_migration_v1.move_resources" */
+  move_resources: Array<MoveResources>;
+  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
+  move_resources_aggregate: MoveResourcesAggregate;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.move_resources" */
+  move_resources_stream: Array<MoveResources>;
+  /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
+  nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
+  /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
+  nft_metadata_crawler_parsed_asset_uris_by_pk?: Maybe<NftMetadataCrawlerParsedAssetUris>;
+  /** fetch data from the table in a streaming manner: "nft_metadata_crawler.parsed_asset_uris" */
+  nft_metadata_crawler_parsed_asset_uris_stream: Array<NftMetadataCrawlerParsedAssetUris>;
+  /** fetch data from the table: "num_active_delegator_per_pool" */
+  num_active_delegator_per_pool: Array<NumActiveDelegatorPerPool>;
+  /** fetch data from the table in a streaming manner: "num_active_delegator_per_pool" */
+  num_active_delegator_per_pool_stream: Array<NumActiveDelegatorPerPool>;
+  /** fetch data from the table: "processor_metadata.processor_status" */
+  processor_status: Array<ProcessorStatus>;
+  /** fetch data from the table: "processor_metadata.processor_status" using primary key columns */
+  processor_status_by_pk?: Maybe<ProcessorStatus>;
+  /** fetch data from the table in a streaming manner: "processor_metadata.processor_status" */
+  processor_status_stream: Array<ProcessorStatus>;
+  /** fetch data from the table: "proposal_votes" */
+  proposal_votes: Array<ProposalVotes>;
+  /** fetch aggregated fields from the table: "proposal_votes" */
+  proposal_votes_aggregate: ProposalVotesAggregate;
+  /** fetch data from the table: "proposal_votes" using primary key columns */
+  proposal_votes_by_pk?: Maybe<ProposalVotes>;
+  /** fetch data from the table in a streaming manner: "proposal_votes" */
+  proposal_votes_stream: Array<ProposalVotes>;
+  /** fetch data from the table: "public_key_auth_keys" */
+  public_key_auth_keys: Array<PublicKeyAuthKeys>;
+  /** fetch aggregated fields from the table: "public_key_auth_keys" */
+  public_key_auth_keys_aggregate: PublicKeyAuthKeysAggregate;
+  /** fetch data from the table: "public_key_auth_keys" using primary key columns */
+  public_key_auth_keys_by_pk?: Maybe<PublicKeyAuthKeys>;
+  /** fetch data from the table in a streaming manner: "public_key_auth_keys" */
+  public_key_auth_keys_stream: Array<PublicKeyAuthKeys>;
+  /** fetch data from the table: "signatures" */
+  signatures: Array<Signatures>;
+  /** fetch data from the table: "signatures" using primary key columns */
+  signatures_by_pk?: Maybe<Signatures>;
+  /** fetch data from the table in a streaming manner: "signatures" */
+  signatures_stream: Array<Signatures>;
+  /** fetch data from the table: "table_items" */
+  table_items: Array<TableItems>;
+  /** fetch data from the table: "table_items" using primary key columns */
+  table_items_by_pk?: Maybe<TableItems>;
+  /** fetch data from the table in a streaming manner: "table_items" */
+  table_items_stream: Array<TableItems>;
+  /** fetch data from the table: "table_metadatas" */
+  table_metadatas: Array<TableMetadatas>;
+  /** fetch data from the table: "table_metadatas" using primary key columns */
+  table_metadatas_by_pk?: Maybe<TableMetadatas>;
+  /** fetch data from the table in a streaming manner: "table_metadatas" */
+  table_metadatas_stream: Array<TableMetadatas>;
+  /** An array relationship */
+  token_activities: Array<TokenActivities>;
+  /** An aggregate relationship */
+  token_activities_aggregate: TokenActivitiesAggregate;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_activities" */
+  token_activities_stream: Array<TokenActivities>;
+  /** An array relationship */
+  token_activities_v2: Array<TokenActivitiesV2>;
+  /** An aggregate relationship */
+  token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
+  /** fetch data from the table: "token_activities_v2" using primary key columns */
+  token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
+  /** fetch data from the table in a streaming manner: "token_activities_v2" */
+  token_activities_v2_stream: Array<TokenActivitiesV2>;
+  /** fetch data from the table: "legacy_migration_v1.token_datas" */
+  token_datas: Array<TokenDatas>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_datas" */
+  token_datas_stream: Array<TokenDatas>;
+  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
+  token_ownerships: Array<TokenOwnerships>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_ownerships" */
+  token_ownerships_stream: Array<TokenOwnerships>;
+  /** fetch data from the table: "legacy_migration_v1.tokens" */
+  tokens: Array<Tokens>;
+  /** fetch data from the table in a streaming manner: "legacy_migration_v1.tokens" */
+  tokens_stream: Array<Tokens>;
+  /** fetch data from the table: "user_transactions" */
+  user_transactions: Array<UserTransactions>;
+  /** fetch data from the table: "user_transactions" using primary key columns */
+  user_transactions_by_pk?: Maybe<UserTransactions>;
+  /** fetch data from the table in a streaming manner: "user_transactions" */
+  user_transactions_stream: Array<UserTransactions>;
+};
+
+
+export type CaassubscriptionRootAccountTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<AccountTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AccountTransactionsOrderBy>>;
+  where?: InputMaybe<AccountTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAccountTransactionsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AccountTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AccountTransactionsOrderBy>>;
+  where?: InputMaybe<AccountTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAccountTransactionsByPkArgs = {
+  account_address: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootAccountTransactionsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AccountTransactionsStreamCursorInput>>;
+  where?: InputMaybe<AccountTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressEventsSummaryArgs = {
+  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
+  where?: InputMaybe<AddressEventsSummaryBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressEventsSummaryStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AddressEventsSummaryStreamCursorInput>>;
+  where?: InputMaybe<AddressEventsSummaryBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromEventsArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
+  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromEventsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
+  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromEventsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AddressVersionFromEventsStreamCursorInput>>;
+  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromMoveResourcesArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
+  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromMoveResourcesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
+  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootAddressVersionFromMoveResourcesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AddressVersionFromMoveResourcesStreamCursorInput>>;
+  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootAuthKeyAccountAddressesArgs = {
+  distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AuthKeyAccountAddressesOrderBy>>;
+  where?: InputMaybe<AuthKeyAccountAddressesBoolExp>;
+};
+
+
+export type CaassubscriptionRootAuthKeyAccountAddressesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AuthKeyAccountAddressesOrderBy>>;
+  where?: InputMaybe<AuthKeyAccountAddressesBoolExp>;
+};
+
+
+export type CaassubscriptionRootAuthKeyAccountAddressesByPkArgs = {
+  account_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootAuthKeyAccountAddressesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<AuthKeyAccountAddressesStreamCursorInput>>;
+  where?: InputMaybe<AuthKeyAccountAddressesBoolExp>;
+};
+
+
+export type CaassubscriptionRootBlockMetadataTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<BlockMetadataTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BlockMetadataTransactionsOrderBy>>;
+  where?: InputMaybe<BlockMetadataTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootBlockMetadataTransactionsByPkArgs = {
+  version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootBlockMetadataTransactionsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BlockMetadataTransactionsStreamCursorInput>>;
+  where?: InputMaybe<BlockMetadataTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
+  where?: InputMaybe<CoinActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinActivitiesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
+  where?: InputMaybe<CoinActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CoinActivitiesStreamCursorInput>>;
+  where?: InputMaybe<CoinActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
+  where?: InputMaybe<CoinBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CoinBalancesStreamCursorInput>>;
+  where?: InputMaybe<CoinBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinInfosArgs = {
+  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
+  where?: InputMaybe<CoinInfosBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinInfosStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CoinInfosStreamCursorInput>>;
+  where?: InputMaybe<CoinInfosBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinSupplyArgs = {
+  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
+  where?: InputMaybe<CoinSupplyBoolExp>;
+};
+
+
+export type CaassubscriptionRootCoinSupplyByPkArgs = {
+  coin_type_hash: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootCoinSupplyStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CoinSupplyStreamCursorInput>>;
+  where?: InputMaybe<CoinSupplyBoolExp>;
+};
+
+
+export type CaassubscriptionRootCollectionDatasArgs = {
+  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
+  where?: InputMaybe<CollectionDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCollectionDatasStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CollectionDatasStreamCursorInput>>;
+  where?: InputMaybe<CollectionDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAnsLookupArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
+  where?: InputMaybe<CurrentAnsLookupBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAnsLookupStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentAnsLookupStreamCursorInput>>;
+  where?: InputMaybe<CurrentAnsLookupBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAnsLookupV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAnsLookupV2OrderBy>>;
+  where?: InputMaybe<CurrentAnsLookupV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAnsLookupV2ByPkArgs = {
+  domain: Scalars['String']['input'];
+  subdomain: Scalars['String']['input'];
+  token_standard: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentAnsLookupV2StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentAnsLookupV2StreamCursorInput>>;
+  where?: InputMaybe<CurrentAnsLookupV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAptosNamesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
+  where?: InputMaybe<CurrentAptosNamesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAptosNamesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
+  where?: InputMaybe<CurrentAptosNamesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentAptosNamesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentAptosNamesStreamCursorInput>>;
+  where?: InputMaybe<CurrentAptosNamesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCoinBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
+  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCoinBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentCoinBalancesStreamCursorInput>>;
+  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionDatasArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
+  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionDatasStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentCollectionDatasStreamCursorInput>>;
+  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionOwnershipV2ViewArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewOrderBy>>;
+  where?: InputMaybe<CurrentCollectionOwnershipV2ViewBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionOwnershipV2ViewAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionOwnershipV2ViewOrderBy>>;
+  where?: InputMaybe<CurrentCollectionOwnershipV2ViewBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionOwnershipV2ViewStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentCollectionOwnershipV2ViewStreamCursorInput>>;
+  where?: InputMaybe<CurrentCollectionOwnershipV2ViewBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionsV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentCollectionsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentCollectionsV2OrderBy>>;
+  where?: InputMaybe<CurrentCollectionsV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentCollectionsV2ByPkArgs = {
+  collection_id: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentCollectionsV2StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentCollectionsV2StreamCursorInput>>;
+  where?: InputMaybe<CurrentCollectionsV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedStakingPoolBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<CurrentDelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedStakingPoolBalancesByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedStakingPoolBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentDelegatedStakingPoolBalancesStreamCursorInput>>;
+  where?: InputMaybe<CurrentDelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedVoterArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatedVoterSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatedVoterOrderBy>>;
+  where?: InputMaybe<CurrentDelegatedVoterBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedVoterByPkArgs = {
+  delegation_pool_address: Scalars['String']['input'];
+  delegator_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentDelegatedVoterStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentDelegatedVoterStreamCursorInput>>;
+  where?: InputMaybe<CurrentDelegatedVoterBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatorBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentDelegatorBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentDelegatorBalancesOrderBy>>;
+  where?: InputMaybe<CurrentDelegatorBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentDelegatorBalancesByPkArgs = {
+  delegator_address: Scalars['String']['input'];
+  pool_address: Scalars['String']['input'];
+  pool_type: Scalars['String']['input'];
+  table_handle: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentDelegatorBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentDelegatorBalancesStreamCursorInput>>;
+  where?: InputMaybe<CurrentDelegatorBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentFungibleAssetBalancesArgs = {
+  distinct_on?: InputMaybe<Array<CurrentFungibleAssetBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentFungibleAssetBalancesOrderBy>>;
+  where?: InputMaybe<CurrentFungibleAssetBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentFungibleAssetBalancesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentFungibleAssetBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentFungibleAssetBalancesOrderBy>>;
+  where?: InputMaybe<CurrentFungibleAssetBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentFungibleAssetBalancesByPkArgs = {
+  storage_id: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentFungibleAssetBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentFungibleAssetBalancesStreamCursorInput>>;
+  where?: InputMaybe<CurrentFungibleAssetBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentObjectsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentObjectsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentObjectsOrderBy>>;
+  where?: InputMaybe<CurrentObjectsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentObjectsByPkArgs = {
+  object_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentObjectsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentObjectsStreamCursorInput>>;
+  where?: InputMaybe<CurrentObjectsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentStakingPoolVoterArgs = {
+  distinct_on?: InputMaybe<Array<CurrentStakingPoolVoterSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentStakingPoolVoterOrderBy>>;
+  where?: InputMaybe<CurrentStakingPoolVoterBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentStakingPoolVoterByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentStakingPoolVoterStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentStakingPoolVoterStreamCursorInput>>;
+  where?: InputMaybe<CurrentStakingPoolVoterBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTableItemsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTableItemsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTableItemsOrderBy>>;
+  where?: InputMaybe<CurrentTableItemsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTableItemsByPkArgs = {
+  key_hash: Scalars['String']['input'];
+  table_handle: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentTableItemsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTableItemsStreamCursorInput>>;
+  where?: InputMaybe<CurrentTableItemsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenDatasArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
+  where?: InputMaybe<CurrentTokenDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenDatasStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenDatasStreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenDatasV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenDatasV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenDatasV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenDatasV2ByPkArgs = {
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentTokenDatasV2StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenDatasV2StreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenDatasV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenOwnershipsStreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsV2Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsV2AggregateArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenOwnershipsV2OrderBy>>;
+  where?: InputMaybe<CurrentTokenOwnershipsV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsV2ByPkArgs = {
+  owner_address: Scalars['String']['input'];
+  property_version_v1: Scalars['numeric']['input'];
+  storage_id: Scalars['String']['input'];
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentTokenOwnershipsV2StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenOwnershipsV2StreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenOwnershipsV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenPendingClaimsArgs = {
+  distinct_on?: InputMaybe<Array<CurrentTokenPendingClaimsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenPendingClaimsOrderBy>>;
+  where?: InputMaybe<CurrentTokenPendingClaimsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenPendingClaimsByPkArgs = {
+  from_address: Scalars['String']['input'];
+  property_version: Scalars['numeric']['input'];
+  to_address: Scalars['String']['input'];
+  token_data_id_hash: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentTokenPendingClaimsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenPendingClaimsStreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenPendingClaimsBoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenRoyaltyV1Args = {
+  distinct_on?: InputMaybe<Array<CurrentTokenRoyaltyV1SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<CurrentTokenRoyaltyV1OrderBy>>;
+  where?: InputMaybe<CurrentTokenRoyaltyV1BoolExp>;
+};
+
+
+export type CaassubscriptionRootCurrentTokenRoyaltyV1ByPkArgs = {
+  token_data_id: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootCurrentTokenRoyaltyV1StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<CurrentTokenRoyaltyV1StreamCursorInput>>;
+  where?: InputMaybe<CurrentTokenRoyaltyV1BoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingActivitiesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingActivitiesByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootDelegatedStakingActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<DelegatedStakingActivitiesStreamCursorInput>>;
+  where?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolBalancesArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolBalancesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolBalancesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolBalancesOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolBalancesByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolBalancesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<DelegatedStakingPoolBalancesStreamCursorInput>>;
+  where?: InputMaybe<DelegatedStakingPoolBalancesBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolsArgs = {
+  distinct_on?: InputMaybe<Array<DelegatedStakingPoolsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatedStakingPoolsOrderBy>>;
+  where?: InputMaybe<DelegatedStakingPoolsBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolsByPkArgs = {
+  staking_pool_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootDelegatedStakingPoolsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<DelegatedStakingPoolsStreamCursorInput>>;
+  where?: InputMaybe<DelegatedStakingPoolsBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatorDistinctPoolArgs = {
+  distinct_on?: InputMaybe<Array<DelegatorDistinctPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatorDistinctPoolOrderBy>>;
+  where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatorDistinctPoolAggregateArgs = {
+  distinct_on?: InputMaybe<Array<DelegatorDistinctPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<DelegatorDistinctPoolOrderBy>>;
+  where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
+};
+
+
+export type CaassubscriptionRootDelegatorDistinctPoolStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<DelegatorDistinctPoolStreamCursorInput>>;
+  where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
+};
+
+
+export type CaassubscriptionRootEventsArgs = {
+  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<EventsOrderBy>>;
+  where?: InputMaybe<EventsBoolExp>;
+};
+
+
+export type CaassubscriptionRootEventsByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootEventsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<EventsStreamCursorInput>>;
+  where?: InputMaybe<EventsBoolExp>;
+};
+
+
+export type CaassubscriptionRootFungibleAssetActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<FungibleAssetActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FungibleAssetActivitiesOrderBy>>;
+  where?: InputMaybe<FungibleAssetActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootFungibleAssetActivitiesByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootFungibleAssetActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<FungibleAssetActivitiesStreamCursorInput>>;
+  where?: InputMaybe<FungibleAssetActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootFungibleAssetMetadataArgs = {
+  distinct_on?: InputMaybe<Array<FungibleAssetMetadataSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<FungibleAssetMetadataOrderBy>>;
+  where?: InputMaybe<FungibleAssetMetadataBoolExp>;
+};
+
+
+export type CaassubscriptionRootFungibleAssetMetadataByPkArgs = {
+  asset_type: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootFungibleAssetMetadataStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<FungibleAssetMetadataStreamCursorInput>>;
+  where?: InputMaybe<FungibleAssetMetadataBoolExp>;
+};
+
+
+export type CaassubscriptionRootIndexerStatusArgs = {
+  distinct_on?: InputMaybe<Array<IndexerStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<IndexerStatusOrderBy>>;
+  where?: InputMaybe<IndexerStatusBoolExp>;
+};
+
+
+export type CaassubscriptionRootIndexerStatusByPkArgs = {
+  db: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootIndexerStatusStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<IndexerStatusStreamCursorInput>>;
+  where?: InputMaybe<IndexerStatusBoolExp>;
+};
+
+
+export type CaassubscriptionRootLedgerInfosArgs = {
+  distinct_on?: InputMaybe<Array<LedgerInfosSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<LedgerInfosOrderBy>>;
+  where?: InputMaybe<LedgerInfosBoolExp>;
+};
+
+
+export type CaassubscriptionRootLedgerInfosByPkArgs = {
+  chain_id: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootLedgerInfosStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<LedgerInfosStreamCursorInput>>;
+  where?: InputMaybe<LedgerInfosBoolExp>;
+};
+
+
+export type CaassubscriptionRootMoveResourcesArgs = {
+  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
+  where?: InputMaybe<MoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootMoveResourcesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
+  where?: InputMaybe<MoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootMoveResourcesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<MoveResourcesStreamCursorInput>>;
+  where?: InputMaybe<MoveResourcesBoolExp>;
+};
+
+
+export type CaassubscriptionRootNftMetadataCrawlerParsedAssetUrisArgs = {
+  distinct_on?: InputMaybe<Array<NftMetadataCrawlerParsedAssetUrisSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<NftMetadataCrawlerParsedAssetUrisOrderBy>>;
+  where?: InputMaybe<NftMetadataCrawlerParsedAssetUrisBoolExp>;
+};
+
+
+export type CaassubscriptionRootNftMetadataCrawlerParsedAssetUrisByPkArgs = {
+  asset_uri: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootNftMetadataCrawlerParsedAssetUrisStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<NftMetadataCrawlerParsedAssetUrisStreamCursorInput>>;
+  where?: InputMaybe<NftMetadataCrawlerParsedAssetUrisBoolExp>;
+};
+
+
+export type CaassubscriptionRootNumActiveDelegatorPerPoolArgs = {
+  distinct_on?: InputMaybe<Array<NumActiveDelegatorPerPoolSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<NumActiveDelegatorPerPoolOrderBy>>;
+  where?: InputMaybe<NumActiveDelegatorPerPoolBoolExp>;
+};
+
+
+export type CaassubscriptionRootNumActiveDelegatorPerPoolStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<NumActiveDelegatorPerPoolStreamCursorInput>>;
+  where?: InputMaybe<NumActiveDelegatorPerPoolBoolExp>;
+};
+
+
+export type CaassubscriptionRootProcessorStatusArgs = {
+  distinct_on?: InputMaybe<Array<ProcessorStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProcessorStatusOrderBy>>;
+  where?: InputMaybe<ProcessorStatusBoolExp>;
+};
+
+
+export type CaassubscriptionRootProcessorStatusByPkArgs = {
+  processor: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootProcessorStatusStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ProcessorStatusStreamCursorInput>>;
+  where?: InputMaybe<ProcessorStatusBoolExp>;
+};
+
+
+export type CaassubscriptionRootProposalVotesArgs = {
+  distinct_on?: InputMaybe<Array<ProposalVotesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProposalVotesOrderBy>>;
+  where?: InputMaybe<ProposalVotesBoolExp>;
+};
+
+
+export type CaassubscriptionRootProposalVotesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ProposalVotesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ProposalVotesOrderBy>>;
+  where?: InputMaybe<ProposalVotesBoolExp>;
+};
+
+
+export type CaassubscriptionRootProposalVotesByPkArgs = {
+  proposal_id: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+  voter_address: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootProposalVotesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ProposalVotesStreamCursorInput>>;
+  where?: InputMaybe<ProposalVotesBoolExp>;
+};
+
+
+export type CaassubscriptionRootPublicKeyAuthKeysArgs = {
+  distinct_on?: InputMaybe<Array<PublicKeyAuthKeysSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PublicKeyAuthKeysOrderBy>>;
+  where?: InputMaybe<PublicKeyAuthKeysBoolExp>;
+};
+
+
+export type CaassubscriptionRootPublicKeyAuthKeysAggregateArgs = {
+  distinct_on?: InputMaybe<Array<PublicKeyAuthKeysSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<PublicKeyAuthKeysOrderBy>>;
+  where?: InputMaybe<PublicKeyAuthKeysBoolExp>;
+};
+
+
+export type CaassubscriptionRootPublicKeyAuthKeysByPkArgs = {
+  auth_key: Scalars['String']['input'];
+  public_key: Scalars['String']['input'];
+  public_key_type: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootPublicKeyAuthKeysStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<PublicKeyAuthKeysStreamCursorInput>>;
+  where?: InputMaybe<PublicKeyAuthKeysBoolExp>;
+};
+
+
+export type CaassubscriptionRootSignaturesArgs = {
+  distinct_on?: InputMaybe<Array<SignaturesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<SignaturesOrderBy>>;
+  where?: InputMaybe<SignaturesBoolExp>;
+};
+
+
+export type CaassubscriptionRootSignaturesByPkArgs = {
+  is_sender_primary: Scalars['Boolean']['input'];
+  multi_agent_index: Scalars['bigint']['input'];
+  multi_sig_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootSignaturesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<SignaturesStreamCursorInput>>;
+  where?: InputMaybe<SignaturesBoolExp>;
+};
+
+
+export type CaassubscriptionRootTableItemsArgs = {
+  distinct_on?: InputMaybe<Array<TableItemsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TableItemsOrderBy>>;
+  where?: InputMaybe<TableItemsBoolExp>;
+};
+
+
+export type CaassubscriptionRootTableItemsByPkArgs = {
+  transaction_version: Scalars['bigint']['input'];
+  write_set_change_index: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootTableItemsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TableItemsStreamCursorInput>>;
+  where?: InputMaybe<TableItemsBoolExp>;
+};
+
+
+export type CaassubscriptionRootTableMetadatasArgs = {
+  distinct_on?: InputMaybe<Array<TableMetadatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TableMetadatasOrderBy>>;
+  where?: InputMaybe<TableMetadatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootTableMetadatasByPkArgs = {
+  handle: Scalars['String']['input'];
+};
+
+
+export type CaassubscriptionRootTableMetadatasStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TableMetadatasStreamCursorInput>>;
+  where?: InputMaybe<TableMetadatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
+  where?: InputMaybe<TokenActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
+  where?: InputMaybe<TokenActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TokenActivitiesStreamCursorInput>>;
+  where?: InputMaybe<TokenActivitiesBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesV2Args = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
+  where?: InputMaybe<TokenActivitiesV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesV2AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
+  where?: InputMaybe<TokenActivitiesV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenActivitiesV2ByPkArgs = {
+  event_index: Scalars['bigint']['input'];
+  transaction_version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootTokenActivitiesV2StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TokenActivitiesV2StreamCursorInput>>;
+  where?: InputMaybe<TokenActivitiesV2BoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenDatasArgs = {
+  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
+  where?: InputMaybe<TokenDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenDatasStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TokenDatasStreamCursorInput>>;
+  where?: InputMaybe<TokenDatasBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenOwnershipsArgs = {
+  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
+  where?: InputMaybe<TokenOwnershipsBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokenOwnershipsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TokenOwnershipsStreamCursorInput>>;
+  where?: InputMaybe<TokenOwnershipsBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokensArgs = {
+  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TokensOrderBy>>;
+  where?: InputMaybe<TokensBoolExp>;
+};
+
+
+export type CaassubscriptionRootTokensStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TokensStreamCursorInput>>;
+  where?: InputMaybe<TokensBoolExp>;
+};
+
+
+export type CaassubscriptionRootUserTransactionsArgs = {
+  distinct_on?: InputMaybe<Array<UserTransactionsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<UserTransactionsOrderBy>>;
+  where?: InputMaybe<UserTransactionsBoolExp>;
+};
+
+
+export type CaassubscriptionRootUserTransactionsByPkArgs = {
+  version: Scalars['bigint']['input'];
+};
+
+
+export type CaassubscriptionRootUserTransactionsStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<UserTransactionsStreamCursorInput>>;
+  where?: InputMaybe<UserTransactionsBoolExp>;
+};
+
 /** columns and relationships of "chainlink_oracle_current_config" */
 export type ChainlinkOracleCurrentConfig = {
   base: Scalars['String']['output'];
@@ -8776,6 +11442,11 @@ export type QueryRoot = {
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
   borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "borrower_usage" */
+  borrower_usage: Array<BorrowerUsage>;
+  /** fetch data from the table: "borrower_usage" using primary key columns */
+  borrower_usage_by_pk?: Maybe<BorrowerUsage>;
+  caas?: Maybe<CaasqueryRoot>;
   /** fetch data from the table: "chainlink_oracle_current_config" */
   chainlink_oracle_current_config: Array<ChainlinkOracleCurrentConfig>;
   /** fetch data from the table: "chainlink_oracle_current_config" using primary key columns */
@@ -9034,6 +11705,14 @@ export type QueryRoot = {
   table_metadatas: Array<TableMetadatas>;
   /** fetch data from the table: "table_metadatas" using primary key columns */
   table_metadatas_by_pk?: Maybe<TableMetadatas>;
+  /** fetch data from the table: "tapp_llp_position_current" */
+  tapp_llp_position_current: Array<TappLlpPositionCurrent>;
+  /** fetch data from the table: "tapp_llp_position_current" using primary key columns */
+  tapp_llp_position_current_by_pk?: Maybe<TappLlpPositionCurrent>;
+  /** fetch data from the table: "tapp_llp_position_debt_stores" */
+  tapp_llp_position_debt_stores: Array<TappLlpPositionDebtStores>;
+  /** fetch data from the table: "tapp_llp_position_debt_stores" using primary key columns */
+  tapp_llp_position_debt_stores_by_pk?: Maybe<TappLlpPositionDebtStores>;
   /** An array relationship */
   token_activities: Array<TokenActivities>;
   /** An aggregate relationship */
@@ -9304,6 +11983,21 @@ export type QueryRootBorrowRiskParametersCurrentByPkArgs = {
   collateral: Scalars['String']['input'];
   market: Scalars['String']['input'];
   vault: Scalars['String']['input'];
+};
+
+
+export type QueryRootBorrowerUsageArgs = {
+  distinct_on?: InputMaybe<Array<BorrowerUsageSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowerUsageOrderBy>>;
+  where?: InputMaybe<BorrowerUsageBoolExp>;
+};
+
+
+export type QueryRootBorrowerUsageByPkArgs = {
+  borrower: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
 };
 
 
@@ -10310,6 +13004,35 @@ export type QueryRootTableMetadatasByPkArgs = {
 };
 
 
+export type QueryRootTappLlpPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<TappLlpPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TappLlpPositionCurrentOrderBy>>;
+  where?: InputMaybe<TappLlpPositionCurrentBoolExp>;
+};
+
+
+export type QueryRootTappLlpPositionCurrentByPkArgs = {
+  position: Scalars['String']['input'];
+};
+
+
+export type QueryRootTappLlpPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<TappLlpPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TappLlpPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+};
+
+
+export type QueryRootTappLlpPositionDebtStoresByPkArgs = {
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
 export type QueryRootTokenActivitiesArgs = {
   distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -11305,6 +14028,13 @@ export type SubscriptionRoot = {
   borrow_risk_parameters_current_by_pk?: Maybe<BorrowRiskParametersCurrent>;
   /** fetch data from the table in a streaming manner: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current_stream: Array<BorrowRiskParametersCurrent>;
+  /** fetch data from the table: "borrower_usage" */
+  borrower_usage: Array<BorrowerUsage>;
+  /** fetch data from the table: "borrower_usage" using primary key columns */
+  borrower_usage_by_pk?: Maybe<BorrowerUsage>;
+  /** fetch data from the table in a streaming manner: "borrower_usage" */
+  borrower_usage_stream: Array<BorrowerUsage>;
+  caas?: Maybe<CaassubscriptionRoot>;
   /** fetch data from the table: "chainlink_oracle_current_config" */
   chainlink_oracle_current_config: Array<ChainlinkOracleCurrentConfig>;
   /** fetch data from the table: "chainlink_oracle_current_config" using primary key columns */
@@ -11695,6 +14425,18 @@ export type SubscriptionRoot = {
   table_metadatas_by_pk?: Maybe<TableMetadatas>;
   /** fetch data from the table in a streaming manner: "table_metadatas" */
   table_metadatas_stream: Array<TableMetadatas>;
+  /** fetch data from the table: "tapp_llp_position_current" */
+  tapp_llp_position_current: Array<TappLlpPositionCurrent>;
+  /** fetch data from the table: "tapp_llp_position_current" using primary key columns */
+  tapp_llp_position_current_by_pk?: Maybe<TappLlpPositionCurrent>;
+  /** fetch data from the table in a streaming manner: "tapp_llp_position_current" */
+  tapp_llp_position_current_stream: Array<TappLlpPositionCurrent>;
+  /** fetch data from the table: "tapp_llp_position_debt_stores" */
+  tapp_llp_position_debt_stores: Array<TappLlpPositionDebtStores>;
+  /** fetch data from the table: "tapp_llp_position_debt_stores" using primary key columns */
+  tapp_llp_position_debt_stores_by_pk?: Maybe<TappLlpPositionDebtStores>;
+  /** fetch data from the table in a streaming manner: "tapp_llp_position_debt_stores" */
+  tapp_llp_position_debt_stores_stream: Array<TappLlpPositionDebtStores>;
   /** An array relationship */
   token_activities: Array<TokenActivities>;
   /** An aggregate relationship */
@@ -12075,6 +14817,28 @@ export type SubscriptionRootBorrowRiskParametersCurrentStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<BorrowRiskParametersCurrentStreamCursorInput>>;
   where?: InputMaybe<BorrowRiskParametersCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowerUsageArgs = {
+  distinct_on?: InputMaybe<Array<BorrowerUsageSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowerUsageOrderBy>>;
+  where?: InputMaybe<BorrowerUsageBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowerUsageByPkArgs = {
+  borrower: Scalars['String']['input'];
+  vault_address: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootBorrowerUsageStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BorrowerUsageStreamCursorInput>>;
+  where?: InputMaybe<BorrowerUsageBoolExp>;
 };
 
 
@@ -13543,6 +16307,49 @@ export type SubscriptionRootTableMetadatasStreamArgs = {
 };
 
 
+export type SubscriptionRootTappLlpPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<TappLlpPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TappLlpPositionCurrentOrderBy>>;
+  where?: InputMaybe<TappLlpPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootTappLlpPositionCurrentByPkArgs = {
+  position: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootTappLlpPositionCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TappLlpPositionCurrentStreamCursorInput>>;
+  where?: InputMaybe<TappLlpPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootTappLlpPositionDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<TappLlpPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TappLlpPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+};
+
+
+export type SubscriptionRootTappLlpPositionDebtStoresByPkArgs = {
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootTappLlpPositionDebtStoresStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<TappLlpPositionDebtStoresStreamCursorInput>>;
+  where?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+};
+
+
 export type SubscriptionRootTokenActivitiesArgs = {
   distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -14154,6 +16961,216 @@ export type TableMetadatasStreamCursorValueInput = {
   handle?: InputMaybe<Scalars['String']['input']>;
   key_type?: InputMaybe<Scalars['String']['input']>;
   value_type?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "tapp_llp_position_current" */
+export type TappLlpPositionCurrent = {
+  collateral: Scalars['String']['output'];
+  /** An array relationship */
+  debt_stores: Array<TappLlpPositionDebtStores>;
+  market: Scalars['String']['output'];
+  /** An object relationship */
+  market_info?: Maybe<BorrowMarket>;
+  owner: Scalars['String']['output'];
+  position: Scalars['String']['output'];
+  status?: Maybe<Scalars['numeric']['output']>;
+};
+
+
+/** columns and relationships of "tapp_llp_position_current" */
+export type TappLlpPositionCurrentDebtStoresArgs = {
+  distinct_on?: InputMaybe<Array<TappLlpPositionDebtStoresSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<TappLlpPositionDebtStoresOrderBy>>;
+  where?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+};
+
+/** Boolean expression to filter rows from the table "tapp_llp_position_current". All fields are combined with a logical 'AND'. */
+export type TappLlpPositionCurrentBoolExp = {
+  _and?: InputMaybe<Array<TappLlpPositionCurrentBoolExp>>;
+  _not?: InputMaybe<TappLlpPositionCurrentBoolExp>;
+  _or?: InputMaybe<Array<TappLlpPositionCurrentBoolExp>>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  debt_stores?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+  market?: InputMaybe<StringComparisonExp>;
+  market_info?: InputMaybe<BorrowMarketBoolExp>;
+  owner?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "tapp_llp_position_current". */
+export type TappLlpPositionCurrentOrderBy = {
+  collateral?: InputMaybe<OrderBy>;
+  debt_stores_aggregate?: InputMaybe<TappLlpPositionDebtStoresAggregateOrderBy>;
+  market?: InputMaybe<OrderBy>;
+  market_info?: InputMaybe<BorrowMarketOrderBy>;
+  owner?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "tapp_llp_position_current" */
+export enum TappLlpPositionCurrentSelectColumn {
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  Market = 'market',
+  /** column name */
+  Owner = 'owner',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  Status = 'status'
+}
+
+/** Streaming cursor of the table "tapp_llp_position_current" */
+export type TappLlpPositionCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: TappLlpPositionCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TappLlpPositionCurrentStreamCursorValueInput = {
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStores = {
+  debt_asset_balance?: Maybe<CurrentFungibleAssetBalances>;
+  debt_store?: Maybe<Scalars['String']['output']>;
+  position: Scalars['String']['output'];
+  status?: Maybe<Scalars['numeric']['output']>;
+  vault: Scalars['String']['output'];
+  /** An object relationship */
+  vault_info?: Maybe<VaultInfo>;
+};
+
+/** order by aggregate values of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresAggregateOrderBy = {
+  avg?: InputMaybe<TappLlpPositionDebtStoresAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<TappLlpPositionDebtStoresMaxOrderBy>;
+  min?: InputMaybe<TappLlpPositionDebtStoresMinOrderBy>;
+  stddev?: InputMaybe<TappLlpPositionDebtStoresStddevOrderBy>;
+  stddev_pop?: InputMaybe<TappLlpPositionDebtStoresStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<TappLlpPositionDebtStoresStddevSampOrderBy>;
+  sum?: InputMaybe<TappLlpPositionDebtStoresSumOrderBy>;
+  var_pop?: InputMaybe<TappLlpPositionDebtStoresVarPopOrderBy>;
+  var_samp?: InputMaybe<TappLlpPositionDebtStoresVarSampOrderBy>;
+  variance?: InputMaybe<TappLlpPositionDebtStoresVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresAvgOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "tapp_llp_position_debt_stores". All fields are combined with a logical 'AND'. */
+export type TappLlpPositionDebtStoresBoolExp = {
+  _and?: InputMaybe<Array<TappLlpPositionDebtStoresBoolExp>>;
+  _not?: InputMaybe<TappLlpPositionDebtStoresBoolExp>;
+  _or?: InputMaybe<Array<TappLlpPositionDebtStoresBoolExp>>;
+  debt_store?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
+  vault_info?: InputMaybe<VaultInfoBoolExp>;
+};
+
+/** order by max() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresMaxOrderBy = {
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresMinOrderBy = {
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** Ordering options when selecting data from "tapp_llp_position_debt_stores". */
+export type TappLlpPositionDebtStoresOrderBy = {
+  debt_store?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+  vault_info?: InputMaybe<VaultInfoOrderBy>;
+};
+
+/** select columns of table "tapp_llp_position_debt_stores" */
+export enum TappLlpPositionDebtStoresSelectColumn {
+  /** column name */
+  DebtStore = 'debt_store',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  Vault = 'vault'
+}
+
+/** order by stddev() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresStddevOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresStddevPopOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresStddevSampOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: TappLlpPositionDebtStoresStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TappLlpPositionDebtStoresStreamCursorValueInput = {
+  debt_store?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresSumOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresVarPopOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresVarSampOrderBy = {
+  status?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "tapp_llp_position_debt_stores" */
+export type TappLlpPositionDebtStoresVarianceOrderBy = {
+  status?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */

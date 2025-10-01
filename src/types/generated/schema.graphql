@@ -2021,6 +2021,3042 @@ input borrow_risk_parameters_current_variance_order_by {
 }
 
 """
+columns and relationships of "borrower_usage"
+"""
+type borrower_usage {
+  borrower: String!
+  new_debt_shares: numeric!
+  vault_address: String!
+}
+
+"""
+Boolean expression to filter rows from the table "borrower_usage". All fields are combined with a logical 'AND'.
+"""
+input borrower_usage_bool_exp {
+  _and: [borrower_usage_bool_exp!]
+  _not: borrower_usage_bool_exp
+  _or: [borrower_usage_bool_exp!]
+  borrower: String_comparison_exp
+  new_debt_shares: numeric_comparison_exp
+  vault_address: String_comparison_exp
+}
+
+"""Ordering options when selecting data from "borrower_usage"."""
+input borrower_usage_order_by {
+  borrower: order_by
+  new_debt_shares: order_by
+  vault_address: order_by
+}
+
+"""
+select columns of table "borrower_usage"
+"""
+enum borrower_usage_select_column {
+  """column name"""
+  borrower
+  """column name"""
+  new_debt_shares
+  """column name"""
+  vault_address
+}
+
+"""
+Streaming cursor of the table "borrower_usage"
+"""
+input borrower_usage_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: borrower_usage_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input borrower_usage_stream_cursor_value_input {
+  borrower: String
+  new_debt_shares: numeric
+  vault_address: String
+}
+
+type caasquery_root {
+  """
+  fetch data from the table: "account_transactions"
+  """
+  account_transactions(
+    """distinct select on columns"""
+    distinct_on: [account_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [account_transactions_order_by!]
+    """filter the rows returned"""
+    where: account_transactions_bool_exp
+  ): [account_transactions!]!
+  """
+  fetch aggregated fields from the table: "account_transactions"
+  """
+  account_transactions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [account_transactions_order_by!]
+    """filter the rows returned"""
+    where: account_transactions_bool_exp
+  ): account_transactions_aggregate!
+  """
+  fetch data from the table: "account_transactions" using primary key columns
+  """
+  account_transactions_by_pk(account_address: String!, transaction_version: bigint!): account_transactions
+  """
+  fetch data from the table: "address_events_summary"
+  """
+  address_events_summary(
+    """distinct select on columns"""
+    distinct_on: [address_events_summary_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_events_summary_order_by!]
+    """filter the rows returned"""
+    where: address_events_summary_bool_exp
+  ): [address_events_summary!]!
+  """
+  fetch data from the table: "address_version_from_events"
+  """
+  address_version_from_events(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_events_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_events_bool_exp
+  ): [address_version_from_events!]!
+  """
+  fetch aggregated fields from the table: "address_version_from_events"
+  """
+  address_version_from_events_aggregate(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_events_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_events_bool_exp
+  ): address_version_from_events_aggregate!
+  """
+  fetch data from the table: "legacy_migration_v1.address_version_from_move_resources"
+  """
+  address_version_from_move_resources(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_move_resources_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_move_resources_bool_exp
+  ): [address_version_from_move_resources!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources"
+  """
+  address_version_from_move_resources_aggregate(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_move_resources_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_move_resources_bool_exp
+  ): address_version_from_move_resources_aggregate!
+  """
+  fetch data from the table: "auth_key_account_addresses"
+  """
+  auth_key_account_addresses(
+    """distinct select on columns"""
+    distinct_on: [auth_key_account_addresses_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [auth_key_account_addresses_order_by!]
+    """filter the rows returned"""
+    where: auth_key_account_addresses_bool_exp
+  ): [auth_key_account_addresses!]!
+  """
+  fetch aggregated fields from the table: "auth_key_account_addresses"
+  """
+  auth_key_account_addresses_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_key_account_addresses_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [auth_key_account_addresses_order_by!]
+    """filter the rows returned"""
+    where: auth_key_account_addresses_bool_exp
+  ): auth_key_account_addresses_aggregate!
+  """
+  fetch data from the table: "auth_key_account_addresses" using primary key columns
+  """
+  auth_key_account_addresses_by_pk(account_address: String!): auth_key_account_addresses
+  """
+  fetch data from the table: "block_metadata_transactions"
+  """
+  block_metadata_transactions(
+    """distinct select on columns"""
+    distinct_on: [block_metadata_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [block_metadata_transactions_order_by!]
+    """filter the rows returned"""
+    where: block_metadata_transactions_bool_exp
+  ): [block_metadata_transactions!]!
+  """
+  fetch data from the table: "block_metadata_transactions" using primary key columns
+  """
+  block_metadata_transactions_by_pk(version: bigint!): block_metadata_transactions
+  """An array relationship"""
+  coin_activities(
+    """distinct select on columns"""
+    distinct_on: [coin_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_activities_order_by!]
+    """filter the rows returned"""
+    where: coin_activities_bool_exp
+  ): [coin_activities!]!
+  """An aggregate relationship"""
+  coin_activities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [coin_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_activities_order_by!]
+    """filter the rows returned"""
+    where: coin_activities_bool_exp
+  ): coin_activities_aggregate!
+  """
+  fetch data from the table: "legacy_migration_v1.coin_balances"
+  """
+  coin_balances(
+    """distinct select on columns"""
+    distinct_on: [coin_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_balances_order_by!]
+    """filter the rows returned"""
+    where: coin_balances_bool_exp
+  ): [coin_balances!]!
+  """
+  fetch data from the table: "legacy_migration_v1.coin_infos"
+  """
+  coin_infos(
+    """distinct select on columns"""
+    distinct_on: [coin_infos_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_infos_order_by!]
+    """filter the rows returned"""
+    where: coin_infos_bool_exp
+  ): [coin_infos!]!
+  """
+  fetch data from the table: "coin_supply"
+  """
+  coin_supply(
+    """distinct select on columns"""
+    distinct_on: [coin_supply_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_supply_order_by!]
+    """filter the rows returned"""
+    where: coin_supply_bool_exp
+  ): [coin_supply!]!
+  """fetch data from the table: "coin_supply" using primary key columns"""
+  coin_supply_by_pk(coin_type_hash: String!, transaction_version: bigint!): coin_supply
+  """
+  fetch data from the table: "legacy_migration_v1.collection_datas"
+  """
+  collection_datas(
+    """distinct select on columns"""
+    distinct_on: [collection_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [collection_datas_order_by!]
+    """filter the rows returned"""
+    where: collection_datas_bool_exp
+  ): [collection_datas!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_ans_lookup"
+  """
+  current_ans_lookup(
+    """distinct select on columns"""
+    distinct_on: [current_ans_lookup_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_ans_lookup_order_by!]
+    """filter the rows returned"""
+    where: current_ans_lookup_bool_exp
+  ): [current_ans_lookup!]!
+  """
+  fetch data from the table: "current_ans_lookup_v2"
+  """
+  current_ans_lookup_v2(
+    """distinct select on columns"""
+    distinct_on: [current_ans_lookup_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_ans_lookup_v2_order_by!]
+    """filter the rows returned"""
+    where: current_ans_lookup_v2_bool_exp
+  ): [current_ans_lookup_v2!]!
+  """
+  fetch data from the table: "current_ans_lookup_v2" using primary key columns
+  """
+  current_ans_lookup_v2_by_pk(domain: String!, subdomain: String!, token_standard: String!): current_ans_lookup_v2
+  """
+  fetch data from the table: "current_aptos_names"
+  """
+  current_aptos_names(
+    """distinct select on columns"""
+    distinct_on: [current_aptos_names_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_aptos_names_order_by!]
+    """filter the rows returned"""
+    where: current_aptos_names_bool_exp
+  ): [current_aptos_names!]!
+  """
+  fetch aggregated fields from the table: "current_aptos_names"
+  """
+  current_aptos_names_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_aptos_names_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_aptos_names_order_by!]
+    """filter the rows returned"""
+    where: current_aptos_names_bool_exp
+  ): current_aptos_names_aggregate!
+  """
+  fetch data from the table: "legacy_migration_v1.current_coin_balances"
+  """
+  current_coin_balances(
+    """distinct select on columns"""
+    distinct_on: [current_coin_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_coin_balances_order_by!]
+    """filter the rows returned"""
+    where: current_coin_balances_bool_exp
+  ): [current_coin_balances!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_collection_datas"
+  """
+  current_collection_datas(
+    """distinct select on columns"""
+    distinct_on: [current_collection_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_datas_order_by!]
+    """filter the rows returned"""
+    where: current_collection_datas_bool_exp
+  ): [current_collection_datas!]!
+  """
+  fetch data from the table: "current_collection_ownership_v2_view"
+  """
+  current_collection_ownership_v2_view(
+    """distinct select on columns"""
+    distinct_on: [current_collection_ownership_v2_view_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_ownership_v2_view_order_by!]
+    """filter the rows returned"""
+    where: current_collection_ownership_v2_view_bool_exp
+  ): [current_collection_ownership_v2_view!]!
+  """
+  fetch aggregated fields from the table: "current_collection_ownership_v2_view"
+  """
+  current_collection_ownership_v2_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_collection_ownership_v2_view_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_ownership_v2_view_order_by!]
+    """filter the rows returned"""
+    where: current_collection_ownership_v2_view_bool_exp
+  ): current_collection_ownership_v2_view_aggregate!
+  """
+  fetch data from the table: "current_collections_v2"
+  """
+  current_collections_v2(
+    """distinct select on columns"""
+    distinct_on: [current_collections_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collections_v2_order_by!]
+    """filter the rows returned"""
+    where: current_collections_v2_bool_exp
+  ): [current_collections_v2!]!
+  """
+  fetch data from the table: "current_collections_v2" using primary key columns
+  """
+  current_collections_v2_by_pk(collection_id: String!): current_collections_v2
+  """
+  fetch data from the table: "current_delegated_staking_pool_balances"
+  """
+  current_delegated_staking_pool_balances(
+    """distinct select on columns"""
+    distinct_on: [current_delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: current_delegated_staking_pool_balances_bool_exp
+  ): [current_delegated_staking_pool_balances!]!
+  """
+  fetch data from the table: "current_delegated_staking_pool_balances" using primary key columns
+  """
+  current_delegated_staking_pool_balances_by_pk(staking_pool_address: String!): current_delegated_staking_pool_balances
+  """
+  fetch data from the table: "current_delegated_voter"
+  """
+  current_delegated_voter(
+    """distinct select on columns"""
+    distinct_on: [current_delegated_voter_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegated_voter_order_by!]
+    """filter the rows returned"""
+    where: current_delegated_voter_bool_exp
+  ): [current_delegated_voter!]!
+  """
+  fetch data from the table: "current_delegated_voter" using primary key columns
+  """
+  current_delegated_voter_by_pk(delegation_pool_address: String!, delegator_address: String!): current_delegated_voter
+  """
+  fetch data from the table: "current_delegator_balances"
+  """
+  current_delegator_balances(
+    """distinct select on columns"""
+    distinct_on: [current_delegator_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegator_balances_order_by!]
+    """filter the rows returned"""
+    where: current_delegator_balances_bool_exp
+  ): [current_delegator_balances!]!
+  """
+  fetch data from the table: "current_delegator_balances" using primary key columns
+  """
+  current_delegator_balances_by_pk(delegator_address: String!, pool_address: String!, pool_type: String!, table_handle: String!): current_delegator_balances
+  """
+  fetch data from the table: "current_fungible_asset_balances"
+  """
+  current_fungible_asset_balances(
+    """distinct select on columns"""
+    distinct_on: [current_fungible_asset_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_fungible_asset_balances_order_by!]
+    """filter the rows returned"""
+    where: current_fungible_asset_balances_bool_exp
+  ): [current_fungible_asset_balances!]!
+  """
+  fetch aggregated fields from the table: "current_fungible_asset_balances"
+  """
+  current_fungible_asset_balances_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_fungible_asset_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_fungible_asset_balances_order_by!]
+    """filter the rows returned"""
+    where: current_fungible_asset_balances_bool_exp
+  ): current_fungible_asset_balances_aggregate!
+  """
+  fetch data from the table: "current_fungible_asset_balances" using primary key columns
+  """
+  current_fungible_asset_balances_by_pk(storage_id: String!): current_fungible_asset_balances
+  """
+  fetch data from the table: "current_objects"
+  """
+  current_objects(
+    """distinct select on columns"""
+    distinct_on: [current_objects_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_objects_order_by!]
+    """filter the rows returned"""
+    where: current_objects_bool_exp
+  ): [current_objects!]!
+  """fetch data from the table: "current_objects" using primary key columns"""
+  current_objects_by_pk(object_address: String!): current_objects
+  """
+  fetch data from the table: "current_staking_pool_voter"
+  """
+  current_staking_pool_voter(
+    """distinct select on columns"""
+    distinct_on: [current_staking_pool_voter_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_staking_pool_voter_order_by!]
+    """filter the rows returned"""
+    where: current_staking_pool_voter_bool_exp
+  ): [current_staking_pool_voter!]!
+  """
+  fetch data from the table: "current_staking_pool_voter" using primary key columns
+  """
+  current_staking_pool_voter_by_pk(staking_pool_address: String!): current_staking_pool_voter
+  """
+  fetch data from the table: "current_table_items"
+  """
+  current_table_items(
+    """distinct select on columns"""
+    distinct_on: [current_table_items_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_table_items_order_by!]
+    """filter the rows returned"""
+    where: current_table_items_bool_exp
+  ): [current_table_items!]!
+  """
+  fetch data from the table: "current_table_items" using primary key columns
+  """
+  current_table_items_by_pk(key_hash: String!, table_handle: String!): current_table_items
+  """
+  fetch data from the table: "legacy_migration_v1.current_token_datas"
+  """
+  current_token_datas(
+    """distinct select on columns"""
+    distinct_on: [current_token_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_datas_order_by!]
+    """filter the rows returned"""
+    where: current_token_datas_bool_exp
+  ): [current_token_datas!]!
+  """
+  fetch data from the table: "current_token_datas_v2"
+  """
+  current_token_datas_v2(
+    """distinct select on columns"""
+    distinct_on: [current_token_datas_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_datas_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_datas_v2_bool_exp
+  ): [current_token_datas_v2!]!
+  """
+  fetch data from the table: "current_token_datas_v2" using primary key columns
+  """
+  current_token_datas_v2_by_pk(token_data_id: String!): current_token_datas_v2
+  """
+  fetch data from the table: "legacy_migration_v1.current_token_ownerships"
+  """
+  current_token_ownerships(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_bool_exp
+  ): [current_token_ownerships!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships"
+  """
+  current_token_ownerships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_bool_exp
+  ): current_token_ownerships_aggregate!
+  """
+  fetch data from the table: "current_token_ownerships_v2"
+  """
+  current_token_ownerships_v2(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_v2_bool_exp
+  ): [current_token_ownerships_v2!]!
+  """
+  fetch aggregated fields from the table: "current_token_ownerships_v2"
+  """
+  current_token_ownerships_v2_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_v2_bool_exp
+  ): current_token_ownerships_v2_aggregate!
+  """
+  fetch data from the table: "current_token_ownerships_v2" using primary key columns
+  """
+  current_token_ownerships_v2_by_pk(owner_address: String!, property_version_v1: numeric!, storage_id: String!, token_data_id: String!): current_token_ownerships_v2
+  """
+  fetch data from the table: "current_token_pending_claims"
+  """
+  current_token_pending_claims(
+    """distinct select on columns"""
+    distinct_on: [current_token_pending_claims_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_pending_claims_order_by!]
+    """filter the rows returned"""
+    where: current_token_pending_claims_bool_exp
+  ): [current_token_pending_claims!]!
+  """
+  fetch data from the table: "current_token_pending_claims" using primary key columns
+  """
+  current_token_pending_claims_by_pk(from_address: String!, property_version: numeric!, to_address: String!, token_data_id_hash: String!): current_token_pending_claims
+  """
+  fetch data from the table: "current_token_royalty_v1"
+  """
+  current_token_royalty_v1(
+    """distinct select on columns"""
+    distinct_on: [current_token_royalty_v1_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_royalty_v1_order_by!]
+    """filter the rows returned"""
+    where: current_token_royalty_v1_bool_exp
+  ): [current_token_royalty_v1!]!
+  """
+  fetch data from the table: "current_token_royalty_v1" using primary key columns
+  """
+  current_token_royalty_v1_by_pk(token_data_id: String!): current_token_royalty_v1
+  """An array relationship"""
+  delegated_staking_activities(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_activities_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_activities_bool_exp
+  ): [delegated_staking_activities!]!
+  """
+  fetch data from the table: "delegated_staking_activities" using primary key columns
+  """
+  delegated_staking_activities_by_pk(event_index: bigint!, transaction_version: bigint!): delegated_staking_activities
+  """
+  fetch data from the table: "delegated_staking_pool_balances"
+  """
+  delegated_staking_pool_balances(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pool_balances_bool_exp
+  ): [delegated_staking_pool_balances!]!
+  """
+  fetch aggregated fields from the table: "delegated_staking_pool_balances"
+  """
+  delegated_staking_pool_balances_aggregate(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pool_balances_bool_exp
+  ): delegated_staking_pool_balances_aggregate!
+  """
+  fetch data from the table: "delegated_staking_pool_balances" using primary key columns
+  """
+  delegated_staking_pool_balances_by_pk(staking_pool_address: String!, transaction_version: bigint!): delegated_staking_pool_balances
+  """
+  fetch data from the table: "delegated_staking_pools"
+  """
+  delegated_staking_pools(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pools_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pools_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pools_bool_exp
+  ): [delegated_staking_pools!]!
+  """
+  fetch data from the table: "delegated_staking_pools" using primary key columns
+  """
+  delegated_staking_pools_by_pk(staking_pool_address: String!): delegated_staking_pools
+  """
+  fetch data from the table: "delegator_distinct_pool"
+  """
+  delegator_distinct_pool(
+    """distinct select on columns"""
+    distinct_on: [delegator_distinct_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegator_distinct_pool_order_by!]
+    """filter the rows returned"""
+    where: delegator_distinct_pool_bool_exp
+  ): [delegator_distinct_pool!]!
+  """
+  fetch aggregated fields from the table: "delegator_distinct_pool"
+  """
+  delegator_distinct_pool_aggregate(
+    """distinct select on columns"""
+    distinct_on: [delegator_distinct_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegator_distinct_pool_order_by!]
+    """filter the rows returned"""
+    where: delegator_distinct_pool_bool_exp
+  ): delegator_distinct_pool_aggregate!
+  """
+  fetch data from the table: "events"
+  """
+  events(
+    """distinct select on columns"""
+    distinct_on: [events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [events_order_by!]
+    """filter the rows returned"""
+    where: events_bool_exp
+  ): [events!]!
+  """fetch data from the table: "events" using primary key columns"""
+  events_by_pk(event_index: bigint!, transaction_version: bigint!): events
+  """An array relationship"""
+  fungible_asset_activities(
+    """distinct select on columns"""
+    distinct_on: [fungible_asset_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fungible_asset_activities_order_by!]
+    """filter the rows returned"""
+    where: fungible_asset_activities_bool_exp
+  ): [fungible_asset_activities!]!
+  """
+  fetch data from the table: "fungible_asset_activities" using primary key columns
+  """
+  fungible_asset_activities_by_pk(event_index: bigint!, transaction_version: bigint!): fungible_asset_activities
+  """
+  fetch data from the table: "fungible_asset_metadata"
+  """
+  fungible_asset_metadata(
+    """distinct select on columns"""
+    distinct_on: [fungible_asset_metadata_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fungible_asset_metadata_order_by!]
+    """filter the rows returned"""
+    where: fungible_asset_metadata_bool_exp
+  ): [fungible_asset_metadata!]!
+  """
+  fetch data from the table: "fungible_asset_metadata" using primary key columns
+  """
+  fungible_asset_metadata_by_pk(asset_type: String!): fungible_asset_metadata
+  """
+  fetch data from the table: "indexer_status"
+  """
+  indexer_status(
+    """distinct select on columns"""
+    distinct_on: [indexer_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [indexer_status_order_by!]
+    """filter the rows returned"""
+    where: indexer_status_bool_exp
+  ): [indexer_status!]!
+  """fetch data from the table: "indexer_status" using primary key columns"""
+  indexer_status_by_pk(db: String!): indexer_status
+  """
+  fetch data from the table: "processor_metadata.ledger_infos"
+  """
+  ledger_infos(
+    """distinct select on columns"""
+    distinct_on: [ledger_infos_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [ledger_infos_order_by!]
+    """filter the rows returned"""
+    where: ledger_infos_bool_exp
+  ): [ledger_infos!]!
+  """
+  fetch data from the table: "processor_metadata.ledger_infos" using primary key columns
+  """
+  ledger_infos_by_pk(chain_id: bigint!): ledger_infos
+  """
+  fetch data from the table: "legacy_migration_v1.move_resources"
+  """
+  move_resources(
+    """distinct select on columns"""
+    distinct_on: [move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [move_resources_order_by!]
+    """filter the rows returned"""
+    where: move_resources_bool_exp
+  ): [move_resources!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.move_resources"
+  """
+  move_resources_aggregate(
+    """distinct select on columns"""
+    distinct_on: [move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [move_resources_order_by!]
+    """filter the rows returned"""
+    where: move_resources_bool_exp
+  ): move_resources_aggregate!
+  """
+  fetch data from the table: "nft_metadata_crawler.parsed_asset_uris"
+  """
+  nft_metadata_crawler_parsed_asset_uris(
+    """distinct select on columns"""
+    distinct_on: [nft_metadata_crawler_parsed_asset_uris_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [nft_metadata_crawler_parsed_asset_uris_order_by!]
+    """filter the rows returned"""
+    where: nft_metadata_crawler_parsed_asset_uris_bool_exp
+  ): [nft_metadata_crawler_parsed_asset_uris!]!
+  """
+  fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns
+  """
+  nft_metadata_crawler_parsed_asset_uris_by_pk(asset_uri: String!): nft_metadata_crawler_parsed_asset_uris
+  """
+  fetch data from the table: "num_active_delegator_per_pool"
+  """
+  num_active_delegator_per_pool(
+    """distinct select on columns"""
+    distinct_on: [num_active_delegator_per_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [num_active_delegator_per_pool_order_by!]
+    """filter the rows returned"""
+    where: num_active_delegator_per_pool_bool_exp
+  ): [num_active_delegator_per_pool!]!
+  """
+  fetch data from the table: "processor_metadata.processor_status"
+  """
+  processor_status(
+    """distinct select on columns"""
+    distinct_on: [processor_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [processor_status_order_by!]
+    """filter the rows returned"""
+    where: processor_status_bool_exp
+  ): [processor_status!]!
+  """
+  fetch data from the table: "processor_metadata.processor_status" using primary key columns
+  """
+  processor_status_by_pk(processor: String!): processor_status
+  """
+  fetch data from the table: "proposal_votes"
+  """
+  proposal_votes(
+    """distinct select on columns"""
+    distinct_on: [proposal_votes_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [proposal_votes_order_by!]
+    """filter the rows returned"""
+    where: proposal_votes_bool_exp
+  ): [proposal_votes!]!
+  """
+  fetch aggregated fields from the table: "proposal_votes"
+  """
+  proposal_votes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [proposal_votes_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [proposal_votes_order_by!]
+    """filter the rows returned"""
+    where: proposal_votes_bool_exp
+  ): proposal_votes_aggregate!
+  """fetch data from the table: "proposal_votes" using primary key columns"""
+  proposal_votes_by_pk(proposal_id: bigint!, transaction_version: bigint!, voter_address: String!): proposal_votes
+  """
+  fetch data from the table: "public_key_auth_keys"
+  """
+  public_key_auth_keys(
+    """distinct select on columns"""
+    distinct_on: [public_key_auth_keys_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [public_key_auth_keys_order_by!]
+    """filter the rows returned"""
+    where: public_key_auth_keys_bool_exp
+  ): [public_key_auth_keys!]!
+  """
+  fetch aggregated fields from the table: "public_key_auth_keys"
+  """
+  public_key_auth_keys_aggregate(
+    """distinct select on columns"""
+    distinct_on: [public_key_auth_keys_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [public_key_auth_keys_order_by!]
+    """filter the rows returned"""
+    where: public_key_auth_keys_bool_exp
+  ): public_key_auth_keys_aggregate!
+  """
+  fetch data from the table: "public_key_auth_keys" using primary key columns
+  """
+  public_key_auth_keys_by_pk(auth_key: String!, public_key: String!, public_key_type: String!): public_key_auth_keys
+  """
+  fetch data from the table: "signatures"
+  """
+  signatures(
+    """distinct select on columns"""
+    distinct_on: [signatures_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [signatures_order_by!]
+    """filter the rows returned"""
+    where: signatures_bool_exp
+  ): [signatures!]!
+  """fetch data from the table: "signatures" using primary key columns"""
+  signatures_by_pk(is_sender_primary: Boolean!, multi_agent_index: bigint!, multi_sig_index: bigint!, transaction_version: bigint!): signatures
+  """
+  fetch data from the table: "table_items"
+  """
+  table_items(
+    """distinct select on columns"""
+    distinct_on: [table_items_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [table_items_order_by!]
+    """filter the rows returned"""
+    where: table_items_bool_exp
+  ): [table_items!]!
+  """fetch data from the table: "table_items" using primary key columns"""
+  table_items_by_pk(transaction_version: bigint!, write_set_change_index: bigint!): table_items
+  """
+  fetch data from the table: "table_metadatas"
+  """
+  table_metadatas(
+    """distinct select on columns"""
+    distinct_on: [table_metadatas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [table_metadatas_order_by!]
+    """filter the rows returned"""
+    where: table_metadatas_bool_exp
+  ): [table_metadatas!]!
+  """fetch data from the table: "table_metadatas" using primary key columns"""
+  table_metadatas_by_pk(handle: String!): table_metadatas
+  """An array relationship"""
+  token_activities(
+    """distinct select on columns"""
+    distinct_on: [token_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_order_by!]
+    """filter the rows returned"""
+    where: token_activities_bool_exp
+  ): [token_activities!]!
+  """An aggregate relationship"""
+  token_activities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [token_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_order_by!]
+    """filter the rows returned"""
+    where: token_activities_bool_exp
+  ): token_activities_aggregate!
+  """An array relationship"""
+  token_activities_v2(
+    """distinct select on columns"""
+    distinct_on: [token_activities_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_v2_order_by!]
+    """filter the rows returned"""
+    where: token_activities_v2_bool_exp
+  ): [token_activities_v2!]!
+  """An aggregate relationship"""
+  token_activities_v2_aggregate(
+    """distinct select on columns"""
+    distinct_on: [token_activities_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_v2_order_by!]
+    """filter the rows returned"""
+    where: token_activities_v2_bool_exp
+  ): token_activities_v2_aggregate!
+  """
+  fetch data from the table: "token_activities_v2" using primary key columns
+  """
+  token_activities_v2_by_pk(event_index: bigint!, transaction_version: bigint!): token_activities_v2
+  """
+  fetch data from the table: "legacy_migration_v1.token_datas"
+  """
+  token_datas(
+    """distinct select on columns"""
+    distinct_on: [token_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_datas_order_by!]
+    """filter the rows returned"""
+    where: token_datas_bool_exp
+  ): [token_datas!]!
+  """
+  fetch data from the table: "legacy_migration_v1.token_ownerships"
+  """
+  token_ownerships(
+    """distinct select on columns"""
+    distinct_on: [token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: token_ownerships_bool_exp
+  ): [token_ownerships!]!
+  """
+  fetch data from the table: "legacy_migration_v1.tokens"
+  """
+  tokens(
+    """distinct select on columns"""
+    distinct_on: [tokens_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tokens_order_by!]
+    """filter the rows returned"""
+    where: tokens_bool_exp
+  ): [tokens!]!
+  """
+  fetch data from the table: "user_transactions"
+  """
+  user_transactions(
+    """distinct select on columns"""
+    distinct_on: [user_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [user_transactions_order_by!]
+    """filter the rows returned"""
+    where: user_transactions_bool_exp
+  ): [user_transactions!]!
+  """
+  fetch data from the table: "user_transactions" using primary key columns
+  """
+  user_transactions_by_pk(version: bigint!): user_transactions
+}
+
+type caassubscription_root {
+  """
+  fetch data from the table: "account_transactions"
+  """
+  account_transactions(
+    """distinct select on columns"""
+    distinct_on: [account_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [account_transactions_order_by!]
+    """filter the rows returned"""
+    where: account_transactions_bool_exp
+  ): [account_transactions!]!
+  """
+  fetch aggregated fields from the table: "account_transactions"
+  """
+  account_transactions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [account_transactions_order_by!]
+    """filter the rows returned"""
+    where: account_transactions_bool_exp
+  ): account_transactions_aggregate!
+  """
+  fetch data from the table: "account_transactions" using primary key columns
+  """
+  account_transactions_by_pk(account_address: String!, transaction_version: bigint!): account_transactions
+  """
+  fetch data from the table in a streaming manner: "account_transactions"
+  """
+  account_transactions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [account_transactions_stream_cursor_input]!
+    """filter the rows returned"""
+    where: account_transactions_bool_exp
+  ): [account_transactions!]!
+  """
+  fetch data from the table: "address_events_summary"
+  """
+  address_events_summary(
+    """distinct select on columns"""
+    distinct_on: [address_events_summary_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_events_summary_order_by!]
+    """filter the rows returned"""
+    where: address_events_summary_bool_exp
+  ): [address_events_summary!]!
+  """
+  fetch data from the table in a streaming manner: "address_events_summary"
+  """
+  address_events_summary_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [address_events_summary_stream_cursor_input]!
+    """filter the rows returned"""
+    where: address_events_summary_bool_exp
+  ): [address_events_summary!]!
+  """
+  fetch data from the table: "address_version_from_events"
+  """
+  address_version_from_events(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_events_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_events_bool_exp
+  ): [address_version_from_events!]!
+  """
+  fetch aggregated fields from the table: "address_version_from_events"
+  """
+  address_version_from_events_aggregate(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_events_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_events_bool_exp
+  ): address_version_from_events_aggregate!
+  """
+  fetch data from the table in a streaming manner: "address_version_from_events"
+  """
+  address_version_from_events_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [address_version_from_events_stream_cursor_input]!
+    """filter the rows returned"""
+    where: address_version_from_events_bool_exp
+  ): [address_version_from_events!]!
+  """
+  fetch data from the table: "legacy_migration_v1.address_version_from_move_resources"
+  """
+  address_version_from_move_resources(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_move_resources_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_move_resources_bool_exp
+  ): [address_version_from_move_resources!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources"
+  """
+  address_version_from_move_resources_aggregate(
+    """distinct select on columns"""
+    distinct_on: [address_version_from_move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [address_version_from_move_resources_order_by!]
+    """filter the rows returned"""
+    where: address_version_from_move_resources_bool_exp
+  ): address_version_from_move_resources_aggregate!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.address_version_from_move_resources"
+  """
+  address_version_from_move_resources_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [address_version_from_move_resources_stream_cursor_input]!
+    """filter the rows returned"""
+    where: address_version_from_move_resources_bool_exp
+  ): [address_version_from_move_resources!]!
+  """
+  fetch data from the table: "auth_key_account_addresses"
+  """
+  auth_key_account_addresses(
+    """distinct select on columns"""
+    distinct_on: [auth_key_account_addresses_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [auth_key_account_addresses_order_by!]
+    """filter the rows returned"""
+    where: auth_key_account_addresses_bool_exp
+  ): [auth_key_account_addresses!]!
+  """
+  fetch aggregated fields from the table: "auth_key_account_addresses"
+  """
+  auth_key_account_addresses_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_key_account_addresses_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [auth_key_account_addresses_order_by!]
+    """filter the rows returned"""
+    where: auth_key_account_addresses_bool_exp
+  ): auth_key_account_addresses_aggregate!
+  """
+  fetch data from the table: "auth_key_account_addresses" using primary key columns
+  """
+  auth_key_account_addresses_by_pk(account_address: String!): auth_key_account_addresses
+  """
+  fetch data from the table in a streaming manner: "auth_key_account_addresses"
+  """
+  auth_key_account_addresses_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [auth_key_account_addresses_stream_cursor_input]!
+    """filter the rows returned"""
+    where: auth_key_account_addresses_bool_exp
+  ): [auth_key_account_addresses!]!
+  """
+  fetch data from the table: "block_metadata_transactions"
+  """
+  block_metadata_transactions(
+    """distinct select on columns"""
+    distinct_on: [block_metadata_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [block_metadata_transactions_order_by!]
+    """filter the rows returned"""
+    where: block_metadata_transactions_bool_exp
+  ): [block_metadata_transactions!]!
+  """
+  fetch data from the table: "block_metadata_transactions" using primary key columns
+  """
+  block_metadata_transactions_by_pk(version: bigint!): block_metadata_transactions
+  """
+  fetch data from the table in a streaming manner: "block_metadata_transactions"
+  """
+  block_metadata_transactions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [block_metadata_transactions_stream_cursor_input]!
+    """filter the rows returned"""
+    where: block_metadata_transactions_bool_exp
+  ): [block_metadata_transactions!]!
+  """An array relationship"""
+  coin_activities(
+    """distinct select on columns"""
+    distinct_on: [coin_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_activities_order_by!]
+    """filter the rows returned"""
+    where: coin_activities_bool_exp
+  ): [coin_activities!]!
+  """An aggregate relationship"""
+  coin_activities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [coin_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_activities_order_by!]
+    """filter the rows returned"""
+    where: coin_activities_bool_exp
+  ): coin_activities_aggregate!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.coin_activities"
+  """
+  coin_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [coin_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: coin_activities_bool_exp
+  ): [coin_activities!]!
+  """
+  fetch data from the table: "legacy_migration_v1.coin_balances"
+  """
+  coin_balances(
+    """distinct select on columns"""
+    distinct_on: [coin_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_balances_order_by!]
+    """filter the rows returned"""
+    where: coin_balances_bool_exp
+  ): [coin_balances!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.coin_balances"
+  """
+  coin_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [coin_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: coin_balances_bool_exp
+  ): [coin_balances!]!
+  """
+  fetch data from the table: "legacy_migration_v1.coin_infos"
+  """
+  coin_infos(
+    """distinct select on columns"""
+    distinct_on: [coin_infos_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_infos_order_by!]
+    """filter the rows returned"""
+    where: coin_infos_bool_exp
+  ): [coin_infos!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.coin_infos"
+  """
+  coin_infos_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [coin_infos_stream_cursor_input]!
+    """filter the rows returned"""
+    where: coin_infos_bool_exp
+  ): [coin_infos!]!
+  """
+  fetch data from the table: "coin_supply"
+  """
+  coin_supply(
+    """distinct select on columns"""
+    distinct_on: [coin_supply_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [coin_supply_order_by!]
+    """filter the rows returned"""
+    where: coin_supply_bool_exp
+  ): [coin_supply!]!
+  """fetch data from the table: "coin_supply" using primary key columns"""
+  coin_supply_by_pk(coin_type_hash: String!, transaction_version: bigint!): coin_supply
+  """
+  fetch data from the table in a streaming manner: "coin_supply"
+  """
+  coin_supply_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [coin_supply_stream_cursor_input]!
+    """filter the rows returned"""
+    where: coin_supply_bool_exp
+  ): [coin_supply!]!
+  """
+  fetch data from the table: "legacy_migration_v1.collection_datas"
+  """
+  collection_datas(
+    """distinct select on columns"""
+    distinct_on: [collection_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [collection_datas_order_by!]
+    """filter the rows returned"""
+    where: collection_datas_bool_exp
+  ): [collection_datas!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas"
+  """
+  collection_datas_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [collection_datas_stream_cursor_input]!
+    """filter the rows returned"""
+    where: collection_datas_bool_exp
+  ): [collection_datas!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_ans_lookup"
+  """
+  current_ans_lookup(
+    """distinct select on columns"""
+    distinct_on: [current_ans_lookup_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_ans_lookup_order_by!]
+    """filter the rows returned"""
+    where: current_ans_lookup_bool_exp
+  ): [current_ans_lookup!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.current_ans_lookup"
+  """
+  current_ans_lookup_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_ans_lookup_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_ans_lookup_bool_exp
+  ): [current_ans_lookup!]!
+  """
+  fetch data from the table: "current_ans_lookup_v2"
+  """
+  current_ans_lookup_v2(
+    """distinct select on columns"""
+    distinct_on: [current_ans_lookup_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_ans_lookup_v2_order_by!]
+    """filter the rows returned"""
+    where: current_ans_lookup_v2_bool_exp
+  ): [current_ans_lookup_v2!]!
+  """
+  fetch data from the table: "current_ans_lookup_v2" using primary key columns
+  """
+  current_ans_lookup_v2_by_pk(domain: String!, subdomain: String!, token_standard: String!): current_ans_lookup_v2
+  """
+  fetch data from the table in a streaming manner: "current_ans_lookup_v2"
+  """
+  current_ans_lookup_v2_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_ans_lookup_v2_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_ans_lookup_v2_bool_exp
+  ): [current_ans_lookup_v2!]!
+  """
+  fetch data from the table: "current_aptos_names"
+  """
+  current_aptos_names(
+    """distinct select on columns"""
+    distinct_on: [current_aptos_names_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_aptos_names_order_by!]
+    """filter the rows returned"""
+    where: current_aptos_names_bool_exp
+  ): [current_aptos_names!]!
+  """
+  fetch aggregated fields from the table: "current_aptos_names"
+  """
+  current_aptos_names_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_aptos_names_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_aptos_names_order_by!]
+    """filter the rows returned"""
+    where: current_aptos_names_bool_exp
+  ): current_aptos_names_aggregate!
+  """
+  fetch data from the table in a streaming manner: "current_aptos_names"
+  """
+  current_aptos_names_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_aptos_names_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_aptos_names_bool_exp
+  ): [current_aptos_names!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_coin_balances"
+  """
+  current_coin_balances(
+    """distinct select on columns"""
+    distinct_on: [current_coin_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_coin_balances_order_by!]
+    """filter the rows returned"""
+    where: current_coin_balances_bool_exp
+  ): [current_coin_balances!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.current_coin_balances"
+  """
+  current_coin_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_coin_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_coin_balances_bool_exp
+  ): [current_coin_balances!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_collection_datas"
+  """
+  current_collection_datas(
+    """distinct select on columns"""
+    distinct_on: [current_collection_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_datas_order_by!]
+    """filter the rows returned"""
+    where: current_collection_datas_bool_exp
+  ): [current_collection_datas!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.current_collection_datas"
+  """
+  current_collection_datas_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_collection_datas_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_collection_datas_bool_exp
+  ): [current_collection_datas!]!
+  """
+  fetch data from the table: "current_collection_ownership_v2_view"
+  """
+  current_collection_ownership_v2_view(
+    """distinct select on columns"""
+    distinct_on: [current_collection_ownership_v2_view_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_ownership_v2_view_order_by!]
+    """filter the rows returned"""
+    where: current_collection_ownership_v2_view_bool_exp
+  ): [current_collection_ownership_v2_view!]!
+  """
+  fetch aggregated fields from the table: "current_collection_ownership_v2_view"
+  """
+  current_collection_ownership_v2_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_collection_ownership_v2_view_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collection_ownership_v2_view_order_by!]
+    """filter the rows returned"""
+    where: current_collection_ownership_v2_view_bool_exp
+  ): current_collection_ownership_v2_view_aggregate!
+  """
+  fetch data from the table in a streaming manner: "current_collection_ownership_v2_view"
+  """
+  current_collection_ownership_v2_view_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_collection_ownership_v2_view_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_collection_ownership_v2_view_bool_exp
+  ): [current_collection_ownership_v2_view!]!
+  """
+  fetch data from the table: "current_collections_v2"
+  """
+  current_collections_v2(
+    """distinct select on columns"""
+    distinct_on: [current_collections_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_collections_v2_order_by!]
+    """filter the rows returned"""
+    where: current_collections_v2_bool_exp
+  ): [current_collections_v2!]!
+  """
+  fetch data from the table: "current_collections_v2" using primary key columns
+  """
+  current_collections_v2_by_pk(collection_id: String!): current_collections_v2
+  """
+  fetch data from the table in a streaming manner: "current_collections_v2"
+  """
+  current_collections_v2_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_collections_v2_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_collections_v2_bool_exp
+  ): [current_collections_v2!]!
+  """
+  fetch data from the table: "current_delegated_staking_pool_balances"
+  """
+  current_delegated_staking_pool_balances(
+    """distinct select on columns"""
+    distinct_on: [current_delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: current_delegated_staking_pool_balances_bool_exp
+  ): [current_delegated_staking_pool_balances!]!
+  """
+  fetch data from the table: "current_delegated_staking_pool_balances" using primary key columns
+  """
+  current_delegated_staking_pool_balances_by_pk(staking_pool_address: String!): current_delegated_staking_pool_balances
+  """
+  fetch data from the table in a streaming manner: "current_delegated_staking_pool_balances"
+  """
+  current_delegated_staking_pool_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_delegated_staking_pool_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_delegated_staking_pool_balances_bool_exp
+  ): [current_delegated_staking_pool_balances!]!
+  """
+  fetch data from the table: "current_delegated_voter"
+  """
+  current_delegated_voter(
+    """distinct select on columns"""
+    distinct_on: [current_delegated_voter_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegated_voter_order_by!]
+    """filter the rows returned"""
+    where: current_delegated_voter_bool_exp
+  ): [current_delegated_voter!]!
+  """
+  fetch data from the table: "current_delegated_voter" using primary key columns
+  """
+  current_delegated_voter_by_pk(delegation_pool_address: String!, delegator_address: String!): current_delegated_voter
+  """
+  fetch data from the table in a streaming manner: "current_delegated_voter"
+  """
+  current_delegated_voter_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_delegated_voter_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_delegated_voter_bool_exp
+  ): [current_delegated_voter!]!
+  """
+  fetch data from the table: "current_delegator_balances"
+  """
+  current_delegator_balances(
+    """distinct select on columns"""
+    distinct_on: [current_delegator_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_delegator_balances_order_by!]
+    """filter the rows returned"""
+    where: current_delegator_balances_bool_exp
+  ): [current_delegator_balances!]!
+  """
+  fetch data from the table: "current_delegator_balances" using primary key columns
+  """
+  current_delegator_balances_by_pk(delegator_address: String!, pool_address: String!, pool_type: String!, table_handle: String!): current_delegator_balances
+  """
+  fetch data from the table in a streaming manner: "current_delegator_balances"
+  """
+  current_delegator_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_delegator_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_delegator_balances_bool_exp
+  ): [current_delegator_balances!]!
+  """
+  fetch data from the table: "current_fungible_asset_balances"
+  """
+  current_fungible_asset_balances(
+    """distinct select on columns"""
+    distinct_on: [current_fungible_asset_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_fungible_asset_balances_order_by!]
+    """filter the rows returned"""
+    where: current_fungible_asset_balances_bool_exp
+  ): [current_fungible_asset_balances!]!
+  """
+  fetch aggregated fields from the table: "current_fungible_asset_balances"
+  """
+  current_fungible_asset_balances_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_fungible_asset_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_fungible_asset_balances_order_by!]
+    """filter the rows returned"""
+    where: current_fungible_asset_balances_bool_exp
+  ): current_fungible_asset_balances_aggregate!
+  """
+  fetch data from the table: "current_fungible_asset_balances" using primary key columns
+  """
+  current_fungible_asset_balances_by_pk(storage_id: String!): current_fungible_asset_balances
+  """
+  fetch data from the table in a streaming manner: "current_fungible_asset_balances"
+  """
+  current_fungible_asset_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_fungible_asset_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_fungible_asset_balances_bool_exp
+  ): [current_fungible_asset_balances!]!
+  """
+  fetch data from the table: "current_objects"
+  """
+  current_objects(
+    """distinct select on columns"""
+    distinct_on: [current_objects_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_objects_order_by!]
+    """filter the rows returned"""
+    where: current_objects_bool_exp
+  ): [current_objects!]!
+  """fetch data from the table: "current_objects" using primary key columns"""
+  current_objects_by_pk(object_address: String!): current_objects
+  """
+  fetch data from the table in a streaming manner: "current_objects"
+  """
+  current_objects_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_objects_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_objects_bool_exp
+  ): [current_objects!]!
+  """
+  fetch data from the table: "current_staking_pool_voter"
+  """
+  current_staking_pool_voter(
+    """distinct select on columns"""
+    distinct_on: [current_staking_pool_voter_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_staking_pool_voter_order_by!]
+    """filter the rows returned"""
+    where: current_staking_pool_voter_bool_exp
+  ): [current_staking_pool_voter!]!
+  """
+  fetch data from the table: "current_staking_pool_voter" using primary key columns
+  """
+  current_staking_pool_voter_by_pk(staking_pool_address: String!): current_staking_pool_voter
+  """
+  fetch data from the table in a streaming manner: "current_staking_pool_voter"
+  """
+  current_staking_pool_voter_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_staking_pool_voter_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_staking_pool_voter_bool_exp
+  ): [current_staking_pool_voter!]!
+  """
+  fetch data from the table: "current_table_items"
+  """
+  current_table_items(
+    """distinct select on columns"""
+    distinct_on: [current_table_items_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_table_items_order_by!]
+    """filter the rows returned"""
+    where: current_table_items_bool_exp
+  ): [current_table_items!]!
+  """
+  fetch data from the table: "current_table_items" using primary key columns
+  """
+  current_table_items_by_pk(key_hash: String!, table_handle: String!): current_table_items
+  """
+  fetch data from the table in a streaming manner: "current_table_items"
+  """
+  current_table_items_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_table_items_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_table_items_bool_exp
+  ): [current_table_items!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_token_datas"
+  """
+  current_token_datas(
+    """distinct select on columns"""
+    distinct_on: [current_token_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_datas_order_by!]
+    """filter the rows returned"""
+    where: current_token_datas_bool_exp
+  ): [current_token_datas!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_datas"
+  """
+  current_token_datas_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_datas_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_datas_bool_exp
+  ): [current_token_datas!]!
+  """
+  fetch data from the table: "current_token_datas_v2"
+  """
+  current_token_datas_v2(
+    """distinct select on columns"""
+    distinct_on: [current_token_datas_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_datas_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_datas_v2_bool_exp
+  ): [current_token_datas_v2!]!
+  """
+  fetch data from the table: "current_token_datas_v2" using primary key columns
+  """
+  current_token_datas_v2_by_pk(token_data_id: String!): current_token_datas_v2
+  """
+  fetch data from the table in a streaming manner: "current_token_datas_v2"
+  """
+  current_token_datas_v2_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_datas_v2_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_datas_v2_bool_exp
+  ): [current_token_datas_v2!]!
+  """
+  fetch data from the table: "legacy_migration_v1.current_token_ownerships"
+  """
+  current_token_ownerships(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_bool_exp
+  ): [current_token_ownerships!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships"
+  """
+  current_token_ownerships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_bool_exp
+  ): current_token_ownerships_aggregate!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_ownerships"
+  """
+  current_token_ownerships_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_ownerships_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_ownerships_bool_exp
+  ): [current_token_ownerships!]!
+  """
+  fetch data from the table: "current_token_ownerships_v2"
+  """
+  current_token_ownerships_v2(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_v2_bool_exp
+  ): [current_token_ownerships_v2!]!
+  """
+  fetch aggregated fields from the table: "current_token_ownerships_v2"
+  """
+  current_token_ownerships_v2_aggregate(
+    """distinct select on columns"""
+    distinct_on: [current_token_ownerships_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_ownerships_v2_order_by!]
+    """filter the rows returned"""
+    where: current_token_ownerships_v2_bool_exp
+  ): current_token_ownerships_v2_aggregate!
+  """
+  fetch data from the table: "current_token_ownerships_v2" using primary key columns
+  """
+  current_token_ownerships_v2_by_pk(owner_address: String!, property_version_v1: numeric!, storage_id: String!, token_data_id: String!): current_token_ownerships_v2
+  """
+  fetch data from the table in a streaming manner: "current_token_ownerships_v2"
+  """
+  current_token_ownerships_v2_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_ownerships_v2_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_ownerships_v2_bool_exp
+  ): [current_token_ownerships_v2!]!
+  """
+  fetch data from the table: "current_token_pending_claims"
+  """
+  current_token_pending_claims(
+    """distinct select on columns"""
+    distinct_on: [current_token_pending_claims_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_pending_claims_order_by!]
+    """filter the rows returned"""
+    where: current_token_pending_claims_bool_exp
+  ): [current_token_pending_claims!]!
+  """
+  fetch data from the table: "current_token_pending_claims" using primary key columns
+  """
+  current_token_pending_claims_by_pk(from_address: String!, property_version: numeric!, to_address: String!, token_data_id_hash: String!): current_token_pending_claims
+  """
+  fetch data from the table in a streaming manner: "current_token_pending_claims"
+  """
+  current_token_pending_claims_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_pending_claims_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_pending_claims_bool_exp
+  ): [current_token_pending_claims!]!
+  """
+  fetch data from the table: "current_token_royalty_v1"
+  """
+  current_token_royalty_v1(
+    """distinct select on columns"""
+    distinct_on: [current_token_royalty_v1_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [current_token_royalty_v1_order_by!]
+    """filter the rows returned"""
+    where: current_token_royalty_v1_bool_exp
+  ): [current_token_royalty_v1!]!
+  """
+  fetch data from the table: "current_token_royalty_v1" using primary key columns
+  """
+  current_token_royalty_v1_by_pk(token_data_id: String!): current_token_royalty_v1
+  """
+  fetch data from the table in a streaming manner: "current_token_royalty_v1"
+  """
+  current_token_royalty_v1_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [current_token_royalty_v1_stream_cursor_input]!
+    """filter the rows returned"""
+    where: current_token_royalty_v1_bool_exp
+  ): [current_token_royalty_v1!]!
+  """An array relationship"""
+  delegated_staking_activities(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_activities_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_activities_bool_exp
+  ): [delegated_staking_activities!]!
+  """
+  fetch data from the table: "delegated_staking_activities" using primary key columns
+  """
+  delegated_staking_activities_by_pk(event_index: bigint!, transaction_version: bigint!): delegated_staking_activities
+  """
+  fetch data from the table in a streaming manner: "delegated_staking_activities"
+  """
+  delegated_staking_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [delegated_staking_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: delegated_staking_activities_bool_exp
+  ): [delegated_staking_activities!]!
+  """
+  fetch data from the table: "delegated_staking_pool_balances"
+  """
+  delegated_staking_pool_balances(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pool_balances_bool_exp
+  ): [delegated_staking_pool_balances!]!
+  """
+  fetch aggregated fields from the table: "delegated_staking_pool_balances"
+  """
+  delegated_staking_pool_balances_aggregate(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pool_balances_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pool_balances_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pool_balances_bool_exp
+  ): delegated_staking_pool_balances_aggregate!
+  """
+  fetch data from the table: "delegated_staking_pool_balances" using primary key columns
+  """
+  delegated_staking_pool_balances_by_pk(staking_pool_address: String!, transaction_version: bigint!): delegated_staking_pool_balances
+  """
+  fetch data from the table in a streaming manner: "delegated_staking_pool_balances"
+  """
+  delegated_staking_pool_balances_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [delegated_staking_pool_balances_stream_cursor_input]!
+    """filter the rows returned"""
+    where: delegated_staking_pool_balances_bool_exp
+  ): [delegated_staking_pool_balances!]!
+  """
+  fetch data from the table: "delegated_staking_pools"
+  """
+  delegated_staking_pools(
+    """distinct select on columns"""
+    distinct_on: [delegated_staking_pools_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegated_staking_pools_order_by!]
+    """filter the rows returned"""
+    where: delegated_staking_pools_bool_exp
+  ): [delegated_staking_pools!]!
+  """
+  fetch data from the table: "delegated_staking_pools" using primary key columns
+  """
+  delegated_staking_pools_by_pk(staking_pool_address: String!): delegated_staking_pools
+  """
+  fetch data from the table in a streaming manner: "delegated_staking_pools"
+  """
+  delegated_staking_pools_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [delegated_staking_pools_stream_cursor_input]!
+    """filter the rows returned"""
+    where: delegated_staking_pools_bool_exp
+  ): [delegated_staking_pools!]!
+  """
+  fetch data from the table: "delegator_distinct_pool"
+  """
+  delegator_distinct_pool(
+    """distinct select on columns"""
+    distinct_on: [delegator_distinct_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegator_distinct_pool_order_by!]
+    """filter the rows returned"""
+    where: delegator_distinct_pool_bool_exp
+  ): [delegator_distinct_pool!]!
+  """
+  fetch aggregated fields from the table: "delegator_distinct_pool"
+  """
+  delegator_distinct_pool_aggregate(
+    """distinct select on columns"""
+    distinct_on: [delegator_distinct_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [delegator_distinct_pool_order_by!]
+    """filter the rows returned"""
+    where: delegator_distinct_pool_bool_exp
+  ): delegator_distinct_pool_aggregate!
+  """
+  fetch data from the table in a streaming manner: "delegator_distinct_pool"
+  """
+  delegator_distinct_pool_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [delegator_distinct_pool_stream_cursor_input]!
+    """filter the rows returned"""
+    where: delegator_distinct_pool_bool_exp
+  ): [delegator_distinct_pool!]!
+  """
+  fetch data from the table: "events"
+  """
+  events(
+    """distinct select on columns"""
+    distinct_on: [events_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [events_order_by!]
+    """filter the rows returned"""
+    where: events_bool_exp
+  ): [events!]!
+  """fetch data from the table: "events" using primary key columns"""
+  events_by_pk(event_index: bigint!, transaction_version: bigint!): events
+  """
+  fetch data from the table in a streaming manner: "events"
+  """
+  events_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [events_stream_cursor_input]!
+    """filter the rows returned"""
+    where: events_bool_exp
+  ): [events!]!
+  """An array relationship"""
+  fungible_asset_activities(
+    """distinct select on columns"""
+    distinct_on: [fungible_asset_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fungible_asset_activities_order_by!]
+    """filter the rows returned"""
+    where: fungible_asset_activities_bool_exp
+  ): [fungible_asset_activities!]!
+  """
+  fetch data from the table: "fungible_asset_activities" using primary key columns
+  """
+  fungible_asset_activities_by_pk(event_index: bigint!, transaction_version: bigint!): fungible_asset_activities
+  """
+  fetch data from the table in a streaming manner: "fungible_asset_activities"
+  """
+  fungible_asset_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [fungible_asset_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: fungible_asset_activities_bool_exp
+  ): [fungible_asset_activities!]!
+  """
+  fetch data from the table: "fungible_asset_metadata"
+  """
+  fungible_asset_metadata(
+    """distinct select on columns"""
+    distinct_on: [fungible_asset_metadata_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [fungible_asset_metadata_order_by!]
+    """filter the rows returned"""
+    where: fungible_asset_metadata_bool_exp
+  ): [fungible_asset_metadata!]!
+  """
+  fetch data from the table: "fungible_asset_metadata" using primary key columns
+  """
+  fungible_asset_metadata_by_pk(asset_type: String!): fungible_asset_metadata
+  """
+  fetch data from the table in a streaming manner: "fungible_asset_metadata"
+  """
+  fungible_asset_metadata_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [fungible_asset_metadata_stream_cursor_input]!
+    """filter the rows returned"""
+    where: fungible_asset_metadata_bool_exp
+  ): [fungible_asset_metadata!]!
+  """
+  fetch data from the table: "indexer_status"
+  """
+  indexer_status(
+    """distinct select on columns"""
+    distinct_on: [indexer_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [indexer_status_order_by!]
+    """filter the rows returned"""
+    where: indexer_status_bool_exp
+  ): [indexer_status!]!
+  """fetch data from the table: "indexer_status" using primary key columns"""
+  indexer_status_by_pk(db: String!): indexer_status
+  """
+  fetch data from the table in a streaming manner: "indexer_status"
+  """
+  indexer_status_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [indexer_status_stream_cursor_input]!
+    """filter the rows returned"""
+    where: indexer_status_bool_exp
+  ): [indexer_status!]!
+  """
+  fetch data from the table: "processor_metadata.ledger_infos"
+  """
+  ledger_infos(
+    """distinct select on columns"""
+    distinct_on: [ledger_infos_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [ledger_infos_order_by!]
+    """filter the rows returned"""
+    where: ledger_infos_bool_exp
+  ): [ledger_infos!]!
+  """
+  fetch data from the table: "processor_metadata.ledger_infos" using primary key columns
+  """
+  ledger_infos_by_pk(chain_id: bigint!): ledger_infos
+  """
+  fetch data from the table in a streaming manner: "processor_metadata.ledger_infos"
+  """
+  ledger_infos_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [ledger_infos_stream_cursor_input]!
+    """filter the rows returned"""
+    where: ledger_infos_bool_exp
+  ): [ledger_infos!]!
+  """
+  fetch data from the table: "legacy_migration_v1.move_resources"
+  """
+  move_resources(
+    """distinct select on columns"""
+    distinct_on: [move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [move_resources_order_by!]
+    """filter the rows returned"""
+    where: move_resources_bool_exp
+  ): [move_resources!]!
+  """
+  fetch aggregated fields from the table: "legacy_migration_v1.move_resources"
+  """
+  move_resources_aggregate(
+    """distinct select on columns"""
+    distinct_on: [move_resources_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [move_resources_order_by!]
+    """filter the rows returned"""
+    where: move_resources_bool_exp
+  ): move_resources_aggregate!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.move_resources"
+  """
+  move_resources_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [move_resources_stream_cursor_input]!
+    """filter the rows returned"""
+    where: move_resources_bool_exp
+  ): [move_resources!]!
+  """
+  fetch data from the table: "nft_metadata_crawler.parsed_asset_uris"
+  """
+  nft_metadata_crawler_parsed_asset_uris(
+    """distinct select on columns"""
+    distinct_on: [nft_metadata_crawler_parsed_asset_uris_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [nft_metadata_crawler_parsed_asset_uris_order_by!]
+    """filter the rows returned"""
+    where: nft_metadata_crawler_parsed_asset_uris_bool_exp
+  ): [nft_metadata_crawler_parsed_asset_uris!]!
+  """
+  fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns
+  """
+  nft_metadata_crawler_parsed_asset_uris_by_pk(asset_uri: String!): nft_metadata_crawler_parsed_asset_uris
+  """
+  fetch data from the table in a streaming manner: "nft_metadata_crawler.parsed_asset_uris"
+  """
+  nft_metadata_crawler_parsed_asset_uris_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [nft_metadata_crawler_parsed_asset_uris_stream_cursor_input]!
+    """filter the rows returned"""
+    where: nft_metadata_crawler_parsed_asset_uris_bool_exp
+  ): [nft_metadata_crawler_parsed_asset_uris!]!
+  """
+  fetch data from the table: "num_active_delegator_per_pool"
+  """
+  num_active_delegator_per_pool(
+    """distinct select on columns"""
+    distinct_on: [num_active_delegator_per_pool_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [num_active_delegator_per_pool_order_by!]
+    """filter the rows returned"""
+    where: num_active_delegator_per_pool_bool_exp
+  ): [num_active_delegator_per_pool!]!
+  """
+  fetch data from the table in a streaming manner: "num_active_delegator_per_pool"
+  """
+  num_active_delegator_per_pool_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [num_active_delegator_per_pool_stream_cursor_input]!
+    """filter the rows returned"""
+    where: num_active_delegator_per_pool_bool_exp
+  ): [num_active_delegator_per_pool!]!
+  """
+  fetch data from the table: "processor_metadata.processor_status"
+  """
+  processor_status(
+    """distinct select on columns"""
+    distinct_on: [processor_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [processor_status_order_by!]
+    """filter the rows returned"""
+    where: processor_status_bool_exp
+  ): [processor_status!]!
+  """
+  fetch data from the table: "processor_metadata.processor_status" using primary key columns
+  """
+  processor_status_by_pk(processor: String!): processor_status
+  """
+  fetch data from the table in a streaming manner: "processor_metadata.processor_status"
+  """
+  processor_status_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [processor_status_stream_cursor_input]!
+    """filter the rows returned"""
+    where: processor_status_bool_exp
+  ): [processor_status!]!
+  """
+  fetch data from the table: "proposal_votes"
+  """
+  proposal_votes(
+    """distinct select on columns"""
+    distinct_on: [proposal_votes_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [proposal_votes_order_by!]
+    """filter the rows returned"""
+    where: proposal_votes_bool_exp
+  ): [proposal_votes!]!
+  """
+  fetch aggregated fields from the table: "proposal_votes"
+  """
+  proposal_votes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [proposal_votes_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [proposal_votes_order_by!]
+    """filter the rows returned"""
+    where: proposal_votes_bool_exp
+  ): proposal_votes_aggregate!
+  """fetch data from the table: "proposal_votes" using primary key columns"""
+  proposal_votes_by_pk(proposal_id: bigint!, transaction_version: bigint!, voter_address: String!): proposal_votes
+  """
+  fetch data from the table in a streaming manner: "proposal_votes"
+  """
+  proposal_votes_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [proposal_votes_stream_cursor_input]!
+    """filter the rows returned"""
+    where: proposal_votes_bool_exp
+  ): [proposal_votes!]!
+  """
+  fetch data from the table: "public_key_auth_keys"
+  """
+  public_key_auth_keys(
+    """distinct select on columns"""
+    distinct_on: [public_key_auth_keys_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [public_key_auth_keys_order_by!]
+    """filter the rows returned"""
+    where: public_key_auth_keys_bool_exp
+  ): [public_key_auth_keys!]!
+  """
+  fetch aggregated fields from the table: "public_key_auth_keys"
+  """
+  public_key_auth_keys_aggregate(
+    """distinct select on columns"""
+    distinct_on: [public_key_auth_keys_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [public_key_auth_keys_order_by!]
+    """filter the rows returned"""
+    where: public_key_auth_keys_bool_exp
+  ): public_key_auth_keys_aggregate!
+  """
+  fetch data from the table: "public_key_auth_keys" using primary key columns
+  """
+  public_key_auth_keys_by_pk(auth_key: String!, public_key: String!, public_key_type: String!): public_key_auth_keys
+  """
+  fetch data from the table in a streaming manner: "public_key_auth_keys"
+  """
+  public_key_auth_keys_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [public_key_auth_keys_stream_cursor_input]!
+    """filter the rows returned"""
+    where: public_key_auth_keys_bool_exp
+  ): [public_key_auth_keys!]!
+  """
+  fetch data from the table: "signatures"
+  """
+  signatures(
+    """distinct select on columns"""
+    distinct_on: [signatures_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [signatures_order_by!]
+    """filter the rows returned"""
+    where: signatures_bool_exp
+  ): [signatures!]!
+  """fetch data from the table: "signatures" using primary key columns"""
+  signatures_by_pk(is_sender_primary: Boolean!, multi_agent_index: bigint!, multi_sig_index: bigint!, transaction_version: bigint!): signatures
+  """
+  fetch data from the table in a streaming manner: "signatures"
+  """
+  signatures_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [signatures_stream_cursor_input]!
+    """filter the rows returned"""
+    where: signatures_bool_exp
+  ): [signatures!]!
+  """
+  fetch data from the table: "table_items"
+  """
+  table_items(
+    """distinct select on columns"""
+    distinct_on: [table_items_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [table_items_order_by!]
+    """filter the rows returned"""
+    where: table_items_bool_exp
+  ): [table_items!]!
+  """fetch data from the table: "table_items" using primary key columns"""
+  table_items_by_pk(transaction_version: bigint!, write_set_change_index: bigint!): table_items
+  """
+  fetch data from the table in a streaming manner: "table_items"
+  """
+  table_items_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [table_items_stream_cursor_input]!
+    """filter the rows returned"""
+    where: table_items_bool_exp
+  ): [table_items!]!
+  """
+  fetch data from the table: "table_metadatas"
+  """
+  table_metadatas(
+    """distinct select on columns"""
+    distinct_on: [table_metadatas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [table_metadatas_order_by!]
+    """filter the rows returned"""
+    where: table_metadatas_bool_exp
+  ): [table_metadatas!]!
+  """fetch data from the table: "table_metadatas" using primary key columns"""
+  table_metadatas_by_pk(handle: String!): table_metadatas
+  """
+  fetch data from the table in a streaming manner: "table_metadatas"
+  """
+  table_metadatas_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [table_metadatas_stream_cursor_input]!
+    """filter the rows returned"""
+    where: table_metadatas_bool_exp
+  ): [table_metadatas!]!
+  """An array relationship"""
+  token_activities(
+    """distinct select on columns"""
+    distinct_on: [token_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_order_by!]
+    """filter the rows returned"""
+    where: token_activities_bool_exp
+  ): [token_activities!]!
+  """An aggregate relationship"""
+  token_activities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [token_activities_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_order_by!]
+    """filter the rows returned"""
+    where: token_activities_bool_exp
+  ): token_activities_aggregate!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.token_activities"
+  """
+  token_activities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [token_activities_stream_cursor_input]!
+    """filter the rows returned"""
+    where: token_activities_bool_exp
+  ): [token_activities!]!
+  """An array relationship"""
+  token_activities_v2(
+    """distinct select on columns"""
+    distinct_on: [token_activities_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_v2_order_by!]
+    """filter the rows returned"""
+    where: token_activities_v2_bool_exp
+  ): [token_activities_v2!]!
+  """An aggregate relationship"""
+  token_activities_v2_aggregate(
+    """distinct select on columns"""
+    distinct_on: [token_activities_v2_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_activities_v2_order_by!]
+    """filter the rows returned"""
+    where: token_activities_v2_bool_exp
+  ): token_activities_v2_aggregate!
+  """
+  fetch data from the table: "token_activities_v2" using primary key columns
+  """
+  token_activities_v2_by_pk(event_index: bigint!, transaction_version: bigint!): token_activities_v2
+  """
+  fetch data from the table in a streaming manner: "token_activities_v2"
+  """
+  token_activities_v2_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [token_activities_v2_stream_cursor_input]!
+    """filter the rows returned"""
+    where: token_activities_v2_bool_exp
+  ): [token_activities_v2!]!
+  """
+  fetch data from the table: "legacy_migration_v1.token_datas"
+  """
+  token_datas(
+    """distinct select on columns"""
+    distinct_on: [token_datas_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_datas_order_by!]
+    """filter the rows returned"""
+    where: token_datas_bool_exp
+  ): [token_datas!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.token_datas"
+  """
+  token_datas_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [token_datas_stream_cursor_input]!
+    """filter the rows returned"""
+    where: token_datas_bool_exp
+  ): [token_datas!]!
+  """
+  fetch data from the table: "legacy_migration_v1.token_ownerships"
+  """
+  token_ownerships(
+    """distinct select on columns"""
+    distinct_on: [token_ownerships_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [token_ownerships_order_by!]
+    """filter the rows returned"""
+    where: token_ownerships_bool_exp
+  ): [token_ownerships!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.token_ownerships"
+  """
+  token_ownerships_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [token_ownerships_stream_cursor_input]!
+    """filter the rows returned"""
+    where: token_ownerships_bool_exp
+  ): [token_ownerships!]!
+  """
+  fetch data from the table: "legacy_migration_v1.tokens"
+  """
+  tokens(
+    """distinct select on columns"""
+    distinct_on: [tokens_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tokens_order_by!]
+    """filter the rows returned"""
+    where: tokens_bool_exp
+  ): [tokens!]!
+  """
+  fetch data from the table in a streaming manner: "legacy_migration_v1.tokens"
+  """
+  tokens_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [tokens_stream_cursor_input]!
+    """filter the rows returned"""
+    where: tokens_bool_exp
+  ): [tokens!]!
+  """
+  fetch data from the table: "user_transactions"
+  """
+  user_transactions(
+    """distinct select on columns"""
+    distinct_on: [user_transactions_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [user_transactions_order_by!]
+    """filter the rows returned"""
+    where: user_transactions_bool_exp
+  ): [user_transactions!]!
+  """
+  fetch data from the table: "user_transactions" using primary key columns
+  """
+  user_transactions_by_pk(version: bigint!): user_transactions
+  """
+  fetch data from the table in a streaming manner: "user_transactions"
+  """
+  user_transactions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [user_transactions_stream_cursor_input]!
+    """filter the rows returned"""
+    where: user_transactions_bool_exp
+  ): [user_transactions!]!
+}
+
+"""
 columns and relationships of "chainlink_oracle_current_config"
 """
 type chainlink_oracle_current_config {
@@ -9817,6 +12853,24 @@ type query_root {
   """
   borrow_risk_parameters_current_by_pk(collateral: String!, market: String!, vault: String!): borrow_risk_parameters_current
   """
+  fetch data from the table: "borrower_usage"
+  """
+  borrower_usage(
+    """distinct select on columns"""
+    distinct_on: [borrower_usage_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrower_usage_order_by!]
+    """filter the rows returned"""
+    where: borrower_usage_bool_exp
+  ): [borrower_usage!]!
+  """fetch data from the table: "borrower_usage" using primary key columns"""
+  borrower_usage_by_pk(borrower: String!, vault_address: String!): borrower_usage
+  caas: caasquery_root
+  """
   fetch data from the table: "chainlink_oracle_current_config"
   """
   chainlink_oracle_current_config(
@@ -11155,6 +14209,44 @@ type query_root {
   ): [table_metadatas!]!
   """fetch data from the table: "table_metadatas" using primary key columns"""
   table_metadatas_by_pk(handle: String!): table_metadatas
+  """
+  fetch data from the table: "tapp_llp_position_current"
+  """
+  tapp_llp_position_current(
+    """distinct select on columns"""
+    distinct_on: [tapp_llp_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tapp_llp_position_current_order_by!]
+    """filter the rows returned"""
+    where: tapp_llp_position_current_bool_exp
+  ): [tapp_llp_position_current!]!
+  """
+  fetch data from the table: "tapp_llp_position_current" using primary key columns
+  """
+  tapp_llp_position_current_by_pk(position: String!): tapp_llp_position_current
+  """
+  fetch data from the table: "tapp_llp_position_debt_stores"
+  """
+  tapp_llp_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [tapp_llp_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tapp_llp_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: tapp_llp_position_debt_stores_bool_exp
+  ): [tapp_llp_position_debt_stores!]!
+  """
+  fetch data from the table: "tapp_llp_position_debt_stores" using primary key columns
+  """
+  tapp_llp_position_debt_stores_by_pk(position: String!, vault: String!): tapp_llp_position_debt_stores
   """An array relationship"""
   token_activities(
     """distinct select on columns"""
@@ -12699,6 +15791,35 @@ type subscription_root {
     """filter the rows returned"""
     where: borrow_risk_parameters_current_bool_exp
   ): [borrow_risk_parameters_current!]!
+  """
+  fetch data from the table: "borrower_usage"
+  """
+  borrower_usage(
+    """distinct select on columns"""
+    distinct_on: [borrower_usage_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrower_usage_order_by!]
+    """filter the rows returned"""
+    where: borrower_usage_bool_exp
+  ): [borrower_usage!]!
+  """fetch data from the table: "borrower_usage" using primary key columns"""
+  borrower_usage_by_pk(borrower: String!, vault_address: String!): borrower_usage
+  """
+  fetch data from the table in a streaming manner: "borrower_usage"
+  """
+  borrower_usage_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [borrower_usage_stream_cursor_input]!
+    """filter the rows returned"""
+    where: borrower_usage_bool_exp
+  ): [borrower_usage!]!
+  caas: caassubscription_root
   """
   fetch data from the table: "chainlink_oracle_current_config"
   """
@@ -14764,6 +17885,66 @@ type subscription_root {
     """filter the rows returned"""
     where: table_metadatas_bool_exp
   ): [table_metadatas!]!
+  """
+  fetch data from the table: "tapp_llp_position_current"
+  """
+  tapp_llp_position_current(
+    """distinct select on columns"""
+    distinct_on: [tapp_llp_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tapp_llp_position_current_order_by!]
+    """filter the rows returned"""
+    where: tapp_llp_position_current_bool_exp
+  ): [tapp_llp_position_current!]!
+  """
+  fetch data from the table: "tapp_llp_position_current" using primary key columns
+  """
+  tapp_llp_position_current_by_pk(position: String!): tapp_llp_position_current
+  """
+  fetch data from the table in a streaming manner: "tapp_llp_position_current"
+  """
+  tapp_llp_position_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [tapp_llp_position_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: tapp_llp_position_current_bool_exp
+  ): [tapp_llp_position_current!]!
+  """
+  fetch data from the table: "tapp_llp_position_debt_stores"
+  """
+  tapp_llp_position_debt_stores(
+    """distinct select on columns"""
+    distinct_on: [tapp_llp_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tapp_llp_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: tapp_llp_position_debt_stores_bool_exp
+  ): [tapp_llp_position_debt_stores!]!
+  """
+  fetch data from the table: "tapp_llp_position_debt_stores" using primary key columns
+  """
+  tapp_llp_position_debt_stores_by_pk(position: String!, vault: String!): tapp_llp_position_debt_stores
+  """
+  fetch data from the table in a streaming manner: "tapp_llp_position_debt_stores"
+  """
+  tapp_llp_position_debt_stores_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [tapp_llp_position_debt_stores_stream_cursor_input]!
+    """filter the rows returned"""
+    where: tapp_llp_position_debt_stores_bool_exp
+  ): [tapp_llp_position_debt_stores!]!
   """An array relationship"""
   token_activities(
     """distinct select on columns"""
@@ -15553,6 +18734,257 @@ input table_metadatas_stream_cursor_value_input {
   handle: String
   key_type: String
   value_type: String
+}
+
+"""
+columns and relationships of "tapp_llp_position_current"
+"""
+type tapp_llp_position_current {
+  collateral: String!
+  """An array relationship"""
+  debt_stores(
+    """distinct select on columns"""
+    distinct_on: [tapp_llp_position_debt_stores_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [tapp_llp_position_debt_stores_order_by!]
+    """filter the rows returned"""
+    where: tapp_llp_position_debt_stores_bool_exp
+  ): [tapp_llp_position_debt_stores!]!
+  market: String!
+  """An object relationship"""
+  market_info: borrow_market
+  owner: String!
+  position: String!
+  status: numeric
+}
+
+"""
+Boolean expression to filter rows from the table "tapp_llp_position_current". All fields are combined with a logical 'AND'.
+"""
+input tapp_llp_position_current_bool_exp {
+  _and: [tapp_llp_position_current_bool_exp!]
+  _not: tapp_llp_position_current_bool_exp
+  _or: [tapp_llp_position_current_bool_exp!]
+  collateral: String_comparison_exp
+  debt_stores: tapp_llp_position_debt_stores_bool_exp
+  market: String_comparison_exp
+  market_info: borrow_market_bool_exp
+  owner: String_comparison_exp
+  position: String_comparison_exp
+  status: numeric_comparison_exp
+}
+
+"""Ordering options when selecting data from "tapp_llp_position_current"."""
+input tapp_llp_position_current_order_by {
+  collateral: order_by
+  debt_stores_aggregate: tapp_llp_position_debt_stores_aggregate_order_by
+  market: order_by
+  market_info: borrow_market_order_by
+  owner: order_by
+  position: order_by
+  status: order_by
+}
+
+"""
+select columns of table "tapp_llp_position_current"
+"""
+enum tapp_llp_position_current_select_column {
+  """column name"""
+  collateral
+  """column name"""
+  market
+  """column name"""
+  owner
+  """column name"""
+  position
+  """column name"""
+  status
+}
+
+"""
+Streaming cursor of the table "tapp_llp_position_current"
+"""
+input tapp_llp_position_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: tapp_llp_position_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input tapp_llp_position_current_stream_cursor_value_input {
+  collateral: String
+  market: String
+  owner: String
+  position: String
+  status: numeric
+}
+
+"""
+columns and relationships of "tapp_llp_position_debt_stores"
+"""
+type tapp_llp_position_debt_stores {
+  debt_asset_balance: current_fungible_asset_balances
+  debt_store: String
+  position: String!
+  status: numeric
+  vault: String!
+  """An object relationship"""
+  vault_info: vault_info
+}
+
+"""
+order by aggregate values of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_aggregate_order_by {
+  avg: tapp_llp_position_debt_stores_avg_order_by
+  count: order_by
+  max: tapp_llp_position_debt_stores_max_order_by
+  min: tapp_llp_position_debt_stores_min_order_by
+  stddev: tapp_llp_position_debt_stores_stddev_order_by
+  stddev_pop: tapp_llp_position_debt_stores_stddev_pop_order_by
+  stddev_samp: tapp_llp_position_debt_stores_stddev_samp_order_by
+  sum: tapp_llp_position_debt_stores_sum_order_by
+  var_pop: tapp_llp_position_debt_stores_var_pop_order_by
+  var_samp: tapp_llp_position_debt_stores_var_samp_order_by
+  variance: tapp_llp_position_debt_stores_variance_order_by
+}
+
+"""
+order by avg() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_avg_order_by {
+  status: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "tapp_llp_position_debt_stores". All fields are combined with a logical 'AND'.
+"""
+input tapp_llp_position_debt_stores_bool_exp {
+  _and: [tapp_llp_position_debt_stores_bool_exp!]
+  _not: tapp_llp_position_debt_stores_bool_exp
+  _or: [tapp_llp_position_debt_stores_bool_exp!]
+  debt_store: String_comparison_exp
+  position: String_comparison_exp
+  status: numeric_comparison_exp
+  vault: String_comparison_exp
+  vault_info: vault_info_bool_exp
+}
+
+"""
+order by max() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_max_order_by {
+  debt_store: order_by
+  position: order_by
+  status: order_by
+  vault: order_by
+}
+
+"""
+order by min() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_min_order_by {
+  debt_store: order_by
+  position: order_by
+  status: order_by
+  vault: order_by
+}
+
+"""
+Ordering options when selecting data from "tapp_llp_position_debt_stores".
+"""
+input tapp_llp_position_debt_stores_order_by {
+  debt_store: order_by
+  position: order_by
+  status: order_by
+  vault: order_by
+  vault_info: vault_info_order_by
+}
+
+"""
+select columns of table "tapp_llp_position_debt_stores"
+"""
+enum tapp_llp_position_debt_stores_select_column {
+  """column name"""
+  debt_store
+  """column name"""
+  position
+  """column name"""
+  status
+  """column name"""
+  vault
+}
+
+"""
+order by stddev() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_stddev_order_by {
+  status: order_by
+}
+
+"""
+order by stddev_pop() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_stddev_pop_order_by {
+  status: order_by
+}
+
+"""
+order by stddev_samp() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_stddev_samp_order_by {
+  status: order_by
+}
+
+"""
+Streaming cursor of the table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: tapp_llp_position_debt_stores_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input tapp_llp_position_debt_stores_stream_cursor_value_input {
+  debt_store: String
+  position: String
+  status: numeric
+  vault: String
+}
+
+"""
+order by sum() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_sum_order_by {
+  status: order_by
+}
+
+"""
+order by var_pop() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_var_pop_order_by {
+  status: order_by
+}
+
+"""
+order by var_samp() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_var_samp_order_by {
+  status: order_by
+}
+
+"""
+order by variance() on columns of table "tapp_llp_position_debt_stores"
+"""
+input tapp_llp_position_debt_stores_variance_order_by {
+  status: order_by
 }
 
 scalar timestamp

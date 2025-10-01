@@ -1,12 +1,10 @@
-#import "./fragments/PositionFields.graphql"
-
-query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+query GetSCMDPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(
     where: { owner: { _eq: $ownerAddress }, status: { _eq: "0" } }
     limit: $limit
     offset: $offset
     order_by: { position: asc }
   ) {
-    ...PositionFields
+    ...SCMDPositionFields
   }
 }

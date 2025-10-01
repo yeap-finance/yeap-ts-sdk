@@ -2,15 +2,12 @@
 #import "./FungibleAssetMetadataFields.graphql"
 #import "./VaultInfoFields.graphql"
 
-fragment PositionFields on scmd_position_current {
+fragment TappLLPositionFields on tapp_llp_position_current {
   position
   owner
   market
   collateral
   status
-  collateral_asset_balance {
-    ...FungibleAssetBalanceFields
-  }
   market_info {
     ...BorrowMarketFields
   }

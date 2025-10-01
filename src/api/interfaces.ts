@@ -5,7 +5,7 @@ import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { FungibleAssetBalance, FungibleAssetMetadata } from "@aptos-labs/js-pro";
 import { BigNumber } from "mathjs";
 import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFieldsFragment } from "../types";
-import { PositionFieldsFragment, BorrowMarketFieldsFragment } from "../types/generated/operations";
+import { BorrowMarketFieldsFragment, ScmdPositionFieldsFragment, TappLlPositionFieldsFragment } from "../types/generated/operations";
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
@@ -259,8 +259,6 @@ export interface SwitchboardOracleConfig {
 export type RawVaultData = NonNullable<VaultInfoFieldsFragment>;
 /** Raw GraphQL row backing a VaultState (latest state activity). */
 export type RawVaultStateData = NonNullable<GetVaultLatestStateQuery["vault_states_activities"][0]>;
-/** Raw GraphQL fragment backing an SCMD position. */
-export type RawPositionData = PositionFieldsFragment;
 /** Raw GraphQL fragment backing a borrow market configuration. */
 export type RawBorrowMarket = BorrowMarketFieldsFragment;
 
@@ -384,7 +382,7 @@ export interface SCMDPosition {
   /** Count of debt stores with non‑zero debt. */
   activeDebtVaultCount?: number;
   /** Raw fragment (escape hatch). */
-  __raw?: RawPositionData;
+  __raw?: ScmdPositionFieldsFragment;
 }
 
 /**
@@ -460,3 +458,34 @@ export interface BorrowMarket {
   __raw?: RawBorrowMarket;
 }
 
+
+
+
+/**
+ * Tapp LLP position.
+ * Hold Tapp Pool position as collateral and borrows from multiple vaults.
+ */
+export interface TappLLPosition {
+  /** Position account address. */
+  positionAddress: string;
+  /** Owner (user) account address. */
+  ownerAddress: string;
+  /** Collateral Pool*/
+  collateral: string;
+  /** Market configuration address linking collateral to borrow vaults. */
+  market: string;
+  /** Full borrow market metadata (optional if not hydrated). */
+  marketInfo?: BorrowMarket;
+  /** Numeric status code (0 = active, others = closed / liquidated). */
+  status?: number;
+  /** Convenience boolean for active status. */
+  isActive?: boolean;
+  /** Map of debt vault address -> debt store detail. */
+  debtStores: Record<string, PositionDebtStore>;
+  /** True if any debt store has non‑zero debt. */
+  hasAnyDebt?: boolean;
+  /** Count of debt stores with non‑zero debt. */
+  activeDebtVaultCount?: number;
+  /** Raw fragment (escape hatch). */
+  __raw?: TappLlPositionFieldsFragment;
+}

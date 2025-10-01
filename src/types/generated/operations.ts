@@ -38,7 +38,9 @@ export type OracleRouterConfigFieldsFragment = (
   & { base_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, quote_asset_metadata?: Types.Maybe<FungibleAssetMetadataFieldsFragment>, fixed_price_oracle_config?: Types.Maybe<FixedPriceOracleConfigFieldsFragment>, pyth_oracle_config?: Types.Maybe<PythOracleConfigFieldsFragment>, switchboard_oracle_config?: Types.Maybe<SwitchboardOracleConfigFieldsFragment>, chainlink_oracle_config?: Types.Maybe<ChainlinkOracleConfigFieldsFragment> }
 );
 
-export type PositionFieldsFragment = (
+export type PythOracleConfigFieldsFragment = Pick<Types.PythOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'pyth_id' | 'max_age_in_seconds' | 'max_confidence'>;
+
+export type ScmdPositionFieldsFragment = (
   Pick<Types.ScmdPositionCurrent, 'position' | 'owner' | 'market' | 'collateral' | 'status'>
   & { collateral_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment>, market_info?: Types.Maybe<BorrowMarketFieldsFragment>, debt_stores: Array<(
     Pick<Types.ScmdPositionDebtStores, 'debt_store' | 'vault'>
@@ -46,9 +48,15 @@ export type PositionFieldsFragment = (
   )> }
 );
 
-export type PythOracleConfigFieldsFragment = Pick<Types.PythOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'pyth_id' | 'max_age_in_seconds' | 'max_confidence'>;
-
 export type SwitchboardOracleConfigFieldsFragment = Pick<Types.SwitchboardOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'aggregator_address' | 'max_age_in_seconds' | 'max_stdev' | 'deleted'>;
+
+export type TappLlPositionFieldsFragment = (
+  Pick<Types.TappLlpPositionCurrent, 'position' | 'owner' | 'market' | 'collateral' | 'status'>
+  & { market_info?: Types.Maybe<BorrowMarketFieldsFragment>, debt_stores: Array<(
+    Pick<Types.TappLlpPositionDebtStores, 'debt_store' | 'vault'>
+    & { debt_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment> }
+  )> }
+);
 
 export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
 
@@ -93,14 +101,23 @@ export type GetOracleRouterConfigsByOracleQueryVariables = Types.Exact<{
 
 export type GetOracleRouterConfigsByOracleQuery = { oracle_router_current_config: Array<OracleRouterConfigFieldsFragment> };
 
-export type GetPositionsByOwnerQueryVariables = Types.Exact<{
+export type GetScmdPositionsByOwnerQueryVariables = Types.Exact<{
   ownerAddress: Types.Scalars['String']['input'];
   limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
   offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
-export type GetPositionsByOwnerQuery = { scmd_position_current: Array<PositionFieldsFragment> };
+export type GetScmdPositionsByOwnerQuery = { scmd_position_current: Array<ScmdPositionFieldsFragment> };
+
+export type GetTappLlPositionsByOwnerQueryVariables = Types.Exact<{
+  ownerAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetTappLlPositionsByOwnerQuery = { tapp_llp_position_current: Array<TappLlPositionFieldsFragment> };
 
 export type GetVaultInfoQueryVariables = Types.Exact<{
   where?: Types.InputMaybe<Types.VaultInfoBoolExp>;

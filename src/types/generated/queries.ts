@@ -257,8 +257,8 @@ export const BorrowMarketFieldsFragmentDoc = `
   }
 }
     `;
-export const PositionFieldsFragmentDoc = `
-    fragment PositionFields on scmd_position_current {
+export const ScmdPositionFieldsFragmentDoc = `
+    fragment SCMDPositionFields on scmd_position_current {
   position
   owner
   market
@@ -267,6 +267,25 @@ export const PositionFieldsFragmentDoc = `
   collateral_asset_balance {
     ...FungibleAssetBalanceFields
   }
+  market_info {
+    ...BorrowMarketFields
+  }
+  debt_stores {
+    debt_store
+    vault
+    debt_asset_balance {
+      ...FungibleAssetBalanceFields
+    }
+  }
+}
+    `;
+export const TappLlPositionFieldsFragmentDoc = `
+    fragment TappLLPositionFields on tapp_llp_position_current {
+  position
+  owner
+  market
+  collateral
+  status
   market_info {
     ...BorrowMarketFields
   }
@@ -388,18 +407,18 @@ ${FixedPriceOracleConfigFieldsFragmentDoc}
 ${PythOracleConfigFieldsFragmentDoc}
 ${SwitchboardOracleConfigFieldsFragmentDoc}
 ${ChainlinkOracleConfigFieldsFragmentDoc}`;
-export const GetPositionsByOwner = `
-    query GetPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+export const GetScmdPositionsByOwner = `
+    query GetSCMDPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   scmd_position_current(
     where: {owner: {_eq: $ownerAddress}, status: {_eq: "0"}}
     limit: $limit
     offset: $offset
     order_by: {position: asc}
   ) {
-    ...PositionFields
+    ...SCMDPositionFields
   }
 }
-    ${PositionFieldsFragmentDoc}
+    ${ScmdPositionFieldsFragmentDoc}
 ${FungibleAssetBalanceFieldsFragmentDoc}
 ${FungibleAssetMetadataFieldsFragmentDoc}
 ${BorrowMarketFieldsFragmentDoc}
@@ -415,9 +434,41 @@ ${FixedPriceOracleConfigFieldsFragmentDoc}
 ${PythOracleConfigFieldsFragmentDoc}
 ${SwitchboardOracleConfigFieldsFragmentDoc}
 ${ChainlinkOracleConfigFieldsFragmentDoc}`;
+export const GetTappLlPositionsByOwner = `
+    query GetTappLLPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+  tapp_llp_position_current(
+    where: {owner: {_eq: $ownerAddress}, status: {_eq: "0"}}
+    limit: $limit
+    offset: $offset
+    order_by: {position: asc}
+  ) {
+    ...TappLLPositionFields
+  }
+}
+    ${TappLlPositionFieldsFragmentDoc}
+${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetVaultInfo = `
-    query GetVaultInfo($where: vault_info_bool_exp, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
-  vault_info(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+    query GetVaultInfo($where: vault_info_bool_exp = {}, $orderBy: [vault_info_order_by!], $limit: Int, $offset: Int) {
+  vault_info(
+    where: {settings: {whitelisted: {_eq: true}}, _and: [$where]}
+    order_by: $orderBy
+    limit: $limit
+    offset: $offset
+  ) {
     ...VaultInfoFields
   }
 }
@@ -569,8 +620,11 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getOracleRouterConfigsByOracle(variables: Types.GetOracleRouterConfigsByOracleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigsByOracleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigsByOracleQuery>({ document: GetOracleRouterConfigsByOracle, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigsByOracle', 'query', variables);
     },
-    GetPositionsByOwner(variables: Types.GetPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetPositionsByOwnerQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetPositionsByOwnerQuery>({ document: GetPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetPositionsByOwner', 'query', variables);
+    GetSCMDPositionsByOwner(variables: Types.GetScmdPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetScmdPositionsByOwnerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetScmdPositionsByOwnerQuery>({ document: GetScmdPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSCMDPositionsByOwner', 'query', variables);
+    },
+    GetTappLLPositionsByOwner(variables: Types.GetTappLlPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetTappLlPositionsByOwnerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetTappLlPositionsByOwnerQuery>({ document: GetTappLlPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTappLLPositionsByOwner', 'query', variables);
     },
     GetVaultInfo(variables?: Types.GetVaultInfoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultInfoQuery>({ document: GetVaultInfo, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultInfo', 'query', variables);
