@@ -91,7 +91,7 @@ export class TappLLPOperationBuilder {
   readonly config: YeapConfig;
 
   /**
-   * Creates an instance of OperationBUilder.
+   * Creates an instance of TappLLPOperationBuilder.
    * @param config - YeapConfig configuration instance
    */
   constructor(config: YeapConfig) {
