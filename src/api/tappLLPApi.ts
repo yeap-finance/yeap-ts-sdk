@@ -1,13 +1,14 @@
-// Copyright © Aptos Foundation
+// Copyright © Yeap Finance
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import { getSCMDPositionsByOwner, getTappLLPositionsByOwner } from "../internal";
+import { getTappLLPositionsByOwner } from "../internal";
 import { BorrowMarket, TappLLPosition } from "./interfaces";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
 import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
 import { createTappLLPosition } from "./entities/tappLLPosition";
+import { TappLLPOperationBuilder } from "./tappLLPOperationBuilder";
 
 /**
  * A class to query Tapp LLP position-related data from the Yeap indexer.
@@ -87,5 +88,9 @@ export class TappLLPApi {
 
   get protocolName(): string {
     return `${this.config.tappLlpProtocolAddress}::protocol_handle::LLProtocol`;
+  }
+
+  operationBuilder(): TappLLPOperationBuilder {
+    return new TappLLPOperationBuilder(this.config);
   }
 }
