@@ -88,14 +88,14 @@ type ClosePositionArgs = MarketContext;
  */
 export class TappLLPOperationBuilder {
   readonly operations: BuilderOperation[] = [];
-  readonly config: YeapConfig;
+  readonly protocolAddress: AccountAddress;
 
   /**
    * Creates an instance of TappLLPOperationBuilder.
    * @param config - YeapConfig configuration instance
    */
-  constructor(config: YeapConfig) {
-    this.config = config;
+  constructor(protocolAddress: AccountAddress) {
+    this.protocolAddress = protocolAddress;
   }
 
   /**
@@ -224,9 +224,8 @@ export class TappLLPOperationBuilder {
    * Returns a txn of the encoded operations for direct use as a transaction payload.
    */
   build(): InputGenerateTransactionPayloadData {
-    const tappLlpProtocolAddress = this.config.tappLlpProtocolAddress;
     return {
-      function: `${tappLlpProtocolAddress}::api::execute`,
+      function: `${this.protocolAddress}::api::execute`,
       typeArguments: [],
       functionArguments: [this.operations],
     };

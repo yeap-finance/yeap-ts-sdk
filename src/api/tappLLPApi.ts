@@ -91,6 +91,6 @@ export class TappLLPApi {
   }
 
   operationBuilder(): TappLLPOperationBuilder {
-    return new TappLLPOperationBuilder(this.config);
+    return new TappLLPOperationBuilder(AccountAddress.fromString(this.config.addresses.yeap_tapp_llp!));
   }
 }

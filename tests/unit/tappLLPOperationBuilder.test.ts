@@ -1,43 +1,56 @@
 import { AccountAddress, Deserializer } from "@aptos-labs/ts-sdk";
 import { TappLLPOperationBuilder } from "../../src/api/tappLLPOperationBuilder";
 
+const address = (hex: string) => `0x${hex.padStart(64, "0")}`;
+
 describe("TappLLPOperationBuilder", () => {
   test("open position encodes opcode and market", () => {
-    const builder = new TappLLPOperationBuilder();
-    const [operation] = builder.openPosition({ market: "0x1" }).build();
+    const protocolAddress = AccountAddress.from(address("1"));
+    const builder = new TappLLPOperationBuilder(protocolAddress);
+    const market = address("2");
+    builder.openPosition({ market });
+
+    const payload = builder.build();
+    if (!("function" in payload)) {
+      throw new Error("Expected entry function payload");
+    }
+    expect(payload.function).toBe(`${protocolAddress.toString()}::api::execute`);
+    expect(payload.typeArguments).toEqual([]);
+
+    const operations = payload.functionArguments[0] as Uint8Array[];
+    expect(operations).toHaveLength(1);
+
+    const [operation] = operations;
 
     const deserializer = new Deserializer(operation);
     expect(deserializer.deserializeU8()).toBe(0);
     expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from("0x1").toString(),
+      AccountAddress.from(market).toString(),
     );
     deserializer.assertFinished();
   });
 
   test("add liquidity serializes amounts and min mint", () => {
-    const builder = new TappLLPOperationBuilder();
+    const protocolAddress = AccountAddress.from(address("1"));
+    const builder = new TappLLPOperationBuilder(protocolAddress);
+    const market = address("9");
+    const position = address("abc");
     builder.addLiquidity({
-      market: "0x9",
-      position: "0xabc",
+      market,
+      position,
       amounts: [1n, 2n],
       minMintAmount: 3n,
     });
 
-    const vectorBytes = builder.toVectorBytes();
-    const vectorDeserializer = new Deserializer(vectorBytes);
-
-    expect(vectorDeserializer.deserializeUleb128AsU32()).toBe(1);
-    const operationBytes = vectorDeserializer.deserializeBytes();
-    vectorDeserializer.assertFinished();
-
-    const operationDeserializer = new Deserializer(operationBytes);
+    const [operation] = builder.operations;
+    const operationDeserializer = new Deserializer(operation);
     expect(operationDeserializer.deserializeU8()).toBe(3); // OP_ADD_LIQUIDITY
     expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(
-      AccountAddress.from("0x9").toString(),
+      AccountAddress.from(market).toString(),
     );
     expect(operationDeserializer.deserializeBool()).toBe(true);
     expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(
-      AccountAddress.from("0xabc").toString(),
+      AccountAddress.from(position).toString(),
     );
     expect(operationDeserializer.deserializeUleb128AsU32()).toBe(2);
     expect(operationDeserializer.deserializeU256()).toBe(BigInt(1));
@@ -47,26 +60,32 @@ describe("TappLLPOperationBuilder", () => {
   });
 
   test("claim reward encodes optional amount", () => {
-    const builder = new TappLLPOperationBuilder();
-    const [operation] = builder
-      .claimReward({
-        market: "0x5",
-        position: "0x42",
-        assetAddress: "0x1",
-        amountToClaim: null,
-      })
-      .build();
+    const protocolAddress = AccountAddress.from(address("1"));
+    const builder = new TappLLPOperationBuilder(protocolAddress);
+    const market = address("5");
+    const position = address("42");
+    const assetAddress = address("dead");
+    builder.claimReward({
+      market,
+      position,
+      assetAddress,
+      amountToClaim: undefined,
+    });
+
+    const [operation] = builder.operations;
 
     const deserializer = new Deserializer(operation);
     expect(deserializer.deserializeU8()).toBe(7); // OP_CLAIM_REWARD
     expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from("0x5").toString(),
+      AccountAddress.from(market).toString(),
     );
     expect(deserializer.deserializeBool()).toBe(true);
     expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from("0x42").toString(),
+      AccountAddress.from(position).toString(),
     );
-    deserializer.deserializeFixedBytes(32);
+    expect(AccountAddress.deserialize(deserializer).toString()).toBe(
+      AccountAddress.from(assetAddress).toString(),
+    );
     expect(deserializer.deserializeBool()).toBe(false);
     deserializer.assertFinished();
   });
