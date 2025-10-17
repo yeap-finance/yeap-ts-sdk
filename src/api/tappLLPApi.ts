@@ -1,4 +1,4 @@
-// Copyright © Aptos Foundation
+// Copyright © Yeap Finance
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
