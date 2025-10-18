@@ -11,7 +11,6 @@ import {
   U256,
   U64,
 } from "@aptos-labs/ts-sdk";
-import { YeapConfig } from "./yeapConfig";
 
 const OP_OPEN_POSITION = 0;
 const OP_ATTACH_COLLATERAL = 1;
@@ -89,7 +88,7 @@ type ClosePositionArgs = MarketContext;
 export class TappLLPOperationBuilder {
   readonly operations: BuilderOperation[] = [];
   readonly protocolAddress: AccountAddress;
-
+  private static ENCODING_VERSION = 1;
   /**
    * Creates an instance of TappLLPOperationBuilder.
    * @param config - YeapConfig configuration instance
@@ -135,32 +134,42 @@ export class TappLLPOperationBuilder {
   }
 
   /**
+   * Add liquidity to a stable pool.
    * Append an `OP_ADD_LIQUIDITY` instruction.
    */
-  addLiquidity({ market, position, amounts, minMintAmount }: AddLiquidityArgs): this {
+  addLiquidityStable({ market, position, amounts, minMintAmount }: AddLiquidityArgs): this {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
+    // encode arguments using bcs first
+    const serializer = new Serializer();
+    serializer.serializeVector(amounts.map(v => new U256(v)));
+    serializer.serializeU256(minMintAmount);
+    const encodedParams = serializer.toUint8Array();
     this.operations.push(
       this.encodeOperationWithContext(OP_ADD_LIQUIDITY, marketAddress, position, (serializer) => {
-        serializer.serializeVector(amounts.map(v => new U256(v)));
-        serializer.serializeU256(minMintAmount);
+        serializer.serializeBytes(encodedParams);
       }),
     );
     return this;
   }
 
   /**
+   * Remove liquidity from a stable pool.
    * Append an `OP_REMOVE_LIQUIDITY` instruction.
    * @param ty Redemption variant identifier consumed by the Move API.
    * @param amount LP tokens to redeem.
    * @param minAmounts Minimum out amounts per asset.
    */
-  removeLiquidity({ market, position, ty, amount, minAmounts }: RemoveLiquidityArgs): this {
+  removeLiquidityStable({ market, position, ty, amount, minAmounts }: RemoveLiquidityArgs): this {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
+    // encode arguments using bcs first
+    const serializer = new Serializer();
+    serializer.serializeU8(ty);
+    serializer.serializeU128(amount);
+    serializer.serializeVector(minAmounts.map(v => new U128(v)));
+    const encodedParams = serializer.toUint8Array();
     this.operations.push(
       this.encodeOperationWithContext(OP_REMOVE_LIQUIDITY, marketAddress, position, (serializer) => {
-        serializer.serializeU8(ty);
-        serializer.serializeU128(amount);
-        serializer.serializeVector(minAmounts.map(v => new U128(v)));
+        serializer.serializeBytes(encodedParams);
       }),
     );
     return this;
@@ -253,6 +262,7 @@ export class TappLLPOperationBuilder {
 
   private static encodeOperation(kind: number, withPayload?: (serializer: Serializer) => void): Uint8Array {
     const serializer = new Serializer();
+    serializer.serializeU8(TappLLPOperationBuilder.ENCODING_VERSION); // encoding version
     serializer.serializeU8(kind);
     if (withPayload) {
       withPayload(serializer);
