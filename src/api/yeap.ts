@@ -8,6 +8,7 @@ import {OracleApi} from "./oracleApi";
 import {BuildApi} from "./buildApi";
 import {AdminApi} from "./adminApi";
 import { TappLLPApi } from "./tappLLPApi";
+import { AptosScriptComposer } from "@aptos-labs/script-composer-sdk";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -97,6 +98,10 @@ export class Yeap {
     this.oracleRouterApi = new OracleApi(this.config);
     this.buildApi = new BuildApi(this.config);
     this.adminApi = new AdminApi(this.config);
+  }
+
+  scriptComposer(): AptosScriptComposer {
+    return new AptosScriptComposer(this.config.aptosClient?.config!);
   }
 }
 
