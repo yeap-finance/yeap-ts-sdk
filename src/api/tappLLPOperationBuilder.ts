@@ -35,36 +35,27 @@ type OpenPositionArgs = {
   market: AccountAddressInput;
 };
 
-type AddLiquidityArgs = MarketContext & {
+type AddLiquidityStableArgs = MarketContext & {
   /** Amount to deposit for each underlying asset in the pool. */
   amounts: AnyNumber[];
   /** Minimum amount of LP tokens the user is willing to mint. */
   minMintAmount: AnyNumber;
 };
 
-type RemoveLiquidityArgs = MarketContext & {
-  /** Redemption type supported by the Move API (e.g. single asset vs balanced). */
-  ty: number;
-  /** Amount of LP tokens to burn. */
-  amount: AnyNumber;
-  /** Minimum redemption amounts per asset (same ordering as pool assets). */
-  minAmounts: AnyNumber[];
-};
-
-type RemoveLiquidityImbalanceArgs = MarketContext & {
+type RemoveLiquidityStableImbalanceArgs = MarketContext & {
   /** Amounts of each underlying asset to withdraw (same ordering as pool assets). */
   amounts: AnyNumber[];
   /** Maximum amount of LP tokens the user is willing to burn. */
   maxBurnAmount: AnyNumber;
 };
-type RemoveLiquidityRatioArgs = MarketContext & {
+type RemoveLiquidityStableRatioArgs = MarketContext & {
   /** Amount of LP tokens to burn. */
   amount: AnyNumber;
   /** Minimum redemption amounts per asset (same ordering as pool assets). */
   minAmounts: AnyNumber[];
 };
 
-type RemoveLiquiditySingleArgs = MarketContext & {
+type RemoveLiquidityStableSingleArgs = MarketContext & {
     /** Amount of LP tokens to burn. */
   amount: AnyNumber;
   /** Index of the asset to withdraw. */
@@ -159,7 +150,7 @@ export class TappLLPOperationBuilder {
    * Add liquidity to a stable pool.
    * Append an `OP_ADD_LIQUIDITY` instruction.
    */
-  addLiquidityStable({ market, position, amounts, minMintAmount }: AddLiquidityArgs): this {
+  addLiquidityStable({ market, position, amounts, minMintAmount }: AddLiquidityStableArgs): this {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
@@ -183,7 +174,7 @@ export class TappLLPOperationBuilder {
     position,
     amounts,
     maxBurnAmount,
-  }: RemoveLiquidityImbalanceArgs) {
+  }: RemoveLiquidityStableImbalanceArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
@@ -208,7 +199,7 @@ export class TappLLPOperationBuilder {
     position,
     amount,
     minAmounts,
-  }: RemoveLiquidityRatioArgs) {
+  }: RemoveLiquidityStableRatioArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
@@ -234,7 +225,7 @@ export class TappLLPOperationBuilder {
     amount,
     index,
     minAmount,
-  }: RemoveLiquiditySingleArgs) {
+  }: RemoveLiquidityStableSingleArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
