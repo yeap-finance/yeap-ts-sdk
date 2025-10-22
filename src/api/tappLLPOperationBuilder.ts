@@ -51,6 +51,28 @@ type RemoveLiquidityArgs = MarketContext & {
   minAmounts: AnyNumber[];
 };
 
+type RemoveLiquidityImbalanceArgs = MarketContext & {
+  /** Amounts of each underlying asset to withdraw (same ordering as pool assets). */
+  amounts: AnyNumber[];
+  /** Maximum amount of LP tokens the user is willing to burn. */
+  maxBurnAmount: AnyNumber;
+};
+type RemoveLiquidityRatioArgs = MarketContext & {
+  /** Amount of LP tokens to burn. */
+  amount: AnyNumber;
+  /** Minimum redemption amounts per asset (same ordering as pool assets). */
+  minAmounts: AnyNumber[];
+};
+
+type RemoveLiquiditySingleArgs = MarketContext & {
+    /** Amount of LP tokens to burn. */
+  amount: AnyNumber;
+  /** Index of the asset to withdraw. */
+  index: number;
+  /** Minimum amount of the asset to receive. */
+  minAmount: AnyNumber;
+};
+
 type AttachCollateralArgs = MarketContext & {
   /** Address of the collateral object to transfer to the position. */
   collateral: AccountAddressInput;
@@ -153,19 +175,21 @@ export class TappLLPOperationBuilder {
   }
 
   /**
-   * Remove liquidity from a stable pool.
+   * Remove liquidity from a stable pool with imbalanced amounts.
    * Append an `OP_REMOVE_LIQUIDITY` instruction.
-   * @param ty Redemption variant identifier consumed by the Move API.
-   * @param amount LP tokens to redeem.
-   * @param minAmounts Minimum out amounts per asset.
    */
-  removeLiquidityStable({ market, position, ty, amount, minAmounts }: RemoveLiquidityArgs): this {
+  removeLiquidityStableImbalance({
+    market,
+    position,
+    amounts,
+    maxBurnAmount,
+  }: RemoveLiquidityImbalanceArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
-    serializer.serializeU8(ty);
-    serializer.serializeU128(amount);
-    serializer.serializeVector(minAmounts.map(v => new U128(v)));
+    serializer.serializeU8(1);
+    serializer.serializeVector(amounts.map(v => new U256(v)));
+    serializer.serializeU256(maxBurnAmount);
     const encodedParams = serializer.toUint8Array();
     this.operations.push(
       this.encodeOperationWithContext(OP_REMOVE_LIQUIDITY, marketAddress, position, (serializer) => {
@@ -174,6 +198,59 @@ export class TappLLPOperationBuilder {
     );
     return this;
   }
+
+  /**
+   * Remove liquidity from a stable pool in ratio.
+   * Append an `OP_REMOVE_LIQUIDITY` instruction.
+   */
+  removeLiquidityStableRatio({
+    market,
+    position,
+    amount,
+    minAmounts,
+  }: RemoveLiquidityRatioArgs) {
+    const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
+    // encode arguments using bcs first
+    const serializer = new Serializer();
+    serializer.serializeU8(2);
+    serializer.serializeU256(amount);
+    serializer.serializeVector(minAmounts.map(v => new U256(v)));
+    const encodedParams = serializer.toUint8Array();
+    this.operations.push(
+      this.encodeOperationWithContext(OP_REMOVE_LIQUIDITY, marketAddress, position, (serializer) => {
+        serializer.serializeBytes(encodedParams);
+      }),
+    );
+    return this;
+  }
+
+  /**
+   * Remove liquidity from a stable pool as single asset.
+   * Append an `OP_REMOVE_LIQUIDITY` instruction.
+   */
+  removeLiquidityStableSingle({
+    market,
+    position,
+    amount,
+    index,
+    minAmount,
+  }: RemoveLiquiditySingleArgs) {
+    const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
+    // encode arguments using bcs first
+    const serializer = new Serializer();
+    serializer.serializeU8(0); // single asset redemption type
+    serializer.serializeU256(amount); // amount of LP tokens to burn
+    serializer.serializeU64(index); // index of the asset to withdraw
+    serializer.serializeU256(minAmount); // minimum amount of the asset to receive
+    const encodedParams = serializer.toUint8Array();
+    this.operations.push(
+      this.encodeOperationWithContext(OP_REMOVE_LIQUIDITY, marketAddress, position, (serializer) => {
+        serializer.serializeBytes(encodedParams);
+      }),
+    );
+    return this;
+  }
+
 
   /**
    * Append an `OP_BORROW` instruction.
