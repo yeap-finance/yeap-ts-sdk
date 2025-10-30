@@ -19,7 +19,20 @@ describe("Tapp SDK tests", () => {
       expect(pool).toHaveProperty("poolId");
       expect(pool).toHaveProperty("apr");
     }
-    console.log(JSON.stringify(pools));
+    const filteredPools = pools.filter(pool => pool.poolId === "0xe0b38051940ebb02885ba5139f2bc86d0726cf5292360725514a56f21f81d66d");
+    // expect(filteredPools.length).toBeGreaterThan(0);
+
+    const poolInfo = await client.getPoolInfo({
+      poolId: "0xe0b38051940ebb02885ba5139f2bc86d0726cf5292360725514a56f21f81d66d",
+    });
+    const poolStats = await client.getPoolStats({
+      poolId: "0xe0b38051940ebb02885ba5139f2bc86d0726cf5292360725514a56f21f81d66d",
+    });
+    expect(poolInfo).toBeDefined();
+    expect(poolStats).toBeDefined();
+
+    console.log("Pool info:", poolInfo);
+    console.log("Pool stats:", poolStats);
   });
 
   test("should fetch pool info by ID from Tapp API", async () => {
