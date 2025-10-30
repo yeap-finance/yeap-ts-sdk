@@ -1,7 +1,6 @@
 // Copyright © Yeap Finance
 // SPDX-License-Identifier: Apache-2.0
 
-import { AptosScriptComposer } from "@aptos-labs/script-composer-sdk";
 import {
   AccountAddress,
   AccountAddressInput,
@@ -297,13 +296,6 @@ export class TappLLPOperationBuilder {
     this.operations.push(this.encodeOperationWithContext(OP_CLOSE_POSITION, marketAddress, position));
     return this;
   }
-
-  // closePositionScript({
-  //   market,
-  //   position,
-  // }: ClosePositionArgs): this {
-  //   new AptosScriptComposer();
-  // }
 
   /**
    * Returns a txn of the encoded operations for direct use as a transaction payload.

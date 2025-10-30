@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "build:clean": "rm -rf dist",
-    "build": "pnpm build:clean && tsup",
+    "build": "pnpm build:clean && tsup --config tsup.config.ts",
     "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
     "prepare": "pnpm run build",
     "prepublishOnly": "pnpm run build",
