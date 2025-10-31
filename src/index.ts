@@ -27,7 +27,7 @@ export * from "./client";
 export * from "./internal";
 export * from "./utils";
 export * as thirdparties from "./thirdparties";
-export * from "./composer/moduleComposer";
+export * from "./composer";
 // Export types in a namespaced way to avoid name collisions with API entities
 export * from "./types/types";
 export * as YeapGeneratedTypes from "./types/generated/types";

@@ -55,4 +55,11 @@ describe("Tapp SDK tests", () => {
     expect(poolStatus).toHaveProperty("tvl");
     console.log(poolStatus);
   });
+  test("should fetch position info from Tapp API", async () => {
+    const client = new TappApiClient("https://display-engine.dev.tapp-dex.devucc.name/api/v1");
+    const positionId = "0xcd01c0a7d8c88c1dc07099f945bcbcb309b15218f2e33bd834a0534dc9386e60";
+    const positionInfo = await client.getPositions({ nftAddrs: ["0xc216c58397f59d7c659168ab79068c22ebd82b291d83af08781495a582fff7f2"]}); // get postioin problems
+    expect(positionInfo.data.length).toBeGreaterThan(0);
+    console.log(positionInfo.data);
+  });
 });

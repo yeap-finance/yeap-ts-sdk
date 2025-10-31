@@ -22,6 +22,10 @@ export interface JsonRpcResponse<T> {
   usOut: number;
   usDiff: number;
 }
+export type PaginatedParams<T> = T & {
+  page?: number;
+  pageSize?: number;
+};
 
 export interface PaginatedResponse<T> {
   data: T[];
@@ -236,11 +240,12 @@ export interface PoolInfoParams {
   tokenAddrs?: [string, string];
 }
 
-export interface PositionParams {
+export type PositionParams = PaginatedParams<{
   userAddr: string;
-  page?: number;
-  pageSize?: number;
-}
+}| {
+  nftAddrs?: string[];
+}>;
+
 
 export interface UserTransactionParams {
   userAddr: string;
