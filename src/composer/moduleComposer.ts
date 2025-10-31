@@ -1,5 +1,6 @@
 import {
   EntryFunctionArgumentTypes,
+  MoveFunctionVisibility,
   MoveModule,
   SimpleEntryFunctionArgumentTypes,
   TypeArgument,
@@ -17,19 +18,17 @@ export type ModuleFunctionCallArgs = {
   };
 };
 
-type MoveModuleFunction<T extends MoveModule = MoveModule> =
-  T['exposed_functions'] extends Array<infer F> ? F : never;
-
-type PublicMoveModuleFunction<T extends MoveModule = MoveModule> = Extract<
-  MoveModuleFunction<T>,
-  { visibility: 'public' }
+type ModuleFunctions<T extends MoveModule = MoveModule> = NonNullable<T['exposed_functions']>;
+type ModuleFunction<T extends MoveModule = MoveModule> = ModuleFunctions<T>[number];
+type PublicModuleFunction<T extends MoveModule = MoveModule> = Extract<
+  ModuleFunction<T>,
+  { visibility: MoveFunctionVisibility.PUBLIC }
 >;
 
-type MoveModuleFunctionName<T extends MoveModule = MoveModule> =
-  PublicMoveModuleFunction<T> extends { name: infer N extends string } ? N : never;
+type PublicModuleFunctionName<T extends MoveModule = MoveModule> = PublicModuleFunction<T>['name'];
 
 export type ModuleFunctionClient<TModule extends MoveModule = MoveModule> = {
-  [TName in MoveModuleFunctionName<TModule>]: (
+  [TName in PublicModuleFunctionName<TModule>]: (
     args?: ModuleFunctionCallArgs
   ) => Promise<CallArgument[]>;
 };
@@ -66,7 +65,9 @@ export async function createModuleClient<TModule extends MoveModule = MoveModule
   const resolvedModuleName = moduleAbi.name;
   const exposedFunctions = moduleAbi.exposed_functions ?? [];
 
-  const publicFunctions = exposedFunctions.filter((func) => func.visibility === 'public');
+  const publicFunctions = exposedFunctions.filter(
+    (func) => func.visibility === MoveFunctionVisibility.PUBLIC
+  );
   const functionMap = new Map(publicFunctions.map((func) => [func.name, func] as const));
   const defaultModuleBytecodes = defaults?.moduleBytecodes;
   const defaultOptions = defaults?.options;
