@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {  AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
+import { AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
 import { createOracleConfig } from "./oracleConfig";
@@ -118,10 +118,16 @@ export class OracleRouter {
    * }
    * ```
    */
-  private getConfigForPair(baseAsset: AccountAddress, quoteAsset: AccountAddress): OracleRouterConfigFieldsFragment | undefined {
+  private getConfigForPair(
+    baseAsset: AccountAddress,
+    quoteAsset: AccountAddress,
+  ): OracleRouterConfigFieldsFragment | undefined {
     const configs = this.data.filter((config) => {
       try {
-        return AccountAddress.from(config.base_asset).equals(baseAsset) && AccountAddress.from(config.quote_asset).equals(quoteAsset);
+        return (
+          AccountAddress.from(config.base_asset).equals(baseAsset) &&
+          AccountAddress.from(config.quote_asset).equals(quoteAsset)
+        );
       } catch (_e) {
         return false;
       }
@@ -130,7 +136,7 @@ export class OracleRouter {
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for asset pair ${baseAsset}/${quoteAsset}. ` +
-        `Expected at most one configuration per pair, but found ${configs.length}.`,
+          `Expected at most one configuration per pair, but found ${configs.length}.`,
       );
     }
 
@@ -218,7 +224,7 @@ export class OracleRouter {
     if (configs.length > 1) {
       throw new Error(
         `Invalid oracle router state: Multiple configurations found for base asset ${baseAsset}. ` +
-        `Expected at most one configuration per base asset, but found ${configs.length}.`,
+          `Expected at most one configuration per base asset, but found ${configs.length}.`,
       );
     }
 
@@ -597,16 +603,14 @@ export class OracleRouter {
    */
   async getPythPriceUpdate(): Promise<PriceFeed[] | undefined> {
     if (!this.config) {
-      throw new Error("YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.");
+      throw new Error(
+        "YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.",
+      );
     }
 
     // FIXME: Collect unique Pyth feed IDs from the router configurations
     const feedIds = Array.from(
-      new Set(
-        this.data
-          .map((c) => c.pyth_oracle_config?.pyth_id)
-          .filter((id): id is string => Boolean(id))
-      )
+      new Set(this.data.map((c) => c.pyth_oracle_config?.pyth_id).filter((id): id is string => Boolean(id))),
     );
 
     if (feedIds.length === 0) {

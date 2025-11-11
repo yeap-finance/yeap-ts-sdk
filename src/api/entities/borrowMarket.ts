@@ -7,10 +7,9 @@ import { BorrowRiskParameters } from "../interfaces";
 import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { createVault } from "./vault";
 import { BorrowMarket } from "../interfaces";
-import {createOracleConfig} from "./oracleConfig";
+import { createOracleConfig } from "./oracleConfig";
 
 type RawBorrowMarket = BorrowMarketFieldsFragment;
-
 
 function parseNumeric(v?: string | null): number {
   const n = Number(v);
@@ -27,7 +26,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
       collateral: AccountAddress.fromString(rp.collateral),
       market: AccountAddress.fromString(rp.market),
       vault: AccountAddress.fromString(rp.vault),
-      vaultInfo: rp.vault_info ? createVault(config, rp.vault_info)??undefined: undefined,
+      vaultInfo: rp.vault_info ? (createVault(config, rp.vault_info) ?? undefined) : undefined,
     };
     borrowRiskParameters[entry.vault.toString()] = entry;
   }
@@ -36,7 +35,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
     market: AccountAddress.fromString(raw.market),
     owner: raw.object_info?.owner_address ? AccountAddress.fromString(raw.object_info?.owner_address) : undefined,
     collateral: AccountAddress.fromString(raw.collateral!),
-    collateralVault: raw.collateral_vault ? createVault(config, raw.collateral_vault!) ??undefined :undefined,
+    collateralVault: raw.collateral_vault ? (createVault(config, raw.collateral_vault!) ?? undefined) : undefined,
     oracle: AccountAddress.fromString(raw.oracle!),
     oracleConfigs,
     crf: parseNumeric(raw.crf),

@@ -56,7 +56,7 @@ type RemoveLiquidityStableRatioArgs = MarketContext & {
 };
 
 type RemoveLiquidityStableSingleArgs = MarketContext & {
-    /** Amount of LP tokens to burn. */
+  /** Amount of LP tokens to burn. */
   amount: AnyNumber;
   /** Index of the asset to withdraw. */
   index: number;
@@ -154,7 +154,7 @@ export class TappLLPOperationBuilder {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
-    serializer.serializeVector(amounts.map(v => new U256(v)));
+    serializer.serializeVector(amounts.map((v) => new U256(v)));
     serializer.serializeU256(minMintAmount);
     const encodedParams = serializer.toUint8Array();
     this.operations.push(
@@ -169,17 +169,12 @@ export class TappLLPOperationBuilder {
    * Remove liquidity from a stable pool with imbalanced amounts.
    * Append an `OP_REMOVE_LIQUIDITY` instruction.
    */
-  removeLiquidityStableImbalance({
-    market,
-    position,
-    amounts,
-    maxBurnAmount,
-  }: RemoveLiquidityStableImbalanceArgs) {
+  removeLiquidityStableImbalance({ market, position, amounts, maxBurnAmount }: RemoveLiquidityStableImbalanceArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
     serializer.serializeU8(1);
-    serializer.serializeVector(amounts.map(v => new U256(v)));
+    serializer.serializeVector(amounts.map((v) => new U256(v)));
     serializer.serializeU256(maxBurnAmount);
     const encodedParams = serializer.toUint8Array();
     this.operations.push(
@@ -194,18 +189,13 @@ export class TappLLPOperationBuilder {
    * Remove liquidity from a stable pool in ratio.
    * Append an `OP_REMOVE_LIQUIDITY` instruction.
    */
-  removeLiquidityStableRatio({
-    market,
-    position,
-    amount,
-    minAmounts,
-  }: RemoveLiquidityStableRatioArgs) {
+  removeLiquidityStableRatio({ market, position, amount, minAmounts }: RemoveLiquidityStableRatioArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
     serializer.serializeU8(2);
     serializer.serializeU256(amount);
-    serializer.serializeVector(minAmounts.map(v => new U256(v)));
+    serializer.serializeVector(minAmounts.map((v) => new U256(v)));
     const encodedParams = serializer.toUint8Array();
     this.operations.push(
       this.encodeOperationWithContext(OP_REMOVE_LIQUIDITY, marketAddress, position, (serializer) => {
@@ -219,13 +209,7 @@ export class TappLLPOperationBuilder {
    * Remove liquidity from a stable pool as single asset.
    * Append an `OP_REMOVE_LIQUIDITY` instruction.
    */
-  removeLiquidityStableSingle({
-    market,
-    position,
-    amount,
-    index,
-    minAmount,
-  }: RemoveLiquidityStableSingleArgs) {
+  removeLiquidityStableSingle({ market, position, amount, index, minAmount }: RemoveLiquidityStableSingleArgs) {
     const marketAddress = TappLLPOperationBuilder.toAccountAddress(market);
     // encode arguments using bcs first
     const serializer = new Serializer();
@@ -241,7 +225,6 @@ export class TappLLPOperationBuilder {
     );
     return this;
   }
-
 
   /**
    * Append an `OP_BORROW` instruction.
@@ -308,7 +291,6 @@ export class TappLLPOperationBuilder {
     };
   }
 
-
   private encodeOperationWithContext(
     kind: number,
     marketAddress: AccountAddress,
@@ -318,9 +300,7 @@ export class TappLLPOperationBuilder {
     return TappLLPOperationBuilder.encodeOperation(kind, (serializer) => {
       serializer.serialize(marketAddress);
       const resolvedPosition =
-        position === undefined || position === null
-          ? undefined
-          : TappLLPOperationBuilder.toAccountAddress(position);
+        position === undefined || position === null ? undefined : TappLLPOperationBuilder.toAccountAddress(position);
       serializer.serializeOption(resolvedPosition);
       if (withPayload) {
         withPayload(serializer);

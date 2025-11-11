@@ -1,11 +1,11 @@
-import { configDotenv } from 'dotenv';
-import {initializeYeapFromEnv} from './setup';
+import { configDotenv } from "dotenv";
+import { initializeYeapFromEnv } from "./setup";
 
 describe("Tapp LLP API tests", () => {
-    beforeAll(() => {
-        // Load environment variables from .env file
-        configDotenv();
-    });
+  beforeAll(() => {
+    // Load environment variables from .env file
+    configDotenv();
+  });
   test("should initialize Tapp LLP API correctly", async () => {
     const yeap = await initializeYeapFromEnv();
     const api = yeap.tappLLPApi;

@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { SCMDPosition,YeapFungibleAssetMetadata } from "../api/interfaces";
+import { SCMDPosition, YeapFungibleAssetMetadata } from "../api/interfaces";
 
 /**
  * 债务余额计算工具

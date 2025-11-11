@@ -5,7 +5,11 @@ import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { FungibleAssetBalance, FungibleAssetMetadata } from "@aptos-labs/js-pro";
 import { BigNumber } from "mathjs";
 import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFieldsFragment } from "../types";
-import { BorrowMarketFieldsFragment, ScmdPositionFieldsFragment, TappLlPositionFieldsFragment } from "../types/generated/operations";
+import {
+  BorrowMarketFieldsFragment,
+  ScmdPositionFieldsFragment,
+  TappLlPositionFieldsFragment,
+} from "../types/generated/operations";
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
@@ -36,7 +40,7 @@ export interface AptosObject {
 /**
  * Fungible asset balance information (clean interface)
  */
-export type YeapFungibleAssetBalance  = FungibleAssetBalance;
+export type YeapFungibleAssetBalance = FungibleAssetBalance;
 
 /**
  * Vault settings interface (clean interface)
@@ -122,7 +126,6 @@ export interface YeapKinkedIrmConfig {
   optimalUtilization?: string | null;
 }
 
-
 /**
  * Pagination information for queries
  */
@@ -158,7 +161,6 @@ export interface YeapOracleRouterConfig {
   /** Whether the configuration is deleted */
   isDeleted?: boolean;
 }
-
 
 /**
  * Borrow risk parameters (aligned to current fragment fields)
@@ -457,9 +459,6 @@ export interface BorrowMarket {
   /** Raw fragment backing this market (escape hatch). */
   __raw?: RawBorrowMarket;
 }
-
-
-
 
 /**
  * Tapp LLP position.

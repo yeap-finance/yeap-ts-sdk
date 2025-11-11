@@ -434,6 +434,28 @@ ${FixedPriceOracleConfigFieldsFragmentDoc}
 ${PythOracleConfigFieldsFragmentDoc}
 ${SwitchboardOracleConfigFieldsFragmentDoc}
 ${ChainlinkOracleConfigFieldsFragmentDoc}`;
+export const GetTappLlPositionById = `
+    query GetTappLLPositionById($positionId: String!) {
+  tapp_llp_position_current_by_pk(position: $positionId) {
+    ...TappLLPositionFields
+  }
+}
+    ${TappLlPositionFieldsFragmentDoc}
+${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetTappLlPositionsByOwner = `
     query GetTappLLPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
   tapp_llp_position_current(
@@ -622,6 +644,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetSCMDPositionsByOwner(variables: Types.GetScmdPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetScmdPositionsByOwnerQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetScmdPositionsByOwnerQuery>({ document: GetScmdPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSCMDPositionsByOwner', 'query', variables);
+    },
+    GetTappLLPositionById(variables: Types.GetTappLlPositionByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetTappLlPositionByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetTappLlPositionByIdQuery>({ document: GetTappLlPositionById, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTappLLPositionById', 'query', variables);
     },
     GetTappLLPositionsByOwner(variables: Types.GetTappLlPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetTappLlPositionsByOwnerQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetTappLlPositionsByOwnerQuery>({ document: GetTappLlPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTappLLPositionsByOwner', 'query', variables);

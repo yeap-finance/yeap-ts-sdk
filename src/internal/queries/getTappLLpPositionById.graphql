@@ -1,0 +1,5 @@
+query GetTappLLPositionById($positionId: String!) {
+  tapp_llp_position_current_by_pk(position: $positionId) {
+    ...TappLLPositionFields
+  }
+}

@@ -6,7 +6,6 @@ import { transformFungibleAssetBalance } from "../transforms";
 import { TappLlPositionFieldsFragment } from "../../types/generated/operations";
 import { createBorrowMarket } from "./borrowMarket";
 
-
 /** Factory to create an TappLLPosition */
 export function createTappLLPosition(config: YeapConfig, rawData: TappLlPositionFieldsFragment): TappLLPosition {
   const debtStores: Record<string, PositionDebtStore> = {};
@@ -31,8 +30,13 @@ export function createTappLLPosition(config: YeapConfig, rawData: TappLlPosition
     status: status ?? 0,
     isActive: status === 0,
     debtStores,
-    get hasAnyDebt(): boolean { return Object.values(debtStores).some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n); },
-    get activeDebtVaultCount(): number { return Object.values(debtStores).filter((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n).length; },
+    get hasAnyDebt(): boolean {
+      return Object.values(debtStores).some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n);
+    },
+    get activeDebtVaultCount(): number {
+      return Object.values(debtStores).filter((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n)
+        .length;
+    },
     __raw: rawData,
   };
 }

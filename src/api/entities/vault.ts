@@ -10,7 +10,6 @@ import {
   YeapAdaptiveIrmConfig,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
-
 } from "../interfaces";
 import {
   transformVaultSettings,
@@ -26,13 +25,27 @@ import { RawVaultData, Vault } from "../interfaces";
 export function createVault(config: YeapConfig, rawData: RawVaultData): Vault {
   // Eagerly transform once (simpler, avoids lazy cache complexity)
   const settings = rawData.settings ? (transformVaultSettings(rawData.settings) ?? undefined) : undefined;
-  const underlyingAssetMetadata = rawData.underlying_asset_metadata ? (transformFungibleAssetMetadata(rawData.underlying_asset_metadata) ?? undefined) : undefined;
-  const debtAssetMetadata = rawData.debt_asset_metadata ? (transformFungibleAssetMetadata(rawData.debt_asset_metadata) ?? undefined) : undefined;
-  const vaultAssetMetadata = rawData.vault_asset_metadata ? (transformFungibleAssetMetadata(rawData.vault_asset_metadata) ?? undefined) : undefined;
-  const governanceObject = rawData.governance_object ? (transformCurrentObject(rawData.governance_object) ?? undefined) : undefined;
-  const adaptiveIrmConfig = rawData.adaptive_irm_config ? (transformAdaptiveIrmConfig(rawData.adaptive_irm_config) ?? undefined) : undefined;
-  const fixedRateIrmConfig = rawData.fixed_rate_irm_config ? (transformFixedRateIrmConfig(rawData.fixed_rate_irm_config) ?? undefined) : undefined;
-  const kinkedIrmConfig = rawData.kinked_irm_config ? (transformKinkedIrmConfig(rawData.kinked_irm_config) ?? undefined) : undefined;
+  const underlyingAssetMetadata = rawData.underlying_asset_metadata
+    ? (transformFungibleAssetMetadata(rawData.underlying_asset_metadata) ?? undefined)
+    : undefined;
+  const debtAssetMetadata = rawData.debt_asset_metadata
+    ? (transformFungibleAssetMetadata(rawData.debt_asset_metadata) ?? undefined)
+    : undefined;
+  const vaultAssetMetadata = rawData.vault_asset_metadata
+    ? (transformFungibleAssetMetadata(rawData.vault_asset_metadata) ?? undefined)
+    : undefined;
+  const governanceObject = rawData.governance_object
+    ? (transformCurrentObject(rawData.governance_object) ?? undefined)
+    : undefined;
+  const adaptiveIrmConfig = rawData.adaptive_irm_config
+    ? (transformAdaptiveIrmConfig(rawData.adaptive_irm_config) ?? undefined)
+    : undefined;
+  const fixedRateIrmConfig = rawData.fixed_rate_irm_config
+    ? (transformFixedRateIrmConfig(rawData.fixed_rate_irm_config) ?? undefined)
+    : undefined;
+  const kinkedIrmConfig = rawData.kinked_irm_config
+    ? (transformKinkedIrmConfig(rawData.kinked_irm_config) ?? undefined)
+    : undefined;
 
   return {
     vaultAddress: rawData.vault_address,

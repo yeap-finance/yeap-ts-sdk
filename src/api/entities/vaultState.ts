@@ -27,9 +27,7 @@ export function createVaultState(rawStateData: RawVaultStateData): VaultState {
   const zero = bignumber(0);
   const badDebt = rawStateData.bad_debt ? bignumber(rawStateData.bad_debt) : zero;
   const cash = rawStateData.cash ? bignumber(rawStateData.cash) : zero;
-  const currentInterestRate = rawStateData.current_interest_rate
-    ? bignumber(rawStateData.current_interest_rate)
-    : zero;
+  const currentInterestRate = rawStateData.current_interest_rate ? bignumber(rawStateData.current_interest_rate) : zero;
   const lastInterestUpdateTime = rawStateData.last_interest_update_time
     ? bignumber(rawStateData.last_interest_update_time)
     : zero;
@@ -40,12 +38,8 @@ export function createVaultState(rawStateData: RawVaultStateData): VaultState {
 
   const totalAvailableBN = cash.plus(totalBorrows).plus(badDebt);
   const utilizationRate = totalAvailableBN.eq(0) ? zero : totalBorrows.div(totalAvailableBN);
-  const shareExchangeRate = totalShares.eq(0)
-    ? zero
-    : totalSupply.div(totalShares);
-  const debtShareExchangeRate = totalDebtShares.eq(0)
-    ? zero
-    : totalBorrows.div(totalDebtShares);
+  const shareExchangeRate = totalShares.eq(0) ? zero : totalSupply.div(totalShares);
+  const debtShareExchangeRate = totalDebtShares.eq(0) ? zero : totalBorrows.div(totalDebtShares);
 
   const borrowApy = rate2Apy(currentInterestRate);
   const supplyApy = utilizationRate.mul(borrowApy);

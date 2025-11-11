@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: BUSL-1.1
  */
 
-import {YeapConfig} from "./yeapConfig";
-import {InputGenerateTransactionPayloadData} from "@aptos-labs/ts-sdk";
+import { YeapConfig } from "./yeapConfig";
+import { InputGenerateTransactionPayloadData } from "@aptos-labs/ts-sdk";
 
 /**
  * A class for interacting with the Yeap admin APIs.

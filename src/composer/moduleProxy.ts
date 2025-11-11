@@ -1,10 +1,6 @@
-import {
-  EntryFunctionArgumentTypes,
-  SimpleEntryFunctionArgumentTypes,
-  TypeArgument,
-} from '@aptos-labs/ts-sdk';
-import type { AptosScriptComposer, CallArgument } from '@aptos-labs/script-composer-sdk';
-import { ABIRoot } from './abi';
+import { EntryFunctionArgumentTypes, SimpleEntryFunctionArgumentTypes, TypeArgument } from "@aptos-labs/ts-sdk";
+import type { AptosScriptComposer, CallArgument } from "@aptos-labs/script-composer-sdk";
+import { ABIRoot } from "./abi";
 
 /**
  * A type representing the possible argument types for module function calls.
@@ -14,39 +10,35 @@ import { ABIRoot } from './abi';
  * @property {SimpleEntryFunctionArgumentTypes} SimpleEntryFunctionArgumentTypes - Argument types for simple entry functions.
  * @returns {FunctionArgument} The combined argument type for module function calls.
  */
-export type FunctionArgument =
-  | EntryFunctionArgumentTypes
-  | CallArgument
-  | SimpleEntryFunctionArgumentTypes;
+export type FunctionArgument = EntryFunctionArgumentTypes | CallArgument | SimpleEntryFunctionArgumentTypes;
 
-type ModuleFunctions<T extends ABIRoot> = NonNullable<T['exposed_functions']>;
+type ModuleFunctions<T extends ABIRoot> = NonNullable<T["exposed_functions"]>;
 type ModuleFunction<T extends ABIRoot> = ModuleFunctions<T>[number];
-type PublicModuleFunction<T extends ABIRoot> = Extract<
-  ModuleFunction<T>,
-  { visibility: 'public' }
+type PublicModuleFunction<T extends ABIRoot> = Extract<ModuleFunction<T>, { visibility: "public" }>;
+type PublicModuleFunctionName<T extends ABIRoot> = PublicModuleFunction<T>["name"];
+type PublicModuleFunctionByName<TModule extends ABIRoot, TName extends PublicModuleFunctionName<TModule>> = Extract<
+  PublicModuleFunction<TModule>,
+  { name: TName }
 >;
-type PublicModuleFunctionName<T extends ABIRoot> = PublicModuleFunction<T>['name'];
-type PublicModuleFunctionByName<
-  TModule extends ABIRoot,
-  TName extends PublicModuleFunctionName<TModule>
-> = Extract<PublicModuleFunction<TModule>, { name: TName }>;
 
 type ModuleFunctionReturnTuple<
   TModule extends ABIRoot,
-  TName extends PublicModuleFunctionName<TModule>
-> = PublicModuleFunctionByName<TModule, TName>['return'];
+  TName extends PublicModuleFunctionName<TModule>,
+> = PublicModuleFunctionByName<TModule, TName>["return"];
 
 type ModuleFunctionArgsTuple<
   TModule extends ABIRoot,
-  TName extends PublicModuleFunctionName<TModule>
-> = PublicModuleFunctionByName<TModule, TName>['params'];
+  TName extends PublicModuleFunctionName<TModule>,
+> = PublicModuleFunctionByName<TModule, TName>["params"];
 type ModuleFunctionGenericTypeParamsTuple<
   TModule extends ABIRoot,
-  TName extends PublicModuleFunctionName<TModule>
-> = PublicModuleFunctionByName<TModule, TName>['generic_type_params'];
+  TName extends PublicModuleFunctionName<TModule>,
+> = PublicModuleFunctionByName<TModule, TName>["generic_type_params"];
 
-type TupleOfLength<TElements extends readonly unknown[], TValue> =
-  TElements extends readonly [unknown, ...infer TRest extends readonly unknown[]]
+type TupleOfLength<TElements extends readonly unknown[], TValue> = TElements extends readonly [
+  unknown,
+  ...infer TRest extends readonly unknown[],
+]
   ? [TValue, ...TupleOfLength<TRest, TValue>]
   : [];
 
@@ -55,11 +47,11 @@ type TupleOfLength<TElements extends readonly unknown[], TValue> =
  * @template TReturns - The tuple of return types for the module function.
  * @returns The return type of the module function, which can be undefined, a single value, or a tuple of values.
  */
-export type FunctionReturns<TReturns extends readonly string[]> = TReturns['length'] extends 0
+export type FunctionReturns<TReturns extends readonly string[]> = TReturns["length"] extends 0
   ? undefined
-  : (TReturns['length'] extends 1
+  : TReturns["length"] extends 1
     ? TupleOfLength<TReturns, CallArgument>[0]
-    : TupleOfLength<TReturns, CallArgument>);
+    : TupleOfLength<TReturns, CallArgument>;
 /**
  * A type representing the function arguments for a module function based on its parameter tuple.
  * @template TParams - The tuple of parameter types for the module function.
@@ -69,7 +61,7 @@ export type FunctionArguments<TParams extends readonly string[]> = TParams exten
   ? {}
   : { functionArguments: TupleOfLength<TParams, FunctionArgument> };
 
-  /**
+/**
  * A type representing the generic type arguments for a module function based on its generic type parameter tuple.
  * @template TParams - The tuple of generic type parameters for the module function.
  * @returns An object containing the generic type arguments for the module function.
@@ -82,7 +74,7 @@ export type FunctionGenericTypeArguments<TParams extends readonly unknown[]> = T
  * An interface representing extra options for module function calls.
  * @property {string[]} [moduleBytecodes] - An optional array of module bytecodes to include in the function call.
  * @property {boolean} [allowFetch] - An optional flag indicating whether to allow fetching data during the function call.
-*/
+ */
 export interface ExtraCallOptions {
   moduleBytecodes?: string[];
   allowFetch?: boolean;
@@ -97,7 +89,7 @@ export interface ExtraCallOptions {
  */
 export type FunctionCallArgs<
   TModule extends ABIRoot,
-  TName extends PublicModuleFunctionName<TModule>
+  TName extends PublicModuleFunctionName<TModule>,
 > = FunctionGenericTypeArguments<ModuleFunctionGenericTypeParamsTuple<TModule, TName>> &
   FunctionArguments<ModuleFunctionArgsTuple<TModule, TName>> &
   ExtraCallOptions;
@@ -109,7 +101,7 @@ export type FunctionCallArgs<
  */
 export type ModuleFunctionClient<TModule extends ABIRoot> = {
   [TName in PublicModuleFunctionName<TModule>]: (
-    args?: FunctionCallArgs<TModule, TName>
+    args?: FunctionCallArgs<TModule, TName>,
   ) => Promise<FunctionReturns<ModuleFunctionReturnTuple<TModule, TName>>>;
 };
 
@@ -118,11 +110,10 @@ export type ModuleFunctionClient<TModule extends ABIRoot> = {
  * @template TModule - The type of the module ABI.
  * @returns An object that includes the module function client, module ABI, and composer instance.
  */
-export type ModuleProxy<TModule extends ABIRoot> =
-  ModuleFunctionClient<TModule> & {
-    readonly moduleAbi: TModule;
-    readonly composer: AptosScriptComposer;
-  };
+export type ModuleProxy<TModule extends ABIRoot> = ModuleFunctionClient<TModule> & {
+  readonly moduleAbi: TModule;
+  readonly composer: AptosScriptComposer;
+};
 
 /**
  * Creates a module proxy that allows invoking public functions defined in the module ABI.
@@ -147,11 +138,11 @@ export function createModuleProxy<TModule extends ABIRoot>(args: {
   const { composer, moduleAbi, defaults, address } = args;
 
   if (!moduleAbi.address) {
-    throw new Error('moduleAbi.address is required to create a module client');
+    throw new Error("moduleAbi.address is required to create a module client");
   }
 
   if (!moduleAbi.name) {
-    throw new Error('moduleAbi.name is required to create a module client');
+    throw new Error("moduleAbi.name is required to create a module client");
   }
 
   const moduleAddress = address ?? moduleAbi.address;
@@ -160,43 +151,34 @@ export function createModuleProxy<TModule extends ABIRoot>(args: {
   const exposedFunctions = moduleAbi.exposed_functions ?? [];
 
   const publicFunctions = exposedFunctions.filter(
-    (func): func is PublicModuleFunction<TModule> => func.visibility === 'public'
+    (func): func is PublicModuleFunction<TModule> => func.visibility === "public",
   );
-  const functionMap = new Map<
-    PublicModuleFunctionName<TModule>,
-    PublicModuleFunction<TModule>
-  >(publicFunctions.map((func) => [func.name, func]));
+  const functionMap = new Map<PublicModuleFunctionName<TModule>, PublicModuleFunction<TModule>>(
+    publicFunctions.map((func) => [func.name, func]),
+  );
   const defaultModuleBytecodes = defaults?.moduleBytecodes;
 
   const invokeFunction = async <TName extends PublicModuleFunctionName<TModule>>(
     functionName: TName,
     callArgs?: FunctionCallArgs<TModule, TName>,
   ): Promise<FunctionReturns<ModuleFunctionReturnTuple<TModule, TName>>> => {
-    const functionAbi = functionMap.get(functionName) as
-      | PublicModuleFunctionByName<TModule, TName>
-      | undefined;
+    const functionAbi = functionMap.get(functionName) as PublicModuleFunctionByName<TModule, TName> | undefined;
     if (!functionAbi) {
-      throw new Error(
-        `Function '${functionName}' does not exist on module '${moduleAddress}::${resolvedModuleName}'`
-      );
+      throw new Error(`Function '${functionName}' does not exist on module '${moduleAddress}::${resolvedModuleName}'`);
     }
 
     const typeArguments =
-      callArgs && 'typeArguments' in callArgs && callArgs.typeArguments
-        ? callArgs.typeArguments
-        : [];
+      callArgs && "typeArguments" in callArgs && callArgs.typeArguments ? callArgs.typeArguments : [];
     if (typeArguments.length !== functionAbi.generic_type_params.length) {
       throw new Error(
-        `Type argument count mismatch for '${moduleAddress}::${resolvedModuleName}::${functionName}', expected ${functionAbi.generic_type_params.length}, received ${typeArguments.length}`
+        `Type argument count mismatch for '${moduleAddress}::${resolvedModuleName}::${functionName}', expected ${functionAbi.generic_type_params.length}, received ${typeArguments.length}`,
       );
     }
     const functionArguments =
-      callArgs && 'functionArguments' in callArgs && callArgs.functionArguments
-        ? callArgs.functionArguments
-        : [];
+      callArgs && "functionArguments" in callArgs && callArgs.functionArguments ? callArgs.functionArguments : [];
     if (functionArguments.length !== functionAbi.params.length) {
       throw new Error(
-        `Function argument count mismatch for '${moduleAddress}::${resolvedModuleName}::${functionName}', expected ${functionAbi.params.length}, received ${functionArguments.length}`
+        `Function argument count mismatch for '${moduleAddress}::${resolvedModuleName}::${functionName}', expected ${functionAbi.params.length}, received ${functionArguments.length}`,
       );
     }
     const callResult = await composer.addBatchedCalls({
@@ -204,9 +186,7 @@ export function createModuleProxy<TModule extends ABIRoot>(args: {
       typeArguments,
       functionArguments,
       moduleBytecodes: callArgs?.moduleBytecodes ?? defaultModuleBytecodes,
-      options: callArgs?.allowFetch !== undefined
-        ? { allowFetch: callArgs.allowFetch }
-        : undefined
+      options: callArgs?.allowFetch !== undefined ? { allowFetch: callArgs.allowFetch } : undefined,
     });
 
     let normalizedResult: CallArgument[] | CallArgument | undefined;
@@ -244,15 +224,15 @@ export function createModuleProxy<TModule extends ABIRoot>(args: {
 
   return new Proxy(target, {
     get: (_target, prop) => {
-      if (prop === 'moduleAbi') {
+      if (prop === "moduleAbi") {
         return moduleAbi;
       }
 
-      if (prop === 'composer') {
+      if (prop === "composer") {
         return composer;
       }
 
-      if (typeof prop !== 'string') {
+      if (typeof prop !== "string") {
         return undefined;
       }
 
@@ -261,8 +241,7 @@ export function createModuleProxy<TModule extends ABIRoot>(args: {
       }
 
       const functionName = prop as PublicModuleFunctionName<TModule>;
-      return (callArgs?: FunctionCallArgs<TModule, typeof functionName>) =>
-        invokeFunction(functionName, callArgs);
+      return (callArgs?: FunctionCallArgs<TModule, typeof functionName>) => invokeFunction(functionName, callArgs);
     },
     set: () => false,
   });

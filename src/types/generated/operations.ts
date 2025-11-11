@@ -110,6 +110,13 @@ export type GetScmdPositionsByOwnerQueryVariables = Types.Exact<{
 
 export type GetScmdPositionsByOwnerQuery = { scmd_position_current: Array<ScmdPositionFieldsFragment> };
 
+export type GetTappLlPositionByIdQueryVariables = Types.Exact<{
+  positionId: Types.Scalars['String']['input'];
+}>;
+
+
+export type GetTappLlPositionByIdQuery = { tapp_llp_position_current_by_pk?: Types.Maybe<TappLlPositionFieldsFragment> };
+
 export type GetTappLlPositionsByOwnerQueryVariables = Types.Exact<{
   ownerAddress: Types.Scalars['String']['input'];
   limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;

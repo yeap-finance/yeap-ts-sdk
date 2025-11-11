@@ -240,12 +240,14 @@ export interface PoolInfoParams {
   tokenAddrs?: [string, string];
 }
 
-export type PositionParams = PaginatedParams<{
-  userAddr: string;
-}| {
-  nftAddrs?: string[];
-}>;
-
+export type PositionParams = PaginatedParams<
+  | {
+      userAddr: string;
+    }
+  | {
+      nftAddrs?: string[];
+    }
+>;
 
 export interface UserTransactionParams {
   userAddr: string;

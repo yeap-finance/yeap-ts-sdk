@@ -7,14 +7,16 @@ import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
 /**
  * Known contract address names in the Yeap protocol
  */
-export type YeapAddressName = "yeap_oracle" | "yeap_vault"
-| "yeap_irm" | "yeap_oracle_lens"
-| "yeap_tapp_llp"
-| "yeap_scmd_protocol"
-| "yeap_earn_api"
-| "yeap_borrow_api"
-| "yeap_admin_api";
-
+export type YeapAddressName =
+  | "yeap_oracle"
+  | "yeap_vault"
+  | "yeap_irm"
+  | "yeap_oracle_lens"
+  | "yeap_tapp_llp"
+  | "yeap_scmd_protocol"
+  | "yeap_earn_api"
+  | "yeap_borrow_api"
+  | "yeap_admin_api";
 
 /**
  * Contract addresses mapping for the Yeap protocol
@@ -133,15 +135,14 @@ export class YeapConfig {
       this.aptosClient = new Aptos(settings.aptosConfig);
     }
 
-
     if (!this.endpoint) {
       throw new Error("Yeap endpoint is required in configuration");
     }
     if (settings?.hermes) {
       this.hermesPriceService = new AptosPriceServiceConnection(settings.hermes.url, {
         priceFeedRequestConfig: {
-          binary: true
-        }
+          binary: true,
+        },
       });
     }
   }
@@ -166,10 +167,10 @@ export class YeapConfig {
     return this.getAddress("yeap_borrow_api");
   }
   /**
-     * Get the Yeap Oracle address
-     * @returns The Yeap Oracle contract address
-     * @throws Error if the address is not configured
-     */
+   * Get the Yeap Oracle address
+   * @returns The Yeap Oracle contract address
+   * @throws Error if the address is not configured
+   */
   get yeapOracleAddress(): string {
     return this.getAddress("yeap_oracle");
   }
@@ -202,6 +203,4 @@ export class YeapConfig {
   hasAddress(addressName: YeapAddressName): boolean {
     return addressName in this.addresses;
   }
-
-
 }

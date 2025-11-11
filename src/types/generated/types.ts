@@ -81,17 +81,9 @@ export type StringComparisonExp = {
 export type AccountTransactions = {
   account_address: Scalars['String']['output'];
   /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** An array relationship */
   delegated_staking_activities: Array<DelegatedStakingActivities>;
   /** An array relationship */
   fungible_asset_activities: Array<FungibleAssetActivities>;
-  /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
   /** An array relationship */
   token_activities_v2: Array<TokenActivitiesV2>;
   /** An aggregate relationship */
@@ -99,26 +91,6 @@ export type AccountTransactions = {
   transaction_version: Scalars['bigint']['output'];
   /** An object relationship */
   user_transaction?: Maybe<UserTransactions>;
-};
-
-
-/** columns and relationships of "account_transactions" */
-export type AccountTransactionsCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "account_transactions" */
-export type AccountTransactionsCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
 };
 
 
@@ -139,26 +111,6 @@ export type AccountTransactionsFungibleAssetActivitiesArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<FungibleAssetActivitiesOrderBy>>;
   where?: InputMaybe<FungibleAssetActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "account_transactions" */
-export type AccountTransactionsTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "account_transactions" */
-export type AccountTransactionsTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
 };
 
 
@@ -220,12 +172,8 @@ export type AccountTransactionsBoolExp = {
   _not?: InputMaybe<AccountTransactionsBoolExp>;
   _or?: InputMaybe<Array<AccountTransactionsBoolExp>>;
   account_address?: InputMaybe<StringComparisonExp>;
-  coin_activities?: InputMaybe<CoinActivitiesBoolExp>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateBoolExp>;
   delegated_staking_activities?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
   fungible_asset_activities?: InputMaybe<FungibleAssetActivitiesBoolExp>;
-  token_activities?: InputMaybe<TokenActivitiesBoolExp>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateBoolExp>;
   token_activities_v2?: InputMaybe<TokenActivitiesV2BoolExp>;
   token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateBoolExp>;
   transaction_version?: InputMaybe<BigintComparisonExp>;
@@ -247,10 +195,8 @@ export type AccountTransactionsMinFields = {
 /** Ordering options when selecting data from "account_transactions". */
 export type AccountTransactionsOrderBy = {
   account_address?: InputMaybe<OrderBy>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateOrderBy>;
   delegated_staking_activities_aggregate?: InputMaybe<DelegatedStakingActivitiesAggregateOrderBy>;
   fungible_asset_activities_aggregate?: InputMaybe<FungibleAssetActivitiesAggregateOrderBy>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateOrderBy>;
   token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateOrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
   user_transaction?: InputMaybe<UserTransactionsOrderBy>;
@@ -875,495 +821,6 @@ export type AdaptiveIrmStateActivitiesStreamCursorValueInput = {
   transaction_version?: InputMaybe<Scalars['numeric']['input']>;
 };
 
-/** columns and relationships of "address_events_summary" */
-export type AddressEventsSummary = {
-  account_address?: Maybe<Scalars['String']['output']>;
-  /** An object relationship */
-  block_metadata?: Maybe<BlockMetadataTransactions>;
-  min_block_height?: Maybe<Scalars['bigint']['output']>;
-  num_distinct_versions?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "address_events_summary". All fields are combined with a logical 'AND'. */
-export type AddressEventsSummaryBoolExp = {
-  _and?: InputMaybe<Array<AddressEventsSummaryBoolExp>>;
-  _not?: InputMaybe<AddressEventsSummaryBoolExp>;
-  _or?: InputMaybe<Array<AddressEventsSummaryBoolExp>>;
-  account_address?: InputMaybe<StringComparisonExp>;
-  block_metadata?: InputMaybe<BlockMetadataTransactionsBoolExp>;
-  min_block_height?: InputMaybe<BigintComparisonExp>;
-  num_distinct_versions?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "address_events_summary". */
-export type AddressEventsSummaryOrderBy = {
-  account_address?: InputMaybe<OrderBy>;
-  block_metadata?: InputMaybe<BlockMetadataTransactionsOrderBy>;
-  min_block_height?: InputMaybe<OrderBy>;
-  num_distinct_versions?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "address_events_summary" */
-export enum AddressEventsSummarySelectColumn {
-  /** column name */
-  AccountAddress = 'account_address',
-  /** column name */
-  MinBlockHeight = 'min_block_height',
-  /** column name */
-  NumDistinctVersions = 'num_distinct_versions'
-}
-
-/** Streaming cursor of the table "address_events_summary" */
-export type AddressEventsSummaryStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: AddressEventsSummaryStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type AddressEventsSummaryStreamCursorValueInput = {
-  account_address?: InputMaybe<Scalars['String']['input']>;
-  min_block_height?: InputMaybe<Scalars['bigint']['input']>;
-  num_distinct_versions?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEvents = {
-  account_address?: Maybe<Scalars['String']['output']>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** An array relationship */
-  delegated_staking_activities: Array<DelegatedStakingActivities>;
-  /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** An array relationship */
-  token_activities_v2: Array<TokenActivitiesV2>;
-  /** An aggregate relationship */
-  token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsDelegatedStakingActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<DelegatedStakingActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<DelegatedStakingActivitiesOrderBy>>;
-  where?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsTokenActivitiesV2Args = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
-  where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-
-/** columns and relationships of "address_version_from_events" */
-export type AddressVersionFromEventsTokenActivitiesV2AggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
-  where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-/** aggregated selection of "address_version_from_events" */
-export type AddressVersionFromEventsAggregate = {
-  aggregate?: Maybe<AddressVersionFromEventsAggregateFields>;
-  nodes: Array<AddressVersionFromEvents>;
-};
-
-/** aggregate fields of "address_version_from_events" */
-export type AddressVersionFromEventsAggregateFields = {
-  avg?: Maybe<AddressVersionFromEventsAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<AddressVersionFromEventsMaxFields>;
-  min?: Maybe<AddressVersionFromEventsMinFields>;
-  stddev?: Maybe<AddressVersionFromEventsStddevFields>;
-  stddev_pop?: Maybe<AddressVersionFromEventsStddevPopFields>;
-  stddev_samp?: Maybe<AddressVersionFromEventsStddevSampFields>;
-  sum?: Maybe<AddressVersionFromEventsSumFields>;
-  var_pop?: Maybe<AddressVersionFromEventsVarPopFields>;
-  var_samp?: Maybe<AddressVersionFromEventsVarSampFields>;
-  variance?: Maybe<AddressVersionFromEventsVarianceFields>;
-};
-
-
-/** aggregate fields of "address_version_from_events" */
-export type AddressVersionFromEventsAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type AddressVersionFromEventsAvgFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "address_version_from_events". All fields are combined with a logical 'AND'. */
-export type AddressVersionFromEventsBoolExp = {
-  _and?: InputMaybe<Array<AddressVersionFromEventsBoolExp>>;
-  _not?: InputMaybe<AddressVersionFromEventsBoolExp>;
-  _or?: InputMaybe<Array<AddressVersionFromEventsBoolExp>>;
-  account_address?: InputMaybe<StringComparisonExp>;
-  coin_activities?: InputMaybe<CoinActivitiesBoolExp>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateBoolExp>;
-  delegated_staking_activities?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
-  token_activities?: InputMaybe<TokenActivitiesBoolExp>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateBoolExp>;
-  token_activities_v2?: InputMaybe<TokenActivitiesV2BoolExp>;
-  token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateBoolExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type AddressVersionFromEventsMaxFields = {
-  account_address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type AddressVersionFromEventsMinFields = {
-  account_address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Ordering options when selecting data from "address_version_from_events". */
-export type AddressVersionFromEventsOrderBy = {
-  account_address?: InputMaybe<OrderBy>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateOrderBy>;
-  delegated_staking_activities_aggregate?: InputMaybe<DelegatedStakingActivitiesAggregateOrderBy>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateOrderBy>;
-  token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateOrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "address_version_from_events" */
-export enum AddressVersionFromEventsSelectColumn {
-  /** column name */
-  AccountAddress = 'account_address',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** aggregate stddev on columns */
-export type AddressVersionFromEventsStddevFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type AddressVersionFromEventsStddevPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type AddressVersionFromEventsStddevSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "address_version_from_events" */
-export type AddressVersionFromEventsStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: AddressVersionFromEventsStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type AddressVersionFromEventsStreamCursorValueInput = {
-  account_address?: InputMaybe<Scalars['String']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type AddressVersionFromEventsSumFields = {
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate var_pop on columns */
-export type AddressVersionFromEventsVarPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type AddressVersionFromEventsVarSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type AddressVersionFromEventsVarianceFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResources = {
-  address?: Maybe<Scalars['String']['output']>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** An array relationship */
-  delegated_staking_activities: Array<DelegatedStakingActivities>;
-  /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** An array relationship */
-  token_activities_v2: Array<TokenActivitiesV2>;
-  /** An aggregate relationship */
-  token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesDelegatedStakingActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<DelegatedStakingActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<DelegatedStakingActivitiesOrderBy>>;
-  where?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesTokenActivitiesV2Args = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
-  where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesTokenActivitiesV2AggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesV2OrderBy>>;
-  where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-/** aggregated selection of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesAggregate = {
-  aggregate?: Maybe<AddressVersionFromMoveResourcesAggregateFields>;
-  nodes: Array<AddressVersionFromMoveResources>;
-};
-
-/** aggregate fields of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesAggregateFields = {
-  avg?: Maybe<AddressVersionFromMoveResourcesAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<AddressVersionFromMoveResourcesMaxFields>;
-  min?: Maybe<AddressVersionFromMoveResourcesMinFields>;
-  stddev?: Maybe<AddressVersionFromMoveResourcesStddevFields>;
-  stddev_pop?: Maybe<AddressVersionFromMoveResourcesStddevPopFields>;
-  stddev_samp?: Maybe<AddressVersionFromMoveResourcesStddevSampFields>;
-  sum?: Maybe<AddressVersionFromMoveResourcesSumFields>;
-  var_pop?: Maybe<AddressVersionFromMoveResourcesVarPopFields>;
-  var_samp?: Maybe<AddressVersionFromMoveResourcesVarSampFields>;
-  variance?: Maybe<AddressVersionFromMoveResourcesVarianceFields>;
-};
-
-
-/** aggregate fields of "legacy_migration_v1.address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type AddressVersionFromMoveResourcesAvgFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.address_version_from_move_resources". All fields are combined with a logical 'AND'. */
-export type AddressVersionFromMoveResourcesBoolExp = {
-  _and?: InputMaybe<Array<AddressVersionFromMoveResourcesBoolExp>>;
-  _not?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-  _or?: InputMaybe<Array<AddressVersionFromMoveResourcesBoolExp>>;
-  address?: InputMaybe<StringComparisonExp>;
-  coin_activities?: InputMaybe<CoinActivitiesBoolExp>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateBoolExp>;
-  delegated_staking_activities?: InputMaybe<DelegatedStakingActivitiesBoolExp>;
-  token_activities?: InputMaybe<TokenActivitiesBoolExp>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateBoolExp>;
-  token_activities_v2?: InputMaybe<TokenActivitiesV2BoolExp>;
-  token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateBoolExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type AddressVersionFromMoveResourcesMaxFields = {
-  address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type AddressVersionFromMoveResourcesMinFields = {
-  address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.address_version_from_move_resources". */
-export type AddressVersionFromMoveResourcesOrderBy = {
-  address?: InputMaybe<OrderBy>;
-  coin_activities_aggregate?: InputMaybe<CoinActivitiesAggregateOrderBy>;
-  delegated_staking_activities_aggregate?: InputMaybe<DelegatedStakingActivitiesAggregateOrderBy>;
-  token_activities_aggregate?: InputMaybe<TokenActivitiesAggregateOrderBy>;
-  token_activities_v2_aggregate?: InputMaybe<TokenActivitiesV2AggregateOrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.address_version_from_move_resources" */
-export enum AddressVersionFromMoveResourcesSelectColumn {
-  /** column name */
-  Address = 'address',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** aggregate stddev on columns */
-export type AddressVersionFromMoveResourcesStddevFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type AddressVersionFromMoveResourcesStddevPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type AddressVersionFromMoveResourcesStddevSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "address_version_from_move_resources" */
-export type AddressVersionFromMoveResourcesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: AddressVersionFromMoveResourcesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type AddressVersionFromMoveResourcesStreamCursorValueInput = {
-  address?: InputMaybe<Scalars['String']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type AddressVersionFromMoveResourcesSumFields = {
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate var_pop on columns */
-export type AddressVersionFromMoveResourcesVarPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type AddressVersionFromMoveResourcesVarSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type AddressVersionFromMoveResourcesVarianceFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
 /** columns and relationships of "auth_key_account_addresses" */
 export type AuthKeyAccountAddresses = {
   account_address: Scalars['String']['output'];
@@ -1931,16 +1388,6 @@ export type CaasqueryRoot = {
   account_transactions_aggregate: AccountTransactionsAggregate;
   /** fetch data from the table: "account_transactions" using primary key columns */
   account_transactions_by_pk?: Maybe<AccountTransactions>;
-  /** fetch data from the table: "address_events_summary" */
-  address_events_summary: Array<AddressEventsSummary>;
-  /** fetch data from the table: "address_version_from_events" */
-  address_version_from_events: Array<AddressVersionFromEvents>;
-  /** fetch aggregated fields from the table: "address_version_from_events" */
-  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
-  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
   /** fetch data from the table: "auth_key_account_addresses" */
   auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
   /** fetch aggregated fields from the table: "auth_key_account_addresses" */
@@ -1951,22 +1398,6 @@ export type CaasqueryRoot = {
   block_metadata_transactions: Array<BlockMetadataTransactions>;
   /** fetch data from the table: "block_metadata_transactions" using primary key columns */
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
-  coin_balances: Array<CoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
-  coin_infos: Array<CoinInfos>;
-  /** fetch data from the table: "coin_supply" */
-  coin_supply: Array<CoinSupply>;
-  /** fetch data from the table: "coin_supply" using primary key columns */
-  coin_supply_by_pk?: Maybe<CoinSupply>;
-  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
-  collection_datas: Array<CollectionDatas>;
-  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup: Array<CurrentAnsLookup>;
   /** fetch data from the table: "current_ans_lookup_v2" */
   current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
   /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
@@ -1975,10 +1406,6 @@ export type CaasqueryRoot = {
   current_aptos_names: Array<CurrentAptosNames>;
   /** fetch aggregated fields from the table: "current_aptos_names" */
   current_aptos_names_aggregate: CurrentAptosNamesAggregate;
-  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances: Array<CurrentCoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas: Array<CurrentCollectionDatas>;
   /** fetch data from the table: "current_collection_ownership_v2_view" */
   current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
   /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
@@ -2017,16 +1444,10 @@ export type CaasqueryRoot = {
   current_table_items: Array<CurrentTableItems>;
   /** fetch data from the table: "current_table_items" using primary key columns */
   current_table_items_by_pk?: Maybe<CurrentTableItems>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
-  current_token_datas: Array<CurrentTokenDatas>;
   /** fetch data from the table: "current_token_datas_v2" */
   current_token_datas_v2: Array<CurrentTokenDatasV2>;
   /** fetch data from the table: "current_token_datas_v2" using primary key columns */
   current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships: Array<CurrentTokenOwnerships>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
   /** fetch data from the table: "current_token_ownerships_v2" */
   current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
   /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
@@ -2059,10 +1480,6 @@ export type CaasqueryRoot = {
   delegator_distinct_pool: Array<DelegatorDistinctPool>;
   /** fetch aggregated fields from the table: "delegator_distinct_pool" */
   delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
-  /** fetch data from the table: "events" */
-  events: Array<Events>;
-  /** fetch data from the table: "events" using primary key columns */
-  events_by_pk?: Maybe<Events>;
   /** An array relationship */
   fungible_asset_activities: Array<FungibleAssetActivities>;
   /** fetch data from the table: "fungible_asset_activities" using primary key columns */
@@ -2079,10 +1496,6 @@ export type CaasqueryRoot = {
   ledger_infos: Array<LedgerInfos>;
   /** fetch data from the table: "processor_metadata.ledger_infos" using primary key columns */
   ledger_infos_by_pk?: Maybe<LedgerInfos>;
-  /** fetch data from the table: "legacy_migration_v1.move_resources" */
-  move_resources: Array<MoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
-  move_resources_aggregate: MoveResourcesAggregate;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
   nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
@@ -2118,21 +1531,11 @@ export type CaasqueryRoot = {
   /** fetch data from the table: "table_metadatas" using primary key columns */
   table_metadatas_by_pk?: Maybe<TableMetadatas>;
   /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** An array relationship */
   token_activities_v2: Array<TokenActivitiesV2>;
   /** An aggregate relationship */
   token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
   /** fetch data from the table: "token_activities_v2" using primary key columns */
   token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
-  /** fetch data from the table: "legacy_migration_v1.token_datas" */
-  token_datas: Array<TokenDatas>;
-  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
-  token_ownerships: Array<TokenOwnerships>;
-  /** fetch data from the table: "legacy_migration_v1.tokens" */
-  tokens: Array<Tokens>;
   /** fetch data from the table: "user_transactions" */
   user_transactions: Array<UserTransactions>;
   /** fetch data from the table: "user_transactions" using primary key columns */
@@ -2161,51 +1564,6 @@ export type CaasqueryRootAccountTransactionsAggregateArgs = {
 export type CaasqueryRootAccountTransactionsByPkArgs = {
   account_address: Scalars['String']['input'];
   transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type CaasqueryRootAddressEventsSummaryArgs = {
-  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type CaasqueryRootAddressVersionFromEventsArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type CaasqueryRootAddressVersionFromEventsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type CaasqueryRootAddressVersionFromMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type CaasqueryRootAddressVersionFromMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
 };
 
 
@@ -2246,75 +1604,6 @@ export type CaasqueryRootBlockMetadataTransactionsByPkArgs = {
 };
 
 
-export type CaasqueryRootCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type CaasqueryRootCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type CaasqueryRootCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type CaasqueryRootCoinInfosArgs = {
-  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type CaasqueryRootCoinSupplyArgs = {
-  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type CaasqueryRootCoinSupplyByPkArgs = {
-  coin_type_hash: Scalars['String']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type CaasqueryRootCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type CaasqueryRootCurrentAnsLookupArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
 export type CaasqueryRootCurrentAnsLookupV2Args = {
   distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2346,24 +1635,6 @@ export type CaasqueryRootCurrentAptosNamesAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
   where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-export type CaasqueryRootCurrentCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type CaasqueryRootCurrentCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
 };
 
 
@@ -2511,15 +1782,6 @@ export type CaasqueryRootCurrentTableItemsByPkArgs = {
 };
 
 
-export type CaasqueryRootCurrentTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
 export type CaasqueryRootCurrentTokenDatasV2Args = {
   distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2531,24 +1793,6 @@ export type CaasqueryRootCurrentTokenDatasV2Args = {
 
 export type CaasqueryRootCurrentTokenDatasV2ByPkArgs = {
   token_data_id: Scalars['String']['input'];
-};
-
-
-export type CaasqueryRootCurrentTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type CaasqueryRootCurrentTokenOwnershipsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
 };
 
 
@@ -2680,21 +1924,6 @@ export type CaasqueryRootDelegatorDistinctPoolAggregateArgs = {
 };
 
 
-export type CaasqueryRootEventsArgs = {
-  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<EventsOrderBy>>;
-  where?: InputMaybe<EventsBoolExp>;
-};
-
-
-export type CaasqueryRootEventsByPkArgs = {
-  event_index: Scalars['bigint']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
 export type CaasqueryRootFungibleAssetActivitiesArgs = {
   distinct_on?: InputMaybe<Array<FungibleAssetActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2749,24 +1978,6 @@ export type CaasqueryRootLedgerInfosArgs = {
 
 export type CaasqueryRootLedgerInfosByPkArgs = {
   chain_id: Scalars['bigint']['input'];
-};
-
-
-export type CaasqueryRootMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type CaasqueryRootMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
 };
 
 
@@ -2903,24 +2114,6 @@ export type CaasqueryRootTableMetadatasByPkArgs = {
 };
 
 
-export type CaasqueryRootTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type CaasqueryRootTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
 export type CaasqueryRootTokenActivitiesV2Args = {
   distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2942,33 +2135,6 @@ export type CaasqueryRootTokenActivitiesV2AggregateArgs = {
 export type CaasqueryRootTokenActivitiesV2ByPkArgs = {
   event_index: Scalars['bigint']['input'];
   transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type CaasqueryRootTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type CaasqueryRootTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type CaasqueryRootTokensArgs = {
-  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokensOrderBy>>;
-  where?: InputMaybe<TokensBoolExp>;
 };
 
 
@@ -2994,22 +2160,6 @@ export type CaassubscriptionRoot = {
   account_transactions_by_pk?: Maybe<AccountTransactions>;
   /** fetch data from the table in a streaming manner: "account_transactions" */
   account_transactions_stream: Array<AccountTransactions>;
-  /** fetch data from the table: "address_events_summary" */
-  address_events_summary: Array<AddressEventsSummary>;
-  /** fetch data from the table in a streaming manner: "address_events_summary" */
-  address_events_summary_stream: Array<AddressEventsSummary>;
-  /** fetch data from the table: "address_version_from_events" */
-  address_version_from_events: Array<AddressVersionFromEvents>;
-  /** fetch aggregated fields from the table: "address_version_from_events" */
-  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
-  /** fetch data from the table in a streaming manner: "address_version_from_events" */
-  address_version_from_events_stream: Array<AddressVersionFromEvents>;
-  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_stream: Array<AddressVersionFromMoveResources>;
   /** fetch data from the table: "auth_key_account_addresses" */
   auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
   /** fetch aggregated fields from the table: "auth_key_account_addresses" */
@@ -3024,34 +2174,6 @@ export type CaassubscriptionRoot = {
   block_metadata_transactions_by_pk?: Maybe<BlockMetadataTransactions>;
   /** fetch data from the table in a streaming manner: "block_metadata_transactions" */
   block_metadata_transactions_stream: Array<BlockMetadataTransactions>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_activities" */
-  coin_activities_stream: Array<CoinActivities>;
-  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
-  coin_balances: Array<CoinBalances>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_balances" */
-  coin_balances_stream: Array<CoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
-  coin_infos: Array<CoinInfos>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_infos" */
-  coin_infos_stream: Array<CoinInfos>;
-  /** fetch data from the table: "coin_supply" */
-  coin_supply: Array<CoinSupply>;
-  /** fetch data from the table: "coin_supply" using primary key columns */
-  coin_supply_by_pk?: Maybe<CoinSupply>;
-  /** fetch data from the table in a streaming manner: "coin_supply" */
-  coin_supply_stream: Array<CoinSupply>;
-  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
-  collection_datas: Array<CollectionDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas" */
-  collection_datas_stream: Array<CollectionDatas>;
-  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup: Array<CurrentAnsLookup>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup_stream: Array<CurrentAnsLookup>;
   /** fetch data from the table: "current_ans_lookup_v2" */
   current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
   /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
@@ -3064,14 +2186,6 @@ export type CaassubscriptionRoot = {
   current_aptos_names_aggregate: CurrentAptosNamesAggregate;
   /** fetch data from the table in a streaming manner: "current_aptos_names" */
   current_aptos_names_stream: Array<CurrentAptosNames>;
-  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances: Array<CurrentCoinBalances>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances_stream: Array<CurrentCoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas: Array<CurrentCollectionDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas_stream: Array<CurrentCollectionDatas>;
   /** fetch data from the table: "current_collection_ownership_v2_view" */
   current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
   /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
@@ -3128,22 +2242,12 @@ export type CaassubscriptionRoot = {
   current_table_items_by_pk?: Maybe<CurrentTableItems>;
   /** fetch data from the table in a streaming manner: "current_table_items" */
   current_table_items_stream: Array<CurrentTableItems>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
-  current_token_datas: Array<CurrentTokenDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_datas" */
-  current_token_datas_stream: Array<CurrentTokenDatas>;
   /** fetch data from the table: "current_token_datas_v2" */
   current_token_datas_v2: Array<CurrentTokenDatasV2>;
   /** fetch data from the table: "current_token_datas_v2" using primary key columns */
   current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
   /** fetch data from the table in a streaming manner: "current_token_datas_v2" */
   current_token_datas_v2_stream: Array<CurrentTokenDatasV2>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships: Array<CurrentTokenOwnerships>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_stream: Array<CurrentTokenOwnerships>;
   /** fetch data from the table: "current_token_ownerships_v2" */
   current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
   /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
@@ -3190,12 +2294,6 @@ export type CaassubscriptionRoot = {
   delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
   /** fetch data from the table in a streaming manner: "delegator_distinct_pool" */
   delegator_distinct_pool_stream: Array<DelegatorDistinctPool>;
-  /** fetch data from the table: "events" */
-  events: Array<Events>;
-  /** fetch data from the table: "events" using primary key columns */
-  events_by_pk?: Maybe<Events>;
-  /** fetch data from the table in a streaming manner: "events" */
-  events_stream: Array<Events>;
   /** An array relationship */
   fungible_asset_activities: Array<FungibleAssetActivities>;
   /** fetch data from the table: "fungible_asset_activities" using primary key columns */
@@ -3220,12 +2318,6 @@ export type CaassubscriptionRoot = {
   ledger_infos_by_pk?: Maybe<LedgerInfos>;
   /** fetch data from the table in a streaming manner: "processor_metadata.ledger_infos" */
   ledger_infos_stream: Array<LedgerInfos>;
-  /** fetch data from the table: "legacy_migration_v1.move_resources" */
-  move_resources: Array<MoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
-  move_resources_aggregate: MoveResourcesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.move_resources" */
-  move_resources_stream: Array<MoveResources>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
   nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
@@ -3277,12 +2369,6 @@ export type CaassubscriptionRoot = {
   /** fetch data from the table in a streaming manner: "table_metadatas" */
   table_metadatas_stream: Array<TableMetadatas>;
   /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_activities" */
-  token_activities_stream: Array<TokenActivities>;
-  /** An array relationship */
   token_activities_v2: Array<TokenActivitiesV2>;
   /** An aggregate relationship */
   token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
@@ -3290,18 +2376,6 @@ export type CaassubscriptionRoot = {
   token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
   /** fetch data from the table in a streaming manner: "token_activities_v2" */
   token_activities_v2_stream: Array<TokenActivitiesV2>;
-  /** fetch data from the table: "legacy_migration_v1.token_datas" */
-  token_datas: Array<TokenDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_datas" */
-  token_datas_stream: Array<TokenDatas>;
-  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
-  token_ownerships: Array<TokenOwnerships>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_ownerships" */
-  token_ownerships_stream: Array<TokenOwnerships>;
-  /** fetch data from the table: "legacy_migration_v1.tokens" */
-  tokens: Array<Tokens>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.tokens" */
-  tokens_stream: Array<Tokens>;
   /** fetch data from the table: "user_transactions" */
   user_transactions: Array<UserTransactions>;
   /** fetch data from the table: "user_transactions" using primary key columns */
@@ -3339,72 +2413,6 @@ export type CaassubscriptionRootAccountTransactionsStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<AccountTransactionsStreamCursorInput>>;
   where?: InputMaybe<AccountTransactionsBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressEventsSummaryArgs = {
-  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressEventsSummaryStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressEventsSummaryStreamCursorInput>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromEventsArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromEventsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromEventsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressVersionFromEventsStreamCursorInput>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type CaassubscriptionRootAddressVersionFromMoveResourcesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressVersionFromMoveResourcesStreamCursorInput>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
 };
 
 
@@ -3459,117 +2467,6 @@ export type CaassubscriptionRootBlockMetadataTransactionsStreamArgs = {
 };
 
 
-export type CaassubscriptionRootCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinActivitiesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinActivitiesStreamCursorInput>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinBalancesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinBalancesStreamCursorInput>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinInfosArgs = {
-  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinInfosStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinInfosStreamCursorInput>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinSupplyArgs = {
-  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type CaassubscriptionRootCoinSupplyByPkArgs = {
-  coin_type_hash: Scalars['String']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type CaassubscriptionRootCoinSupplyStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinSupplyStreamCursorInput>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type CaassubscriptionRootCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootCollectionDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CollectionDatasStreamCursorInput>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentAnsLookupArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentAnsLookupStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentAnsLookupStreamCursorInput>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
 export type CaassubscriptionRootCurrentAnsLookupV2Args = {
   distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3615,38 +2512,6 @@ export type CaassubscriptionRootCurrentAptosNamesStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CurrentAptosNamesStreamCursorInput>>;
   where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentCoinBalancesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentCoinBalancesStreamCursorInput>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentCollectionDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentCollectionDatasStreamCursorInput>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
 };
 
 
@@ -3857,22 +2722,6 @@ export type CaassubscriptionRootCurrentTableItemsStreamArgs = {
 };
 
 
-export type CaassubscriptionRootCurrentTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentTokenDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentTokenDatasStreamCursorInput>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
 export type CaassubscriptionRootCurrentTokenDatasV2Args = {
   distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3891,31 +2740,6 @@ export type CaassubscriptionRootCurrentTokenDatasV2StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CurrentTokenDatasV2StreamCursorInput>>;
   where?: InputMaybe<CurrentTokenDatasV2BoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentTokenOwnershipsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type CaassubscriptionRootCurrentTokenOwnershipsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentTokenOwnershipsStreamCursorInput>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
 };
 
 
@@ -4096,28 +2920,6 @@ export type CaassubscriptionRootDelegatorDistinctPoolStreamArgs = {
 };
 
 
-export type CaassubscriptionRootEventsArgs = {
-  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<EventsOrderBy>>;
-  where?: InputMaybe<EventsBoolExp>;
-};
-
-
-export type CaassubscriptionRootEventsByPkArgs = {
-  event_index: Scalars['bigint']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type CaassubscriptionRootEventsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<EventsStreamCursorInput>>;
-  where?: InputMaybe<EventsBoolExp>;
-};
-
-
 export type CaassubscriptionRootFungibleAssetActivitiesArgs = {
   distinct_on?: InputMaybe<Array<FungibleAssetActivitiesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4200,31 +3002,6 @@ export type CaassubscriptionRootLedgerInfosStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<LedgerInfosStreamCursorInput>>;
   where?: InputMaybe<LedgerInfosBoolExp>;
-};
-
-
-export type CaassubscriptionRootMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type CaassubscriptionRootMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type CaassubscriptionRootMoveResourcesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<MoveResourcesStreamCursorInput>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
 };
 
 
@@ -4417,31 +3194,6 @@ export type CaassubscriptionRootTableMetadatasStreamArgs = {
 };
 
 
-export type CaassubscriptionRootTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenActivitiesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenActivitiesStreamCursorInput>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
 export type CaassubscriptionRootTokenActivitiesV2Args = {
   distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4470,54 +3222,6 @@ export type CaassubscriptionRootTokenActivitiesV2StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<TokenActivitiesV2StreamCursorInput>>;
   where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenDatasStreamCursorInput>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokenOwnershipsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenOwnershipsStreamCursorInput>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokensArgs = {
-  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokensOrderBy>>;
-  where?: InputMaybe<TokensBoolExp>;
-};
-
-
-export type CaassubscriptionRootTokensStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokensStreamCursorInput>>;
-  where?: InputMaybe<TokensBoolExp>;
 };
 
 
@@ -4612,922 +3316,6 @@ export type ChainlinkOracleCurrentConfigStreamCursorValueInput = {
   max_age_in_seconds?: InputMaybe<Scalars['numeric']['input']>;
   oracle_address?: InputMaybe<Scalars['String']['input']>;
   quote?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.coin_activities" */
-export type CoinActivities = {
-  activity_type?: Maybe<Scalars['String']['output']>;
-  amount?: Maybe<Scalars['numeric']['output']>;
-  /** An array relationship */
-  aptos_names: Array<CurrentAptosNames>;
-  /** An aggregate relationship */
-  aptos_names_aggregate: CurrentAptosNamesAggregate;
-  block_height?: Maybe<Scalars['bigint']['output']>;
-  /** An object relationship */
-  coin_info?: Maybe<CoinInfos>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  entry_function_id_str?: Maybe<Scalars['String']['output']>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  is_gas_fee?: Maybe<Scalars['Boolean']['output']>;
-  is_transaction_success?: Maybe<Scalars['Boolean']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  storage_refund_amount?: Maybe<Scalars['numeric']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAptosNamesArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAptosNamesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-/** aggregated selection of "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAggregate = {
-  aggregate?: Maybe<CoinActivitiesAggregateFields>;
-  nodes: Array<CoinActivities>;
-};
-
-export type CoinActivitiesAggregateBoolExp = {
-  bool_and?: InputMaybe<CoinActivitiesAggregateBoolExpBoolAnd>;
-  bool_or?: InputMaybe<CoinActivitiesAggregateBoolExpBoolOr>;
-  count?: InputMaybe<CoinActivitiesAggregateBoolExpCount>;
-};
-
-export type CoinActivitiesAggregateBoolExpBoolAnd = {
-  arguments: CoinActivitiesSelectColumnCoinActivitiesAggregateBoolExpBoolAndArgumentsColumns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<CoinActivitiesBoolExp>;
-  predicate: BooleanComparisonExp;
-};
-
-export type CoinActivitiesAggregateBoolExpBoolOr = {
-  arguments: CoinActivitiesSelectColumnCoinActivitiesAggregateBoolExpBoolOrArgumentsColumns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<CoinActivitiesBoolExp>;
-  predicate: BooleanComparisonExp;
-};
-
-export type CoinActivitiesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<CoinActivitiesBoolExp>;
-  predicate: IntComparisonExp;
-};
-
-/** aggregate fields of "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAggregateFields = {
-  avg?: Maybe<CoinActivitiesAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<CoinActivitiesMaxFields>;
-  min?: Maybe<CoinActivitiesMinFields>;
-  stddev?: Maybe<CoinActivitiesStddevFields>;
-  stddev_pop?: Maybe<CoinActivitiesStddevPopFields>;
-  stddev_samp?: Maybe<CoinActivitiesStddevSampFields>;
-  sum?: Maybe<CoinActivitiesSumFields>;
-  var_pop?: Maybe<CoinActivitiesVarPopFields>;
-  var_samp?: Maybe<CoinActivitiesVarSampFields>;
-  variance?: Maybe<CoinActivitiesVarianceFields>;
-};
-
-
-/** aggregate fields of "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** order by aggregate values of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAggregateOrderBy = {
-  avg?: InputMaybe<CoinActivitiesAvgOrderBy>;
-  count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<CoinActivitiesMaxOrderBy>;
-  min?: InputMaybe<CoinActivitiesMinOrderBy>;
-  stddev?: InputMaybe<CoinActivitiesStddevOrderBy>;
-  stddev_pop?: InputMaybe<CoinActivitiesStddevPopOrderBy>;
-  stddev_samp?: InputMaybe<CoinActivitiesStddevSampOrderBy>;
-  sum?: InputMaybe<CoinActivitiesSumOrderBy>;
-  var_pop?: InputMaybe<CoinActivitiesVarPopOrderBy>;
-  var_samp?: InputMaybe<CoinActivitiesVarSampOrderBy>;
-  variance?: InputMaybe<CoinActivitiesVarianceOrderBy>;
-};
-
-/** aggregate avg on columns */
-export type CoinActivitiesAvgFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesAvgOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.coin_activities". All fields are combined with a logical 'AND'. */
-export type CoinActivitiesBoolExp = {
-  _and?: InputMaybe<Array<CoinActivitiesBoolExp>>;
-  _not?: InputMaybe<CoinActivitiesBoolExp>;
-  _or?: InputMaybe<Array<CoinActivitiesBoolExp>>;
-  activity_type?: InputMaybe<StringComparisonExp>;
-  amount?: InputMaybe<NumericComparisonExp>;
-  aptos_names?: InputMaybe<CurrentAptosNamesBoolExp>;
-  aptos_names_aggregate?: InputMaybe<CurrentAptosNamesAggregateBoolExp>;
-  block_height?: InputMaybe<BigintComparisonExp>;
-  coin_info?: InputMaybe<CoinInfosBoolExp>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  entry_function_id_str?: InputMaybe<StringComparisonExp>;
-  event_account_address?: InputMaybe<StringComparisonExp>;
-  event_creation_number?: InputMaybe<IntComparisonExp>;
-  event_index?: InputMaybe<BigintComparisonExp>;
-  event_sequence_number?: InputMaybe<IntComparisonExp>;
-  is_gas_fee?: InputMaybe<BooleanComparisonExp>;
-  is_transaction_success?: InputMaybe<BooleanComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  storage_refund_amount?: InputMaybe<NumericComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type CoinActivitiesMaxFields = {
-  activity_type?: Maybe<Scalars['String']['output']>;
-  amount?: Maybe<Scalars['numeric']['output']>;
-  block_height?: Maybe<Scalars['bigint']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  entry_function_id_str?: Maybe<Scalars['String']['output']>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  storage_refund_amount?: Maybe<Scalars['numeric']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by max() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesMaxOrderBy = {
-  activity_type?: InputMaybe<OrderBy>;
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  entry_function_id_str?: InputMaybe<OrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate min on columns */
-export type CoinActivitiesMinFields = {
-  activity_type?: Maybe<Scalars['String']['output']>;
-  amount?: Maybe<Scalars['numeric']['output']>;
-  block_height?: Maybe<Scalars['bigint']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  entry_function_id_str?: Maybe<Scalars['String']['output']>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  storage_refund_amount?: Maybe<Scalars['numeric']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by min() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesMinOrderBy = {
-  activity_type?: InputMaybe<OrderBy>;
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  entry_function_id_str?: InputMaybe<OrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.coin_activities". */
-export type CoinActivitiesOrderBy = {
-  activity_type?: InputMaybe<OrderBy>;
-  amount?: InputMaybe<OrderBy>;
-  aptos_names_aggregate?: InputMaybe<CurrentAptosNamesAggregateOrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  coin_info?: InputMaybe<CoinInfosOrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  entry_function_id_str?: InputMaybe<OrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  is_gas_fee?: InputMaybe<OrderBy>;
-  is_transaction_success?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.coin_activities" */
-export enum CoinActivitiesSelectColumn {
-  /** column name */
-  ActivityType = 'activity_type',
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  BlockHeight = 'block_height',
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  EntryFunctionIdStr = 'entry_function_id_str',
-  /** column name */
-  EventAccountAddress = 'event_account_address',
-  /** column name */
-  EventCreationNumber = 'event_creation_number',
-  /** column name */
-  EventIndex = 'event_index',
-  /** column name */
-  EventSequenceNumber = 'event_sequence_number',
-  /** column name */
-  IsGasFee = 'is_gas_fee',
-  /** column name */
-  IsTransactionSuccess = 'is_transaction_success',
-  /** column name */
-  OwnerAddress = 'owner_address',
-  /** column name */
-  StorageRefundAmount = 'storage_refund_amount',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** select "coin_activities_aggregate_bool_exp_bool_and_arguments_columns" columns of table "legacy_migration_v1.coin_activities" */
-export enum CoinActivitiesSelectColumnCoinActivitiesAggregateBoolExpBoolAndArgumentsColumns {
-  /** column name */
-  IsGasFee = 'is_gas_fee',
-  /** column name */
-  IsTransactionSuccess = 'is_transaction_success'
-}
-
-/** select "coin_activities_aggregate_bool_exp_bool_or_arguments_columns" columns of table "legacy_migration_v1.coin_activities" */
-export enum CoinActivitiesSelectColumnCoinActivitiesAggregateBoolExpBoolOrArgumentsColumns {
-  /** column name */
-  IsGasFee = 'is_gas_fee',
-  /** column name */
-  IsTransactionSuccess = 'is_transaction_success'
-}
-
-/** aggregate stddev on columns */
-export type CoinActivitiesStddevFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesStddevOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_pop on columns */
-export type CoinActivitiesStddevPopFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_pop() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesStddevPopOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_samp on columns */
-export type CoinActivitiesStddevSampFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesStddevSampOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "coin_activities" */
-export type CoinActivitiesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CoinActivitiesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CoinActivitiesStreamCursorValueInput = {
-  activity_type?: InputMaybe<Scalars['String']['input']>;
-  amount?: InputMaybe<Scalars['numeric']['input']>;
-  block_height?: InputMaybe<Scalars['bigint']['input']>;
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  entry_function_id_str?: InputMaybe<Scalars['String']['input']>;
-  event_account_address?: InputMaybe<Scalars['String']['input']>;
-  event_creation_number?: InputMaybe<Scalars['Int']['input']>;
-  event_index?: InputMaybe<Scalars['bigint']['input']>;
-  event_sequence_number?: InputMaybe<Scalars['Int']['input']>;
-  is_gas_fee?: InputMaybe<Scalars['Boolean']['input']>;
-  is_transaction_success?: InputMaybe<Scalars['Boolean']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  storage_refund_amount?: InputMaybe<Scalars['numeric']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type CoinActivitiesSumFields = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  block_height?: Maybe<Scalars['bigint']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  storage_refund_amount?: Maybe<Scalars['numeric']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by sum() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesSumOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_pop on columns */
-export type CoinActivitiesVarPopFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_pop() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesVarPopOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_samp on columns */
-export type CoinActivitiesVarSampFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_samp() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesVarSampOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate variance on columns */
-export type CoinActivitiesVarianceFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  block_height?: Maybe<Scalars['Float']['output']>;
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  storage_refund_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "legacy_migration_v1.coin_activities" */
-export type CoinActivitiesVarianceOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  block_height?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  storage_refund_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** columns and relationships of "legacy_migration_v1.coin_balances" */
-export type CoinBalances = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  coin_type_hash?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.coin_balances". All fields are combined with a logical 'AND'. */
-export type CoinBalancesBoolExp = {
-  _and?: InputMaybe<Array<CoinBalancesBoolExp>>;
-  _not?: InputMaybe<CoinBalancesBoolExp>;
-  _or?: InputMaybe<Array<CoinBalancesBoolExp>>;
-  amount?: InputMaybe<NumericComparisonExp>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  coin_type_hash?: InputMaybe<StringComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.coin_balances". */
-export type CoinBalancesOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  coin_type_hash?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.coin_balances" */
-export enum CoinBalancesSelectColumn {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  CoinTypeHash = 'coin_type_hash',
-  /** column name */
-  OwnerAddress = 'owner_address',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** Streaming cursor of the table "coin_balances" */
-export type CoinBalancesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CoinBalancesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CoinBalancesStreamCursorValueInput = {
-  amount?: InputMaybe<Scalars['numeric']['input']>;
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  coin_type_hash?: InputMaybe<Scalars['String']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.coin_infos" */
-export type CoinInfos = {
-  coin_type?: Maybe<Scalars['String']['output']>;
-  coin_type_hash?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  decimals?: Maybe<Scalars['Int']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  supply_aggregator_table_handle?: Maybe<Scalars['String']['output']>;
-  supply_aggregator_table_key?: Maybe<Scalars['String']['output']>;
-  symbol?: Maybe<Scalars['String']['output']>;
-  transaction_created_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version_created?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.coin_infos". All fields are combined with a logical 'AND'. */
-export type CoinInfosBoolExp = {
-  _and?: InputMaybe<Array<CoinInfosBoolExp>>;
-  _not?: InputMaybe<CoinInfosBoolExp>;
-  _or?: InputMaybe<Array<CoinInfosBoolExp>>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  coin_type_hash?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  decimals?: InputMaybe<IntComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  supply_aggregator_table_handle?: InputMaybe<StringComparisonExp>;
-  supply_aggregator_table_key?: InputMaybe<StringComparisonExp>;
-  symbol?: InputMaybe<StringComparisonExp>;
-  transaction_created_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version_created?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.coin_infos". */
-export type CoinInfosOrderBy = {
-  coin_type?: InputMaybe<OrderBy>;
-  coin_type_hash?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  decimals?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  supply_aggregator_table_handle?: InputMaybe<OrderBy>;
-  supply_aggregator_table_key?: InputMaybe<OrderBy>;
-  symbol?: InputMaybe<OrderBy>;
-  transaction_created_timestamp?: InputMaybe<OrderBy>;
-  transaction_version_created?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.coin_infos" */
-export enum CoinInfosSelectColumn {
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  CoinTypeHash = 'coin_type_hash',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  Decimals = 'decimals',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  SupplyAggregatorTableHandle = 'supply_aggregator_table_handle',
-  /** column name */
-  SupplyAggregatorTableKey = 'supply_aggregator_table_key',
-  /** column name */
-  Symbol = 'symbol',
-  /** column name */
-  TransactionCreatedTimestamp = 'transaction_created_timestamp',
-  /** column name */
-  TransactionVersionCreated = 'transaction_version_created'
-}
-
-/** Streaming cursor of the table "coin_infos" */
-export type CoinInfosStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CoinInfosStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CoinInfosStreamCursorValueInput = {
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  coin_type_hash?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  decimals?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  supply_aggregator_table_handle?: InputMaybe<Scalars['String']['input']>;
-  supply_aggregator_table_key?: InputMaybe<Scalars['String']['input']>;
-  symbol?: InputMaybe<Scalars['String']['input']>;
-  transaction_created_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version_created?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "coin_supply" */
-export type CoinSupply = {
-  coin_type: Scalars['String']['output'];
-  coin_type_hash: Scalars['String']['output'];
-  supply: Scalars['numeric']['output'];
-  transaction_epoch: Scalars['bigint']['output'];
-  transaction_timestamp: Scalars['timestamp']['output'];
-  transaction_version: Scalars['bigint']['output'];
-};
-
-/** Boolean expression to filter rows from the table "coin_supply". All fields are combined with a logical 'AND'. */
-export type CoinSupplyBoolExp = {
-  _and?: InputMaybe<Array<CoinSupplyBoolExp>>;
-  _not?: InputMaybe<CoinSupplyBoolExp>;
-  _or?: InputMaybe<Array<CoinSupplyBoolExp>>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  coin_type_hash?: InputMaybe<StringComparisonExp>;
-  supply?: InputMaybe<NumericComparisonExp>;
-  transaction_epoch?: InputMaybe<BigintComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "coin_supply". */
-export type CoinSupplyOrderBy = {
-  coin_type?: InputMaybe<OrderBy>;
-  coin_type_hash?: InputMaybe<OrderBy>;
-  supply?: InputMaybe<OrderBy>;
-  transaction_epoch?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "coin_supply" */
-export enum CoinSupplySelectColumn {
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  CoinTypeHash = 'coin_type_hash',
-  /** column name */
-  Supply = 'supply',
-  /** column name */
-  TransactionEpoch = 'transaction_epoch',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** Streaming cursor of the table "coin_supply" */
-export type CoinSupplyStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CoinSupplyStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CoinSupplyStreamCursorValueInput = {
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  coin_type_hash?: InputMaybe<Scalars['String']['input']>;
-  supply?: InputMaybe<Scalars['numeric']['input']>;
-  transaction_epoch?: InputMaybe<Scalars['bigint']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.collection_datas" */
-export type CollectionDatas = {
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  description_mutable?: Maybe<Scalars['Boolean']['output']>;
-  maximum?: Maybe<Scalars['numeric']['output']>;
-  maximum_mutable?: Maybe<Scalars['Boolean']['output']>;
-  metadata_uri?: Maybe<Scalars['String']['output']>;
-  supply?: Maybe<Scalars['numeric']['output']>;
-  table_handle?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-  uri_mutable?: Maybe<Scalars['Boolean']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.collection_datas". All fields are combined with a logical 'AND'. */
-export type CollectionDatasBoolExp = {
-  _and?: InputMaybe<Array<CollectionDatasBoolExp>>;
-  _not?: InputMaybe<CollectionDatasBoolExp>;
-  _or?: InputMaybe<Array<CollectionDatasBoolExp>>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  description?: InputMaybe<StringComparisonExp>;
-  description_mutable?: InputMaybe<BooleanComparisonExp>;
-  maximum?: InputMaybe<NumericComparisonExp>;
-  maximum_mutable?: InputMaybe<BooleanComparisonExp>;
-  metadata_uri?: InputMaybe<StringComparisonExp>;
-  supply?: InputMaybe<NumericComparisonExp>;
-  table_handle?: InputMaybe<StringComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-  uri_mutable?: InputMaybe<BooleanComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.collection_datas". */
-export type CollectionDatasOrderBy = {
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  description?: InputMaybe<OrderBy>;
-  description_mutable?: InputMaybe<OrderBy>;
-  maximum?: InputMaybe<OrderBy>;
-  maximum_mutable?: InputMaybe<OrderBy>;
-  metadata_uri?: InputMaybe<OrderBy>;
-  supply?: InputMaybe<OrderBy>;
-  table_handle?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  uri_mutable?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.collection_datas" */
-export enum CollectionDatasSelectColumn {
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  DescriptionMutable = 'description_mutable',
-  /** column name */
-  Maximum = 'maximum',
-  /** column name */
-  MaximumMutable = 'maximum_mutable',
-  /** column name */
-  MetadataUri = 'metadata_uri',
-  /** column name */
-  Supply = 'supply',
-  /** column name */
-  TableHandle = 'table_handle',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version',
-  /** column name */
-  UriMutable = 'uri_mutable'
-}
-
-/** Streaming cursor of the table "collection_datas" */
-export type CollectionDatasStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CollectionDatasStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CollectionDatasStreamCursorValueInput = {
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  description_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  maximum?: InputMaybe<Scalars['numeric']['input']>;
-  maximum_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  metadata_uri?: InputMaybe<Scalars['String']['input']>;
-  supply?: InputMaybe<Scalars['numeric']['input']>;
-  table_handle?: InputMaybe<Scalars['String']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  uri_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.current_ans_lookup" */
-export type CurrentAnsLookup = {
-  /** An array relationship */
-  all_token_ownerships: Array<CurrentTokenOwnerships>;
-  /** An aggregate relationship */
-  all_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
-  domain?: Maybe<Scalars['String']['output']>;
-  expiration_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  is_deleted?: Maybe<Scalars['Boolean']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  registered_address?: Maybe<Scalars['String']['output']>;
-  subdomain?: Maybe<Scalars['String']['output']>;
-  token_name?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.current_ans_lookup" */
-export type CurrentAnsLookupAllTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.current_ans_lookup" */
-export type CurrentAnsLookupAllTokenOwnershipsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.current_ans_lookup". All fields are combined with a logical 'AND'. */
-export type CurrentAnsLookupBoolExp = {
-  _and?: InputMaybe<Array<CurrentAnsLookupBoolExp>>;
-  _not?: InputMaybe<CurrentAnsLookupBoolExp>;
-  _or?: InputMaybe<Array<CurrentAnsLookupBoolExp>>;
-  all_token_ownerships?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-  all_token_ownerships_aggregate?: InputMaybe<CurrentTokenOwnershipsAggregateBoolExp>;
-  domain?: InputMaybe<StringComparisonExp>;
-  expiration_timestamp?: InputMaybe<TimestampComparisonExp>;
-  is_deleted?: InputMaybe<BooleanComparisonExp>;
-  last_transaction_version?: InputMaybe<BigintComparisonExp>;
-  registered_address?: InputMaybe<StringComparisonExp>;
-  subdomain?: InputMaybe<StringComparisonExp>;
-  token_name?: InputMaybe<StringComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.current_ans_lookup". */
-export type CurrentAnsLookupOrderBy = {
-  all_token_ownerships_aggregate?: InputMaybe<CurrentTokenOwnershipsAggregateOrderBy>;
-  domain?: InputMaybe<OrderBy>;
-  expiration_timestamp?: InputMaybe<OrderBy>;
-  is_deleted?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  registered_address?: InputMaybe<OrderBy>;
-  subdomain?: InputMaybe<OrderBy>;
-  token_name?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.current_ans_lookup" */
-export enum CurrentAnsLookupSelectColumn {
-  /** column name */
-  Domain = 'domain',
-  /** column name */
-  ExpirationTimestamp = 'expiration_timestamp',
-  /** column name */
-  IsDeleted = 'is_deleted',
-  /** column name */
-  LastTransactionVersion = 'last_transaction_version',
-  /** column name */
-  RegisteredAddress = 'registered_address',
-  /** column name */
-  Subdomain = 'subdomain',
-  /** column name */
-  TokenName = 'token_name'
-}
-
-/** Streaming cursor of the table "current_ans_lookup" */
-export type CurrentAnsLookupStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CurrentAnsLookupStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CurrentAnsLookupStreamCursorValueInput = {
-  domain?: InputMaybe<Scalars['String']['input']>;
-  expiration_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
-  last_transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  registered_address?: InputMaybe<Scalars['String']['input']>;
-  subdomain?: InputMaybe<Scalars['String']['input']>;
-  token_name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "current_ans_lookup_v2" */
@@ -5962,186 +3750,6 @@ export type CurrentAptosNamesVarianceFields = {
 export type CurrentAptosNamesVarianceOrderBy = {
   last_transaction_version?: InputMaybe<OrderBy>;
   subdomain_expiration_policy?: InputMaybe<OrderBy>;
-};
-
-/** columns and relationships of "legacy_migration_v1.current_coin_balances" */
-export type CurrentCoinBalances = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  /** An object relationship */
-  coin_info?: Maybe<CoinInfos>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  coin_type_hash?: Maybe<Scalars['String']['output']>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.current_coin_balances". All fields are combined with a logical 'AND'. */
-export type CurrentCoinBalancesBoolExp = {
-  _and?: InputMaybe<Array<CurrentCoinBalancesBoolExp>>;
-  _not?: InputMaybe<CurrentCoinBalancesBoolExp>;
-  _or?: InputMaybe<Array<CurrentCoinBalancesBoolExp>>;
-  amount?: InputMaybe<NumericComparisonExp>;
-  coin_info?: InputMaybe<CoinInfosBoolExp>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  coin_type_hash?: InputMaybe<StringComparisonExp>;
-  last_transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  last_transaction_version?: InputMaybe<BigintComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.current_coin_balances". */
-export type CurrentCoinBalancesOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  coin_info?: InputMaybe<CoinInfosOrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  coin_type_hash?: InputMaybe<OrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.current_coin_balances" */
-export enum CurrentCoinBalancesSelectColumn {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  CoinTypeHash = 'coin_type_hash',
-  /** column name */
-  LastTransactionTimestamp = 'last_transaction_timestamp',
-  /** column name */
-  LastTransactionVersion = 'last_transaction_version',
-  /** column name */
-  OwnerAddress = 'owner_address'
-}
-
-/** Streaming cursor of the table "current_coin_balances" */
-export type CurrentCoinBalancesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CurrentCoinBalancesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CurrentCoinBalancesStreamCursorValueInput = {
-  amount?: InputMaybe<Scalars['numeric']['input']>;
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  coin_type_hash?: InputMaybe<Scalars['String']['input']>;
-  last_transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  last_transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.current_collection_datas" */
-export type CurrentCollectionDatas = {
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  description_mutable?: Maybe<Scalars['Boolean']['output']>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  maximum?: Maybe<Scalars['numeric']['output']>;
-  maximum_mutable?: Maybe<Scalars['Boolean']['output']>;
-  metadata_uri?: Maybe<Scalars['String']['output']>;
-  supply?: Maybe<Scalars['numeric']['output']>;
-  table_handle?: Maybe<Scalars['String']['output']>;
-  uri_mutable?: Maybe<Scalars['Boolean']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.current_collection_datas". All fields are combined with a logical 'AND'. */
-export type CurrentCollectionDatasBoolExp = {
-  _and?: InputMaybe<Array<CurrentCollectionDatasBoolExp>>;
-  _not?: InputMaybe<CurrentCollectionDatasBoolExp>;
-  _or?: InputMaybe<Array<CurrentCollectionDatasBoolExp>>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  description?: InputMaybe<StringComparisonExp>;
-  description_mutable?: InputMaybe<BooleanComparisonExp>;
-  last_transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  last_transaction_version?: InputMaybe<BigintComparisonExp>;
-  maximum?: InputMaybe<NumericComparisonExp>;
-  maximum_mutable?: InputMaybe<BooleanComparisonExp>;
-  metadata_uri?: InputMaybe<StringComparisonExp>;
-  supply?: InputMaybe<NumericComparisonExp>;
-  table_handle?: InputMaybe<StringComparisonExp>;
-  uri_mutable?: InputMaybe<BooleanComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.current_collection_datas". */
-export type CurrentCollectionDatasOrderBy = {
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  description?: InputMaybe<OrderBy>;
-  description_mutable?: InputMaybe<OrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  maximum?: InputMaybe<OrderBy>;
-  maximum_mutable?: InputMaybe<OrderBy>;
-  metadata_uri?: InputMaybe<OrderBy>;
-  supply?: InputMaybe<OrderBy>;
-  table_handle?: InputMaybe<OrderBy>;
-  uri_mutable?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.current_collection_datas" */
-export enum CurrentCollectionDatasSelectColumn {
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  DescriptionMutable = 'description_mutable',
-  /** column name */
-  LastTransactionTimestamp = 'last_transaction_timestamp',
-  /** column name */
-  LastTransactionVersion = 'last_transaction_version',
-  /** column name */
-  Maximum = 'maximum',
-  /** column name */
-  MaximumMutable = 'maximum_mutable',
-  /** column name */
-  MetadataUri = 'metadata_uri',
-  /** column name */
-  Supply = 'supply',
-  /** column name */
-  TableHandle = 'table_handle',
-  /** column name */
-  UriMutable = 'uri_mutable'
-}
-
-/** Streaming cursor of the table "current_collection_datas" */
-export type CurrentCollectionDatasStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CurrentCollectionDatasStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CurrentCollectionDatasStreamCursorValueInput = {
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  description_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  last_transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  last_transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  maximum?: InputMaybe<Scalars['numeric']['input']>;
-  maximum_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  metadata_uri?: InputMaybe<Scalars['String']['input']>;
-  supply?: InputMaybe<Scalars['numeric']['input']>;
-  table_handle?: InputMaybe<Scalars['String']['input']>;
-  uri_mutable?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** columns and relationships of "current_collection_ownership_v2_view" */
@@ -7208,173 +4816,6 @@ export type CurrentTableItemsStreamCursorValueInput = {
   table_handle?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** columns and relationships of "legacy_migration_v1.current_token_datas" */
-export type CurrentTokenDatas = {
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  /** An object relationship */
-  current_collection_data?: Maybe<CurrentCollectionDatas>;
-  default_properties?: Maybe<Scalars['jsonb']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  description_mutable?: Maybe<Scalars['Boolean']['output']>;
-  largest_property_version?: Maybe<Scalars['numeric']['output']>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  maximum?: Maybe<Scalars['numeric']['output']>;
-  maximum_mutable?: Maybe<Scalars['Boolean']['output']>;
-  metadata_uri?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  payee_address?: Maybe<Scalars['String']['output']>;
-  properties_mutable?: Maybe<Scalars['Boolean']['output']>;
-  royalty_mutable?: Maybe<Scalars['Boolean']['output']>;
-  royalty_points_denominator?: Maybe<Scalars['numeric']['output']>;
-  royalty_points_numerator?: Maybe<Scalars['numeric']['output']>;
-  supply?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  uri_mutable?: Maybe<Scalars['Boolean']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.current_token_datas" */
-export type CurrentTokenDatasDefaultPropertiesArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.current_token_datas". All fields are combined with a logical 'AND'. */
-export type CurrentTokenDatasBoolExp = {
-  _and?: InputMaybe<Array<CurrentTokenDatasBoolExp>>;
-  _not?: InputMaybe<CurrentTokenDatasBoolExp>;
-  _or?: InputMaybe<Array<CurrentTokenDatasBoolExp>>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasBoolExp>;
-  default_properties?: InputMaybe<JsonbComparisonExp>;
-  description?: InputMaybe<StringComparisonExp>;
-  description_mutable?: InputMaybe<BooleanComparisonExp>;
-  largest_property_version?: InputMaybe<NumericComparisonExp>;
-  last_transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  last_transaction_version?: InputMaybe<BigintComparisonExp>;
-  maximum?: InputMaybe<NumericComparisonExp>;
-  maximum_mutable?: InputMaybe<BooleanComparisonExp>;
-  metadata_uri?: InputMaybe<StringComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  payee_address?: InputMaybe<StringComparisonExp>;
-  properties_mutable?: InputMaybe<BooleanComparisonExp>;
-  royalty_mutable?: InputMaybe<BooleanComparisonExp>;
-  royalty_points_denominator?: InputMaybe<NumericComparisonExp>;
-  royalty_points_numerator?: InputMaybe<NumericComparisonExp>;
-  supply?: InputMaybe<NumericComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  uri_mutable?: InputMaybe<BooleanComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.current_token_datas". */
-export type CurrentTokenDatasOrderBy = {
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasOrderBy>;
-  default_properties?: InputMaybe<OrderBy>;
-  description?: InputMaybe<OrderBy>;
-  description_mutable?: InputMaybe<OrderBy>;
-  largest_property_version?: InputMaybe<OrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  maximum?: InputMaybe<OrderBy>;
-  maximum_mutable?: InputMaybe<OrderBy>;
-  metadata_uri?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  payee_address?: InputMaybe<OrderBy>;
-  properties_mutable?: InputMaybe<OrderBy>;
-  royalty_mutable?: InputMaybe<OrderBy>;
-  royalty_points_denominator?: InputMaybe<OrderBy>;
-  royalty_points_numerator?: InputMaybe<OrderBy>;
-  supply?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  uri_mutable?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.current_token_datas" */
-export enum CurrentTokenDatasSelectColumn {
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  DefaultProperties = 'default_properties',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  DescriptionMutable = 'description_mutable',
-  /** column name */
-  LargestPropertyVersion = 'largest_property_version',
-  /** column name */
-  LastTransactionTimestamp = 'last_transaction_timestamp',
-  /** column name */
-  LastTransactionVersion = 'last_transaction_version',
-  /** column name */
-  Maximum = 'maximum',
-  /** column name */
-  MaximumMutable = 'maximum_mutable',
-  /** column name */
-  MetadataUri = 'metadata_uri',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  PayeeAddress = 'payee_address',
-  /** column name */
-  PropertiesMutable = 'properties_mutable',
-  /** column name */
-  RoyaltyMutable = 'royalty_mutable',
-  /** column name */
-  RoyaltyPointsDenominator = 'royalty_points_denominator',
-  /** column name */
-  RoyaltyPointsNumerator = 'royalty_points_numerator',
-  /** column name */
-  Supply = 'supply',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  UriMutable = 'uri_mutable'
-}
-
-/** Streaming cursor of the table "current_token_datas" */
-export type CurrentTokenDatasStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CurrentTokenDatasStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CurrentTokenDatasStreamCursorValueInput = {
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  default_properties?: InputMaybe<Scalars['jsonb']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  description_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  largest_property_version?: InputMaybe<Scalars['numeric']['input']>;
-  last_transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  last_transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  maximum?: InputMaybe<Scalars['numeric']['input']>;
-  maximum_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  metadata_uri?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  payee_address?: InputMaybe<Scalars['String']['input']>;
-  properties_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  royalty_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  royalty_points_denominator?: InputMaybe<Scalars['numeric']['input']>;
-  royalty_points_numerator?: InputMaybe<Scalars['numeric']['input']>;
-  supply?: InputMaybe<Scalars['numeric']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  uri_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 /** columns and relationships of "current_token_datas_v2" */
 export type CurrentTokenDatasV2 = {
   /** An object relationship */
@@ -7543,311 +4984,6 @@ export type CurrentTokenDatasV2StreamCursorValueInput = {
   token_properties?: InputMaybe<Scalars['jsonb']['input']>;
   token_standard?: InputMaybe<Scalars['String']['input']>;
   token_uri?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnerships = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  /** An object relationship */
-  aptos_name?: Maybe<CurrentAptosNames>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  /** An object relationship */
-  current_collection_data?: Maybe<CurrentCollectionDatas>;
-  /** An object relationship */
-  current_token_data?: Maybe<CurrentTokenDatas>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  table_type?: Maybe<Scalars['String']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  token_properties?: Maybe<Scalars['jsonb']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsTokenPropertiesArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** aggregated selection of "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsAggregate = {
-  aggregate?: Maybe<CurrentTokenOwnershipsAggregateFields>;
-  nodes: Array<CurrentTokenOwnerships>;
-};
-
-export type CurrentTokenOwnershipsAggregateBoolExp = {
-  count?: InputMaybe<CurrentTokenOwnershipsAggregateBoolExpCount>;
-};
-
-export type CurrentTokenOwnershipsAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-  predicate: IntComparisonExp;
-};
-
-/** aggregate fields of "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsAggregateFields = {
-  avg?: Maybe<CurrentTokenOwnershipsAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<CurrentTokenOwnershipsMaxFields>;
-  min?: Maybe<CurrentTokenOwnershipsMinFields>;
-  stddev?: Maybe<CurrentTokenOwnershipsStddevFields>;
-  stddev_pop?: Maybe<CurrentTokenOwnershipsStddevPopFields>;
-  stddev_samp?: Maybe<CurrentTokenOwnershipsStddevSampFields>;
-  sum?: Maybe<CurrentTokenOwnershipsSumFields>;
-  var_pop?: Maybe<CurrentTokenOwnershipsVarPopFields>;
-  var_samp?: Maybe<CurrentTokenOwnershipsVarSampFields>;
-  variance?: Maybe<CurrentTokenOwnershipsVarianceFields>;
-};
-
-
-/** aggregate fields of "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** order by aggregate values of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsAggregateOrderBy = {
-  avg?: InputMaybe<CurrentTokenOwnershipsAvgOrderBy>;
-  count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<CurrentTokenOwnershipsMaxOrderBy>;
-  min?: InputMaybe<CurrentTokenOwnershipsMinOrderBy>;
-  stddev?: InputMaybe<CurrentTokenOwnershipsStddevOrderBy>;
-  stddev_pop?: InputMaybe<CurrentTokenOwnershipsStddevPopOrderBy>;
-  stddev_samp?: InputMaybe<CurrentTokenOwnershipsStddevSampOrderBy>;
-  sum?: InputMaybe<CurrentTokenOwnershipsSumOrderBy>;
-  var_pop?: InputMaybe<CurrentTokenOwnershipsVarPopOrderBy>;
-  var_samp?: InputMaybe<CurrentTokenOwnershipsVarSampOrderBy>;
-  variance?: InputMaybe<CurrentTokenOwnershipsVarianceOrderBy>;
-};
-
-/** aggregate avg on columns */
-export type CurrentTokenOwnershipsAvgFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsAvgOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.current_token_ownerships". All fields are combined with a logical 'AND'. */
-export type CurrentTokenOwnershipsBoolExp = {
-  _and?: InputMaybe<Array<CurrentTokenOwnershipsBoolExp>>;
-  _not?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-  _or?: InputMaybe<Array<CurrentTokenOwnershipsBoolExp>>;
-  amount?: InputMaybe<NumericComparisonExp>;
-  aptos_name?: InputMaybe<CurrentAptosNamesBoolExp>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasBoolExp>;
-  current_token_data?: InputMaybe<CurrentTokenDatasBoolExp>;
-  last_transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  last_transaction_version?: InputMaybe<BigintComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  property_version?: InputMaybe<NumericComparisonExp>;
-  table_type?: InputMaybe<StringComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  token_properties?: InputMaybe<JsonbComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type CurrentTokenOwnershipsMaxFields = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  table_type?: Maybe<Scalars['String']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by max() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsMaxOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  table_type?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-};
-
-/** aggregate min on columns */
-export type CurrentTokenOwnershipsMinFields = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  last_transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  table_type?: Maybe<Scalars['String']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by min() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsMinOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  table_type?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.current_token_ownerships". */
-export type CurrentTokenOwnershipsOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  aptos_name?: InputMaybe<CurrentAptosNamesOrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasOrderBy>;
-  current_token_data?: InputMaybe<CurrentTokenDatasOrderBy>;
-  last_transaction_timestamp?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  table_type?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  token_properties?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.current_token_ownerships" */
-export enum CurrentTokenOwnershipsSelectColumn {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  LastTransactionTimestamp = 'last_transaction_timestamp',
-  /** column name */
-  LastTransactionVersion = 'last_transaction_version',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  OwnerAddress = 'owner_address',
-  /** column name */
-  PropertyVersion = 'property_version',
-  /** column name */
-  TableType = 'table_type',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  TokenProperties = 'token_properties'
-}
-
-/** aggregate stddev on columns */
-export type CurrentTokenOwnershipsStddevFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsStddevOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_pop on columns */
-export type CurrentTokenOwnershipsStddevPopFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_pop() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsStddevPopOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_samp on columns */
-export type CurrentTokenOwnershipsStddevSampFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsStddevSampOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "current_token_ownerships" */
-export type CurrentTokenOwnershipsStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: CurrentTokenOwnershipsStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type CurrentTokenOwnershipsStreamCursorValueInput = {
-  amount?: InputMaybe<Scalars['numeric']['input']>;
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  last_transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  last_transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  property_version?: InputMaybe<Scalars['numeric']['input']>;
-  table_type?: InputMaybe<Scalars['String']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  token_properties?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
-/** aggregate sum on columns */
-export type CurrentTokenOwnershipsSumFields = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  last_transaction_version?: Maybe<Scalars['bigint']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-};
-
-/** order by sum() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsSumOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "current_token_ownerships_v2" */
@@ -8250,48 +5386,6 @@ export type CurrentTokenOwnershipsV2VarianceOrderBy = {
   property_version_v1?: InputMaybe<OrderBy>;
 };
 
-/** aggregate var_pop on columns */
-export type CurrentTokenOwnershipsVarPopFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_pop() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsVarPopOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_samp on columns */
-export type CurrentTokenOwnershipsVarSampFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_samp() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsVarSampOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate variance on columns */
-export type CurrentTokenOwnershipsVarianceFields = {
-  amount?: Maybe<Scalars['Float']['output']>;
-  last_transaction_version?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "legacy_migration_v1.current_token_ownerships" */
-export type CurrentTokenOwnershipsVarianceOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  last_transaction_version?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-};
-
 /** columns and relationships of "current_token_pending_claims" */
 export type CurrentTokenPendingClaims = {
   amount: Scalars['numeric']['output'];
@@ -8300,11 +5394,7 @@ export type CurrentTokenPendingClaims = {
   collection_name: Scalars['String']['output'];
   creator_address: Scalars['String']['output'];
   /** An object relationship */
-  current_collection_data?: Maybe<CurrentCollectionDatas>;
-  /** An object relationship */
   current_collection_v2?: Maybe<CurrentCollectionsV2>;
-  /** An object relationship */
-  current_token_data?: Maybe<CurrentTokenDatas>;
   /** An object relationship */
   current_token_data_v2?: Maybe<CurrentTokenDatasV2>;
   from_address: Scalars['String']['output'];
@@ -8314,8 +5404,6 @@ export type CurrentTokenPendingClaims = {
   property_version: Scalars['numeric']['output'];
   table_handle: Scalars['String']['output'];
   to_address: Scalars['String']['output'];
-  /** An object relationship */
-  token?: Maybe<Tokens>;
   token_data_id: Scalars['String']['output'];
   token_data_id_hash: Scalars['String']['output'];
 };
@@ -8330,9 +5418,7 @@ export type CurrentTokenPendingClaimsBoolExp = {
   collection_id?: InputMaybe<StringComparisonExp>;
   collection_name?: InputMaybe<StringComparisonExp>;
   creator_address?: InputMaybe<StringComparisonExp>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasBoolExp>;
   current_collection_v2?: InputMaybe<CurrentCollectionsV2BoolExp>;
-  current_token_data?: InputMaybe<CurrentTokenDatasBoolExp>;
   current_token_data_v2?: InputMaybe<CurrentTokenDatasV2BoolExp>;
   from_address?: InputMaybe<StringComparisonExp>;
   last_transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
@@ -8341,7 +5427,6 @@ export type CurrentTokenPendingClaimsBoolExp = {
   property_version?: InputMaybe<NumericComparisonExp>;
   table_handle?: InputMaybe<StringComparisonExp>;
   to_address?: InputMaybe<StringComparisonExp>;
-  token?: InputMaybe<TokensBoolExp>;
   token_data_id?: InputMaybe<StringComparisonExp>;
   token_data_id_hash?: InputMaybe<StringComparisonExp>;
 };
@@ -8353,9 +5438,7 @@ export type CurrentTokenPendingClaimsOrderBy = {
   collection_id?: InputMaybe<OrderBy>;
   collection_name?: InputMaybe<OrderBy>;
   creator_address?: InputMaybe<OrderBy>;
-  current_collection_data?: InputMaybe<CurrentCollectionDatasOrderBy>;
   current_collection_v2?: InputMaybe<CurrentCollectionsV2OrderBy>;
-  current_token_data?: InputMaybe<CurrentTokenDatasOrderBy>;
   current_token_data_v2?: InputMaybe<CurrentTokenDatasV2OrderBy>;
   from_address?: InputMaybe<OrderBy>;
   last_transaction_timestamp?: InputMaybe<OrderBy>;
@@ -8364,7 +5447,6 @@ export type CurrentTokenPendingClaimsOrderBy = {
   property_version?: InputMaybe<OrderBy>;
   table_handle?: InputMaybe<OrderBy>;
   to_address?: InputMaybe<OrderBy>;
-  token?: InputMaybe<TokensOrderBy>;
   token_data_id?: InputMaybe<OrderBy>;
   token_data_id_hash?: InputMaybe<OrderBy>;
 };
@@ -8975,97 +6057,6 @@ export type DelegatorDistinctPoolStreamCursorInput = {
 export type DelegatorDistinctPoolStreamCursorValueInput = {
   delegator_address?: InputMaybe<Scalars['String']['input']>;
   pool_address?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** columns and relationships of "events" */
-export type Events = {
-  account_address: Scalars['String']['output'];
-  creation_number: Scalars['bigint']['output'];
-  data: Scalars['jsonb']['output'];
-  event_index: Scalars['bigint']['output'];
-  indexed_type: Scalars['String']['output'];
-  sequence_number: Scalars['bigint']['output'];
-  transaction_block_height: Scalars['bigint']['output'];
-  transaction_version: Scalars['bigint']['output'];
-  type: Scalars['String']['output'];
-};
-
-
-/** columns and relationships of "events" */
-export type EventsDataArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "events". All fields are combined with a logical 'AND'. */
-export type EventsBoolExp = {
-  _and?: InputMaybe<Array<EventsBoolExp>>;
-  _not?: InputMaybe<EventsBoolExp>;
-  _or?: InputMaybe<Array<EventsBoolExp>>;
-  account_address?: InputMaybe<StringComparisonExp>;
-  creation_number?: InputMaybe<BigintComparisonExp>;
-  data?: InputMaybe<JsonbComparisonExp>;
-  event_index?: InputMaybe<BigintComparisonExp>;
-  indexed_type?: InputMaybe<StringComparisonExp>;
-  sequence_number?: InputMaybe<BigintComparisonExp>;
-  transaction_block_height?: InputMaybe<BigintComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-  type?: InputMaybe<StringComparisonExp>;
-};
-
-/** Ordering options when selecting data from "events". */
-export type EventsOrderBy = {
-  account_address?: InputMaybe<OrderBy>;
-  creation_number?: InputMaybe<OrderBy>;
-  data?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  indexed_type?: InputMaybe<OrderBy>;
-  sequence_number?: InputMaybe<OrderBy>;
-  transaction_block_height?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  type?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "events" */
-export enum EventsSelectColumn {
-  /** column name */
-  AccountAddress = 'account_address',
-  /** column name */
-  CreationNumber = 'creation_number',
-  /** column name */
-  Data = 'data',
-  /** column name */
-  EventIndex = 'event_index',
-  /** column name */
-  IndexedType = 'indexed_type',
-  /** column name */
-  SequenceNumber = 'sequence_number',
-  /** column name */
-  TransactionBlockHeight = 'transaction_block_height',
-  /** column name */
-  TransactionVersion = 'transaction_version',
-  /** column name */
-  Type = 'type'
-}
-
-/** Streaming cursor of the table "events" */
-export type EventsStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: EventsStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type EventsStreamCursorValueInput = {
-  account_address?: InputMaybe<Scalars['String']['input']>;
-  creation_number?: InputMaybe<Scalars['bigint']['input']>;
-  data?: InputMaybe<Scalars['jsonb']['input']>;
-  event_index?: InputMaybe<Scalars['bigint']['input']>;
-  indexed_type?: InputMaybe<Scalars['String']['input']>;
-  sequence_number?: InputMaybe<Scalars['bigint']['input']>;
-  transaction_block_height?: InputMaybe<Scalars['bigint']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "fixed_price_oracle_activities" */
@@ -10307,129 +7298,6 @@ export type LedgerInfosStreamCursorValueInput = {
   chain_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
-/** columns and relationships of "legacy_migration_v1.move_resources" */
-export type MoveResources = {
-  address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregated selection of "legacy_migration_v1.move_resources" */
-export type MoveResourcesAggregate = {
-  aggregate?: Maybe<MoveResourcesAggregateFields>;
-  nodes: Array<MoveResources>;
-};
-
-/** aggregate fields of "legacy_migration_v1.move_resources" */
-export type MoveResourcesAggregateFields = {
-  avg?: Maybe<MoveResourcesAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<MoveResourcesMaxFields>;
-  min?: Maybe<MoveResourcesMinFields>;
-  stddev?: Maybe<MoveResourcesStddevFields>;
-  stddev_pop?: Maybe<MoveResourcesStddevPopFields>;
-  stddev_samp?: Maybe<MoveResourcesStddevSampFields>;
-  sum?: Maybe<MoveResourcesSumFields>;
-  var_pop?: Maybe<MoveResourcesVarPopFields>;
-  var_samp?: Maybe<MoveResourcesVarSampFields>;
-  variance?: Maybe<MoveResourcesVarianceFields>;
-};
-
-
-/** aggregate fields of "legacy_migration_v1.move_resources" */
-export type MoveResourcesAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type MoveResourcesAvgFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.move_resources". All fields are combined with a logical 'AND'. */
-export type MoveResourcesBoolExp = {
-  _and?: InputMaybe<Array<MoveResourcesBoolExp>>;
-  _not?: InputMaybe<MoveResourcesBoolExp>;
-  _or?: InputMaybe<Array<MoveResourcesBoolExp>>;
-  address?: InputMaybe<StringComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type MoveResourcesMaxFields = {
-  address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type MoveResourcesMinFields = {
-  address?: Maybe<Scalars['String']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.move_resources". */
-export type MoveResourcesOrderBy = {
-  address?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.move_resources" */
-export enum MoveResourcesSelectColumn {
-  /** column name */
-  Address = 'address',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** aggregate stddev on columns */
-export type MoveResourcesStddevFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type MoveResourcesStddevPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type MoveResourcesStddevSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "move_resources" */
-export type MoveResourcesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: MoveResourcesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type MoveResourcesStreamCursorValueInput = {
-  address?: InputMaybe<Scalars['String']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type MoveResourcesSumFields = {
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate var_pop on columns */
-export type MoveResourcesVarPopFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type MoveResourcesVarSampFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type MoveResourcesVarianceFields = {
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
 /** columns and relationships of "nft_metadata_crawler.parsed_asset_uris" */
 export type NftMetadataCrawlerParsedAssetUris = {
   animation_optimizer_retry_count: Scalars['Int']['output'];
@@ -11414,16 +8282,6 @@ export type QueryRoot = {
   adaptive_irm_state_activities: Array<AdaptiveIrmStateActivities>;
   /** fetch data from the table: "adaptive_irm_state_activities" using primary key columns */
   adaptive_irm_state_activities_by_pk?: Maybe<AdaptiveIrmStateActivities>;
-  /** fetch data from the table: "address_events_summary" */
-  address_events_summary: Array<AddressEventsSummary>;
-  /** fetch data from the table: "address_version_from_events" */
-  address_version_from_events: Array<AddressVersionFromEvents>;
-  /** fetch aggregated fields from the table: "address_version_from_events" */
-  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
-  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
   /** fetch data from the table: "auth_key_account_addresses" */
   auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
   /** fetch aggregated fields from the table: "auth_key_account_addresses" */
@@ -11451,22 +8309,6 @@ export type QueryRoot = {
   chainlink_oracle_current_config: Array<ChainlinkOracleCurrentConfig>;
   /** fetch data from the table: "chainlink_oracle_current_config" using primary key columns */
   chainlink_oracle_current_config_by_pk?: Maybe<ChainlinkOracleCurrentConfig>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
-  coin_balances: Array<CoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
-  coin_infos: Array<CoinInfos>;
-  /** fetch data from the table: "coin_supply" */
-  coin_supply: Array<CoinSupply>;
-  /** fetch data from the table: "coin_supply" using primary key columns */
-  coin_supply_by_pk?: Maybe<CoinSupply>;
-  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
-  collection_datas: Array<CollectionDatas>;
-  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup: Array<CurrentAnsLookup>;
   /** fetch data from the table: "current_ans_lookup_v2" */
   current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
   /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
@@ -11475,10 +8317,6 @@ export type QueryRoot = {
   current_aptos_names: Array<CurrentAptosNames>;
   /** fetch aggregated fields from the table: "current_aptos_names" */
   current_aptos_names_aggregate: CurrentAptosNamesAggregate;
-  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances: Array<CurrentCoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas: Array<CurrentCollectionDatas>;
   /** fetch data from the table: "current_collection_ownership_v2_view" */
   current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
   /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
@@ -11517,16 +8355,10 @@ export type QueryRoot = {
   current_table_items: Array<CurrentTableItems>;
   /** fetch data from the table: "current_table_items" using primary key columns */
   current_table_items_by_pk?: Maybe<CurrentTableItems>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
-  current_token_datas: Array<CurrentTokenDatas>;
   /** fetch data from the table: "current_token_datas_v2" */
   current_token_datas_v2: Array<CurrentTokenDatasV2>;
   /** fetch data from the table: "current_token_datas_v2" using primary key columns */
   current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships: Array<CurrentTokenOwnerships>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
   /** fetch data from the table: "current_token_ownerships_v2" */
   current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
   /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
@@ -11559,10 +8391,6 @@ export type QueryRoot = {
   delegator_distinct_pool: Array<DelegatorDistinctPool>;
   /** fetch aggregated fields from the table: "delegator_distinct_pool" */
   delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
-  /** fetch data from the table: "events" */
-  events: Array<Events>;
-  /** fetch data from the table: "events" using primary key columns */
-  events_by_pk?: Maybe<Events>;
   /** fetch data from the table: "fixed_price_oracle_activities" */
   fixed_price_oracle_activities: Array<FixedPriceOracleActivities>;
   /** fetch data from the table: "fixed_price_oracle_activities" using primary key columns */
@@ -11623,10 +8451,6 @@ export type QueryRoot = {
   ledger_infos: Array<LedgerInfos>;
   /** fetch data from the table: "processor_metadata.ledger_infos" using primary key columns */
   ledger_infos_by_pk?: Maybe<LedgerInfos>;
-  /** fetch data from the table: "legacy_migration_v1.move_resources" */
-  move_resources: Array<MoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
-  move_resources_aggregate: MoveResourcesAggregate;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
   nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
@@ -11714,21 +8538,11 @@ export type QueryRoot = {
   /** fetch data from the table: "tapp_llp_position_debt_stores" using primary key columns */
   tapp_llp_position_debt_stores_by_pk?: Maybe<TappLlpPositionDebtStores>;
   /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** An array relationship */
   token_activities_v2: Array<TokenActivitiesV2>;
   /** An aggregate relationship */
   token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
   /** fetch data from the table: "token_activities_v2" using primary key columns */
   token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
-  /** fetch data from the table: "legacy_migration_v1.token_datas" */
-  token_datas: Array<TokenDatas>;
-  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
-  token_ownerships: Array<TokenOwnerships>;
-  /** fetch data from the table: "legacy_migration_v1.tokens" */
-  tokens: Array<Tokens>;
   /** fetch data from the table: "user_transactions" */
   user_transactions: Array<UserTransactions>;
   /** fetch data from the table: "user_transactions" using primary key columns */
@@ -11874,51 +8688,6 @@ export type QueryRootAdaptiveIrmStateActivitiesByPkArgs = {
 };
 
 
-export type QueryRootAddressEventsSummaryArgs = {
-  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type QueryRootAddressVersionFromEventsArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type QueryRootAddressVersionFromEventsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type QueryRootAddressVersionFromMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type QueryRootAddressVersionFromMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
 export type QueryRootAuthKeyAccountAddressesArgs = {
   distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -12017,75 +8786,6 @@ export type QueryRootChainlinkOracleCurrentConfigByPkArgs = {
 };
 
 
-export type QueryRootCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type QueryRootCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type QueryRootCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type QueryRootCoinInfosArgs = {
-  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type QueryRootCoinSupplyArgs = {
-  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type QueryRootCoinSupplyByPkArgs = {
-  coin_type_hash: Scalars['String']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type QueryRootCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type QueryRootCurrentAnsLookupArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
 export type QueryRootCurrentAnsLookupV2Args = {
   distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -12117,24 +8817,6 @@ export type QueryRootCurrentAptosNamesAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
   where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-export type QueryRootCurrentCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type QueryRootCurrentCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
 };
 
 
@@ -12282,15 +8964,6 @@ export type QueryRootCurrentTableItemsByPkArgs = {
 };
 
 
-export type QueryRootCurrentTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
 export type QueryRootCurrentTokenDatasV2Args = {
   distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -12302,24 +8975,6 @@ export type QueryRootCurrentTokenDatasV2Args = {
 
 export type QueryRootCurrentTokenDatasV2ByPkArgs = {
   token_data_id: Scalars['String']['input'];
-};
-
-
-export type QueryRootCurrentTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type QueryRootCurrentTokenOwnershipsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
 };
 
 
@@ -12448,21 +9103,6 @@ export type QueryRootDelegatorDistinctPoolAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<DelegatorDistinctPoolOrderBy>>;
   where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
-};
-
-
-export type QueryRootEventsArgs = {
-  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<EventsOrderBy>>;
-  where?: InputMaybe<EventsBoolExp>;
-};
-
-
-export type QueryRootEventsByPkArgs = {
-  event_index: Scalars['bigint']['input'];
-  transaction_version: Scalars['bigint']['input'];
 };
 
 
@@ -12683,24 +9323,6 @@ export type QueryRootLedgerInfosArgs = {
 
 export type QueryRootLedgerInfosByPkArgs = {
   chain_id: Scalars['bigint']['input'];
-};
-
-
-export type QueryRootMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type QueryRootMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
 };
 
 
@@ -13033,24 +9655,6 @@ export type QueryRootTappLlpPositionDebtStoresByPkArgs = {
 };
 
 
-export type QueryRootTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type QueryRootTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
 export type QueryRootTokenActivitiesV2Args = {
   distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -13072,33 +9676,6 @@ export type QueryRootTokenActivitiesV2AggregateArgs = {
 export type QueryRootTokenActivitiesV2ByPkArgs = {
   event_index: Scalars['bigint']['input'];
   transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type QueryRootTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type QueryRootTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type QueryRootTokensArgs = {
-  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokensOrderBy>>;
-  where?: InputMaybe<TokensBoolExp>;
 };
 
 
@@ -13986,22 +10563,6 @@ export type SubscriptionRoot = {
   adaptive_irm_state_activities_by_pk?: Maybe<AdaptiveIrmStateActivities>;
   /** fetch data from the table in a streaming manner: "adaptive_irm_state_activities" */
   adaptive_irm_state_activities_stream: Array<AdaptiveIrmStateActivities>;
-  /** fetch data from the table: "address_events_summary" */
-  address_events_summary: Array<AddressEventsSummary>;
-  /** fetch data from the table in a streaming manner: "address_events_summary" */
-  address_events_summary_stream: Array<AddressEventsSummary>;
-  /** fetch data from the table: "address_version_from_events" */
-  address_version_from_events: Array<AddressVersionFromEvents>;
-  /** fetch aggregated fields from the table: "address_version_from_events" */
-  address_version_from_events_aggregate: AddressVersionFromEventsAggregate;
-  /** fetch data from the table in a streaming manner: "address_version_from_events" */
-  address_version_from_events_stream: Array<AddressVersionFromEvents>;
-  /** fetch data from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources: Array<AddressVersionFromMoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_aggregate: AddressVersionFromMoveResourcesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.address_version_from_move_resources" */
-  address_version_from_move_resources_stream: Array<AddressVersionFromMoveResources>;
   /** fetch data from the table: "auth_key_account_addresses" */
   auth_key_account_addresses: Array<AuthKeyAccountAddresses>;
   /** fetch aggregated fields from the table: "auth_key_account_addresses" */
@@ -14041,34 +10602,6 @@ export type SubscriptionRoot = {
   chainlink_oracle_current_config_by_pk?: Maybe<ChainlinkOracleCurrentConfig>;
   /** fetch data from the table in a streaming manner: "chainlink_oracle_current_config" */
   chainlink_oracle_current_config_stream: Array<ChainlinkOracleCurrentConfig>;
-  /** An array relationship */
-  coin_activities: Array<CoinActivities>;
-  /** An aggregate relationship */
-  coin_activities_aggregate: CoinActivitiesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_activities" */
-  coin_activities_stream: Array<CoinActivities>;
-  /** fetch data from the table: "legacy_migration_v1.coin_balances" */
-  coin_balances: Array<CoinBalances>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_balances" */
-  coin_balances_stream: Array<CoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.coin_infos" */
-  coin_infos: Array<CoinInfos>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.coin_infos" */
-  coin_infos_stream: Array<CoinInfos>;
-  /** fetch data from the table: "coin_supply" */
-  coin_supply: Array<CoinSupply>;
-  /** fetch data from the table: "coin_supply" using primary key columns */
-  coin_supply_by_pk?: Maybe<CoinSupply>;
-  /** fetch data from the table in a streaming manner: "coin_supply" */
-  coin_supply_stream: Array<CoinSupply>;
-  /** fetch data from the table: "legacy_migration_v1.collection_datas" */
-  collection_datas: Array<CollectionDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.collection_datas" */
-  collection_datas_stream: Array<CollectionDatas>;
-  /** fetch data from the table: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup: Array<CurrentAnsLookup>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_ans_lookup" */
-  current_ans_lookup_stream: Array<CurrentAnsLookup>;
   /** fetch data from the table: "current_ans_lookup_v2" */
   current_ans_lookup_v2: Array<CurrentAnsLookupV2>;
   /** fetch data from the table: "current_ans_lookup_v2" using primary key columns */
@@ -14081,14 +10614,6 @@ export type SubscriptionRoot = {
   current_aptos_names_aggregate: CurrentAptosNamesAggregate;
   /** fetch data from the table in a streaming manner: "current_aptos_names" */
   current_aptos_names_stream: Array<CurrentAptosNames>;
-  /** fetch data from the table: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances: Array<CurrentCoinBalances>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_coin_balances" */
-  current_coin_balances_stream: Array<CurrentCoinBalances>;
-  /** fetch data from the table: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas: Array<CurrentCollectionDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_collection_datas" */
-  current_collection_datas_stream: Array<CurrentCollectionDatas>;
   /** fetch data from the table: "current_collection_ownership_v2_view" */
   current_collection_ownership_v2_view: Array<CurrentCollectionOwnershipV2View>;
   /** fetch aggregated fields from the table: "current_collection_ownership_v2_view" */
@@ -14145,22 +10670,12 @@ export type SubscriptionRoot = {
   current_table_items_by_pk?: Maybe<CurrentTableItems>;
   /** fetch data from the table in a streaming manner: "current_table_items" */
   current_table_items_stream: Array<CurrentTableItems>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_datas" */
-  current_token_datas: Array<CurrentTokenDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_datas" */
-  current_token_datas_stream: Array<CurrentTokenDatas>;
   /** fetch data from the table: "current_token_datas_v2" */
   current_token_datas_v2: Array<CurrentTokenDatasV2>;
   /** fetch data from the table: "current_token_datas_v2" using primary key columns */
   current_token_datas_v2_by_pk?: Maybe<CurrentTokenDatasV2>;
   /** fetch data from the table in a streaming manner: "current_token_datas_v2" */
   current_token_datas_v2_stream: Array<CurrentTokenDatasV2>;
-  /** fetch data from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships: Array<CurrentTokenOwnerships>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_aggregate: CurrentTokenOwnershipsAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.current_token_ownerships" */
-  current_token_ownerships_stream: Array<CurrentTokenOwnerships>;
   /** fetch data from the table: "current_token_ownerships_v2" */
   current_token_ownerships_v2: Array<CurrentTokenOwnershipsV2>;
   /** fetch aggregated fields from the table: "current_token_ownerships_v2" */
@@ -14207,12 +10722,6 @@ export type SubscriptionRoot = {
   delegator_distinct_pool_aggregate: DelegatorDistinctPoolAggregate;
   /** fetch data from the table in a streaming manner: "delegator_distinct_pool" */
   delegator_distinct_pool_stream: Array<DelegatorDistinctPool>;
-  /** fetch data from the table: "events" */
-  events: Array<Events>;
-  /** fetch data from the table: "events" using primary key columns */
-  events_by_pk?: Maybe<Events>;
-  /** fetch data from the table in a streaming manner: "events" */
-  events_stream: Array<Events>;
   /** fetch data from the table: "fixed_price_oracle_activities" */
   fixed_price_oracle_activities: Array<FixedPriceOracleActivities>;
   /** fetch data from the table: "fixed_price_oracle_activities" using primary key columns */
@@ -14303,12 +10812,6 @@ export type SubscriptionRoot = {
   ledger_infos_by_pk?: Maybe<LedgerInfos>;
   /** fetch data from the table in a streaming manner: "processor_metadata.ledger_infos" */
   ledger_infos_stream: Array<LedgerInfos>;
-  /** fetch data from the table: "legacy_migration_v1.move_resources" */
-  move_resources: Array<MoveResources>;
-  /** fetch aggregated fields from the table: "legacy_migration_v1.move_resources" */
-  move_resources_aggregate: MoveResourcesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.move_resources" */
-  move_resources_stream: Array<MoveResources>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" */
   nft_metadata_crawler_parsed_asset_uris: Array<NftMetadataCrawlerParsedAssetUris>;
   /** fetch data from the table: "nft_metadata_crawler.parsed_asset_uris" using primary key columns */
@@ -14438,12 +10941,6 @@ export type SubscriptionRoot = {
   /** fetch data from the table in a streaming manner: "tapp_llp_position_debt_stores" */
   tapp_llp_position_debt_stores_stream: Array<TappLlpPositionDebtStores>;
   /** An array relationship */
-  token_activities: Array<TokenActivities>;
-  /** An aggregate relationship */
-  token_activities_aggregate: TokenActivitiesAggregate;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_activities" */
-  token_activities_stream: Array<TokenActivities>;
-  /** An array relationship */
   token_activities_v2: Array<TokenActivitiesV2>;
   /** An aggregate relationship */
   token_activities_v2_aggregate: TokenActivitiesV2Aggregate;
@@ -14451,18 +10948,6 @@ export type SubscriptionRoot = {
   token_activities_v2_by_pk?: Maybe<TokenActivitiesV2>;
   /** fetch data from the table in a streaming manner: "token_activities_v2" */
   token_activities_v2_stream: Array<TokenActivitiesV2>;
-  /** fetch data from the table: "legacy_migration_v1.token_datas" */
-  token_datas: Array<TokenDatas>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_datas" */
-  token_datas_stream: Array<TokenDatas>;
-  /** fetch data from the table: "legacy_migration_v1.token_ownerships" */
-  token_ownerships: Array<TokenOwnerships>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.token_ownerships" */
-  token_ownerships_stream: Array<TokenOwnerships>;
-  /** fetch data from the table: "legacy_migration_v1.tokens" */
-  tokens: Array<Tokens>;
-  /** fetch data from the table in a streaming manner: "legacy_migration_v1.tokens" */
-  tokens_stream: Array<Tokens>;
   /** fetch data from the table: "user_transactions" */
   user_transactions: Array<UserTransactions>;
   /** fetch data from the table: "user_transactions" using primary key columns */
@@ -14659,72 +11144,6 @@ export type SubscriptionRootAdaptiveIrmStateActivitiesStreamArgs = {
 };
 
 
-export type SubscriptionRootAddressEventsSummaryArgs = {
-  distinct_on?: InputMaybe<Array<AddressEventsSummarySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressEventsSummaryOrderBy>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type SubscriptionRootAddressEventsSummaryStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressEventsSummaryStreamCursorInput>>;
-  where?: InputMaybe<AddressEventsSummaryBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromEventsArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromEventsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromEventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromEventsOrderBy>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromEventsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressVersionFromEventsStreamCursorInput>>;
-  where?: InputMaybe<AddressVersionFromEventsBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<AddressVersionFromMoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<AddressVersionFromMoveResourcesOrderBy>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
-export type SubscriptionRootAddressVersionFromMoveResourcesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<AddressVersionFromMoveResourcesStreamCursorInput>>;
-  where?: InputMaybe<AddressVersionFromMoveResourcesBoolExp>;
-};
-
-
 export type SubscriptionRootAuthKeyAccountAddressesArgs = {
   distinct_on?: InputMaybe<Array<AuthKeyAccountAddressesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -14865,117 +11284,6 @@ export type SubscriptionRootChainlinkOracleCurrentConfigStreamArgs = {
 };
 
 
-export type SubscriptionRootCoinActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type SubscriptionRootCoinActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CoinActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinActivitiesOrderBy>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type SubscriptionRootCoinActivitiesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinActivitiesStreamCursorInput>>;
-  where?: InputMaybe<CoinActivitiesBoolExp>;
-};
-
-
-export type SubscriptionRootCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinBalancesOrderBy>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type SubscriptionRootCoinBalancesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinBalancesStreamCursorInput>>;
-  where?: InputMaybe<CoinBalancesBoolExp>;
-};
-
-
-export type SubscriptionRootCoinInfosArgs = {
-  distinct_on?: InputMaybe<Array<CoinInfosSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinInfosOrderBy>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type SubscriptionRootCoinInfosStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinInfosStreamCursorInput>>;
-  where?: InputMaybe<CoinInfosBoolExp>;
-};
-
-
-export type SubscriptionRootCoinSupplyArgs = {
-  distinct_on?: InputMaybe<Array<CoinSupplySelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CoinSupplyOrderBy>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type SubscriptionRootCoinSupplyByPkArgs = {
-  coin_type_hash: Scalars['String']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type SubscriptionRootCoinSupplyStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CoinSupplyStreamCursorInput>>;
-  where?: InputMaybe<CoinSupplyBoolExp>;
-};
-
-
-export type SubscriptionRootCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CollectionDatasOrderBy>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type SubscriptionRootCollectionDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CollectionDatasStreamCursorInput>>;
-  where?: InputMaybe<CollectionDatasBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentAnsLookupArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAnsLookupSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAnsLookupOrderBy>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentAnsLookupStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentAnsLookupStreamCursorInput>>;
-  where?: InputMaybe<CurrentAnsLookupBoolExp>;
-};
-
-
 export type SubscriptionRootCurrentAnsLookupV2Args = {
   distinct_on?: InputMaybe<Array<CurrentAnsLookupV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -15021,38 +11329,6 @@ export type SubscriptionRootCurrentAptosNamesStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CurrentAptosNamesStreamCursorInput>>;
   where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentCoinBalancesArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCoinBalancesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCoinBalancesOrderBy>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentCoinBalancesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentCoinBalancesStreamCursorInput>>;
-  where?: InputMaybe<CurrentCoinBalancesBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentCollectionDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentCollectionDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentCollectionDatasOrderBy>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentCollectionDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentCollectionDatasStreamCursorInput>>;
-  where?: InputMaybe<CurrentCollectionDatasBoolExp>;
 };
 
 
@@ -15263,22 +11539,6 @@ export type SubscriptionRootCurrentTableItemsStreamArgs = {
 };
 
 
-export type SubscriptionRootCurrentTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenDatasOrderBy>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentTokenDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentTokenDatasStreamCursorInput>>;
-  where?: InputMaybe<CurrentTokenDatasBoolExp>;
-};
-
-
 export type SubscriptionRootCurrentTokenDatasV2Args = {
   distinct_on?: InputMaybe<Array<CurrentTokenDatasV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -15297,31 +11557,6 @@ export type SubscriptionRootCurrentTokenDatasV2StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<CurrentTokenDatasV2StreamCursorInput>>;
   where?: InputMaybe<CurrentTokenDatasV2BoolExp>;
-};
-
-
-export type SubscriptionRootCurrentTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentTokenOwnershipsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentTokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentTokenOwnershipsOrderBy>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
-};
-
-
-export type SubscriptionRootCurrentTokenOwnershipsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<CurrentTokenOwnershipsStreamCursorInput>>;
-  where?: InputMaybe<CurrentTokenOwnershipsBoolExp>;
 };
 
 
@@ -15499,28 +11734,6 @@ export type SubscriptionRootDelegatorDistinctPoolStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<DelegatorDistinctPoolStreamCursorInput>>;
   where?: InputMaybe<DelegatorDistinctPoolBoolExp>;
-};
-
-
-export type SubscriptionRootEventsArgs = {
-  distinct_on?: InputMaybe<Array<EventsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<EventsOrderBy>>;
-  where?: InputMaybe<EventsBoolExp>;
-};
-
-
-export type SubscriptionRootEventsByPkArgs = {
-  event_index: Scalars['bigint']['input'];
-  transaction_version: Scalars['bigint']['input'];
-};
-
-
-export type SubscriptionRootEventsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<EventsStreamCursorInput>>;
-  where?: InputMaybe<EventsBoolExp>;
 };
 
 
@@ -15846,31 +12059,6 @@ export type SubscriptionRootLedgerInfosStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<LedgerInfosStreamCursorInput>>;
   where?: InputMaybe<LedgerInfosBoolExp>;
-};
-
-
-export type SubscriptionRootMoveResourcesArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type SubscriptionRootMoveResourcesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<MoveResourcesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MoveResourcesOrderBy>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
-};
-
-
-export type SubscriptionRootMoveResourcesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<MoveResourcesStreamCursorInput>>;
-  where?: InputMaybe<MoveResourcesBoolExp>;
 };
 
 
@@ -16350,31 +12538,6 @@ export type SubscriptionRootTappLlpPositionDebtStoresStreamArgs = {
 };
 
 
-export type SubscriptionRootTokenActivitiesArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type SubscriptionRootTokenActivitiesAggregateArgs = {
-  distinct_on?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenActivitiesOrderBy>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
-export type SubscriptionRootTokenActivitiesStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenActivitiesStreamCursorInput>>;
-  where?: InputMaybe<TokenActivitiesBoolExp>;
-};
-
-
 export type SubscriptionRootTokenActivitiesV2Args = {
   distinct_on?: InputMaybe<Array<TokenActivitiesV2SelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -16403,54 +12566,6 @@ export type SubscriptionRootTokenActivitiesV2StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<TokenActivitiesV2StreamCursorInput>>;
   where?: InputMaybe<TokenActivitiesV2BoolExp>;
-};
-
-
-export type SubscriptionRootTokenDatasArgs = {
-  distinct_on?: InputMaybe<Array<TokenDatasSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenDatasOrderBy>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type SubscriptionRootTokenDatasStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenDatasStreamCursorInput>>;
-  where?: InputMaybe<TokenDatasBoolExp>;
-};
-
-
-export type SubscriptionRootTokenOwnershipsArgs = {
-  distinct_on?: InputMaybe<Array<TokenOwnershipsSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokenOwnershipsOrderBy>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type SubscriptionRootTokenOwnershipsStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokenOwnershipsStreamCursorInput>>;
-  where?: InputMaybe<TokenOwnershipsBoolExp>;
-};
-
-
-export type SubscriptionRootTokensArgs = {
-  distinct_on?: InputMaybe<Array<TokensSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<TokensOrderBy>>;
-  where?: InputMaybe<TokensBoolExp>;
-};
-
-
-export type SubscriptionRootTokensStreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<TokensStreamCursorInput>>;
-  where?: InputMaybe<TokensBoolExp>;
 };
 
 
@@ -17186,445 +13301,6 @@ export type TimestampComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['timestamp']['input']>>;
 };
 
-/** columns and relationships of "legacy_migration_v1.token_activities" */
-export type TokenActivities = {
-  /** An array relationship */
-  aptos_names_owner: Array<CurrentAptosNames>;
-  /** An aggregate relationship */
-  aptos_names_owner_aggregate: CurrentAptosNamesAggregate;
-  /** An array relationship */
-  aptos_names_to: Array<CurrentAptosNames>;
-  /** An aggregate relationship */
-  aptos_names_to_aggregate: CurrentAptosNamesAggregate;
-  coin_amount?: Maybe<Scalars['String']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  /** An object relationship */
-  current_token_data?: Maybe<CurrentTokenDatas>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  from_address?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  to_address?: Maybe<Scalars['String']['output']>;
-  token_amount?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-  transfer_type?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAptosNamesOwnerArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAptosNamesOwnerAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAptosNamesToArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAptosNamesToAggregateArgs = {
-  distinct_on?: InputMaybe<Array<CurrentAptosNamesSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<CurrentAptosNamesOrderBy>>;
-  where?: InputMaybe<CurrentAptosNamesBoolExp>;
-};
-
-/** aggregated selection of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAggregate = {
-  aggregate?: Maybe<TokenActivitiesAggregateFields>;
-  nodes: Array<TokenActivities>;
-};
-
-export type TokenActivitiesAggregateBoolExp = {
-  count?: InputMaybe<TokenActivitiesAggregateBoolExpCount>;
-};
-
-export type TokenActivitiesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<TokenActivitiesBoolExp>;
-  predicate: IntComparisonExp;
-};
-
-/** aggregate fields of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAggregateFields = {
-  avg?: Maybe<TokenActivitiesAvgFields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<TokenActivitiesMaxFields>;
-  min?: Maybe<TokenActivitiesMinFields>;
-  stddev?: Maybe<TokenActivitiesStddevFields>;
-  stddev_pop?: Maybe<TokenActivitiesStddevPopFields>;
-  stddev_samp?: Maybe<TokenActivitiesStddevSampFields>;
-  sum?: Maybe<TokenActivitiesSumFields>;
-  var_pop?: Maybe<TokenActivitiesVarPopFields>;
-  var_samp?: Maybe<TokenActivitiesVarSampFields>;
-  variance?: Maybe<TokenActivitiesVarianceFields>;
-};
-
-
-/** aggregate fields of "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<TokenActivitiesSelectColumn>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** order by aggregate values of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAggregateOrderBy = {
-  avg?: InputMaybe<TokenActivitiesAvgOrderBy>;
-  count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<TokenActivitiesMaxOrderBy>;
-  min?: InputMaybe<TokenActivitiesMinOrderBy>;
-  stddev?: InputMaybe<TokenActivitiesStddevOrderBy>;
-  stddev_pop?: InputMaybe<TokenActivitiesStddevPopOrderBy>;
-  stddev_samp?: InputMaybe<TokenActivitiesStddevSampOrderBy>;
-  sum?: InputMaybe<TokenActivitiesSumOrderBy>;
-  var_pop?: InputMaybe<TokenActivitiesVarPopOrderBy>;
-  var_samp?: InputMaybe<TokenActivitiesVarSampOrderBy>;
-  variance?: InputMaybe<TokenActivitiesVarianceOrderBy>;
-};
-
-/** aggregate avg on columns */
-export type TokenActivitiesAvgFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesAvgOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.token_activities". All fields are combined with a logical 'AND'. */
-export type TokenActivitiesBoolExp = {
-  _and?: InputMaybe<Array<TokenActivitiesBoolExp>>;
-  _not?: InputMaybe<TokenActivitiesBoolExp>;
-  _or?: InputMaybe<Array<TokenActivitiesBoolExp>>;
-  aptos_names_owner?: InputMaybe<CurrentAptosNamesBoolExp>;
-  aptos_names_owner_aggregate?: InputMaybe<CurrentAptosNamesAggregateBoolExp>;
-  aptos_names_to?: InputMaybe<CurrentAptosNamesBoolExp>;
-  aptos_names_to_aggregate?: InputMaybe<CurrentAptosNamesAggregateBoolExp>;
-  coin_amount?: InputMaybe<StringComparisonExp>;
-  coin_type?: InputMaybe<StringComparisonExp>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  current_token_data?: InputMaybe<CurrentTokenDatasBoolExp>;
-  event_account_address?: InputMaybe<StringComparisonExp>;
-  event_creation_number?: InputMaybe<IntComparisonExp>;
-  event_index?: InputMaybe<BigintComparisonExp>;
-  event_sequence_number?: InputMaybe<IntComparisonExp>;
-  from_address?: InputMaybe<StringComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  property_version?: InputMaybe<NumericComparisonExp>;
-  to_address?: InputMaybe<StringComparisonExp>;
-  token_amount?: InputMaybe<NumericComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-  transfer_type?: InputMaybe<StringComparisonExp>;
-};
-
-/** aggregate max on columns */
-export type TokenActivitiesMaxFields = {
-  coin_amount?: Maybe<Scalars['String']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  from_address?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  to_address?: Maybe<Scalars['String']['output']>;
-  token_amount?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-  transfer_type?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by max() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesMaxOrderBy = {
-  coin_amount?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  from_address?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  to_address?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  transfer_type?: InputMaybe<OrderBy>;
-};
-
-/** aggregate min on columns */
-export type TokenActivitiesMinFields = {
-  coin_amount?: Maybe<Scalars['String']['output']>;
-  coin_type?: Maybe<Scalars['String']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  event_account_address?: Maybe<Scalars['String']['output']>;
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  from_address?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  to_address?: Maybe<Scalars['String']['output']>;
-  token_amount?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-  transfer_type?: Maybe<Scalars['String']['output']>;
-};
-
-/** order by min() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesMinOrderBy = {
-  coin_amount?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  from_address?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  to_address?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  transfer_type?: InputMaybe<OrderBy>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.token_activities". */
-export type TokenActivitiesOrderBy = {
-  aptos_names_owner_aggregate?: InputMaybe<CurrentAptosNamesAggregateOrderBy>;
-  aptos_names_to_aggregate?: InputMaybe<CurrentAptosNamesAggregateOrderBy>;
-  coin_amount?: InputMaybe<OrderBy>;
-  coin_type?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  current_token_data?: InputMaybe<CurrentTokenDatasOrderBy>;
-  event_account_address?: InputMaybe<OrderBy>;
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  from_address?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  to_address?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  transfer_type?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.token_activities" */
-export enum TokenActivitiesSelectColumn {
-  /** column name */
-  CoinAmount = 'coin_amount',
-  /** column name */
-  CoinType = 'coin_type',
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  EventAccountAddress = 'event_account_address',
-  /** column name */
-  EventCreationNumber = 'event_creation_number',
-  /** column name */
-  EventIndex = 'event_index',
-  /** column name */
-  EventSequenceNumber = 'event_sequence_number',
-  /** column name */
-  FromAddress = 'from_address',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  PropertyVersion = 'property_version',
-  /** column name */
-  ToAddress = 'to_address',
-  /** column name */
-  TokenAmount = 'token_amount',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version',
-  /** column name */
-  TransferType = 'transfer_type'
-}
-
-/** aggregate stddev on columns */
-export type TokenActivitiesStddevFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesStddevOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_pop on columns */
-export type TokenActivitiesStddevPopFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_pop() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesStddevPopOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate stddev_samp on columns */
-export type TokenActivitiesStddevSampFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesStddevSampOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "token_activities" */
-export type TokenActivitiesStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: TokenActivitiesStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type TokenActivitiesStreamCursorValueInput = {
-  coin_amount?: InputMaybe<Scalars['String']['input']>;
-  coin_type?: InputMaybe<Scalars['String']['input']>;
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  event_account_address?: InputMaybe<Scalars['String']['input']>;
-  event_creation_number?: InputMaybe<Scalars['Int']['input']>;
-  event_index?: InputMaybe<Scalars['bigint']['input']>;
-  event_sequence_number?: InputMaybe<Scalars['Int']['input']>;
-  from_address?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  property_version?: InputMaybe<Scalars['numeric']['input']>;
-  to_address?: InputMaybe<Scalars['String']['input']>;
-  token_amount?: InputMaybe<Scalars['numeric']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  transfer_type?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** aggregate sum on columns */
-export type TokenActivitiesSumFields = {
-  event_creation_number?: Maybe<Scalars['Int']['output']>;
-  event_index?: Maybe<Scalars['bigint']['output']>;
-  event_sequence_number?: Maybe<Scalars['Int']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  token_amount?: Maybe<Scalars['numeric']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by sum() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesSumOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
 /** columns and relationships of "token_activities_v2" */
 export type TokenActivitiesV2 = {
   after_value?: Maybe<Scalars['String']['output']>;
@@ -18084,423 +13760,6 @@ export type TokenActivitiesV2VarianceOrderBy = {
   property_version_v1?: InputMaybe<OrderBy>;
   token_amount?: InputMaybe<OrderBy>;
   transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_pop on columns */
-export type TokenActivitiesVarPopFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_pop() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesVarPopOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate var_samp on columns */
-export type TokenActivitiesVarSampFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by var_samp() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesVarSampOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** aggregate variance on columns */
-export type TokenActivitiesVarianceFields = {
-  event_creation_number?: Maybe<Scalars['Float']['output']>;
-  event_index?: Maybe<Scalars['Float']['output']>;
-  event_sequence_number?: Maybe<Scalars['Float']['output']>;
-  property_version?: Maybe<Scalars['Float']['output']>;
-  token_amount?: Maybe<Scalars['Float']['output']>;
-  transaction_version?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "legacy_migration_v1.token_activities" */
-export type TokenActivitiesVarianceOrderBy = {
-  event_creation_number?: InputMaybe<OrderBy>;
-  event_index?: InputMaybe<OrderBy>;
-  event_sequence_number?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_amount?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** columns and relationships of "legacy_migration_v1.token_datas" */
-export type TokenDatas = {
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  default_properties?: Maybe<Scalars['jsonb']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  description_mutable?: Maybe<Scalars['Boolean']['output']>;
-  largest_property_version?: Maybe<Scalars['numeric']['output']>;
-  maximum?: Maybe<Scalars['numeric']['output']>;
-  maximum_mutable?: Maybe<Scalars['Boolean']['output']>;
-  metadata_uri?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  payee_address?: Maybe<Scalars['String']['output']>;
-  properties_mutable?: Maybe<Scalars['Boolean']['output']>;
-  royalty_mutable?: Maybe<Scalars['Boolean']['output']>;
-  royalty_points_denominator?: Maybe<Scalars['String']['output']>;
-  royalty_points_numerator?: Maybe<Scalars['String']['output']>;
-  supply?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-  uri_mutable?: Maybe<Scalars['Boolean']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.token_datas" */
-export type TokenDatasDefaultPropertiesArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.token_datas". All fields are combined with a logical 'AND'. */
-export type TokenDatasBoolExp = {
-  _and?: InputMaybe<Array<TokenDatasBoolExp>>;
-  _not?: InputMaybe<TokenDatasBoolExp>;
-  _or?: InputMaybe<Array<TokenDatasBoolExp>>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  default_properties?: InputMaybe<JsonbComparisonExp>;
-  description?: InputMaybe<StringComparisonExp>;
-  description_mutable?: InputMaybe<BooleanComparisonExp>;
-  largest_property_version?: InputMaybe<NumericComparisonExp>;
-  maximum?: InputMaybe<NumericComparisonExp>;
-  maximum_mutable?: InputMaybe<BooleanComparisonExp>;
-  metadata_uri?: InputMaybe<StringComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  payee_address?: InputMaybe<StringComparisonExp>;
-  properties_mutable?: InputMaybe<BooleanComparisonExp>;
-  royalty_mutable?: InputMaybe<BooleanComparisonExp>;
-  royalty_points_denominator?: InputMaybe<StringComparisonExp>;
-  royalty_points_numerator?: InputMaybe<StringComparisonExp>;
-  supply?: InputMaybe<NumericComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-  uri_mutable?: InputMaybe<BooleanComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.token_datas". */
-export type TokenDatasOrderBy = {
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  default_properties?: InputMaybe<OrderBy>;
-  description?: InputMaybe<OrderBy>;
-  description_mutable?: InputMaybe<OrderBy>;
-  largest_property_version?: InputMaybe<OrderBy>;
-  maximum?: InputMaybe<OrderBy>;
-  maximum_mutable?: InputMaybe<OrderBy>;
-  metadata_uri?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  payee_address?: InputMaybe<OrderBy>;
-  properties_mutable?: InputMaybe<OrderBy>;
-  royalty_mutable?: InputMaybe<OrderBy>;
-  royalty_points_denominator?: InputMaybe<OrderBy>;
-  royalty_points_numerator?: InputMaybe<OrderBy>;
-  supply?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-  uri_mutable?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.token_datas" */
-export enum TokenDatasSelectColumn {
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  DefaultProperties = 'default_properties',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  DescriptionMutable = 'description_mutable',
-  /** column name */
-  LargestPropertyVersion = 'largest_property_version',
-  /** column name */
-  Maximum = 'maximum',
-  /** column name */
-  MaximumMutable = 'maximum_mutable',
-  /** column name */
-  MetadataUri = 'metadata_uri',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  PayeeAddress = 'payee_address',
-  /** column name */
-  PropertiesMutable = 'properties_mutable',
-  /** column name */
-  RoyaltyMutable = 'royalty_mutable',
-  /** column name */
-  RoyaltyPointsDenominator = 'royalty_points_denominator',
-  /** column name */
-  RoyaltyPointsNumerator = 'royalty_points_numerator',
-  /** column name */
-  Supply = 'supply',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version',
-  /** column name */
-  UriMutable = 'uri_mutable'
-}
-
-/** Streaming cursor of the table "token_datas" */
-export type TokenDatasStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: TokenDatasStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type TokenDatasStreamCursorValueInput = {
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  default_properties?: InputMaybe<Scalars['jsonb']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  description_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  largest_property_version?: InputMaybe<Scalars['numeric']['input']>;
-  maximum?: InputMaybe<Scalars['numeric']['input']>;
-  maximum_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  metadata_uri?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  payee_address?: InputMaybe<Scalars['String']['input']>;
-  properties_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  royalty_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-  royalty_points_denominator?: InputMaybe<Scalars['String']['input']>;
-  royalty_points_numerator?: InputMaybe<Scalars['String']['input']>;
-  supply?: InputMaybe<Scalars['numeric']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-  uri_mutable?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.token_ownerships" */
-export type TokenOwnerships = {
-  amount?: Maybe<Scalars['numeric']['output']>;
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  owner_address?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  table_handle?: Maybe<Scalars['String']['output']>;
-  table_type?: Maybe<Scalars['String']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.token_ownerships". All fields are combined with a logical 'AND'. */
-export type TokenOwnershipsBoolExp = {
-  _and?: InputMaybe<Array<TokenOwnershipsBoolExp>>;
-  _not?: InputMaybe<TokenOwnershipsBoolExp>;
-  _or?: InputMaybe<Array<TokenOwnershipsBoolExp>>;
-  amount?: InputMaybe<NumericComparisonExp>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  owner_address?: InputMaybe<StringComparisonExp>;
-  property_version?: InputMaybe<NumericComparisonExp>;
-  table_handle?: InputMaybe<StringComparisonExp>;
-  table_type?: InputMaybe<StringComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.token_ownerships". */
-export type TokenOwnershipsOrderBy = {
-  amount?: InputMaybe<OrderBy>;
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  owner_address?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  table_handle?: InputMaybe<OrderBy>;
-  table_type?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.token_ownerships" */
-export enum TokenOwnershipsSelectColumn {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  OwnerAddress = 'owner_address',
-  /** column name */
-  PropertyVersion = 'property_version',
-  /** column name */
-  TableHandle = 'table_handle',
-  /** column name */
-  TableType = 'table_type',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** Streaming cursor of the table "token_ownerships" */
-export type TokenOwnershipsStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: TokenOwnershipsStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type TokenOwnershipsStreamCursorValueInput = {
-  amount?: InputMaybe<Scalars['numeric']['input']>;
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  owner_address?: InputMaybe<Scalars['String']['input']>;
-  property_version?: InputMaybe<Scalars['numeric']['input']>;
-  table_handle?: InputMaybe<Scalars['String']['input']>;
-  table_type?: InputMaybe<Scalars['String']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** columns and relationships of "legacy_migration_v1.tokens" */
-export type Tokens = {
-  collection_data_id_hash?: Maybe<Scalars['String']['output']>;
-  collection_name?: Maybe<Scalars['String']['output']>;
-  creator_address?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  property_version?: Maybe<Scalars['numeric']['output']>;
-  token_data_id_hash?: Maybe<Scalars['String']['output']>;
-  token_properties?: Maybe<Scalars['jsonb']['output']>;
-  transaction_timestamp?: Maybe<Scalars['timestamp']['output']>;
-  transaction_version?: Maybe<Scalars['bigint']['output']>;
-};
-
-
-/** columns and relationships of "legacy_migration_v1.tokens" */
-export type TokensTokenPropertiesArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "legacy_migration_v1.tokens". All fields are combined with a logical 'AND'. */
-export type TokensBoolExp = {
-  _and?: InputMaybe<Array<TokensBoolExp>>;
-  _not?: InputMaybe<TokensBoolExp>;
-  _or?: InputMaybe<Array<TokensBoolExp>>;
-  collection_data_id_hash?: InputMaybe<StringComparisonExp>;
-  collection_name?: InputMaybe<StringComparisonExp>;
-  creator_address?: InputMaybe<StringComparisonExp>;
-  name?: InputMaybe<StringComparisonExp>;
-  property_version?: InputMaybe<NumericComparisonExp>;
-  token_data_id_hash?: InputMaybe<StringComparisonExp>;
-  token_properties?: InputMaybe<JsonbComparisonExp>;
-  transaction_timestamp?: InputMaybe<TimestampComparisonExp>;
-  transaction_version?: InputMaybe<BigintComparisonExp>;
-};
-
-/** Ordering options when selecting data from "legacy_migration_v1.tokens". */
-export type TokensOrderBy = {
-  collection_data_id_hash?: InputMaybe<OrderBy>;
-  collection_name?: InputMaybe<OrderBy>;
-  creator_address?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-  property_version?: InputMaybe<OrderBy>;
-  token_data_id_hash?: InputMaybe<OrderBy>;
-  token_properties?: InputMaybe<OrderBy>;
-  transaction_timestamp?: InputMaybe<OrderBy>;
-  transaction_version?: InputMaybe<OrderBy>;
-};
-
-/** select columns of table "legacy_migration_v1.tokens" */
-export enum TokensSelectColumn {
-  /** column name */
-  CollectionDataIdHash = 'collection_data_id_hash',
-  /** column name */
-  CollectionName = 'collection_name',
-  /** column name */
-  CreatorAddress = 'creator_address',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  PropertyVersion = 'property_version',
-  /** column name */
-  TokenDataIdHash = 'token_data_id_hash',
-  /** column name */
-  TokenProperties = 'token_properties',
-  /** column name */
-  TransactionTimestamp = 'transaction_timestamp',
-  /** column name */
-  TransactionVersion = 'transaction_version'
-}
-
-/** Streaming cursor of the table "tokens" */
-export type TokensStreamCursorInput = {
-  /** Stream column input with initial value */
-  initial_value: TokensStreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type TokensStreamCursorValueInput = {
-  collection_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  collection_name?: InputMaybe<Scalars['String']['input']>;
-  creator_address?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  property_version?: InputMaybe<Scalars['numeric']['input']>;
-  token_data_id_hash?: InputMaybe<Scalars['String']['input']>;
-  token_properties?: InputMaybe<Scalars['jsonb']['input']>;
-  transaction_timestamp?: InputMaybe<Scalars['timestamp']['input']>;
-  transaction_version?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** columns and relationships of "user_transactions" */

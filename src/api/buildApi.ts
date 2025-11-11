@@ -1,8 +1,8 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {YeapConfig} from "./yeapConfig";
-import {InputGenerateTransactionPayloadData} from "@aptos-labs/ts-sdk";
+import { YeapConfig } from "./yeapConfig";
+import { InputGenerateTransactionPayloadData } from "@aptos-labs/ts-sdk";
 
 /**
  * BuildApi is a utility class for constructing transaction data related to Yeap Earn and Borrow APIs.
@@ -178,7 +178,11 @@ export class BuildApi {
    * @param amount - The collateral amount (bigint)
    * @returns InputGenerateTransactionPayloadData transaction data
    */
-  buildDepositCollateralTxn(positionAddress: string, amount: bigint, collateralAmountInShares: boolean): InputGenerateTransactionPayloadData {
+  buildDepositCollateralTxn(
+    positionAddress: string,
+    amount: bigint,
+    collateralAmountInShares: boolean,
+  ): InputGenerateTransactionPayloadData {
     const yeapBorrowApiAddress = this.config.yeapBorrowApiAddress;
     return {
       function: `${yeapBorrowApiAddress}::borrow_api::deposit_collateral`,

@@ -29,11 +29,20 @@ export function createScmdPosition(config: YeapConfig, rawData: ScmdPositionFiel
     marketInfo,
     status: status ?? 0,
     isActive: status === 0,
-    collateralAssetBalance: rawData.collateral_asset_balance ? (transformFungibleAssetBalance(rawData.collateral_asset_balance) ?? undefined) : undefined,
-    collateralAssetMetadata: rawData.collateral_asset_balance?.metadata ? (transformFungibleAssetMetadata(rawData.collateral_asset_balance.metadata) ?? undefined) : undefined,
+    collateralAssetBalance: rawData.collateral_asset_balance
+      ? (transformFungibleAssetBalance(rawData.collateral_asset_balance) ?? undefined)
+      : undefined,
+    collateralAssetMetadata: rawData.collateral_asset_balance?.metadata
+      ? (transformFungibleAssetMetadata(rawData.collateral_asset_balance.metadata) ?? undefined)
+      : undefined,
     debtStores,
-    get hasAnyDebt(): boolean { return Object.values(debtStores).some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n); },
-    get activeDebtVaultCount(): number { return Object.values(debtStores).filter((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n).length; },
+    get hasAnyDebt(): boolean {
+      return Object.values(debtStores).some((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n);
+    },
+    get activeDebtVaultCount(): number {
+      return Object.values(debtStores).filter((s) => s.debtAssetBalance && BigInt(s.debtAssetBalance.amount) > 0n)
+        .length;
+    },
     __raw: rawData,
   };
 }

@@ -1,9 +1,9 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import {getOracleRouterConfigsByOracle} from "../internal";
-import {YeapConfig} from "./yeapConfig";
-import {OracleRouter} from "./entities";
+import { getOracleRouterConfigsByOracle } from "../internal";
+import { YeapConfig } from "./yeapConfig";
+import { OracleRouter } from "./entities";
 import { AccountAddress, InputViewFunctionData, MoveUint128Type } from "@aptos-labs/ts-sdk";
 
 /**
@@ -63,7 +63,7 @@ export class OracleApi {
       if (this.config.aptosClient) {
         let resource = await this.config.aptosClient.getAccountResource({
           accountAddress: oracleRouter,
-          resourceType: `${this.config.yeapOracleAddress}::oracle_router::OracleRouterConfig`
+          resourceType: `${this.config.yeapOracleAddress}::oracle_router::OracleRouterConfig`,
         });
         if (!resource) {
           // If no resource found, it means the router does not exist
@@ -76,7 +76,6 @@ export class OracleApi {
         return null; // No configurations found for this router
       }
     }
-
 
     return new OracleRouter(oracleRouter, rawConfigs, this.config);
   }
@@ -102,12 +101,12 @@ export class OracleApi {
       typeArguments: [],
       functionArguments: [
         routerAddress,
-        pairs.map(p => p.base.toString()),
-        pairs.map(p => (p.quote || AccountAddress.ZERO).toString()),
+        pairs.map((p) => p.base.toString()),
+        pairs.map((p) => (p.quote || AccountAddress.ZERO).toString()),
       ],
     };
     const result = await this.config.aptosClient.view({ payload: viewFunctionData });
     const prices = result[0] as MoveUint128Type[];
-    return prices.map(v => BigInt(v));
+    return prices.map((v) => BigInt(v));
   }
 }

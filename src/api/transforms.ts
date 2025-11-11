@@ -10,7 +10,6 @@ import {
   YeapAdaptiveIrmState,
   YeapFixedRateIrmConfig,
   YeapKinkedIrmConfig,
-
   YeapOracleRouterConfig,
   FixedPriceOracleConfig,
   PythOracleConfig,
@@ -26,17 +25,19 @@ import {
   VaultSettingsFieldsFragment,
   VaultStateActivitiesFieldsFragment,
   AdaptiveIrmConfigFieldsFragment,
-  AdaptiveIrmStateFieldsFragment, FixedRateIrmConfigFieldsFragment, KinkedIrmConfigFieldsFragment,
+  AdaptiveIrmStateFieldsFragment,
+  FixedRateIrmConfigFieldsFragment,
+  KinkedIrmConfigFieldsFragment,
 } from "../types/generated/operations";
-import {Maybe} from "../types";
-
-
+import { Maybe } from "../types";
 
 /**
  * Transform raw GraphQL fungible asset metadata to clean interface
  * @internal
  */
-export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataFieldsFragment>| undefined): Maybe<YeapFungibleAssetMetadata> {
+export function transformFungibleAssetMetadata(
+  raw: Maybe<FungibleAssetMetadataFieldsFragment> | undefined,
+): Maybe<YeapFungibleAssetMetadata> {
   if (!raw) return null;
   return {
     creatorAddress: raw.creator_address,
@@ -56,7 +57,7 @@ export function transformFungibleAssetMetadata(raw: Maybe<FungibleAssetMetadataF
  * Transform raw GraphQL current object to clean interface
  * @internal
  */
-export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment>|undefined): AptosObject | null {
+export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment> | undefined): AptosObject | null {
   if (!raw) return null;
   return {
     objectAddress: raw.object_address,
@@ -71,7 +72,7 @@ export function transformCurrentObject(raw: Maybe<CurrentObjectFieldsFragment>|u
  * Transform raw GraphQL vault settings to clean interface
  * @internal
  */
-export function transformVaultSettings(raw: Maybe<VaultSettingsFieldsFragment>|undefined): YeapVaultSettings | null {
+export function transformVaultSettings(raw: Maybe<VaultSettingsFieldsFragment> | undefined): YeapVaultSettings | null {
   if (!raw) return null;
   return {
     vaultAddress: raw.vault_address,
@@ -83,16 +84,17 @@ export function transformVaultSettings(raw: Maybe<VaultSettingsFieldsFragment>|u
     flashloanFeeStoreAddress: raw.flashloan_fee_store_address || null,
     interestFeeRate: raw.interest_fee_rate || null,
     irmKind: raw.irm_kind ? Number(raw.irm_kind) : null,
-  isPaused: raw.paused ?? false,
+    isPaused: raw.paused ?? false,
   };
 }
-
 
 /**
  * Transform raw GraphQL adaptive IRM config to clean interface
  * @internal
  */
-export function transformAdaptiveIrmConfig(raw: Maybe<AdaptiveIrmConfigFieldsFragment>|undefined): YeapAdaptiveIrmConfig | null {
+export function transformAdaptiveIrmConfig(
+  raw: Maybe<AdaptiveIrmConfigFieldsFragment> | undefined,
+): YeapAdaptiveIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -109,7 +111,9 @@ export function transformAdaptiveIrmConfig(raw: Maybe<AdaptiveIrmConfigFieldsFra
  * Transform raw GraphQL adaptive IRM state to clean interface
  * @internal
  */
-export function transformAdaptiveIrmState(raw: Maybe<AdaptiveIrmStateFieldsFragment>|undefined): YeapAdaptiveIrmState | null {
+export function transformAdaptiveIrmState(
+  raw: Maybe<AdaptiveIrmStateFieldsFragment> | undefined,
+): YeapAdaptiveIrmState | null {
   if (!raw) return null;
   return {
     stateAddress: raw.state_address,
@@ -122,7 +126,9 @@ export function transformAdaptiveIrmState(raw: Maybe<AdaptiveIrmStateFieldsFragm
  * Transform raw GraphQL fixed rate IRM config to clean interface
  * @internal
  */
-export function transformFixedRateIrmConfig(raw: Maybe<FixedRateIrmConfigFieldsFragment>|undefined): YeapFixedRateIrmConfig | null {
+export function transformFixedRateIrmConfig(
+  raw: Maybe<FixedRateIrmConfigFieldsFragment> | undefined,
+): YeapFixedRateIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -134,7 +140,9 @@ export function transformFixedRateIrmConfig(raw: Maybe<FixedRateIrmConfigFieldsF
  * Transform raw GraphQL kinked IRM config to clean interface
  * @internal
  */
-export function transformKinkedIrmConfig(raw: Maybe<KinkedIrmConfigFieldsFragment>|undefined): YeapKinkedIrmConfig | null {
+export function transformKinkedIrmConfig(
+  raw: Maybe<KinkedIrmConfigFieldsFragment> | undefined,
+): YeapKinkedIrmConfig | null {
   if (!raw) return null;
   return {
     configAddress: raw.config_address,
@@ -144,7 +152,6 @@ export function transformKinkedIrmConfig(raw: Maybe<KinkedIrmConfigFieldsFragmen
     optimalUtilization: raw.optimal_utilization || null,
   };
 }
-
 
 /**
  * Transform raw GraphQL fungible asset balance to clean interface
@@ -163,7 +170,7 @@ export function transformFungibleAssetBalance(
     tokenStandard: raw.token_standard,
     amount: Number(raw.amount || "0"),
     isFrozen: raw.is_frozen || false,
-    metadata: transformFungibleAssetMetadata(raw.metadata)!
+    metadata: transformFungibleAssetMetadata(raw.metadata)!,
   };
 }
 
@@ -171,7 +178,9 @@ export function transformFungibleAssetBalance(
  * Transform raw GraphQL oracle router config to clean interface
  * @internal
  */
-export function transformOracleRouterConfig(raw: Maybe<OracleRouterConfigFieldsFragment>|undefined): YeapOracleRouterConfig | null {
+export function transformOracleRouterConfig(
+  raw: Maybe<OracleRouterConfigFieldsFragment> | undefined,
+): YeapOracleRouterConfig | null {
   if (!raw) return null;
   return {
     baseAsset: raw.base_asset,
@@ -187,9 +196,9 @@ export function transformOracleRouterConfig(raw: Maybe<OracleRouterConfigFieldsF
 export function transformFixedPriceOracleSubConfig(raw: any | undefined | null): FixedPriceOracleConfig | null {
   if (!raw) return null;
   return {
-    oracle_address: raw.oracle_address ? (raw.oracle_address) : raw.oracle_address,
-    base: raw.base_asset ? (raw.base_asset) : raw.base,
-    quote: raw.quote_asset ? (raw.quote_asset) : raw.quote,
+    oracle_address: raw.oracle_address ? raw.oracle_address : raw.oracle_address,
+    base: raw.base_asset ? raw.base_asset : raw.base,
+    quote: raw.quote_asset ? raw.quote_asset : raw.quote,
     price: raw.price!,
     deleted: raw.deleted ?? null,
   } as FixedPriceOracleConfig;
@@ -236,6 +245,3 @@ export function transformChainlinkOracleSubConfig(raw: any | undefined | null): 
     deleted: raw.deleted ?? null,
   } as ChainlinkOracleConfig;
 }
-
-
-

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import { getTappLLPositionsByOwner } from "../internal";
+import { getTappLLPositionById, getTappLLPositionsByOwner } from "../internal";
 import { BorrowMarket, TappLLPosition } from "./interfaces";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
@@ -65,6 +65,18 @@ export class TappLLPApi {
     });
 
     return positions.map((position) => createTappLLPosition(this.config, position));
+  }
+
+  async getPositionById(positionId: string): Promise<TappLLPosition | null> {
+    const position = await getTappLLPositionById({
+      yeapConfig: this.config,
+      positionId,
+    });
+    if (!position) {
+      return null;
+    }
+
+    return createTappLLPosition(this.config, position);
   }
 
   /**

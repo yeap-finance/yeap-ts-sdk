@@ -19,7 +19,9 @@ describe("Tapp SDK tests", () => {
       expect(pool).toHaveProperty("poolId");
       expect(pool).toHaveProperty("apr");
     }
-    const filteredPools = pools.filter(pool => pool.poolId === "0xe0b38051940ebb02885ba5139f2bc86d0726cf5292360725514a56f21f81d66d");
+    const filteredPools = pools.filter(
+      (pool) => pool.poolId === "0xe0b38051940ebb02885ba5139f2bc86d0726cf5292360725514a56f21f81d66d",
+    );
     // expect(filteredPools.length).toBeGreaterThan(0);
 
     const poolInfo = await client.getPoolInfo({
@@ -58,7 +60,9 @@ describe("Tapp SDK tests", () => {
   test("should fetch position info from Tapp API", async () => {
     const client = new TappApiClient("https://display-engine.dev.tapp-dex.devucc.name/api/v1");
     const positionId = "0xcd01c0a7d8c88c1dc07099f945bcbcb309b15218f2e33bd834a0534dc9386e60";
-    const positionInfo = await client.getPositions({ nftAddrs: ["0xc216c58397f59d7c659168ab79068c22ebd82b291d83af08781495a582fff7f2"]}); // get postioin problems
+    const positionInfo = await client.getPositions({
+      nftAddrs: ["0xc216c58397f59d7c659168ab79068c22ebd82b291d83af08781495a582fff7f2"],
+    }); // get postioin problems
     expect(positionInfo.data.length).toBeGreaterThan(0);
     console.log(positionInfo.data);
   });

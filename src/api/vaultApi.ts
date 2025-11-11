@@ -1,10 +1,17 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { getVaultInfoByAddress, getVaultsByUnderlyingAsset, getActiveVaults, getAllVaults, getLatestVaultState, getLatestVaultStates } from "../internal";
+import {
+  getVaultInfoByAddress,
+  getVaultsByUnderlyingAsset,
+  getActiveVaults,
+  getAllVaults,
+  getLatestVaultState,
+  getLatestVaultStates,
+} from "../internal";
 import { createVault } from "./entities/vault";
 import { createVaultState } from "./entities/vaultState";
-import { Vault,VaultState } from "./interfaces";
+import { Vault, VaultState } from "./interfaces";
 import { YeapConfig } from "./yeapConfig";
 
 /**
@@ -50,7 +57,9 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
+    return vaultInfos
+      .filter((vaultInfo) => vaultInfo !== null)
+      .map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
 
   /**
@@ -114,7 +123,9 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
+    return vaultInfos
+      .filter((vaultInfo) => vaultInfo !== null)
+      .map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
 
   /**
@@ -142,7 +153,9 @@ export class VaultApi {
       offset,
     });
 
-    return vaultInfos.filter((vaultInfo) => vaultInfo !== null).map((vaultInfo) => createVault(this.config, vaultInfo!));
+    return vaultInfos
+      .filter((vaultInfo) => vaultInfo !== null)
+      .map((vaultInfo) => createVault(this.config, vaultInfo!));
   }
 
   /**
@@ -165,6 +178,4 @@ export class VaultApi {
     const rawArray = await getLatestVaultStates({ yeapConfig: this.config, vaultAddresses });
     return rawArray.map((raw) => createVaultState(raw));
   }
-
-
 }

@@ -24,9 +24,7 @@ describe("TappLLPOperationBuilder", () => {
 
     const deserializer = new Deserializer(operation);
     expect(deserializer.deserializeU8()).toBe(0);
-    expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from(market).toString(),
-    );
+    expect(AccountAddress.deserialize(deserializer).toString()).toBe(AccountAddress.from(market).toString());
     deserializer.assertFinished();
   });
 
@@ -45,13 +43,9 @@ describe("TappLLPOperationBuilder", () => {
     const [operation] = builder.operations;
     const operationDeserializer = new Deserializer(operation);
     expect(operationDeserializer.deserializeU8()).toBe(3); // OP_ADD_LIQUIDITY
-    expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(
-      AccountAddress.from(market).toString(),
-    );
+    expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(AccountAddress.from(market).toString());
     expect(operationDeserializer.deserializeBool()).toBe(true);
-    expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(
-      AccountAddress.from(position).toString(),
-    );
+    expect(AccountAddress.deserialize(operationDeserializer).toString()).toBe(AccountAddress.from(position).toString());
     expect(operationDeserializer.deserializeUleb128AsU32()).toBe(2);
     expect(operationDeserializer.deserializeU256()).toBe(BigInt(1));
     expect(operationDeserializer.deserializeU256()).toBe(BigInt(2));
@@ -76,16 +70,10 @@ describe("TappLLPOperationBuilder", () => {
 
     const deserializer = new Deserializer(operation);
     expect(deserializer.deserializeU8()).toBe(7); // OP_CLAIM_REWARD
-    expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from(market).toString(),
-    );
+    expect(AccountAddress.deserialize(deserializer).toString()).toBe(AccountAddress.from(market).toString());
     expect(deserializer.deserializeBool()).toBe(true);
-    expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from(position).toString(),
-    );
-    expect(AccountAddress.deserialize(deserializer).toString()).toBe(
-      AccountAddress.from(assetAddress).toString(),
-    );
+    expect(AccountAddress.deserialize(deserializer).toString()).toBe(AccountAddress.from(position).toString());
+    expect(AccountAddress.deserialize(deserializer).toString()).toBe(AccountAddress.from(assetAddress).toString());
     expect(deserializer.deserializeBool()).toBe(false);
     deserializer.assertFinished();
   });

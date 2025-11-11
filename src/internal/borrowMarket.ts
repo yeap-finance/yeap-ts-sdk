@@ -11,15 +11,10 @@ import { YeapConfig } from "../api";
 import { queryYeapIndexer } from "./yeapIndexer";
 import { GraphqlQuery } from "../client";
 import { GetWhitelistedBorrowMarketsByProtocolQuery } from "../types/generated/operations";
-import {
-  GetWhitelistedBorrowMarketsByProtocol,
-} from "../types/generated/queries";
+import { GetWhitelistedBorrowMarketsByProtocol } from "../types/generated/queries";
 
 // Response types based on the generated queries
-export type GetWhitelistedBorrowMarketsByProtocolResponse =
-  GetWhitelistedBorrowMarketsByProtocolQuery["borrow_market"];
-
-
+export type GetWhitelistedBorrowMarketsByProtocolResponse = GetWhitelistedBorrowMarketsByProtocolQuery["borrow_market"];
 
 /**
  * Get all whitelisted borrow markets filtered by protocol.
