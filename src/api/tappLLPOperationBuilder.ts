@@ -5,7 +5,9 @@ import {
   AccountAddress,
   AccountAddressInput,
   AnyNumber,
+  FixedBytes,
   InputGenerateTransactionPayloadData,
+  MoveVector,
   Serializer,
   U128,
   U256,
@@ -283,12 +285,25 @@ export class TappLLPOperationBuilder {
   /**
    * Returns a txn of the encoded operations for direct use as a transaction payload.
    */
-  build(): InputGenerateTransactionPayloadData {
-    return {
-      function: `${this.protocolAddress}::api::execute`,
-      typeArguments: [],
-      functionArguments: [this.operations],
-    };
+  build(options?: { bcs?: boolean }): InputGenerateTransactionPayloadData {
+    if (options?.bcs) {
+      const serializer = new Serializer();
+      serializer.serializeVector(this.operations.map((op) => {
+        return new FixedBytes(op);
+      }));
+      const serializedBytes = Array.from(serializer.toUint8Array());
+      return {
+        function: `${this.protocolAddress}::api::execute`,
+        typeArguments: [],
+        functionArguments: [serializedBytes],
+      };
+    } else {
+      return {
+        function: `${this.protocolAddress}::api::execute`,
+        typeArguments: [],
+        functionArguments: [this.operations.map((op) => Array.from(op))],
+      };
+    }
   }
 
   private encodeOperationWithContext(
