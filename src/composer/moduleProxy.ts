@@ -1,5 +1,6 @@
 import { EntryFunctionArgumentTypes, SimpleEntryFunctionArgumentTypes, TypeArgument } from "@aptos-labs/ts-sdk";
-import type { AptosScriptComposer, CallArgument } from "@aptos-labs/script-composer-sdk";
+import type { AptosScriptComposer } from "@aptos-labs/script-composer-sdk";
+import type { CallArgument } from "@aptos-labs/script-composer-pack";
 import { ABIRoot } from "./abi";
 
 /**
