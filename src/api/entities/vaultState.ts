@@ -1,39 +1,58 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { bignumber, BigNumber } from "mathjs";
-import { VaultState, RawVaultStateData } from "../interfaces";
+import Decimal from "decimal.js";
+import type { BigNumber, RawVaultStateData, VaultState } from "../interfaces";
+
+type DecimalInput = Decimal | bigint | number | string;
+
+function toDecimal(value: DecimalInput): Decimal {
+  if (Decimal.isDecimal(value)) {
+    return value;
+  }
+  if (typeof value === "bigint") {
+    return new Decimal(value.toString());
+  }
+  return new Decimal(value);
+}
 /**
  * Converts a per-second rate to APY using compounding:
  *   APY = (1 + rate/precision)^(seconds_per_year) - 1
  * Returns as a BigNumber (not percent, e.g. 0.05 for 5%).
  */
 export function rate2Apy(rate: BigNumber | bigint | number, precision: number = 2 ** 96): BigNumber {
-  if (rate === 0 || rate === 0n) {
-    return bignumber(0);
+  const zero = new Decimal(0);
+  const rateDecimal = toDecimal(rate);
+
+  if (rateDecimal.isZero()) {
+    return zero;
   }
-  const rateBN = bignumber(rate.toString());
 
   const secondsPerYear = 365 * 24 * 60 * 60;
-  const r = rateBN.div(precision);
+  const r = rateDecimal.div(precision);
   // APY = (1 + r) ^ secondsPerYear - 1
-  return bignumber(1).plus(r).pow(secondsPerYear).minus(1).mul(100);
+  return new Decimal(1).plus(r).pow(secondsPerYear).minus(1).mul(100);
 }
 
 // VaultState interface moved to interfaces.ts
 
 /** Factory to create an immutable VaultState */
 export function createVaultState(rawStateData: RawVaultStateData): VaultState {
-  const zero = bignumber(0);
-  const badDebt = rawStateData.bad_debt ? bignumber(rawStateData.bad_debt) : zero;
-  const cash = rawStateData.cash ? bignumber(rawStateData.cash) : zero;
-  const currentInterestRate = rawStateData.current_interest_rate ? bignumber(rawStateData.current_interest_rate) : zero;
-  const lastInterestUpdateTime = rawStateData.last_interest_update_time
-    ? bignumber(rawStateData.last_interest_update_time)
-    : zero;
-  const totalBorrows = rawStateData.total_borrows ? bignumber(rawStateData.total_borrows) : zero;
-  const totalDebtShares = rawStateData.total_debt_shares ? bignumber(rawStateData.total_debt_shares) : zero;
-  const totalShares = rawStateData.total_shares ? bignumber(rawStateData.total_shares) : zero;
+  const zero = new Decimal(0);
+  const decimalOrZero = (value?: DecimalInput | null): Decimal => {
+    if (value === undefined || value === null) {
+      return zero;
+    }
+    return toDecimal(value);
+  };
+
+  const badDebt = decimalOrZero(rawStateData.bad_debt);
+  const cash = decimalOrZero(rawStateData.cash);
+  const currentInterestRate = decimalOrZero(rawStateData.current_interest_rate);
+  const lastInterestUpdateTime = decimalOrZero(rawStateData.last_interest_update_time);
+  const totalBorrows = decimalOrZero(rawStateData.total_borrows);
+  const totalDebtShares = decimalOrZero(rawStateData.total_debt_shares);
+  const totalShares = decimalOrZero(rawStateData.total_shares);
   const totalSupply = badDebt.plus(cash).plus(totalBorrows);
 
   const totalAvailableBN = cash.plus(totalBorrows).plus(badDebt);

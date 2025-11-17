@@ -3,7 +3,9 @@
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
 import { FungibleAssetBalance, FungibleAssetMetadata } from "@aptos-labs/js-pro";
-import { BigNumber } from "mathjs";
+import type Decimal from "decimal.js";
+
+export type BigNumber = Decimal;
 import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFieldsFragment } from "../types";
 import {
   BorrowMarketFieldsFragment,
