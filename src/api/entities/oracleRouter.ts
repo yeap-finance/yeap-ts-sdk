@@ -5,7 +5,6 @@ import { AccountAddress, InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { OracleRouterConfigFieldsFragment } from "../../types";
 import { YeapConfig } from "../yeapConfig";
 import { createOracleConfig } from "./oracleConfig";
-import { PriceFeed } from "@pythnetwork/pyth-aptos-js";
 import { OracleConfig } from "../interfaces";
 /**
  * Oracle Router entity representing a collection of oracle configurations.
@@ -587,47 +586,47 @@ export class OracleRouter {
     }
   }
 
-  /**
-   * Get latest Pyth price updates by fetching from Hermes price service.
-   *
-   * This method collects all unique Pyth feed IDs from the router configurations
-   * and retrieves their latest price update data from the configured Hermes price service.
-   *
-   * @returns Promise resolving to an array of PriceFeed containing the latest price updates for Pyth feeds
-   *
-   * @example
-   * ```typescript
-   * const updates = await oracleRouter.getPythPriceUpdate();
-   * console.log(`Received ${updates.length} Pyth price updates`);
-   * ```
-   */
-  async getPythPriceUpdate(): Promise<PriceFeed[] | undefined> {
-    if (!this.config) {
-      throw new Error(
-        "YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.",
-      );
-    }
+  // /**
+  //  * Get latest Pyth price updates by fetching from Hermes price service.
+  //  *
+  //  * This method collects all unique Pyth feed IDs from the router configurations
+  //  * and retrieves their latest price update data from the configured Hermes price service.
+  //  *
+  //  * @returns Promise resolving to an array of PriceFeed containing the latest price updates for Pyth feeds
+  //  *
+  //  * @example
+  //  * ```typescript
+  //  * const updates = await oracleRouter.getPythPriceUpdate();
+  //  * console.log(`Received ${updates.length} Pyth price updates`);
+  //  * ```
+  //  */
+  // async getPythPriceUpdate(): Promise<PriceFeed[] | undefined> {
+  //   if (!this.config) {
+  //     throw new Error(
+  //       "YeapConfig is required to fetch Pyth price updates. Please construct OracleRouter with a YeapConfig instance.",
+  //     );
+  //   }
 
-    // FIXME: Collect unique Pyth feed IDs from the router configurations
-    const feedIds = Array.from(
-      new Set(this.data.map((c) => c.pyth_oracle_config?.pyth_id).filter((id): id is string => Boolean(id))),
-    );
+  //   // FIXME: Collect unique Pyth feed IDs from the router configurations
+  //   const feedIds = Array.from(
+  //     new Set(this.data.map((c) => c.pyth_oracle_config?.pyth_id).filter((id): id is string => Boolean(id))),
+  //   );
 
-    if (feedIds.length === 0) {
-      return [];
-    }
+  //   if (feedIds.length === 0) {
+  //     return [];
+  //   }
 
-    try {
-      const updates = await this.config.hermesPriceService?.getLatestPriceFeeds(feedIds);
-      if (!updates || updates.length === 0) {
-        console.warn(`No Pyth price updates found for ${feedIds.length} feeds.`);
-        return undefined;
-      } else {
-        return updates;
-      }
-    } catch (error: any) {
-      console.warn(`Failed to fetch Pyth price updates for ${feedIds.length} feeds: ${error?.message ?? error}`);
-      return undefined;
-    }
-  }
+  //   try {
+  //     const updates = await this.config.hermesPriceService?.getLatestPriceFeeds(feedIds);
+  //     if (!updates || updates.length === 0) {
+  //       console.warn(`No Pyth price updates found for ${feedIds.length} feeds.`);
+  //       return undefined;
+  //     } else {
+  //       return updates;
+  //     }
+  //   } catch (error: any) {
+  //     console.warn(`Failed to fetch Pyth price updates for ${feedIds.length} feeds: ${error?.message ?? error}`);
+  //     return undefined;
+  //   }
+  // }
 }
