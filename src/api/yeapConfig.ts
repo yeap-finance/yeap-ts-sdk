@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
-import { AptosPriceServiceConnection } from "@pythnetwork/pyth-aptos-js";
 
 /**
  * Known contract address names in the Yeap protocol
@@ -55,10 +54,6 @@ export interface YeapSettings {
    * Contract addresses mapping for the Yeap protocol
    */
   addresses?: YeapAddresses;
-  hermes?: {
-    url: string;
-    apiKey?: string;
-  };
 }
 
 /**
@@ -114,8 +109,6 @@ export class YeapConfig {
   /** Contract addresses mapping for the Yeap protocol */
   readonly addresses: YeapAddresses;
 
-  readonly hermesPriceService?: AptosPriceServiceConnection;
-
   /**
    * Create a new YeapConfig instance
    *
@@ -137,13 +130,6 @@ export class YeapConfig {
 
     if (!this.endpoint) {
       throw new Error("Yeap endpoint is required in configuration");
-    }
-    if (settings?.hermes) {
-      this.hermesPriceService = new AptosPriceServiceConnection(settings.hermes.url, {
-        priceFeedRequestConfig: {
-          binary: true,
-        },
-      });
     }
   }
 

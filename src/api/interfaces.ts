@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import { FungibleAssetBalance, FungibleAssetMetadata } from "@aptos-labs/js-pro";
 import type Decimal from "decimal.js";
 
 export type BigNumber = Decimal;
@@ -17,6 +16,35 @@ import {
  * These interfaces provide a stable API that abstracts away GraphQL implementation details.
  * @group Types
  */
+
+interface FungibleAssetMetadata {
+  assetType: string;
+  creatorAddress: string;
+  decimals: number;
+  iconUri?: string | null;
+  maximumV2?: number | null;
+  name: string;
+  projectUri?: string | null;
+  supplyV2?: number | null;
+  symbol: string;
+  tokenStandard: string;
+}
+
+interface FungibleAssetBalance {
+  amount: number;
+  amountV1?: number | null;
+  amountV2?: number | null;
+  assetType: string;
+  assetTypeV1?: string | null;
+  assetTypeV2?: string | null;
+  isFrozen: boolean;
+  isPrimary: boolean;
+  lastTransactionTimestamp?: string | null;
+  lastTransactionVersion?: string | null;
+  metadata: FungibleAssetMetadata;
+  ownerAddress: string;
+  tokenStandard: string;
+}
 
 /**
  * Fungible asset metadata information (clean interface)
