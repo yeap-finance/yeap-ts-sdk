@@ -36,10 +36,10 @@
   ],
   "scripts": {
     "build:clean": "rm -rf dist",
-    "build": "pnpm build:clean && tsup --config tsup.config.ts",
+    "build": "npm run build:clean && tsup --config tsup.config.ts",
     "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
-    "prepare": "pnpm run build",
-    "prepublishOnly": "pnpm run build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "_fmt": "prettier 'src/**/*.ts' 'tests/**/*.ts'",
     "fmt": "pnpm _fmt --write",
     "lint": "eslint '**/*.{cts,mts,ts}'",
