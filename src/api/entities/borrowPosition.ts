@@ -1,19 +1,28 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { YeapConfig } from "../yeapConfig";
-import { TappLLPosition, PositionDebtStore } from "../interfaces";
-import { transformFungibleAssetBalance } from "../transforms";
-import { TappLlPositionFieldsFragment } from "../../types/generated/operations";
+import { BorrowPosition, PositionDebtInfo } from "../interfaces";
+import { BorrowPositionFieldsFragment } from "../../types/generated/operations";
 import { createBorrowMarket } from "./borrowMarket";
+import { createVault } from "./vault";
 
-/** Factory to create an TappLLPosition */
-export function createTappLLPosition(config: YeapConfig, rawData: TappLlPositionFieldsFragment): TappLLPosition {
-  const debtStores: Record<string, PositionDebtStore> = {};
-  for (const store of rawData.debt_stores || []) {
-    const entry: PositionDebtStore = {
-      debtStoreAddress: store.debt_store!,
+/** Factory to create a BorrowPosition */
+export function createBorrowPosition(config: YeapConfig, rawData: BorrowPositionFieldsFragment): BorrowPosition {
+  const debtStores: Record<string, PositionDebtInfo> = {};
+  for (const store of rawData.debts || []) {
+    const vaultInfo = createVault(config, store.vault_info!)
+    const entry: PositionDebtInfo = {
       vaultAddress: store.vault!,
-      debtAssetBalance: store.debt_asset_balance ? transformFungibleAssetBalance(store.debt_asset_balance)! : undefined,
+      debtAssetBalance: {
+        amount: Number(store.debt_share ?? "0"),
+        metadata: vaultInfo.debtAssetMetadata!,
+        assetType: vaultInfo.debtAssetMetadata!.assetType,
+        isFrozen: false,
+        isPrimary: false,
+        ownerAddress: "",
+        tokenStandard: ""
+      },
+      vaultInfo
     };
     debtStores[entry.vaultAddress] = entry;
   }

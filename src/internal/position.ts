@@ -7,12 +7,12 @@ import { GraphqlQuery } from "../client";
 import {
   GetScmdPositionsByOwner,
   GetScmdPositionsByOwnerQuery,
-  GetTappLlPositionById,
-  GetTappLlPositionByIdQuery,
-  GetTappLlPositionsByOwner,
-  GetTappLlPositionsByOwnerQuery,
+  GetBorrowPositionById,
+  GetBorrowPositionByIdQuery,
+  GetBorrowPositionsByOwner,
+  GetBorrowPositionsByOwnerQuery,
   ScmdPositionFieldsFragment,
-  TappLlPositionFieldsFragment,
+  BorrowPositionFieldsFragment,
 } from "../types";
 
 /**
@@ -62,13 +62,13 @@ export async function getSCMDPositionsByOwner(
  * @returns Promise resolving to position data
  * @group Internal
  */
-export async function getTappLLPositionsByOwner(
+export async function getBorrowPositionsByOwner(
   args: GetPositionsByOwnerArgs,
-): Promise<Array<TappLlPositionFieldsFragment>> {
+): Promise<Array<BorrowPositionFieldsFragment>> {
   const { yeapConfig, ownerAddress, limit = 10, offset = 0 } = args;
 
   const graphqlQuery: GraphqlQuery = {
-    query: GetTappLlPositionsByOwner,
+    query: GetBorrowPositionsByOwner,
     variables: {
       ownerAddress,
       limit,
@@ -76,42 +76,42 @@ export async function getTappLLPositionsByOwner(
     },
   };
 
-  const data = await queryYeapIndexer<GetTappLlPositionsByOwnerQuery>({
+  const data = await queryYeapIndexer<GetBorrowPositionsByOwnerQuery>({
     yeapConfig,
     query: graphqlQuery,
     originMethod: "getPositionsByOwner",
   });
 
-  return data.tapp_llp_position_current;
+  return data.borrow_protocol_position_current;
 }
 
-export interface GetTappLLPositionByIdArgs {
+export interface GetBorrowPositionByIdArgs {
   yeapConfig: YeapConfig;
   positionId: string;
 }
 
 /**
- * Retrieves a single TAPP LLP position by its position identifier.
+ * Retrieves a single borrow protocol position by its identifier.
  *
  * @param args - Query parameters
  * @returns Promise resolving to the position or null if not found
  * @group Internal
  */
-export async function getTappLLPositionById(
-  args: GetTappLLPositionByIdArgs,
-): Promise<TappLlPositionFieldsFragment | null> {
+export async function getBorrowPositionById(
+  args: GetBorrowPositionByIdArgs,
+): Promise<BorrowPositionFieldsFragment | null> {
   const { yeapConfig, positionId } = args;
 
   const graphqlQuery: GraphqlQuery = {
-    query: GetTappLlPositionById,
+    query: GetBorrowPositionById,
     variables: { positionId },
   };
 
-  const data = await queryYeapIndexer<GetTappLlPositionByIdQuery>({
+  const data = await queryYeapIndexer<GetBorrowPositionByIdQuery>({
     yeapConfig,
     query: graphqlQuery,
-    originMethod: "getTappLLPositionById",
+    originMethod: "getBorrowPositionById",
   });
 
-  return data.tapp_llp_position_current_by_pk ?? null;
+  return data.borrow_protocol_position_current_by_pk ?? null;
 }

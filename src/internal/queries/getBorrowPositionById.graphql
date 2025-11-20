@@ -1,0 +1,5 @@
+query GetBorrowPositionById($positionId: String!) {
+  borrow_protocol_position_current_by_pk(position: $positionId) {
+    ...BorrowPositionFields
+  }
+}

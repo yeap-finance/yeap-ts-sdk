@@ -11,7 +11,8 @@ export type YeapAddressName =
   | "yeap_vault"
   | "yeap_irm"
   | "yeap_oracle_lens"
-  | "yeap_tapp_llp"
+  | "yeap_borrow_protocol"
+  | "yeap_tapp_llp_protocol"
   | "yeap_scmd_protocol"
   | "yeap_earn_api"
   | "yeap_borrow_api"
@@ -141,8 +142,8 @@ export class YeapConfig {
     return this.getAddress("yeap_scmd_protocol");
   }
 
-  get tappLlpProtocolAddress(): string {
-    return this.getAddress("yeap_tapp_llp");
+  get borrowProtocolAddress(): string {
+    return this.getAddress("yeap_borrow_protocol");
   }
 
   get yeapEarnApiAddress(): string {

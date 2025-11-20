@@ -1156,6 +1156,7 @@ type borrow_market {
   lltv: numeric
   ltv: numeric
   market: String!
+  market_type: String
   max_borrowable_vaults: numeric
   object_info: current_objects
   oracle: String
@@ -1192,6 +1193,7 @@ input borrow_market_bool_exp {
   lltv: numeric_comparison_exp
   ltv: numeric_comparison_exp
   market: String_comparison_exp
+  market_type: String_comparison_exp
   max_borrowable_vaults: numeric_comparison_exp
   oracle: String_comparison_exp
   oracle_configs: oracle_router_current_config_bool_exp
@@ -1210,6 +1212,7 @@ input borrow_market_order_by {
   lltv: order_by
   ltv: order_by
   market: order_by
+  market_type: order_by
   max_borrowable_vaults: order_by
   oracle: order_by
   oracle_configs_aggregate: oracle_router_current_config_aggregate_order_by
@@ -1234,6 +1237,8 @@ enum borrow_market_select_column {
   ltv
   """column name"""
   market
+  """column name"""
+  market_type
   """column name"""
   max_borrowable_vaults
   """column name"""
@@ -1264,11 +1269,256 @@ input borrow_market_stream_cursor_value_input {
   lltv: numeric
   ltv: numeric
   market: String
+  market_type: String
   max_borrowable_vaults: numeric
   oracle: String
   protocol: String
   status: numeric
   whitelisted: Boolean
+}
+
+"""
+columns and relationships of "borrow_protocol_position_current"
+"""
+type borrow_protocol_position_current {
+  collateral: String!
+  """An array relationship"""
+  debts(
+    """distinct select on columns"""
+    distinct_on: [borrow_protocol_position_debt_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_protocol_position_debt_status_order_by!]
+    """filter the rows returned"""
+    where: borrow_protocol_position_debt_status_bool_exp
+  ): [borrow_protocol_position_debt_status!]!
+  market: String!
+  """An object relationship"""
+  market_info: borrow_market
+  owner: String!
+  position: String!
+  status: numeric
+}
+
+"""
+Boolean expression to filter rows from the table "borrow_protocol_position_current". All fields are combined with a logical 'AND'.
+"""
+input borrow_protocol_position_current_bool_exp {
+  _and: [borrow_protocol_position_current_bool_exp!]
+  _not: borrow_protocol_position_current_bool_exp
+  _or: [borrow_protocol_position_current_bool_exp!]
+  collateral: String_comparison_exp
+  debts: borrow_protocol_position_debt_status_bool_exp
+  market: String_comparison_exp
+  market_info: borrow_market_bool_exp
+  owner: String_comparison_exp
+  position: String_comparison_exp
+  status: numeric_comparison_exp
+}
+
+"""
+Ordering options when selecting data from "borrow_protocol_position_current".
+"""
+input borrow_protocol_position_current_order_by {
+  collateral: order_by
+  debts_aggregate: borrow_protocol_position_debt_status_aggregate_order_by
+  market: order_by
+  market_info: borrow_market_order_by
+  owner: order_by
+  position: order_by
+  status: order_by
+}
+
+"""
+select columns of table "borrow_protocol_position_current"
+"""
+enum borrow_protocol_position_current_select_column {
+  """column name"""
+  collateral
+  """column name"""
+  market
+  """column name"""
+  owner
+  """column name"""
+  position
+  """column name"""
+  status
+}
+
+"""
+Streaming cursor of the table "borrow_protocol_position_current"
+"""
+input borrow_protocol_position_current_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: borrow_protocol_position_current_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input borrow_protocol_position_current_stream_cursor_value_input {
+  collateral: String
+  market: String
+  owner: String
+  position: String
+  status: numeric
+}
+
+"""
+columns and relationships of "borrow_protocol_position_debt_status"
+"""
+type borrow_protocol_position_debt_status {
+  debt_share: numeric
+  position: String!
+  vault: String!
+  """An object relationship"""
+  vault_info: vault_info
+}
+
+"""
+order by aggregate values of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_aggregate_order_by {
+  avg: borrow_protocol_position_debt_status_avg_order_by
+  count: order_by
+  max: borrow_protocol_position_debt_status_max_order_by
+  min: borrow_protocol_position_debt_status_min_order_by
+  stddev: borrow_protocol_position_debt_status_stddev_order_by
+  stddev_pop: borrow_protocol_position_debt_status_stddev_pop_order_by
+  stddev_samp: borrow_protocol_position_debt_status_stddev_samp_order_by
+  sum: borrow_protocol_position_debt_status_sum_order_by
+  var_pop: borrow_protocol_position_debt_status_var_pop_order_by
+  var_samp: borrow_protocol_position_debt_status_var_samp_order_by
+  variance: borrow_protocol_position_debt_status_variance_order_by
+}
+
+"""
+order by avg() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_avg_order_by {
+  debt_share: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "borrow_protocol_position_debt_status". All fields are combined with a logical 'AND'.
+"""
+input borrow_protocol_position_debt_status_bool_exp {
+  _and: [borrow_protocol_position_debt_status_bool_exp!]
+  _not: borrow_protocol_position_debt_status_bool_exp
+  _or: [borrow_protocol_position_debt_status_bool_exp!]
+  debt_share: numeric_comparison_exp
+  position: String_comparison_exp
+  vault: String_comparison_exp
+  vault_info: vault_info_bool_exp
+}
+
+"""
+order by max() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_max_order_by {
+  debt_share: order_by
+  position: order_by
+  vault: order_by
+}
+
+"""
+order by min() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_min_order_by {
+  debt_share: order_by
+  position: order_by
+  vault: order_by
+}
+
+"""
+Ordering options when selecting data from "borrow_protocol_position_debt_status".
+"""
+input borrow_protocol_position_debt_status_order_by {
+  debt_share: order_by
+  position: order_by
+  vault: order_by
+  vault_info: vault_info_order_by
+}
+
+"""
+select columns of table "borrow_protocol_position_debt_status"
+"""
+enum borrow_protocol_position_debt_status_select_column {
+  """column name"""
+  debt_share
+  """column name"""
+  position
+  """column name"""
+  vault
+}
+
+"""
+order by stddev() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_stddev_order_by {
+  debt_share: order_by
+}
+
+"""
+order by stddev_pop() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_stddev_pop_order_by {
+  debt_share: order_by
+}
+
+"""
+order by stddev_samp() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_stddev_samp_order_by {
+  debt_share: order_by
+}
+
+"""
+Streaming cursor of the table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: borrow_protocol_position_debt_status_stream_cursor_value_input!
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input borrow_protocol_position_debt_status_stream_cursor_value_input {
+  debt_share: numeric
+  position: String
+  vault: String
+}
+
+"""
+order by sum() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_sum_order_by {
+  debt_share: order_by
+}
+
+"""
+order by var_pop() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_var_pop_order_by {
+  debt_share: order_by
+}
+
+"""
+order by var_samp() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_var_samp_order_by {
+  debt_share: order_by
+}
+
+"""
+order by variance() on columns of table "borrow_protocol_position_debt_status"
+"""
+input borrow_protocol_position_debt_status_variance_order_by {
+  debt_share: order_by
 }
 
 """
@@ -9239,6 +9489,44 @@ type query_root {
   """fetch data from the table: "borrow_market" using primary key columns"""
   borrow_market_by_pk(market: String!): borrow_market
   """
+  fetch data from the table: "borrow_protocol_position_current"
+  """
+  borrow_protocol_position_current(
+    """distinct select on columns"""
+    distinct_on: [borrow_protocol_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_protocol_position_current_order_by!]
+    """filter the rows returned"""
+    where: borrow_protocol_position_current_bool_exp
+  ): [borrow_protocol_position_current!]!
+  """
+  fetch data from the table: "borrow_protocol_position_current" using primary key columns
+  """
+  borrow_protocol_position_current_by_pk(position: String!): borrow_protocol_position_current
+  """
+  fetch data from the table: "borrow_protocol_position_debt_status"
+  """
+  borrow_protocol_position_debt_status(
+    """distinct select on columns"""
+    distinct_on: [borrow_protocol_position_debt_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_protocol_position_debt_status_order_by!]
+    """filter the rows returned"""
+    where: borrow_protocol_position_debt_status_bool_exp
+  ): [borrow_protocol_position_debt_status!]!
+  """
+  fetch data from the table: "borrow_protocol_position_debt_status" using primary key columns
+  """
+  borrow_protocol_position_debt_status_by_pk(position: String!, vault: String!): borrow_protocol_position_debt_status
+  """
   fetch data from the table: "borrow_risk_parameters_current"
   """
   borrow_risk_parameters_current(
@@ -11762,6 +12050,66 @@ type subscription_root {
     """filter the rows returned"""
     where: borrow_market_bool_exp
   ): [borrow_market!]!
+  """
+  fetch data from the table: "borrow_protocol_position_current"
+  """
+  borrow_protocol_position_current(
+    """distinct select on columns"""
+    distinct_on: [borrow_protocol_position_current_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_protocol_position_current_order_by!]
+    """filter the rows returned"""
+    where: borrow_protocol_position_current_bool_exp
+  ): [borrow_protocol_position_current!]!
+  """
+  fetch data from the table: "borrow_protocol_position_current" using primary key columns
+  """
+  borrow_protocol_position_current_by_pk(position: String!): borrow_protocol_position_current
+  """
+  fetch data from the table in a streaming manner: "borrow_protocol_position_current"
+  """
+  borrow_protocol_position_current_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [borrow_protocol_position_current_stream_cursor_input]!
+    """filter the rows returned"""
+    where: borrow_protocol_position_current_bool_exp
+  ): [borrow_protocol_position_current!]!
+  """
+  fetch data from the table: "borrow_protocol_position_debt_status"
+  """
+  borrow_protocol_position_debt_status(
+    """distinct select on columns"""
+    distinct_on: [borrow_protocol_position_debt_status_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [borrow_protocol_position_debt_status_order_by!]
+    """filter the rows returned"""
+    where: borrow_protocol_position_debt_status_bool_exp
+  ): [borrow_protocol_position_debt_status!]!
+  """
+  fetch data from the table: "borrow_protocol_position_debt_status" using primary key columns
+  """
+  borrow_protocol_position_debt_status_by_pk(position: String!, vault: String!): borrow_protocol_position_debt_status
+  """
+  fetch data from the table in a streaming manner: "borrow_protocol_position_debt_status"
+  """
+  borrow_protocol_position_debt_status_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+    """cursor to stream the results returned by the query"""
+    cursor: [borrow_protocol_position_debt_status_stream_cursor_input]!
+    """filter the rows returned"""
+    where: borrow_protocol_position_debt_status_bool_exp
+  ): [borrow_protocol_position_debt_status!]!
   """
   fetch data from the table: "borrow_risk_parameters_current"
   """

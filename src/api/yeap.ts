@@ -7,7 +7,7 @@ import { ScmdApi } from "./scmdApi";
 import { OracleApi } from "./oracleApi";
 import { BuildApi } from "./buildApi";
 import { AdminApi } from "./adminApi";
-import { TappLLPApi } from "./tappLLPApi";
+import { BorrowApi } from "./borrowApi";
 
 /**
  * The main entry point for interacting with the Yeap APIs,
@@ -61,7 +61,7 @@ export class Yeap {
   readonly vaultApi: VaultApi;
 
   readonly scmdApi: ScmdApi;
-  readonly tappLLPApi: TappLLPApi;
+  readonly borrowApi: BorrowApi;
   readonly oracleRouterApi: OracleApi;
 
   readonly buildApi: BuildApi;
@@ -93,12 +93,11 @@ export class Yeap {
     this.config = config;
     this.vaultApi = new VaultApi(this.config);
     this.scmdApi = new ScmdApi(this.config);
-    this.tappLLPApi = new TappLLPApi(this.config);
+    this.borrowApi = new BorrowApi(this.config);
     this.oracleRouterApi = new OracleApi(this.config);
     this.buildApi = new BuildApi(this.config);
     this.adminApi = new AdminApi(this.config);
   }
-
 }
 
 //

@@ -1080,6 +1080,7 @@ export type BorrowMarket = {
   lltv?: Maybe<Scalars['numeric']['output']>;
   ltv?: Maybe<Scalars['numeric']['output']>;
   market: Scalars['String']['output'];
+  market_type?: Maybe<Scalars['String']['output']>;
   max_borrowable_vaults?: Maybe<Scalars['numeric']['output']>;
   object_info?: Maybe<CurrentObjects>;
   oracle?: Maybe<Scalars['String']['output']>;
@@ -1123,6 +1124,7 @@ export type BorrowMarketBoolExp = {
   lltv?: InputMaybe<NumericComparisonExp>;
   ltv?: InputMaybe<NumericComparisonExp>;
   market?: InputMaybe<StringComparisonExp>;
+  market_type?: InputMaybe<StringComparisonExp>;
   max_borrowable_vaults?: InputMaybe<NumericComparisonExp>;
   oracle?: InputMaybe<StringComparisonExp>;
   oracle_configs?: InputMaybe<OracleRouterCurrentConfigBoolExp>;
@@ -1141,6 +1143,7 @@ export type BorrowMarketOrderBy = {
   lltv?: InputMaybe<OrderBy>;
   ltv?: InputMaybe<OrderBy>;
   market?: InputMaybe<OrderBy>;
+  market_type?: InputMaybe<OrderBy>;
   max_borrowable_vaults?: InputMaybe<OrderBy>;
   oracle?: InputMaybe<OrderBy>;
   oracle_configs_aggregate?: InputMaybe<OracleRouterCurrentConfigAggregateOrderBy>;
@@ -1163,6 +1166,8 @@ export enum BorrowMarketSelectColumn {
   Ltv = 'ltv',
   /** column name */
   Market = 'market',
+  /** column name */
+  MarketType = 'market_type',
   /** column name */
   MaxBorrowableVaults = 'max_borrowable_vaults',
   /** column name */
@@ -1191,11 +1196,213 @@ export type BorrowMarketStreamCursorValueInput = {
   lltv?: InputMaybe<Scalars['numeric']['input']>;
   ltv?: InputMaybe<Scalars['numeric']['input']>;
   market?: InputMaybe<Scalars['String']['input']>;
+  market_type?: InputMaybe<Scalars['String']['input']>;
   max_borrowable_vaults?: InputMaybe<Scalars['numeric']['input']>;
   oracle?: InputMaybe<Scalars['String']['input']>;
   protocol?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['numeric']['input']>;
   whitelisted?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** columns and relationships of "borrow_protocol_position_current" */
+export type BorrowProtocolPositionCurrent = {
+  collateral: Scalars['String']['output'];
+  /** An array relationship */
+  debts: Array<BorrowProtocolPositionDebtStatus>;
+  market: Scalars['String']['output'];
+  /** An object relationship */
+  market_info?: Maybe<BorrowMarket>;
+  owner: Scalars['String']['output'];
+  position: Scalars['String']['output'];
+  status?: Maybe<Scalars['numeric']['output']>;
+};
+
+
+/** columns and relationships of "borrow_protocol_position_current" */
+export type BorrowProtocolPositionCurrentDebtsArgs = {
+  distinct_on?: InputMaybe<Array<BorrowProtocolPositionDebtStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowProtocolPositionDebtStatusOrderBy>>;
+  where?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
+};
+
+/** Boolean expression to filter rows from the table "borrow_protocol_position_current". All fields are combined with a logical 'AND'. */
+export type BorrowProtocolPositionCurrentBoolExp = {
+  _and?: InputMaybe<Array<BorrowProtocolPositionCurrentBoolExp>>;
+  _not?: InputMaybe<BorrowProtocolPositionCurrentBoolExp>;
+  _or?: InputMaybe<Array<BorrowProtocolPositionCurrentBoolExp>>;
+  collateral?: InputMaybe<StringComparisonExp>;
+  debts?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
+  market?: InputMaybe<StringComparisonExp>;
+  market_info?: InputMaybe<BorrowMarketBoolExp>;
+  owner?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  status?: InputMaybe<NumericComparisonExp>;
+};
+
+/** Ordering options when selecting data from "borrow_protocol_position_current". */
+export type BorrowProtocolPositionCurrentOrderBy = {
+  collateral?: InputMaybe<OrderBy>;
+  debts_aggregate?: InputMaybe<BorrowProtocolPositionDebtStatusAggregateOrderBy>;
+  market?: InputMaybe<OrderBy>;
+  market_info?: InputMaybe<BorrowMarketOrderBy>;
+  owner?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  status?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "borrow_protocol_position_current" */
+export enum BorrowProtocolPositionCurrentSelectColumn {
+  /** column name */
+  Collateral = 'collateral',
+  /** column name */
+  Market = 'market',
+  /** column name */
+  Owner = 'owner',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  Status = 'status'
+}
+
+/** Streaming cursor of the table "borrow_protocol_position_current" */
+export type BorrowProtocolPositionCurrentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: BorrowProtocolPositionCurrentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BorrowProtocolPositionCurrentStreamCursorValueInput = {
+  collateral?: InputMaybe<Scalars['String']['input']>;
+  market?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** columns and relationships of "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatus = {
+  debt_share?: Maybe<Scalars['numeric']['output']>;
+  position: Scalars['String']['output'];
+  vault: Scalars['String']['output'];
+  /** An object relationship */
+  vault_info?: Maybe<VaultInfo>;
+};
+
+/** order by aggregate values of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusAggregateOrderBy = {
+  avg?: InputMaybe<BorrowProtocolPositionDebtStatusAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<BorrowProtocolPositionDebtStatusMaxOrderBy>;
+  min?: InputMaybe<BorrowProtocolPositionDebtStatusMinOrderBy>;
+  stddev?: InputMaybe<BorrowProtocolPositionDebtStatusStddevOrderBy>;
+  stddev_pop?: InputMaybe<BorrowProtocolPositionDebtStatusStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<BorrowProtocolPositionDebtStatusStddevSampOrderBy>;
+  sum?: InputMaybe<BorrowProtocolPositionDebtStatusSumOrderBy>;
+  var_pop?: InputMaybe<BorrowProtocolPositionDebtStatusVarPopOrderBy>;
+  var_samp?: InputMaybe<BorrowProtocolPositionDebtStatusVarSampOrderBy>;
+  variance?: InputMaybe<BorrowProtocolPositionDebtStatusVarianceOrderBy>;
+};
+
+/** order by avg() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusAvgOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "borrow_protocol_position_debt_status". All fields are combined with a logical 'AND'. */
+export type BorrowProtocolPositionDebtStatusBoolExp = {
+  _and?: InputMaybe<Array<BorrowProtocolPositionDebtStatusBoolExp>>;
+  _not?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
+  _or?: InputMaybe<Array<BorrowProtocolPositionDebtStatusBoolExp>>;
+  debt_share?: InputMaybe<NumericComparisonExp>;
+  position?: InputMaybe<StringComparisonExp>;
+  vault?: InputMaybe<StringComparisonExp>;
+  vault_info?: InputMaybe<VaultInfoBoolExp>;
+};
+
+/** order by max() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusMaxOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusMinOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+};
+
+/** Ordering options when selecting data from "borrow_protocol_position_debt_status". */
+export type BorrowProtocolPositionDebtStatusOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  vault?: InputMaybe<OrderBy>;
+  vault_info?: InputMaybe<VaultInfoOrderBy>;
+};
+
+/** select columns of table "borrow_protocol_position_debt_status" */
+export enum BorrowProtocolPositionDebtStatusSelectColumn {
+  /** column name */
+  DebtShare = 'debt_share',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  Vault = 'vault'
+}
+
+/** order by stddev() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusStddevOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusStddevPopOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusStddevSampOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: BorrowProtocolPositionDebtStatusStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BorrowProtocolPositionDebtStatusStreamCursorValueInput = {
+  debt_share?: InputMaybe<Scalars['numeric']['input']>;
+  position?: InputMaybe<Scalars['String']['input']>;
+  vault?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** order by sum() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusSumOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusVarPopOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusVarSampOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "borrow_protocol_position_debt_status" */
+export type BorrowProtocolPositionDebtStatusVarianceOrderBy = {
+  debt_share?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "borrow_risk_parameters_current" */
@@ -8296,6 +8503,14 @@ export type QueryRoot = {
   borrow_market: Array<BorrowMarket>;
   /** fetch data from the table: "borrow_market" using primary key columns */
   borrow_market_by_pk?: Maybe<BorrowMarket>;
+  /** fetch data from the table: "borrow_protocol_position_current" */
+  borrow_protocol_position_current: Array<BorrowProtocolPositionCurrent>;
+  /** fetch data from the table: "borrow_protocol_position_current" using primary key columns */
+  borrow_protocol_position_current_by_pk?: Maybe<BorrowProtocolPositionCurrent>;
+  /** fetch data from the table: "borrow_protocol_position_debt_status" */
+  borrow_protocol_position_debt_status: Array<BorrowProtocolPositionDebtStatus>;
+  /** fetch data from the table: "borrow_protocol_position_debt_status" using primary key columns */
+  borrow_protocol_position_debt_status_by_pk?: Maybe<BorrowProtocolPositionDebtStatus>;
   /** fetch data from the table: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
@@ -8736,6 +8951,35 @@ export type QueryRootBorrowMarketArgs = {
 
 export type QueryRootBorrowMarketByPkArgs = {
   market: Scalars['String']['input'];
+};
+
+
+export type QueryRootBorrowProtocolPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<BorrowProtocolPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowProtocolPositionCurrentOrderBy>>;
+  where?: InputMaybe<BorrowProtocolPositionCurrentBoolExp>;
+};
+
+
+export type QueryRootBorrowProtocolPositionCurrentByPkArgs = {
+  position: Scalars['String']['input'];
+};
+
+
+export type QueryRootBorrowProtocolPositionDebtStatusArgs = {
+  distinct_on?: InputMaybe<Array<BorrowProtocolPositionDebtStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowProtocolPositionDebtStatusOrderBy>>;
+  where?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
+};
+
+
+export type QueryRootBorrowProtocolPositionDebtStatusByPkArgs = {
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
 };
 
 
@@ -10583,6 +10827,18 @@ export type SubscriptionRoot = {
   borrow_market_by_pk?: Maybe<BorrowMarket>;
   /** fetch data from the table in a streaming manner: "borrow_market" */
   borrow_market_stream: Array<BorrowMarket>;
+  /** fetch data from the table: "borrow_protocol_position_current" */
+  borrow_protocol_position_current: Array<BorrowProtocolPositionCurrent>;
+  /** fetch data from the table: "borrow_protocol_position_current" using primary key columns */
+  borrow_protocol_position_current_by_pk?: Maybe<BorrowProtocolPositionCurrent>;
+  /** fetch data from the table in a streaming manner: "borrow_protocol_position_current" */
+  borrow_protocol_position_current_stream: Array<BorrowProtocolPositionCurrent>;
+  /** fetch data from the table: "borrow_protocol_position_debt_status" */
+  borrow_protocol_position_debt_status: Array<BorrowProtocolPositionDebtStatus>;
+  /** fetch data from the table: "borrow_protocol_position_debt_status" using primary key columns */
+  borrow_protocol_position_debt_status_by_pk?: Maybe<BorrowProtocolPositionDebtStatus>;
+  /** fetch data from the table in a streaming manner: "borrow_protocol_position_debt_status" */
+  borrow_protocol_position_debt_status_stream: Array<BorrowProtocolPositionDebtStatus>;
   /** fetch data from the table: "borrow_risk_parameters_current" */
   borrow_risk_parameters_current: Array<BorrowRiskParametersCurrent>;
   /** fetch data from the table: "borrow_risk_parameters_current" using primary key columns */
@@ -11213,6 +11469,49 @@ export type SubscriptionRootBorrowMarketStreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<BorrowMarketStreamCursorInput>>;
   where?: InputMaybe<BorrowMarketBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionCurrentArgs = {
+  distinct_on?: InputMaybe<Array<BorrowProtocolPositionCurrentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowProtocolPositionCurrentOrderBy>>;
+  where?: InputMaybe<BorrowProtocolPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionCurrentByPkArgs = {
+  position: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionCurrentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BorrowProtocolPositionCurrentStreamCursorInput>>;
+  where?: InputMaybe<BorrowProtocolPositionCurrentBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionDebtStatusArgs = {
+  distinct_on?: InputMaybe<Array<BorrowProtocolPositionDebtStatusSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<BorrowProtocolPositionDebtStatusOrderBy>>;
+  where?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionDebtStatusByPkArgs = {
+  position: Scalars['String']['input'];
+  vault: Scalars['String']['input'];
+};
+
+
+export type SubscriptionRootBorrowProtocolPositionDebtStatusStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<BorrowProtocolPositionDebtStatusStreamCursorInput>>;
+  where?: InputMaybe<BorrowProtocolPositionDebtStatusBoolExp>;
 };
 
 

@@ -46,6 +46,7 @@ export function createBorrowMarket(config: YeapConfig, raw: RawBorrowMarket): Bo
     status: parseNumeric(raw.status),
     whitelisted: Boolean(raw.whitelisted),
     borrowRiskParameters,
+    marketType: raw.market_type ?? undefined,
     __raw: raw,
   };
 }

@@ -9,19 +9,6 @@ export const AdaptiveIrmStateFieldsFragmentDoc = `
   last_update_timestamp_secs
 }
     `;
-export const LiquidationActivityFieldsFragmentDoc = `
-    fragment LiquidationActivityFields on scmd_liquidation_activities {
-  event_index
-  transaction_version
-  timestamp
-  position
-  vault
-  collateral_liquidation_amount
-  collateral_value_before
-  loan_value_before
-  repay_amount
-}
-    `;
 export const FungibleAssetMetadataFieldsFragmentDoc = `
     fragment FungibleAssetMetadataFields on fungible_asset_metadata {
   asset_type
@@ -255,6 +242,39 @@ export const BorrowMarketFieldsFragmentDoc = `
   oracle_configs {
     ...OracleRouterConfigFields
   }
+  market_type
+}
+    `;
+export const BorrowPositionFieldsFragmentDoc = `
+    fragment BorrowPositionFields on borrow_protocol_position_current {
+  position
+  owner
+  market
+  collateral
+  status
+  market_info {
+    ...BorrowMarketFields
+  }
+  debts {
+    debt_share
+    vault
+    vault_info {
+      ...VaultInfoFields
+    }
+  }
+}
+    `;
+export const LiquidationActivityFieldsFragmentDoc = `
+    fragment LiquidationActivityFields on scmd_liquidation_activities {
+  event_index
+  transaction_version
+  timestamp
+  position
+  vault
+  collateral_liquidation_amount
+  collateral_value_before
+  loan_value_before
+  repay_amount
 }
     `;
 export const ScmdPositionFieldsFragmentDoc = `
@@ -267,25 +287,6 @@ export const ScmdPositionFieldsFragmentDoc = `
   collateral_asset_balance {
     ...FungibleAssetBalanceFields
   }
-  market_info {
-    ...BorrowMarketFields
-  }
-  debt_stores {
-    debt_store
-    vault
-    debt_asset_balance {
-      ...FungibleAssetBalanceFields
-    }
-  }
-}
-    `;
-export const TappLlPositionFieldsFragmentDoc = `
-    fragment TappLLPositionFields on tapp_llp_position_current {
-  position
-  owner
-  market
-  collateral
-  status
   market_info {
     ...BorrowMarketFields
   }
@@ -376,6 +377,55 @@ ${VaultSettingsFieldsFragmentDoc}
 ${AdaptiveIrmConfigFieldsFragmentDoc}
 ${FixedRateIrmConfigFieldsFragmentDoc}
 ${KinkedIrmConfigFieldsFragmentDoc}`;
+export const GetBorrowPositionById = `
+    query GetBorrowPositionById($positionId: String!) {
+  borrow_protocol_position_current_by_pk(position: $positionId) {
+    ...BorrowPositionFields
+  }
+}
+    ${BorrowPositionFieldsFragmentDoc}
+${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
+export const GetBorrowPositionsByOwner = `
+    query GetBorrowPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
+  borrow_protocol_position_current(
+    where: {owner: {_eq: $ownerAddress}, status: {_eq: "0"}}
+    limit: $limit
+    offset: $offset
+    order_by: {position: asc}
+  ) {
+    ...BorrowPositionFields
+  }
+}
+    ${BorrowPositionFieldsFragmentDoc}
+${BorrowMarketFieldsFragmentDoc}
+${VaultInfoFieldsFragmentDoc}
+${FungibleAssetMetadataFieldsFragmentDoc}
+${FungibleAssetBalanceFieldsFragmentDoc}
+${CurrentObjectFieldsFragmentDoc}
+${VaultSettingsFieldsFragmentDoc}
+${AdaptiveIrmConfigFieldsFragmentDoc}
+${FixedRateIrmConfigFieldsFragmentDoc}
+${KinkedIrmConfigFieldsFragmentDoc}
+${BorrowRiskParametersFieldsFragmentDoc}
+${OracleRouterConfigFieldsFragmentDoc}
+${FixedPriceOracleConfigFieldsFragmentDoc}
+${PythOracleConfigFieldsFragmentDoc}
+${SwitchboardOracleConfigFieldsFragmentDoc}
+${ChainlinkOracleConfigFieldsFragmentDoc}`;
 export const GetOracleRouterConfigByPrimaryKey = `
     query getOracleRouterConfigByPrimaryKey($baseAsset: String!, $oracleRouter: String!, $quoteAsset: String!) {
   oracle_router_current_config(
@@ -423,55 +473,6 @@ ${FungibleAssetBalanceFieldsFragmentDoc}
 ${FungibleAssetMetadataFieldsFragmentDoc}
 ${BorrowMarketFieldsFragmentDoc}
 ${VaultInfoFieldsFragmentDoc}
-${CurrentObjectFieldsFragmentDoc}
-${VaultSettingsFieldsFragmentDoc}
-${AdaptiveIrmConfigFieldsFragmentDoc}
-${FixedRateIrmConfigFieldsFragmentDoc}
-${KinkedIrmConfigFieldsFragmentDoc}
-${BorrowRiskParametersFieldsFragmentDoc}
-${OracleRouterConfigFieldsFragmentDoc}
-${FixedPriceOracleConfigFieldsFragmentDoc}
-${PythOracleConfigFieldsFragmentDoc}
-${SwitchboardOracleConfigFieldsFragmentDoc}
-${ChainlinkOracleConfigFieldsFragmentDoc}`;
-export const GetTappLlPositionById = `
-    query GetTappLLPositionById($positionId: String!) {
-  tapp_llp_position_current_by_pk(position: $positionId) {
-    ...TappLLPositionFields
-  }
-}
-    ${TappLlPositionFieldsFragmentDoc}
-${BorrowMarketFieldsFragmentDoc}
-${VaultInfoFieldsFragmentDoc}
-${FungibleAssetMetadataFieldsFragmentDoc}
-${FungibleAssetBalanceFieldsFragmentDoc}
-${CurrentObjectFieldsFragmentDoc}
-${VaultSettingsFieldsFragmentDoc}
-${AdaptiveIrmConfigFieldsFragmentDoc}
-${FixedRateIrmConfigFieldsFragmentDoc}
-${KinkedIrmConfigFieldsFragmentDoc}
-${BorrowRiskParametersFieldsFragmentDoc}
-${OracleRouterConfigFieldsFragmentDoc}
-${FixedPriceOracleConfigFieldsFragmentDoc}
-${PythOracleConfigFieldsFragmentDoc}
-${SwitchboardOracleConfigFieldsFragmentDoc}
-${ChainlinkOracleConfigFieldsFragmentDoc}`;
-export const GetTappLlPositionsByOwner = `
-    query GetTappLLPositionsByOwner($ownerAddress: String!, $limit: Int = 10, $offset: Int = 0) {
-  tapp_llp_position_current(
-    where: {owner: {_eq: $ownerAddress}, status: {_eq: "0"}}
-    limit: $limit
-    offset: $offset
-    order_by: {position: asc}
-  ) {
-    ...TappLLPositionFields
-  }
-}
-    ${TappLlPositionFieldsFragmentDoc}
-${BorrowMarketFieldsFragmentDoc}
-${VaultInfoFieldsFragmentDoc}
-${FungibleAssetMetadataFieldsFragmentDoc}
-${FungibleAssetBalanceFieldsFragmentDoc}
 ${CurrentObjectFieldsFragmentDoc}
 ${VaultSettingsFieldsFragmentDoc}
 ${AdaptiveIrmConfigFieldsFragmentDoc}
@@ -636,6 +637,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetActiveVaults(variables?: Types.GetActiveVaultsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetActiveVaultsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetActiveVaultsQuery>({ document: GetActiveVaults, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetActiveVaults', 'query', variables);
     },
+    GetBorrowPositionById(variables: Types.GetBorrowPositionByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetBorrowPositionByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetBorrowPositionByIdQuery>({ document: GetBorrowPositionById, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetBorrowPositionById', 'query', variables);
+    },
+    GetBorrowPositionsByOwner(variables: Types.GetBorrowPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetBorrowPositionsByOwnerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetBorrowPositionsByOwnerQuery>({ document: GetBorrowPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetBorrowPositionsByOwner', 'query', variables);
+    },
     getOracleRouterConfigByPrimaryKey(variables: Types.GetOracleRouterConfigByPrimaryKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetOracleRouterConfigByPrimaryKeyQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetOracleRouterConfigByPrimaryKeyQuery>({ document: GetOracleRouterConfigByPrimaryKey, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'getOracleRouterConfigByPrimaryKey', 'query', variables);
     },
@@ -644,12 +651,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetSCMDPositionsByOwner(variables: Types.GetScmdPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetScmdPositionsByOwnerQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetScmdPositionsByOwnerQuery>({ document: GetScmdPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSCMDPositionsByOwner', 'query', variables);
-    },
-    GetTappLLPositionById(variables: Types.GetTappLlPositionByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetTappLlPositionByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetTappLlPositionByIdQuery>({ document: GetTappLlPositionById, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTappLLPositionById', 'query', variables);
-    },
-    GetTappLLPositionsByOwner(variables: Types.GetTappLlPositionsByOwnerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetTappLlPositionsByOwnerQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Types.GetTappLlPositionsByOwnerQuery>({ document: GetTappLlPositionsByOwner, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetTappLLPositionsByOwner', 'query', variables);
     },
     GetVaultInfo(variables?: Types.GetVaultInfoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<Types.GetVaultInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.GetVaultInfoQuery>({ document: GetVaultInfo, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetVaultInfo', 'query', variables);

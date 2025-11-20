@@ -2,21 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import { getTappLLPositionById, getTappLLPositionsByOwner } from "../internal";
-import { BorrowMarket, TappLLPosition } from "./interfaces";
+import { getBorrowPositionById, getBorrowPositionsByOwner } from "../internal";
+import { BorrowMarket, BorrowPosition } from "./interfaces";
 import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
 import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
-import { createTappLLPosition } from "./entities/tappLLPosition";
+import { createBorrowPosition } from "./entities/borrowPosition";
 import { TappLLPOperationBuilder } from "./tappLLPOperationBuilder";
 
 /**
- * A class to query Tapp LLP position-related data from the Yeap indexer.
+ * A class to query borrow protocol position-related data from the Yeap indexer.
  * This provides high-level methods for interacting with position information.
- * This follows the same pattern as other API classes in the main Aptos SDK.
  * @group Position
  */
-export class TappLLPApi {
+export class BorrowApi {
   readonly config: YeapConfig;
   readonly protocolAddress: AccountAddress;
 
@@ -25,12 +24,8 @@ export class TappLLPApi {
    */
   constructor(config: YeapConfig) {
     this.config = config;
-    this.protocolAddress = AccountAddress.fromString(config.tappLlpProtocolAddress);
+    this.protocolAddress = AccountAddress.fromString(config.borrowProtocolAddress);
   }
-
-  // get goveranceObjectAddress(): AccountAddress {
-  //   return createObjectAddress(this.protocolAddress, "scmd_protocol_config");
-  // }
 
   /**
    * Get positions by owner address.
@@ -42,10 +37,10 @@ export class TappLLPApi {
    *
    * @example
    * ```typescript
-   * const positions = await yeap.tappLLPApi.getPositionsByOwner("0xabc...", 5);
+   * const positions = await yeap.borrowApi.getPositionsByOwner("0xabc...", 5);
    * console.log(`Found ${positions.length} positions for this owner`);
    * positions.forEach(position => {
-   *   console.log("Position address:", position.position_address);
+   *   console.log("Position address:", position.positionAddress);
    *   console.log("Collateral type:", position.collateral);
    *   console.log("Status:", position.status);
    * });
@@ -56,19 +51,19 @@ export class TappLLPApi {
     ownerAddress: string,
     limit: number = 10,
     offset: number = 0,
-  ): Promise<Array<TappLLPosition>> {
-    const positions = await getTappLLPositionsByOwner({
+  ): Promise<Array<BorrowPosition>> {
+    const positions = await getBorrowPositionsByOwner({
       yeapConfig: this.config,
       ownerAddress,
       limit,
       offset,
     });
 
-    return positions.map((position) => createTappLLPosition(this.config, position));
+    return positions.map((position) => createBorrowPosition(this.config, position));
   }
 
-  async getPositionById(positionId: string): Promise<TappLLPosition | null> {
-    const position = await getTappLLPositionById({
+  async getPositionById(positionId: string): Promise<BorrowPosition | null> {
+    const position = await getBorrowPositionById({
       yeapConfig: this.config,
       positionId,
     });
@@ -76,11 +71,11 @@ export class TappLLPApi {
       return null;
     }
 
-    return createTappLLPosition(this.config, position);
+    return createBorrowPosition(this.config, position);
   }
 
   /**
-   * Get all whitelisted borrow markets for this SCMD protocol.
+   * Get all whitelisted borrow markets for this protocol.
    * @param limit - Max number of markets to return (optional)
    * @param offset - Pagination offset (optional)
    * @returns Array of BorrowMarket entities
@@ -99,10 +94,10 @@ export class TappLLPApi {
   }
 
   get protocolName(): string {
-    return `${this.config.tappLlpProtocolAddress}::protocol_handle::LLProtocol`;
+    return `${this.config.addresses.yeap_borrow_protocol}::protocol_handle::Protocol`;
   }
 
-  operationBuilder(): TappLLPOperationBuilder {
-    return new TappLLPOperationBuilder(AccountAddress.fromString(this.config.addresses.yeap_tapp_llp!));
+  tappOperationBuilder(): TappLLPOperationBuilder {
+    return new TappLLPOperationBuilder(AccountAddress.fromString(this.config.addresses.yeap_tapp_llp_protocol!));
   }
 }

@@ -5,8 +5,16 @@ export type AdaptiveIrmConfigFieldsFragment = Pick<Types.AdaptiveIrmCurrentConfi
 export type AdaptiveIrmStateFieldsFragment = Pick<Types.AdaptiveIrmCurrentState, 'state_address' | 'current_rate_at_target' | 'last_update_timestamp_secs'>;
 
 export type BorrowMarketFieldsFragment = (
-  Pick<Types.BorrowMarket, 'market' | 'protocol' | 'collateral' | 'oracle' | 'crf' | 'ltv' | 'lltv' | 'liquidation_bonus_bps' | 'max_borrowable_vaults' | 'status' | 'whitelisted'>
+  Pick<Types.BorrowMarket, 'market' | 'protocol' | 'collateral' | 'oracle' | 'crf' | 'ltv' | 'lltv' | 'liquidation_bonus_bps' | 'max_borrowable_vaults' | 'status' | 'whitelisted' | 'market_type'>
   & { collateral_vault?: Types.Maybe<VaultInfoFieldsFragment>, borrow_risk_parameters: Array<BorrowRiskParametersFieldsFragment>, object_info?: Types.Maybe<CurrentObjectFieldsFragment>, oracle_configs: Array<OracleRouterConfigFieldsFragment> }
+);
+
+export type BorrowPositionFieldsFragment = (
+  Pick<Types.BorrowProtocolPositionCurrent, 'position' | 'owner' | 'market' | 'collateral' | 'status'>
+  & { market_info?: Types.Maybe<BorrowMarketFieldsFragment>, debts: Array<(
+    Pick<Types.BorrowProtocolPositionDebtStatus, 'debt_share' | 'vault'>
+    & { vault_info?: Types.Maybe<VaultInfoFieldsFragment> }
+  )> }
 );
 
 export type BorrowRiskParametersFieldsFragment = (
@@ -50,14 +58,6 @@ export type ScmdPositionFieldsFragment = (
 
 export type SwitchboardOracleConfigFieldsFragment = Pick<Types.SwitchboardOracleCurrentConfig, 'oracle_address' | 'base' | 'quote' | 'aggregator_address' | 'max_age_in_seconds' | 'max_stdev' | 'deleted'>;
 
-export type TappLlPositionFieldsFragment = (
-  Pick<Types.TappLlpPositionCurrent, 'position' | 'owner' | 'market' | 'collateral' | 'status'>
-  & { market_info?: Types.Maybe<BorrowMarketFieldsFragment>, debt_stores: Array<(
-    Pick<Types.TappLlpPositionDebtStores, 'debt_store' | 'vault'>
-    & { debt_asset_balance?: Types.Maybe<FungibleAssetBalanceFieldsFragment> }
-  )> }
-);
-
 export type VaultBadDebtActivitiesFieldsFragment = Pick<Types.VaultBadDebtActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'event_type' | 'timestamp' | 'bad_debt_amount' | 'bad_debt_shares' | 'debt_store_address' | 'total_bad_debt_after' | 'total_bad_debt_before'>;
 
 export type VaultEmergencyActivitiesFieldsFragment = Pick<Types.VaultEmergencyActivities, 'event_index' | 'transaction_version' | 'vault_address' | 'timestamp' | 'amount' | 'withdrawn_by'>;
@@ -82,6 +82,22 @@ export type GetActiveVaultsQueryVariables = Types.Exact<{
 
 
 export type GetActiveVaultsQuery = { vault_info: Array<VaultInfoFieldsFragment> };
+
+export type GetBorrowPositionByIdQueryVariables = Types.Exact<{
+  positionId: Types.Scalars['String']['input'];
+}>;
+
+
+export type GetBorrowPositionByIdQuery = { borrow_protocol_position_current_by_pk?: Types.Maybe<BorrowPositionFieldsFragment> };
+
+export type GetBorrowPositionsByOwnerQueryVariables = Types.Exact<{
+  ownerAddress: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
+
+
+export type GetBorrowPositionsByOwnerQuery = { borrow_protocol_position_current: Array<BorrowPositionFieldsFragment> };
 
 export type GetOracleRouterConfigByPrimaryKeyQueryVariables = Types.Exact<{
   baseAsset: Types.Scalars['String']['input'];
@@ -109,22 +125,6 @@ export type GetScmdPositionsByOwnerQueryVariables = Types.Exact<{
 
 
 export type GetScmdPositionsByOwnerQuery = { scmd_position_current: Array<ScmdPositionFieldsFragment> };
-
-export type GetTappLlPositionByIdQueryVariables = Types.Exact<{
-  positionId: Types.Scalars['String']['input'];
-}>;
-
-
-export type GetTappLlPositionByIdQuery = { tapp_llp_position_current_by_pk?: Types.Maybe<TappLlPositionFieldsFragment> };
-
-export type GetTappLlPositionsByOwnerQueryVariables = Types.Exact<{
-  ownerAddress: Types.Scalars['String']['input'];
-  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-}>;
-
-
-export type GetTappLlPositionsByOwnerQuery = { tapp_llp_position_current: Array<TappLlPositionFieldsFragment> };
 
 export type GetVaultInfoQueryVariables = Types.Exact<{
   where?: Types.InputMaybe<Types.VaultInfoBoolExp>;

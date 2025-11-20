@@ -24,4 +24,5 @@ fragment BorrowMarketFields on borrow_market {
   oracle_configs {
     ...OracleRouterConfigFields
   }
+  market_type
 }

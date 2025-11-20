@@ -11,5 +11,5 @@ export * from "./entities";
 export * from "./transforms";
 export * from "./buildApi";
 export * from "./adminApi";
-export * from "./tappLLPApi";
+export * from "./borrowApi";
 export * from "./tappLLPOperationBuilder";

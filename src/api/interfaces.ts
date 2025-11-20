@@ -9,7 +9,7 @@ import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFi
 import {
   BorrowMarketFieldsFragment,
   ScmdPositionFieldsFragment,
-  TappLlPositionFieldsFragment,
+  BorrowPositionFieldsFragment,
 } from "../types/generated/operations";
 /**
  * Clean, user-friendly interfaces for Yeap SDK query types.
@@ -385,6 +385,12 @@ export interface PositionDebtStore {
   vaultInfo?: Vault;
 }
 
+export interface PositionDebtInfo {
+  vaultAddress: string;
+  debtAssetBalance?: YeapFungibleAssetBalance;
+  vaultInfo?: Vault;
+}
+
 /**
  * Smart Collateral Multi‑Debt position. Holds collateral in one market and borrows from multiple vaults.
  */
@@ -486,15 +492,16 @@ export interface BorrowMarket {
   whitelisted?: boolean;
   /** Mapping of debt vault address -> per‑vault risk parameters. */
   borrowRiskParameters: Record<string, BorrowRiskParameters>;
+  marketType?: string;
   /** Raw fragment backing this market (escape hatch). */
   __raw?: RawBorrowMarket;
 }
 
 /**
- * Tapp LLP position.
- * Hold Tapp Pool position as collateral and borrows from multiple vaults.
+ * Borrow protocol position (formerly Tapp LLP).
+ * Holds a LP collateral basket and borrows from multiple vaults.
  */
-export interface TappLLPosition {
+export interface BorrowPosition {
   /** Position account address. */
   positionAddress: string;
   /** Owner (user) account address. */
@@ -510,11 +517,11 @@ export interface TappLLPosition {
   /** Convenience boolean for active status. */
   isActive?: boolean;
   /** Map of debt vault address -> debt store detail. */
-  debtStores: Record<string, PositionDebtStore>;
+  debtStores: Record<string, PositionDebtInfo>;
   /** True if any debt store has non‑zero debt. */
   hasAnyDebt?: boolean;
   /** Count of debt stores with non‑zero debt. */
   activeDebtVaultCount?: number;
   /** Raw fragment (escape hatch). */
-  __raw?: TappLlPositionFieldsFragment;
+  __raw?: BorrowPositionFieldsFragment;
 }
