@@ -1,19 +1,19 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import Decimal from "decimal.js";
-import type { BigNumber, RawVaultStateData, VaultState } from "../interfaces";
+import BigNumber from "bignumber.js";
+import type { RawVaultStateData, VaultState } from "../interfaces";
 
-type DecimalInput = Decimal | bigint | number | string;
+type DecimalInput = BigNumber | bigint | number | string;
 
-function toDecimal(value: DecimalInput): Decimal {
-  if (Decimal.isDecimal(value)) {
+function toBigNumber(value: DecimalInput): BigNumber {
+  if (BigNumber.isBigNumber(value)) {
     return value;
   }
   if (typeof value === "bigint") {
-    return new Decimal(value.toString());
+    return new BigNumber(value.toString());
   }
-  return new Decimal(value);
+  return new BigNumber(value);
 }
 /**
  * Converts a per-second rate to APY using compounding:
@@ -21,8 +21,8 @@ function toDecimal(value: DecimalInput): Decimal {
  * Returns as a BigNumber (not percent, e.g. 0.05 for 5%).
  */
 export function rate2Apy(rate: BigNumber | bigint | number, precision: number = 2 ** 96): BigNumber {
-  const zero = new Decimal(0);
-  const rateDecimal = toDecimal(rate);
+  const zero = new BigNumber(0);
+  const rateDecimal = toBigNumber(rate);
 
   if (rateDecimal.isZero()) {
     return zero;
@@ -31,19 +31,19 @@ export function rate2Apy(rate: BigNumber | bigint | number, precision: number = 
   const secondsPerYear = 365 * 24 * 60 * 60;
   const r = rateDecimal.div(precision);
   // APY = (1 + r) ^ secondsPerYear - 1
-  return new Decimal(1).plus(r).pow(secondsPerYear).minus(1).mul(100);
+  return new BigNumber(1).plus(r).pow(secondsPerYear).minus(1).times(100);
 }
 
 // VaultState interface moved to interfaces.ts
 
 /** Factory to create an immutable VaultState */
 export function createVaultState(rawStateData: RawVaultStateData): VaultState {
-  const zero = new Decimal(0);
-  const decimalOrZero = (value?: DecimalInput | null): Decimal => {
+  const zero = new BigNumber(0);
+  const decimalOrZero = (value?: DecimalInput | null): BigNumber => {
     if (value === undefined || value === null) {
       return zero;
     }
-    return toDecimal(value);
+    return toBigNumber(value);
   };
 
   const badDebt = decimalOrZero(rawStateData.bad_debt);
@@ -61,7 +61,7 @@ export function createVaultState(rawStateData: RawVaultStateData): VaultState {
   const debtShareExchangeRate = totalDebtShares.eq(0) ? zero : totalBorrows.div(totalDebtShares);
 
   const borrowApy = rate2Apy(currentInterestRate);
-  const supplyApy = utilizationRate.mul(borrowApy);
+  const supplyApy = utilizationRate.times(borrowApy);
   return {
     vaultAddress: rawStateData.vault_address!!,
     badDebt,

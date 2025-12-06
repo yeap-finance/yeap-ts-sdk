@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { AccountAddress } from "@aptos-labs/ts-sdk";
-import type Decimal from "decimal.js";
+import BigNumber from "bignumber.js";
 
-export type BigNumber = Decimal;
+export type { BigNumber };
 import { VaultInfoFieldsFragment, GetVaultLatestStateQuery, OracleRouterConfigFieldsFragment } from "../types";
 import {
   BorrowMarketFieldsFragment,
