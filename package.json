@@ -56,12 +56,14 @@
     "example:build-api": "tsx examples/test-build-api.ts"
   },
   "dependencies": {
-    "@aptos-labs/ts-sdk": "^4.0.0",
     "@noble/curves": "^1.6.0",
     "@noble/hashes": "^1.5.0",
     "decimal.js": "^10.5.0",
-    "dotenv": "^16.6.0",
+    "dotenv": ">=16.6",
     "graphql-request": "^7.1.2"
+  },
+  "peerDependencies": {
+    "@aptos-labs/ts-sdk": ">4.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.5",
