@@ -12,7 +12,6 @@ export type YeapAddressName =
   | "yeap_irm"
   | "yeap_oracle_lens"
   | "yeap_borrow_protocol"
-  | "yeap_tapp_llp_protocol"
   | "yeap_scmd_protocol"
   | "yeap_earn_api"
   | "yeap_borrow_api"

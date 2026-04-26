@@ -12,4 +12,3 @@ export * from "./transforms";
 export * from "./buildApi";
 export * from "./adminApi";
 export * from "./borrowApi";
-export * from "./tappLLPOperationBuilder";
