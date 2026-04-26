@@ -8,7 +8,6 @@ import { createBorrowMarket } from "./entities/borrowMarket";
 import { YeapConfig } from "./yeapConfig";
 import { getWhitelistedBorrowMarketsByProtocol } from "../internal/borrowMarket";
 import { createBorrowPosition } from "./entities/borrowPosition";
-import { TappLLPOperationBuilder } from "./tappLLPOperationBuilder";
 
 /**
  * A class to query borrow protocol position-related data from the Yeap indexer.
@@ -95,9 +94,5 @@ export class BorrowApi {
 
   get protocolName(): string {
     return `${this.config.addresses.yeap_borrow_protocol}::protocol_handle::Protocol`;
-  }
-
-  tappOperationBuilder(): TappLLPOperationBuilder {
-    return new TappLLPOperationBuilder(AccountAddress.fromString(this.config.addresses.yeap_tapp_llp_protocol!));
   }
 }
